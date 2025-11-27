@@ -1,0 +1,103 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+
+
+[CreateAssetMenu(fileName = "Skill", menuName = "ScriptableObject/Skill/Skill Module")]
+public class Skill_Module : ScriptableObject
+{
+    public IBlackBoard blackBoard = new BlackBoard(); //스킬 데이터를 담을 블랙보드.
+
+    [SerializeField] private string skillName; //최종 스킬 이름
+    [SerializeField] private string skillDetail; //최종 스킬의 상세 설명
+    public float coolDown; //최종 스킬의 쿨타임
+    public int consumption;
+
+    private float remainingCoolDown; //남은 쿨타임
+    [SerializeField] private bool attackable; //공격 판정이 존재하는 스킬 체크
+    [SerializeField] private bool cancleDelay; //기본 공격의 후딜레이를 캔슬하고 작동하는 스킬 체크
+    [SerializeField] private bool havePassive; //기본 지속 효과를 가지고 있는지 여부 체크
+
+    [SerializeField] private List<SkillBase> activeSkills = new List<SkillBase>(); //이 스킬을 실행할 때 같이 실행되는 액티브 스킬들.
+    [SerializeField] private List<SkillBase> passiveSkills = new List<SkillBase>(); //이 스킬을 착용하고 있을 때 발동하는 패시브 스킬들.
+
+    //외부에서 접근할 수 있게 하는 프로퍼티
+    #region Property
+    public bool OnCoolDown => remainingCoolDown > 0;
+    public float RemainingCoolDown => remainingCoolDown;
+    public bool Attackable => attackable;
+    public bool CancleDelay => cancleDelay;
+    public bool HavePassive => havePassive;
+    #endregion EndProperty
+
+    private void OnEnable()
+    {
+        //data.SkillName = skillName;
+        //data.SkillDetail = skillDetail;
+
+        blackBoard.Set("Condition", true);
+        foreach (var skill in activeSkills)
+        {
+            if (skill != null) skill.Initialize(this);
+        }
+
+        foreach (var skill in passiveSkills)
+        {
+            if (skill != null) skill.Initialize(this);
+        }
+    }
+
+    // 스킬 사용을 시도하는 메서드
+    //caster.Attacking은 플레이어가 공격 중인지 체크하는 boolean.
+    //공격 판정이 아닌 스킬도 존재하기에 (버프 스킬), attacking을 조정하는 코드는 스킬 개인 모듈에 넣어야 함.
+    public bool UseSkill(ISkillCaster caster)
+    {
+        Unit unit = caster.GetCom<Unit>();
+        if (unit.curGage - consumption < 0) return false;
+
+        unit.curGage -= consumption;
+
+        if (OnCoolDown || !blackBoard.Get<bool>("Condition"))
+        {
+            Debug.Log($"쿨타임 상황 : {OnCoolDown}, 조건 상황 : {blackBoard.Get<bool>("Condition")}.");
+            return false;
+        }
+
+        // 쿨다운이 아니라면 모든 스킬을 실행
+        foreach (var skill in new List<SkillBase>(activeSkills))
+        {
+            skill.UseSkill(caster);
+        }
+
+        // 쿨다운 시작
+        remainingCoolDown = coolDown;
+        return true;
+    }
+
+    // 매 프레임 쿨다운을 업데이트하는 메서드
+    public void UpdateCoolDown(float deltaTime)
+    {
+        if (!OnCoolDown) return;
+        foreach (var skill in new List<SkillBase>(passiveSkills))
+        {
+            IPassiveSkills passiveSkill = skill as IPassiveSkills;
+            if (passiveSkill != null) passiveSkill.SkillOff();
+        }
+        remainingCoolDown -= deltaTime;
+    }
+
+    public void ProccessPassive(ISkillCaster caster) //패시브 스킬 사용.
+    {
+        foreach (var skill in new List<SkillBase>(passiveSkills))
+        {
+            skill.UseSkill(caster); //패시브 스킬들은 계속 실행되어야 함.
+        }
+    }
+
+    public void ChangeSkillModule(SkillBase previousSkill, SkillBase currentSkill)
+    {
+        activeSkills[activeSkills.IndexOf(previousSkill)] = currentSkill;
+        currentSkill.Initialize(this);
+    }
+}

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c2aa832763e3d4a81890312c919fb7, type: 3}
+  m_Name: FirePunch
+  m_EditorClassIdentifier: 
+  dmgCalculater: {fileID: 11400000, guid: d3d258ea939030545b15f20e544e390c, type: 2}
+  explanation: Plz be a FirePunch for us
+  throwableObj: {fileID: 3621372190358372797, guid: 5fcf3b45c7b5f7c489799ebf98420b02, type: 3}

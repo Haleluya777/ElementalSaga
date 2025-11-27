@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74bb7d0ca14f304081d8ddf5eaa1f49, type: 3}
+  m_Name: Combo_4
+  m_EditorClassIdentifier: 
+  dmgCalculater: {fileID: 11400000, guid: 3b72c79561dbee946ad62d6e74faff48, type: 2}
+  explanation: 
+  onHitEvents:
+  - {fileID: 11400000, guid: 098c7b339026ff644938338d74430d84, type: 2}
+  hitBoxOffset: {x: 0, y: 0.5}
+  hitBoxSize: {x: 0.5, y: 1}
+  chainedSkill: {fileID: 0}
+  firstComboSkill: {fileID: 11400000, guid: 04f32aeb6086fcc41959c780d57d8f9d, type: 2}
+  hitBoxObj: {fileID: 2777659332053925459, guid: b77ee40dc4b61cd4485a30dc37ecdfeb, type: 3}
