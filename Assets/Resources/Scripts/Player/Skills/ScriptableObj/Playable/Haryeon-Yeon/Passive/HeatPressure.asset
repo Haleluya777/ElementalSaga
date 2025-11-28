@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmgCalculater: {fileID: 0}
   explanation: 
-  heatPressure: 18
+  heatPressure: 0
