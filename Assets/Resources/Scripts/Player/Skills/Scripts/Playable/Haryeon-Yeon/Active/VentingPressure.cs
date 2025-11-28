@@ -11,8 +11,12 @@ public class VentingPressure : SkillBase
         Unit casterUnit = caster.GetCom<Unit>();
 
         //heatPressurePassive.heatPressure -= (int)(heatPressurePassive.heatPressure * 30) / 100;
-        Buff_Attack attackBuff = new Buff_Attack(5f, casterUnit, 50, "VectingPressure_Attack_Buff");
-        casterUnit.AddEffectProcess(attackBuff);
+        Buff_AttackSpeed attackSpeedBuff = new Buff_AttackSpeed(5f, casterUnit, 50f, "VentingPressure_AttackSpeed_Buff");
+        Buff_MoveSpeed moveSpeedBuff = new Buff_MoveSpeed(5f, casterUnit, 50f, "VentingPressure_MoveSpeed_Buff");
+
+        casterUnit.AddEffectProcess(attackSpeedBuff);
+        casterUnit.AddEffectProcess(moveSpeedBuff);
+
         return true;
     }
 }

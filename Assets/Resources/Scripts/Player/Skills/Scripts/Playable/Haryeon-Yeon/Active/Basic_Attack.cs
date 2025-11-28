@@ -53,7 +53,7 @@ public class Basic_Attack : SkillBase
             parentModule.ChangeSkillModule(this, chainedSkill); //다음 콤보 진행.
             coroutine = GameManager.instance.coroutineRunner.StartRunnerCoroutine(ReturnCombo()); //타이머 실행
             parentModule.blackBoard.Set("Basic_Combo", coroutine);
-            parentModule.coolDown = .6f;
+            //parentModule.coolDown = .6f;
         }
 
         return true;

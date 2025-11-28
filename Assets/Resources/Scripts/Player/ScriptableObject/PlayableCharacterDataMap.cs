@@ -16,6 +16,7 @@ public class Datas
     [SerializeField] private int moveSpeed;
     [SerializeField] private int jumpForce;
     [SerializeField] private int addJumpCount;
+    [SerializeField] private float attSpeed;
 
     public int Id => id;
     public string Name => name;
@@ -26,6 +27,7 @@ public class Datas
     public int MoveSpeed => moveSpeed;
     public int JumpForce => jumpForce;
     public int AddJumpCount => addJumpCount;
+    public float AttSpeed => attSpeed;
 }
 
 [CreateAssetMenu(fileName = "CharacterMap", menuName = "ScriptableObject/DataMaps/PlayableCharacter/CharcterMap")]

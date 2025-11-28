@@ -18,6 +18,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
         public int moveSpeed;
         public int jumpForce;
         public int addJumpCount;
+        public float attSpeed;
 
         public UnitData(Datas datas)
         {
@@ -31,6 +32,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
             moveSpeed = datas.MoveSpeed;
             jumpForce = datas.JumpForce;
             addJumpCount = datas.AddJumpCount;
+            attSpeed = datas.AttSpeed;
         }
     }
 
@@ -40,6 +42,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
     public int CurHp { get => unitData.curHp; private set => unitData.curHp = Mathf.Max(0, value); }
 
     public int Att { get => unitData.att; set => unitData.att = Mathf.Max(0, value); }
+    public float AttSpeed { get => unitData.attSpeed; set => unitData.attSpeed = Mathf.Max(0, value); }
     //public int Def { get => unitData.def; set => unitData.def = Mathf.Max(0, value); }
     public int MaxGage { get => unitData.maxGage; set => unitData.maxGage = value; }
     public int curGage { get => unitData.curGage; set => unitData.curGage = value; }
@@ -55,11 +58,11 @@ public abstract class Unit : MonoBehaviour, IDamageable
     private Dictionary<string, Coroutine> activeEffectCoroutines = new Dictionary<string, Coroutine>(); //상태이상 지속을 돕는 코루틴.
     private Coroutine newCorutine;
     public bool isStunned { get; private set; }
-    public UnitData currentStats;
+    //public UnitData currentStats;
 
     void OnEnable()
     {
-        currentStats = unitData;
+        //currentStats = unitData;
     }
 
     public void TakeDamage(int dmg, ISkillCaster attacker, GameObject character)
