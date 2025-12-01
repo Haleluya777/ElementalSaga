@@ -9,16 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2780ed85bf902ce4898239f6d4d41414, type: 3}
-  m_Name: CharacterMap
+  m_Script: {fileID: 11500000, guid: 0d11d43c3136c614599ecbe3206e1d69, type: 3}
+  m_Name: SlamDown_Dash
   m_EditorClassIdentifier: 
-  datas:
-  - id: 1
-    name: HaRyeon-Yeon
-    hp: 450
-    att: 150
-    gage: 100
-    moveSpeed: 5
-    jumpForce: 5
-    addJumpCount: 0
-    attSpeed: 1
+  dmgCalculater: {fileID: 0}
+  explanation: 
+  chainedSkill: {fileID: 11400000, guid: 3ac131b6147f91546b65599784c1af67, type: 2}
+  dashDistance: 5
+  duration: 0.2

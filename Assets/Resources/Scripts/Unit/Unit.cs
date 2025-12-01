@@ -58,6 +58,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
     private Dictionary<string, Coroutine> activeEffectCoroutines = new Dictionary<string, Coroutine>(); //상태이상 지속을 돕는 코루틴.
     private Coroutine newCorutine;
     public bool isStunned { get; private set; }
+    public bool isAirial;
     //public UnitData currentStats;
 
     void OnEnable()

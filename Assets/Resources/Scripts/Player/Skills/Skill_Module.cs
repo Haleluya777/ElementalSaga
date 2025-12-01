@@ -18,6 +18,7 @@ public class Skill_Module : ScriptableObject
     [SerializeField] private bool attackable; //공격 판정이 존재하는 스킬 체크
     [SerializeField] private bool cancleDelay; //기본 공격의 후딜레이를 캔슬하고 작동하는 스킬 체크
     [SerializeField] private bool havePassive; //기본 지속 효과를 가지고 있는지 여부 체크
+    [SerializeField] private bool canUseAirial; //공중에서 사용이 가능한지의 여부 체크
 
     [SerializeField] private List<SkillBase> activeSkills = new List<SkillBase>(); //이 스킬을 실행할 때 같이 실행되는 액티브 스킬들.
     [SerializeField] private List<SkillBase> passiveSkills = new List<SkillBase>(); //이 스킬을 착용하고 있을 때 발동하는 패시브 스킬들.
@@ -29,8 +30,8 @@ public class Skill_Module : ScriptableObject
     public bool Attackable => attackable;
     public bool CancleDelay => cancleDelay;
     public bool HavePassive => havePassive;
+    public bool CanUseAirial => canUseAirial;
     #endregion EndProperty
-
     private void OnEnable()
     {
         //data.SkillName = skillName;
@@ -97,7 +98,18 @@ public class Skill_Module : ScriptableObject
 
     public void ChangeSkillModule(SkillBase previousSkill, SkillBase currentSkill)
     {
-        activeSkills[activeSkills.IndexOf(previousSkill)] = currentSkill;
-        currentSkill.Initialize(this);
+        int index = activeSkills.IndexOf(previousSkill);
+
+        if (index != -1)
+        {
+            //Debug.Log("0이 나와야함 = " + index);
+            activeSkills[index] = currentSkill;
+            currentSkill.Initialize(this);
+        }
+        else
+        {
+            // 교체하려는 스킬을 찾지 못하면 오류가 발생하므로, 경고를 출력하고 실행을 중단합니다.
+            Debug.LogWarning($"Warning: Skill '{previousSkill?.name}' not found in module '{this.name}' and could not be replaced by '{currentSkill?.name}'.");
+        }
     }
 }

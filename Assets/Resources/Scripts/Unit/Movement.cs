@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -20,6 +21,7 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
     private void FixedUpdate()
     {
         CheckingGround();
+        Debug.Log("리지드 x값 : " + rigid.velocity.x);
     }
 
     public void DataInit()
@@ -69,13 +71,18 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
 
     private void CheckingGround()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(parentObj.transform.position, new Vector2(.5f, .05f), 0, Vector2.down, 0, 1 << 3);
+        RaycastHit2D hit = Physics2D.BoxCast(parentObj.transform.position, new Vector2(.5f, .1f), 0, Vector2.down, 0, 1 << 3);
         if (hit.collider != null)
         {
-            //Debug.Log("닿는 중");
+            //Debug.Log("땅을 딛고 있음");
+            unit.isAirial = false;
             curJumpCount = unit.AddJumpCount;
         }
+        else
+        {
+            unit.isAirial = true;
+        }
 
-        Debug.DrawRay(parentObj.transform.position, Vector2.down * 0, Color.red);
+        Debug.DrawRay(parentObj.transform.position, Vector2.down * .1f, Color.red);
     }
 }

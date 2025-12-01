@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDataInitializable
 {
-    private enum UnitState { Idle, Attacking, Moving, Jumping }
+    private enum UnitState { Idle, Attacking, Moving }
 
     private Animator anim;
     private IMovable movement;
@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour, IDataInitializable
 
     [SerializeField] private GameObject parentObj;
     private Vector2 targetVector; //플레이어 목표 방향.
+    private bool isAirial;
 
     public void DataInit()
     {
         movement = parentObj.GetComponentInChildren<IMovable>();
         attack = parentObj.GetComponentInChildren<IAttackable>();
         anim = parentObj.GetComponent<Animator>();
+        isAirial = false;
     }
 
     void Update()
@@ -42,9 +44,6 @@ public class PlayerController : MonoBehaviour, IDataInitializable
             case UnitState.Moving:
                 anim.CrossFade("Run", 0f);
                 break;
-
-            case UnitState.Jumping:
-                break;
         }
     }
 
@@ -66,13 +65,15 @@ public class PlayerController : MonoBehaviour, IDataInitializable
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("할렐루야");
+            //Debug.Log("할렐루야");
             movement.PerformJump();
         }
     }
 
     private void PlayerMove()
     {
+        if (curState == UnitState.Attacking) return;
+
         float dirX = Input.GetAxisRaw("Horizontal");
         if (curState == UnitState.Attacking)
         {
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour, IDataInitializable
 
     private void PlayerAttack()
     {
+        if (curState == UnitState.Attacking) return;
         int attackNum = (Input.inputString.ToUpper()) switch
         {
             ("Z") => 0,

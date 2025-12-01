@@ -1,14 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializable
 {
     public event Action<int> OnHitEvent;
 
+    [SerializeField] private Skill_Module[] basicAttacks = new Skill_Module[2]; //유닛이 땅/공중에 있을 때 교체할 기본 공격 모듈.
     [SerializeField] private GameObject parentObj;
     [SerializeField] private BoxCollider2D hitBox;
+    [SerializeField] private Rigidbody2D rigid;
     private Unit unit;
     private Animator anim;
 
@@ -22,7 +25,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     //맞을 때 실행할 효과들은 공격자의 정보가 필요한 경우도 존재하므로, 새로운 클래스를 만들어 사용.
     [SerializeField] private List<DamagedEventBase> hitEvents = new List<DamagedEventBase>();
 
-    private int combo;
+    [SerializeField] private int combo;
 
     public int TotalDmg { set; get; }
     public bool Attacking { set; get; }
@@ -37,18 +40,33 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     {
         UpdateCoolDown();
         UsePassiveSkills();
+        ChangeAirialBasicAttack();
     }
 
     public void DataInit()
     {
         unit = parentObj.GetComponent<Unit>();
         anim = parentObj.GetComponent<Animator>();
+        rigid = parentObj.GetComponent<Rigidbody2D>();
 
         for (int i = 0; i < hitEvents.Count; i++)
         {
             if (hitEvents[i] == null) break;
             hitEvents[i] = Instantiate(hitEvents[i]);
             hitEvents[i].Initialize(unit);
+        }
+    }
+
+    private void ChangeAirialBasicAttack()
+    {
+        if (activeSkills.Count == 0 || basicAttacks.Length == 0) return;
+        if (unit.isAirial)
+        {
+            ActiveSkills[0] = basicAttacks[1];
+        }
+        else
+        {
+            ActiveSkills[0] = basicAttacks[0];
         }
     }
 
@@ -63,18 +81,50 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     public bool PerformAttack(int attNum)
     {
         if (attNum == -1) return false;
-        if (!activeSkills[attNum].UseSkill(this)) return false;
-        else
+        rigid.velocity = new Vector2(0, rigid.velocity.y);
+        if (unit.isAirial) //공중에서 스킬을 쓸 때.
         {
-            if (attNum == 1) //기본 공격을 했을 때.
-            {
-                anim.CrossFade($"BasicAttack_{combo}", 0f);
-            }
+            if (!activeSkills[attNum].CanUseAirial) return false;
             else
             {
-                anim.CrossFade($"Skill_{attNum}", 0f);
+                bool result = activeSkills[attNum].UseSkill(this);
+                if (!result) return false;
+
+                else
+                {
+                    if (attNum == 0) //공중에서 기본 공격을 했을 때.
+                    {
+                        //Debug.Log(Combo);
+                        anim.CrossFade($"BasicAttackAirial_{Combo}", 0f);
+                    }
+                    else
+                    {
+                        anim.CrossFade($"AirialSkill_{attNum}", 0f);
+                    }
+                }
+                return true;
             }
-            return true;
+        }
+
+        else //땅 위에서 스킬을 쓸 때.
+        {
+            int comboAnim = Combo;
+            bool result = activeSkills[attNum].UseSkill(this);
+
+            if (!result) return false;
+            else
+            {
+                if (attNum == 0) //기본 공격을 했을 때.
+                {
+                    //Debug.Log(Combo);
+                    anim.CrossFade($"BasicAttack_{comboAnim}", 0f);
+                }
+                else
+                {
+                    anim.CrossFade($"Skill_{attNum}", 0f);
+                }
+                return true;
+            }
         }
     }
 

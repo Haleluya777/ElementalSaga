@@ -41,30 +41,33 @@ public class Basic_Attack : SkillBase
 
         hitBoxCom.Initialize(dmgCalculater.Calculate(caster), caster, onHitEvents, .5f);
 
+
         //스킬 사용 후 상황.
         //연결된 스킬 사용.
         if (chainedSkill == null) //연결된 스킬이 없을 때. (사용한 스킬이 콤보의 마지막 스킬일 때.)
         {
             parentModule.ChangeSkillModule(this, firstComboSkill); //1번 콤보로 되돌아감.
-            parentModule.coolDown = 3f; //부모 모듈의 쿨타임 변경. (콤보가 끝났으므로.)
+            caster.GetCom<IAttackable>().Combo = 0;
+            //parentModule.coolDown = 3f; //부모 모듈의 쿨타임 변경. (콤보가 끝났으므로.)
         }
         else //다음 콤보가 존재할 때.
         {
             parentModule.ChangeSkillModule(this, chainedSkill); //다음 콤보 진행.
-            coroutine = GameManager.instance.coroutineRunner.StartRunnerCoroutine(ReturnCombo()); //타이머 실행
+            coroutine = GameManager.instance.coroutineRunner.StartRunnerCoroutine(ReturnCombo(caster)); //타이머 실행
             parentModule.blackBoard.Set("Basic_Combo", coroutine);
-            //parentModule.coolDown = .6f;
+            caster.GetCom<IAttackable>().Combo++;
         }
 
         return true;
     }
 
-    private IEnumerator ReturnCombo()
+    private IEnumerator ReturnCombo(ISkillCaster caster)
     {
         yield return new WaitForSeconds(3f);
         parentModule.ChangeSkillModule(chainedSkill, firstComboSkill);
         parentModule.blackBoard.Remove("Basic_Combo");
-        parentModule.coolDown = 3f;
+        //parentModule.coolDown = 3f;
+        caster.GetCom<IAttackable>().Combo = 0;
         Debug.Log("3초지남. 콤보 초기화!");
     }
 }

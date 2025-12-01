@@ -31,13 +31,6 @@ public class Skill_Dash : SkillBase
 
         while (((Vector2)target - rigid.position).magnitude > minSqrDistance)
         {
-            Debug.Log("대쉬중");
-            //if (Physics2D.BoxCast(caster.GetPosition(), new Vector2(2, 2), 0, Vector2.right * caster.GetGameObject().transform.localScale.x, 2f, 1 << 6))
-            //{
-            //    Debug.Log("대쉬 취소");
-            //    break;
-            //}
-
             Vector2 direction = ((Vector2)target - rigid.position).normalized;
             Vector3 newPos = rigid.position + direction * dashSpeed * Time.fixedDeltaTime;
 

@@ -18,6 +18,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 098c7b339026ff644938338d74430d84, type: 2}
   hitBoxOffset: {x: 0, y: 0.5}
   hitBoxSize: {x: 0.5, y: 1}
-  chainedSkill: {fileID: 11400000, guid: a30b8a975ceacab4a9e1d4e0128a02c1, type: 2}
+  chainedSkill: {fileID: 0}
   firstComboSkill: {fileID: 11400000, guid: 04f32aeb6086fcc41959c780d57d8f9d, type: 2}
   hitBoxObj: {fileID: 2777659332053925459, guid: b77ee40dc4b61cd4485a30dc37ecdfeb, type: 3}

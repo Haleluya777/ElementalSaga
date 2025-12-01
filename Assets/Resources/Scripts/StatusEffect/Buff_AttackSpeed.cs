@@ -18,14 +18,16 @@ public class Buff_AttackSpeed : StatusEffectBase
         Debug.Log("공격 속도 버프 받음.");
         var anim = target.GetComponent<Animator>();
         increase = rate / 100f;
-        anim.SetFloat("AnimationSpeed", 1 + increase);
-        target.GetComponentInChildren<IAttackable>().ActiveSkills[0].coolDown = 0.15f;
+        target.AttSpeed += increase;
+        target.GetComponentInChildren<IAttackable>().ActiveSkills[0].coolDown /= target.AttSpeed;
+        anim.SetFloat("AnimationSpeed", target.AttSpeed);
     }
 
     public override void RemoveEffect()
     {
         Debug.Log("공격 속도 버프 삭제.");
         var anim = target.GetComponent<Animator>();
-        anim.SetFloat("AnimationSpeed", 1);
+        target.AttSpeed -= increase;
+        anim.SetFloat("AnimationSpeed", target.AttSpeed);
     }
 }

@@ -9,16 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2780ed85bf902ce4898239f6d4d41414, type: 3}
-  m_Name: CharacterMap
+  m_Script: {fileID: 11500000, guid: 47c3400ba45b13a4088cdba07c9a3c8e, type: 3}
+  m_Name: SlamDown_Explosion
   m_EditorClassIdentifier: 
-  datas:
-  - id: 1
-    name: HaRyeon-Yeon
-    hp: 450
-    att: 150
-    gage: 100
-    moveSpeed: 5
-    jumpForce: 5
-    addJumpCount: 0
-    attSpeed: 1
+  dmgCalculater: {fileID: 11400000, guid: 6b44caaa230f03f418de02163f53c894, type: 2}
+  explanation: 
+  hitBoxOffset: {x: 0, y: 0}
+  hitBoxSize: {x: 25, y: 5}
+  hitBoxObj: {fileID: 0}

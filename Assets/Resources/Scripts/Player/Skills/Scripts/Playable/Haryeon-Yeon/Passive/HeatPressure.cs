@@ -36,7 +36,7 @@ public class HeatPressure : SkillBase
             baseMoveSpeed = unit.MoveSpeed;
             baseJumpForce = unit.JumpForce;
             statsCaptured = true;
-            Debug.Log($"원본 스탯 저장: Att({baseAtt}), MoveSpeed({baseMoveSpeed}), JumpForce({baseJumpForce})");
+            //Debug.Log($"원본 스탯 저장: Att({baseAtt}), MoveSpeed({baseMoveSpeed}), JumpForce({baseJumpForce})");
         }
 
         // heatPressure 값이 변경되었을 때만 스탯을 업데이트.
