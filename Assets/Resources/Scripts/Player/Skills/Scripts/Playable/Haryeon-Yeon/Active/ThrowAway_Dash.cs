@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SlamDown_Dash", menuName = "ScriptableObject/Skills/Active/YeonHaRyeon/SlamDown_Dash")]
-public class SlamDown_Dash : SkillBase
+[CreateAssetMenu(fileName = "ThrowAway_Dash", menuName = "ScriptableObject/Skills/Active/YeonHaRyeon/ThrowAway_Dash")]
+public class ThrowAway_Dash : SkillBase
 {
     [SerializeField] private SkillBase chainedSkill;
-    [SerializeField] private float dashDistance = 5f; // 대쉬 거리
+    [SerializeField] private float dashDistance = 2f; // 대쉬 거리
 
     public override bool UseSkill(ISkillCaster caster)
     {
@@ -21,7 +21,6 @@ public class SlamDown_Dash : SkillBase
         Vector2 target = Vector2.zero;
         if (enemyHitted.collider != null) //돌진 범위 내에 적이 존재할 때.
         {
-            //Debug.DrawRay(caster.GetPosition(), caster.GetDirection(), Color.red, 100, true);
             target = new Vector2(enemyHitted.point.x, caster.GetGameObject().transform.position.y);
             enemy = enemyHitted.collider.gameObject;
         }
@@ -31,20 +30,20 @@ public class SlamDown_Dash : SkillBase
             target = new Vector2(targetX, caster.GetGameObject().transform.position.y);
         }
 
-
         GameManager.instance.coroutineRunner.StartRunnerCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), casterTransform, target, enemy));
         return true;
     }
 
     private IEnumerator PerformDash(ISkillCaster caster, Rigidbody2D rigid, Transform casterTransform, Vector3 target, GameObject enemy)
     {
-        float dashSpeed = 50f; // 대쉬 속도
+        float dashSpeed = 25f; // 대쉬 속도
         float minSqrDistance = .5f;
 
         while (((Vector2)target - rigid.position).magnitude > minSqrDistance)
         {
             if (Physics2D.Raycast(new Vector2(caster.GetGameObject().transform.position.x, caster.GetGameObject().transform.position.y + .5f), Vector2.right * caster.GetGameObject().transform.localScale.x, .75f, 1 << 3))
             {
+                Debug.Log("대쉬취소");
                 break;
             }
 
@@ -56,13 +55,11 @@ public class SlamDown_Dash : SkillBase
             yield return new WaitForFixedUpdate();
         }
 
-        yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(.5f);
         if (enemy != null)
         {
             var enemyUnit = enemy.GetComponent<Unit>();
-            enemyUnit.AddEffectProcess(new DeBuff_Catched(1.5f, enemyUnit, 0, "Catchted", caster.GetGameObject()));
-            chainedSkill.targetObj = enemy;
-            chainedSkill.UseSkill(caster);
+            enemyUnit.AddEffectProcess(new DeBuff_Throwed(100f, enemyUnit, 0, "Throwed", caster, 5f, chainedSkill));
         }
         yield return null;
     }

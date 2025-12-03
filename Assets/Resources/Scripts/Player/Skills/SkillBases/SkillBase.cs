@@ -6,6 +6,7 @@ public abstract class SkillBase : ScriptableObject
 {
     public Skill_Module parentModule { get; private set; }
     public DmgCalculator dmgCalculater;
+    public GameObject targetObj; //타게팅 스킬에 사용
     public string explanation;
 
     public virtual void Initialize(Skill_Module module)
@@ -14,4 +15,8 @@ public abstract class SkillBase : ScriptableObject
     }
 
     public abstract bool UseSkill(ISkillCaster caster);
+    public virtual bool UseSkill(ISkillCaster caster, Vector2 position)
+    {
+        return true;
+    }
 }

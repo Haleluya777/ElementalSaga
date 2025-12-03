@@ -11,6 +11,6 @@ public class FillHeatPressure : OnHitEventBase
 
     public override void Execute(GameObject target, ISkillCaster caster, int dmg)
     {
-        heatPressurePassive.heatPressure += 10;
+        heatPressurePassive.heatPressure += 3;
     }
 }

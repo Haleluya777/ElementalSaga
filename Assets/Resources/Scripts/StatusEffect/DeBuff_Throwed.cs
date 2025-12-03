@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class DeBuff_Throwed : StatusEffectBase
 {
+    private SkillBase chainedSkill;
     private float distance;
     private Vector2 targetPos;
     private Rigidbody2D rigid;
+    private ISkillCaster attacker;
 
-    public DeBuff_Throwed(float duration, Unit target, int _rate, string _effectName, GameObject _attacker, float _distance) : base(duration, target)
+    public DeBuff_Throwed(float duration, Unit target, int _rate, string _effectName, ISkillCaster _attacker, float _distance, SkillBase _chainedSkill) : base(duration, target)
     {
         effectName = _effectName;
         distance = _distance;
+        attacker = _attacker;
+        chainedSkill = _chainedSkill;
     }
 
     public override void ApplyEffect()
@@ -25,7 +29,7 @@ public class DeBuff_Throwed : StatusEffectBase
 
         targetPos = new Vector2(targetX, unitTransform.position.y);
 
-        GameManager.instance.coroutineRunner.StartCoroutine(Throwing());
+        GameManager.instance.coroutineRunner.StartCoroutine(Throwing(unitTransform.position));
     }
 
     public override void RemoveEffect()
@@ -33,13 +37,26 @@ public class DeBuff_Throwed : StatusEffectBase
         Debug.Log("다 던져짐");
     }
 
-    private IEnumerator Throwing()
+    private IEnumerator Throwing(Vector2 origin)
     {
+        RaycastHit2D hitted;
         float dashSpeed = 50f; // 대쉬 속도
         float minSqrDistance = .5f;
 
-        while ((targetPos - rigid.position).magnitude > minSqrDistance)
+        while (true)
         {
+            hitted = Physics2D.Raycast(this.target.transform.position + new Vector3(.5f, .5f), targetPos - origin, .5f);
+            Debug.DrawRay(this.target.transform.position + new Vector3(.5f, .5f), targetPos - origin, Color.red, 100f, true);
+            Debug.Log(targetPos);
+
+            if (hitted.collider != null)
+            {
+                chainedSkill.UseSkill(attacker, hitted.point);
+                break;
+            }
+
+            if ((targetPos - rigid.position).magnitude < minSqrDistance) break;
+
             Vector2 direction = (targetPos - rigid.position).normalized;
             Vector2 newPos = rigid.position + direction * dashSpeed * Time.fixedDeltaTime;
 

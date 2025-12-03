@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f090322ae918f843969ca55d3b043e4, type: 3}
-  m_Name: SlamDown_Jump
+  m_Script: {fileID: 11500000, guid: 47c3400ba45b13a4088cdba07c9a3c8e, type: 3}
+  m_Name: ThrowAway_Explosion
   m_EditorClassIdentifier: 
-  dmgCalculater: {fileID: 11400000, guid: 09ec66a83ba100449b7ecbb9615eee51, type: 2}
+  dmgCalculater: {fileID: 11400000, guid: 8e766981311f59948aaa49886890069e, type: 2}
   targetObj: {fileID: 0}
   explanation: 
-  explosion: {fileID: 11400000, guid: 99b9f01a521db804eac4ac3823c2c2b0, type: 2}
-  distance: 5
-  jumpDuration: 1.5
-  defaultDuration: 0
+  hitBoxOffset: {x: 0, y: 0}
+  hitBoxSize: {x: 2, y: 2}
+  hitBoxObj: {fileID: 0}

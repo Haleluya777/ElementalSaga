@@ -22,7 +22,6 @@ public class SlamDown_Jump : SkillBase
         if (enemyHitted.collider != null) //범위 내 적이 존재할 경우.
         {
             target = new Vector2(enemyHitted.point.x, caster.GetGameObject().transform.position.y);
-            //target.position = enemyHitted.point
         }
         else //아닐 경우.
         {
@@ -58,6 +57,7 @@ public class SlamDown_Jump : SkillBase
             if (hit.collider != null)
             {
                 Debug.Log("땅에 도착함");
+                targetObj.GetComponentInChildren<IDamageable>().TakeDamage(dmgCalculater.Calculate(caster), caster, targetObj);
                 explosion.UseSkill(caster);
                 break;
             }

@@ -31,6 +31,11 @@ public class Skill_Dash : SkillBase
 
         while (((Vector2)target - rigid.position).magnitude > minSqrDistance)
         {
+            if (Physics2D.Raycast(new Vector2(caster.GetGameObject().transform.position.x, caster.GetGameObject().transform.position.y + .5f), Vector2.right * caster.GetGameObject().transform.localScale.x, .75f, 1 << 3))
+            {
+                break;
+            }
+
             Vector2 direction = ((Vector2)target - rigid.position).normalized;
             Vector3 newPos = rigid.position + direction * dashSpeed * Time.fixedDeltaTime;
 

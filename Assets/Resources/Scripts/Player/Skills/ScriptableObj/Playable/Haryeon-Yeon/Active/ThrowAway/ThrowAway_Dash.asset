@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f090322ae918f843969ca55d3b043e4, type: 3}
-  m_Name: SlamDown_Jump
+  m_Script: {fileID: 11500000, guid: d606a19676fd1044fa80e4b8c222075e, type: 3}
+  m_Name: ThrowAway_Dash
   m_EditorClassIdentifier: 
-  dmgCalculater: {fileID: 11400000, guid: 09ec66a83ba100449b7ecbb9615eee51, type: 2}
+  dmgCalculater: {fileID: 0}
   targetObj: {fileID: 0}
   explanation: 
-  explosion: {fileID: 11400000, guid: 99b9f01a521db804eac4ac3823c2c2b0, type: 2}
-  distance: 5
-  jumpDuration: 1.5
-  defaultDuration: 0
+  chainedSkill: {fileID: 11400000, guid: 5c8b1efc46ca7d044b901576c60c510b, type: 2}
+  dashDistance: 2
