@@ -59,8 +59,8 @@ public class HeatPressure : SkillBase
         {
             //skill.
         }
-        unit.MoveSpeed = baseMoveSpeed - (int)(heatPressure * 0.2f);
-        unit.JumpForce = baseJumpForce - (int)(heatPressure * 0.2f);
+        unit.MoveSpeed = baseMoveSpeed - (int)(heatPressure * 0.05f);
+        unit.JumpForce = baseJumpForce - (int)(heatPressure * 0.05f);
 
         Debug.Log($"스탯 업데이트: Heat({heatPressure}) -> Att({unit.Att}), MoveSpeed({unit.MoveSpeed}), JumpForce({unit.JumpForce})");
     }

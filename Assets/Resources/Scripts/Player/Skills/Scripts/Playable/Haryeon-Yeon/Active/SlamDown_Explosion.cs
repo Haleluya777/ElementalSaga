@@ -8,9 +8,15 @@ public class SlamDown_Explosion : SkillBase
     [SerializeField] private Vector2 hitBoxOffset;
     [SerializeField] private Vector2 hitBoxSize;
     [SerializeField] private GameObject hitBoxObj;
+    [SerializeField] private HeatPressure heatPressurePassive;
 
     public override bool UseSkill(ISkillCaster caster)
     {
+        if (heatPressurePassive.heatPressure > 50 && heatPressurePassive.heatPressure < 100)
+        {
+            hitBoxSize += hitBoxSize * .4f;
+        }
+
         GameObject hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
         GameObject effectObj = GameManager.instance.objectPoolManager.GetGo("Effect");
 

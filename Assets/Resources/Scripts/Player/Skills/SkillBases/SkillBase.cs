@@ -14,5 +14,10 @@ public abstract class SkillBase : ScriptableObject
         parentModule = module;
     }
 
+    public virtual void HitBoxInit(Vector2 hitBoxSize, Vector2 hitBoxOffSet)
+    {
+
+    }
+
     public abstract bool UseSkill(ISkillCaster caster);
 }
