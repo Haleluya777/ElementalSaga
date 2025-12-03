@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowAway_Action : MonoBehaviour
+[CreateAssetMenu(fileName = "ThrowAway_Action", menuName = "ScriptableObject/Skills/Active/YeonHaRyeon/ThrowAway_Action")]
+public class ThrowAway_Action : SkillBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private RaycastHit2D hitted;
+    private GameObject hitBox;
+    private GameObject effect;
 
-    // Update is called once per frame
-    void Update()
+    public override bool UseSkill(ISkillCaster caster)
     {
-        
+        hitted = Physics2D.Raycast(new Vector2(caster.GetPosition().x, caster.GetPosition().y + .5f), caster.GetDirection(), 5f, 1 << 6);
+
+        hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
+        effect = GameManager.instance.objectPoolManager.GetGo("Effect");
+
+        hitBox.transform.position = hitted.collider.transform.position;
+        effect.transform.position = hitted.collider.transform.position;
+
+        return true;
     }
 }

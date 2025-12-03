@@ -46,12 +46,12 @@ public class DeBuff_Throwed : StatusEffectBase
         while (true)
         {
             hitted = Physics2D.Raycast(this.target.transform.position + new Vector3(.5f, .5f), targetPos - origin, .5f);
-            Debug.DrawRay(this.target.transform.position + new Vector3(.5f, .5f), targetPos - origin, Color.red, 100f, true);
-            Debug.Log(targetPos);
+            //Debug.DrawRay(this.target.transform.position + new Vector3(.5f, .5f), targetPos - origin, Color.red, 100f, true);
+            //Debug.Log(targetPos);
 
             if (hitted.collider != null)
             {
-                chainedSkill.UseSkill(attacker, hitted.point);
+                chainedSkill.UseSkill(attacker);
                 break;
             }
 

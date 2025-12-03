@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47c3400ba45b13a4088cdba07c9a3c8e, type: 3}
-  m_Name: ThrowAway_Explosion
+  m_Script: {fileID: 11500000, guid: 9487d34839fdd6b488fd9c16fd1b4ba8, type: 3}
+  m_Name: ThrowAway_Action
   m_EditorClassIdentifier: 
-  dmgCalculater: {fileID: 11400000, guid: 8e766981311f59948aaa49886890069e, type: 2}
+  dmgCalculater: {fileID: 0}
   targetObj: {fileID: 0}
   explanation: 
-  hitBoxOffset: {x: 0, y: 0}
-  hitBoxSize: {x: 2, y: 2}
-  hitBoxObj: {fileID: 0}

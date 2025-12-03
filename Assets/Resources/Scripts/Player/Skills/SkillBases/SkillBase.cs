@@ -15,8 +15,4 @@ public abstract class SkillBase : ScriptableObject
     }
 
     public abstract bool UseSkill(ISkillCaster caster);
-    public virtual bool UseSkill(ISkillCaster caster, Vector2 position)
-    {
-        return true;
-    }
 }
