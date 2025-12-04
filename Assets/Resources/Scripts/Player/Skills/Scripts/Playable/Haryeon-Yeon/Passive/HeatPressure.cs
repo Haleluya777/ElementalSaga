@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "HeatPressure", menuName = "ScriptableObject/Skills/Passive/HeatPressure")]
+[CreateAssetMenu(fileName = "HeatPressure", menuName = "ScriptableObject/Skills/Passive/YeonHaRyeon/HeatPressure")]
 public class HeatPressure : SkillBase
 {
     private Unit unit;
@@ -55,10 +55,10 @@ public class HeatPressure : SkillBase
 
         // 항상 원본 스탯을 기준으로 현재 heatPressure에 맞는 스탯을 계산하여 적용합니다.
         unit.Att = baseAtt + heatPressure;
-        foreach (var skill in unit.GetComponentInChildren<IAttackable>().ActiveSkills)
-        {
-            //skill.
-        }
+        // foreach (var skill in unit.GetComponentInChildren<IAttackable>().ActiveSkills)
+        // {
+        //     //skill.
+        // }
         unit.MoveSpeed = baseMoveSpeed - (int)(heatPressure * 0.05f);
         unit.JumpForce = baseJumpForce - (int)(heatPressure * 0.05f);
 

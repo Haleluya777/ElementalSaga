@@ -2,20 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SlamDown_Explosion", menuName = "ScriptableObject/Skills/Active/YeonHaRyeon/SlamDown_Explosion")]
-public class SlamDown_Explosion : SkillBase
+[CreateAssetMenu(fileName = "SlamDown_Punch_Explosion", menuName = "ScriptableObject/Skills/Active/YeonHaRyeon/SlamDown_Punch_Explosion")]
+public class SlamDown_Punch_Explosion : SkillBase
 {
     [SerializeField] private Vector2 hitBoxOffset;
     [SerializeField] private Vector2 hitBoxSize;
-    [SerializeField] private GameObject hitBoxObj;
-    [SerializeField] private HeatPressure heatPressurePassive;
 
     public override bool UseSkill(ISkillCaster caster)
     {
-        if (heatPressurePassive.heatPressure > 50 && heatPressurePassive.heatPressure < 100)
-        {
-            hitBoxSize += hitBoxSize * .4f;
-        }
+        Debug.Log("대폭발!");
 
         GameObject hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
         GameObject effectObj = GameManager.instance.objectPoolManager.GetGo("Effect");
@@ -23,10 +18,10 @@ public class SlamDown_Explosion : SkillBase
         hitBox.transform.position = caster.GetHitBoxPos().position;
         effectObj.transform.position = caster.GetHitBoxPos().position;
 
+        hitBox.tag = caster.GetGameObject().tag;
+
         HitBox hitBoxCom = hitBox.GetComponent<HitBox>();
         Effect effectCom = effectObj.GetComponent<Effect>();
-
-        hitBox.tag = caster.GetGameObject().tag;
 
         hitBoxCom.GetComponent<BoxCollider2D>().size = hitBoxSize;
         hitBoxCom.GetComponent<BoxCollider2D>().offset = hitBoxOffset;

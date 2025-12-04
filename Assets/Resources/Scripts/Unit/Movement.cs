@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
     private void FixedUpdate()
     {
         CheckingGround();
-        Debug.Log("리지드 x값 : " + rigid.velocity.x);
+        //Debug.DrawRay(parentObj.transform.position + new Vector3(0f, .5f), Vector2.right * .6f, Color.red, 100f, true);
     }
 
     public void DataInit()

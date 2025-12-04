@@ -39,18 +39,22 @@ public class DeBuff_Throwed : StatusEffectBase
 
     private IEnumerator Throwing(Vector2 origin)
     {
+        BoxCollider2D col = this.target.GetComponentInChildren<BoxCollider2D>();
+        Debug.Log(col.size.x / 2 + .1f);
         RaycastHit2D hitted;
         float dashSpeed = 50f; // 대쉬 속도
         float minSqrDistance = .5f;
 
+        Physics2D.queriesStartInColliders = false;
         while (true)
         {
-            hitted = Physics2D.Raycast(this.target.transform.position + new Vector3(.5f, .5f), targetPos - origin, .5f);
+            hitted = Physics2D.Raycast(this.target.transform.position + new Vector3(0f, .5f), targetPos - origin, (col.size.x / 2) + .115f);
             //Debug.DrawRay(this.target.transform.position + new Vector3(.5f, .5f), targetPos - origin, Color.red, 100f, true);
             //Debug.Log(targetPos);
 
             if (hitted.collider != null)
             {
+                Debug.Log("부딪힘");
                 chainedSkill.UseSkill(attacker);
                 break;
             }

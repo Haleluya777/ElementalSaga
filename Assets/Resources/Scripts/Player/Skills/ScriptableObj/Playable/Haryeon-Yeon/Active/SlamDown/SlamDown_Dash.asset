@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: SlamDown_Dash
   m_EditorClassIdentifier: 
   dmgCalculater: {fileID: 0}
+  targetObj: {fileID: 0}
   explanation: 
-  chainedSkill: {fileID: 11400000, guid: 3ac131b6147f91546b65599784c1af67, type: 2}
-  dashDistance: 5
-  duration: 0.2
+  chainedSkill_Jump: {fileID: 11400000, guid: 3ac131b6147f91546b65599784c1af67, type: 2}
+  chainedSkill_FirePunch: {fileID: 11400000, guid: acb7b1e6f98787047b9dc39d7e5038f0, type: 2}
+  heatPressurePassive: {fileID: 11400000, guid: 84fe844fc0b012d478d3121609eb8ac4, type: 2}

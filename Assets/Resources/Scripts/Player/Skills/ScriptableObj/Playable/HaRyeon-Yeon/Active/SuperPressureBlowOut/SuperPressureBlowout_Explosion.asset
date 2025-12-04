@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92fbf6f3b81abc343a71b69c15c49012, type: 3}
-  m_Name: HeatPressure
+  m_Script: {fileID: 11500000, guid: acdf3cd460558734d9774f4bf4eee176, type: 3}
+  m_Name: SuperPressureBlowout_Explosion
   m_EditorClassIdentifier: 
-  dmgCalculater: {fileID: 0}
+  dmgCalculater: {fileID: 11400000, guid: 7a6b5c35a55575d42802b609d866b668, type: 2}
   targetObj: {fileID: 0}
   explanation: 
-  heatPressure: 100
+  hitBoxOffset: {x: -0.5, y: 0.5}
+  hitBoxSize: {x: 5, y: 1}

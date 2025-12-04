@@ -22,3 +22,12 @@ MonoBehaviour:
     jumpForce: 5
     addJumpCount: 0
     attSpeed: 1
+  - id: 2
+    name: SeoYeon-Yun
+    hp: 300
+    att: 90
+    gage: 100
+    moveSpeed: 5
+    jumpForce: 5
+    addJumpCount: 0
+    attSpeed: 1
