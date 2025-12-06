@@ -55,6 +55,16 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
             hitEvents[i] = Instantiate(hitEvents[i]);
             hitEvents[i].Initialize(unit);
         }
+
+        foreach (var skill in activeSkills)
+        {
+            skill.InitSkill();
+        }
+
+        foreach (var skill in passiveSkills)
+        {
+            skill.InitSkill();
+        }
     }
 
     private void ChangeAirialBasicAttack()

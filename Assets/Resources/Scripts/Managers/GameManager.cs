@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public CoroutineRunner coroutineRunner;
     public ObjectPoolManager objectPoolManager;
+    public EventManager eventManager;
 
     private void Awake()
     {

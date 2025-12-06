@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -32,11 +33,13 @@ public class Skill_Module : ScriptableObject
     public bool HavePassive => havePassive;
     public bool CanUseAirial => canUseAirial;
     #endregion EndProperty
-    private void OnEnable()
+
+    public void InitSkill()
     {
         //data.SkillName = skillName;
         //data.SkillDetail = skillDetail;
 
+        Debug.Log("스킬 초기화 완료");
         blackBoard.Set("Condition", true);
         foreach (var skill in activeSkills)
         {
@@ -96,7 +99,7 @@ public class Skill_Module : ScriptableObject
         }
     }
 
-    public void ChangeSkillModule(SkillBase previousSkill, SkillBase currentSkill)
+    public void ChangeSkillModule(SkillBase previousSkill, SkillBase currentSkill) //현재 스킬, 바꿀 스킬
     {
         int index = activeSkills.IndexOf(previousSkill);
 
@@ -111,5 +114,10 @@ public class Skill_Module : ScriptableObject
             // 교체하려는 스킬을 찾지 못하면 오류가 발생하므로, 경고를 출력하고 실행을 중단합니다.
             Debug.LogWarning($"Warning: Skill '{previousSkill?.name}' not found in module '{this.name}' and could not be replaced by '{currentSkill?.name}'.");
         }
+    }
+
+    public void ResetCoolDown()
+    {
+        remainingCoolDown = 0;
     }
 }

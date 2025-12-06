@@ -37,6 +37,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
     }
 
     [SerializeField] protected UnitData unitData;
+    private bool cantAction; //true일 경우 행동 불능.
 
     #region Property
     public int CurHp { get => unitData.curHp; private set => unitData.curHp = Mathf.Max(0, value); }
@@ -50,14 +51,26 @@ public abstract class Unit : MonoBehaviour, IDamageable
     public int JumpForce { get => unitData.jumpForce; set => unitData.jumpForce = Mathf.Max(0, value); }
     public int AddJumpCount { get => unitData.addJumpCount; set => unitData.addJumpCount = Mathf.Max(0, value); }
     public bool isDead => CurHp <= 0;
+    public bool CantAction
+    {
+        get { return cantAction; }
+        set
+        {
+            if (cantAction != value)
+            {
+                cantAction = value;
+                CheckUnitAction(cantAction);
+            }
+        }
+    }
 
     #endregion
 
     public event Action<int, ISkillCaster, GameObject> TakeDamageEvent; //데미지를 받을 때 실행하는 이벤트 (받은 데미지, 데미지를 준 공격자와 피격자의 게임 오브젝트 인자.)
+    public event Action<ISkillCaster> DeadEvent; //이 캐릭터가 사망할 때 실행하는 이벤트, 아직은 인자값이 필요 없어 보임.
     private Dictionary<string, StatusEffectBase> activeEffect = new Dictionary<string, StatusEffectBase>(); //유닛에 진행중인 상태 이상들. 버프/디버프 등
     private Dictionary<string, Coroutine> activeEffectCoroutines = new Dictionary<string, Coroutine>(); //상태이상 지속을 돕는 코루틴.
     private Coroutine newCorutine;
-    public bool isStunned { get; private set; }
     public bool isAirial;
     //public UnitData currentStats;
 
@@ -74,17 +87,37 @@ public abstract class Unit : MonoBehaviour, IDamageable
         TakeDamageEvent?.Invoke(dmg, attacker, character);
 
         CurHp -= (dmg);// - Def);
-        if (isDead) Dead();
+        if (isDead) Dead(attacker);
     }
 
-    public virtual void Dead()
+    public virtual void Dead(ISkillCaster attacker)
     {
+        //사망 시 적용되는 이벤트 실행
+        GameManager.instance.eventManager.ReportDead(attacker);
         Debug.Log("사망!");
         this.gameObject.SetActive(false);
     }
 
+    private void CheckUnitAction(bool cantAction)
+    {
+        GameObject attack = transform.GetChild(1).gameObject;
+        GameObject movement = transform.GetChild(2).gameObject;
+
+        if (cantAction)
+        {
+            attack.SetActive(false);
+            movement.SetActive(false);
+        }
+        else
+        {
+            attack.SetActive(true);
+            movement.SetActive(true);
+        }
+    }
+
     public void AddEffectProcess(StatusEffectBase effect)
     {
+        if (!this.gameObject.activeSelf) return;
         ApplyEffect(effect);
     }
 

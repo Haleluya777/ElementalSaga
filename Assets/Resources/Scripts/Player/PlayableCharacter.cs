@@ -14,7 +14,7 @@ public class PlayableCharacter : Unit
 
     public ControlState controlState;
 
-    void Awake()
+    private void Start()
     {
         CheckingControlState(controlState);
 
@@ -42,11 +42,5 @@ public class PlayableCharacter : Unit
                 GetComponentInChildren<PlayerController>().enabled = false;
                 break;
         }
-    }
-
-    public override void Dead()
-    {
-        base.Dead();
-        Debug.Log("게임 종료.");
     }
 }

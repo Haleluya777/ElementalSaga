@@ -17,8 +17,8 @@ public class EnemyCharacter : Unit
         }
     }
 
-    public override void Dead()
+    public override void Dead(ISkillCaster attacker)
     {
-        base.Dead();
+        base.Dead(attacker);
     }
 }
