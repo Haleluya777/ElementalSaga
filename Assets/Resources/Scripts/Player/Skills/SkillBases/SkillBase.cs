@@ -20,5 +20,13 @@ public abstract class SkillBase : ScriptableObject
 
     }
 
-    public abstract bool UseSkill(ISkillCaster caster);
+    public virtual bool UseSkill(ISkillCaster caster)
+    {
+        return true;
+    }
+
+    public virtual bool UseSkill(ISkillCaster caster, Vector3 skillPos)
+    {
+        return true;
+    }
 }

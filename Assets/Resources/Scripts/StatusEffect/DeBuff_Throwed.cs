@@ -52,7 +52,7 @@ public class DeBuff_Throwed : StatusEffectBase
             if (hitted.collider != null)
             {
                 Debug.Log("부딪힘");
-                chainedSkill.UseSkill(attacker);
+                chainedSkill.UseSkill(attacker, target.transform.position);
                 break;
             }
 

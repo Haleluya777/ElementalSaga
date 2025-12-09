@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO.Compression;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -41,7 +43,6 @@ public class PlayerController : MonoBehaviour, IDataInitializable
         PlayerIdle();
         //PlayerMove();
         PlayerJump();
-        //PlayerAttack();
         StateActions(curState);
         StateAnimation(curState);
     }
@@ -72,12 +73,17 @@ public class PlayerController : MonoBehaviour, IDataInitializable
             case "Attack":
                 if (context.control is KeyControl keyControl)
                 {
-                    if (Enum.TryParse<KeyCode>(keyControl.displayName, true, out var pressedKey))
+                    if (Enum.TryParse<KeyCode>(keyControl.displayName, true, out KeyCode pressedKey))
                     {
-                        Debug.Log($"{pressedKey}를 누름");
-                        ProccessSkillInput(pressedKey);
+                        if (context.performed)
+                        {
+                            ProccessSkillKeyDown(pressedKey);
+                        }
+                        else if (context.canceled)
+                        {
+                            ProccessSkillKeyUp(pressedKey);
+                        }
                     }
-                    //ProccessSkillInput(pressedKey);
                 }
                 break;
 
@@ -140,16 +146,40 @@ public class PlayerController : MonoBehaviour, IDataInitializable
         if (moveX.x != 0) curState = UnitState.Moving;
     }
 
-    private void ProccessSkillInput(KeyCode keyCode)
+    private void ProccessSkillKeyDown(KeyCode keyCode)
     {
-        int attNum = GetAttNum(keyCode);
+        int attNum = GetSkillNumFromKeyCode(keyCode);
+        if (attNum == -1) return;
 
         if (attack == null || attNum >= attack.ActiveSkills.Count) return;
         var skill = attack.ActiveSkills[attNum];
-        //Debug.Log("입력함");
 
-        // 지속 스킬의 경우, 키를 뗄 때 코루틴을 중지 (상태와 무관하게 항상 체크)
-        if (skill.activeType != Skill_Module.ActiveType.OnDown && Input.GetKeyUp(keyCode))
+        if (curState == UnitState.Attacking) return;
+
+        if (skill.activeType == Skill_Module.ActiveType.OnDown) //단발성 스킬
+        {
+            if (attack.PerformAttack(attNum)) curState = UnitState.Attacking;
+        }
+        else //지속성 스킬
+        {
+            if (attack.PerformAttack(attNum))
+            {
+                curState = UnitState.Attacking;
+                if (continuousSkill != null) StopCoroutine(continuousSkill);
+                continuousSkill = StartCoroutine(SkillRoutine(skill, attNum));
+            }
+        }
+    }
+
+    private void ProccessSkillKeyUp(KeyCode keyCode)
+    {
+        int attNum = GetSkillNumFromKeyCode(keyCode);
+        if (attNum == -1) return;
+
+        if (attack == null || attNum >= attack.ActiveSkills.Count) return;
+        var skill = attack.ActiveSkills[attNum];
+
+        if (skill.activeType != Skill_Module.ActiveType.OnDown)
         {
             if (continuousSkill != null)
             {
@@ -157,31 +187,11 @@ public class PlayerController : MonoBehaviour, IDataInitializable
                 continuousSkill = null;
             }
         }
-
-        // 키를 누르는 로직은 공격 중이 아닐 때만 실행
-        if (Input.GetKeyDown(keyCode))
-        {
-            if (curState == UnitState.Attacking) return;
-
-            if (skill.activeType == Skill_Module.ActiveType.OnDown) //단발성 스킬
-            {
-                if (attack.PerformAttack(attNum)) curState = UnitState.Attacking;
-            }
-            else //지속성 스킬
-            {
-                if (attack.PerformAttack(attNum))
-                {
-                    curState = UnitState.Attacking;
-                    if (continuousSkill != null) StopCoroutine(continuousSkill);
-                    continuousSkill = StartCoroutine(SkillRoutine(skill, attNum));
-                }
-            }
-        }
     }
 
-    private int GetAttNum(KeyCode keyCode)
+    private int GetSkillNumFromKeyCode(KeyCode keyCode)
     {
-        int attNum = (keyCode) switch
+        return (keyCode) switch
         {
             KeyCode.Z => 0,
             KeyCode.X => 1,
@@ -189,8 +199,6 @@ public class PlayerController : MonoBehaviour, IDataInitializable
             KeyCode.V => 3,
             _ => -1
         };
-
-        return attNum;
     }
 
     private IEnumerator SkillRoutine(Skill_Module skill, int skillNum)
