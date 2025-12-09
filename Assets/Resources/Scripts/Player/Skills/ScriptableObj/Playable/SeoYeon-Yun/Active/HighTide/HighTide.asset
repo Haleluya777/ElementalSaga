@@ -15,5 +15,5 @@ MonoBehaviour:
   dmgCalculater: {fileID: 0}
   targetObj: {fileID: 0}
   explanation: 
-  reinforcedBasicSkill: {fileID: 0}
-  basicSkill: {fileID: 0}
+  reinforcedBasicSkill: {fileID: 11400000, guid: 3b721f9f45d673345866642d06804439, type: 2}
+  basicSkill: {fileID: 11400000, guid: 5f85d9ceb38e52b4d802b2cee4d352f8, type: 2}

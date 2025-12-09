@@ -23,3 +23,4 @@ MonoBehaviour:
   activeSkills:
   - {fileID: 11400000, guid: 60e8013126c2e9f40a7c497ae5c863bf, type: 2}
   passiveSkills: []
+  activeType: 1

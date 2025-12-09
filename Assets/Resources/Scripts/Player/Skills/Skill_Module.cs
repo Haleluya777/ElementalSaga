@@ -9,7 +9,7 @@ using UnityEngine;
 public class Skill_Module : ScriptableObject
 {
     public IBlackBoard blackBoard = new BlackBoard(); //스킬 데이터를 담을 블랙보드.
-
+    public enum ActiveType { OnDown, OnHold };
     [SerializeField] private string skillName; //최종 스킬 이름
     [SerializeField] private string skillDetail; //최종 스킬의 상세 설명
     public float coolDown; //최종 스킬의 쿨타임
@@ -23,7 +23,7 @@ public class Skill_Module : ScriptableObject
 
     [SerializeField] private List<SkillBase> activeSkills = new List<SkillBase>(); //이 스킬을 실행할 때 같이 실행되는 액티브 스킬들.
     [SerializeField] private List<SkillBase> passiveSkills = new List<SkillBase>(); //이 스킬을 착용하고 있을 때 발동하는 패시브 스킬들.
-
+    public ActiveType activeType;
     //외부에서 접근할 수 있게 하는 프로퍼티
     #region Property
     public bool OnCoolDown => remainingCoolDown > 0;

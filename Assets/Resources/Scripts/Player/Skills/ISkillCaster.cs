@@ -20,6 +20,7 @@ public interface ISkillCaster
     IDamageable GetDamageable();
     GameObject GetGameObject();
     Transform GetHitBoxPos();
+    Transform GetCatchPos(); //잡기할 때 Enemy의 위치.
 
     T GetCom<T>();
 }

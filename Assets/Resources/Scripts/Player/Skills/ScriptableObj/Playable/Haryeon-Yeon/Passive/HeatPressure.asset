@@ -15,4 +15,4 @@ MonoBehaviour:
   dmgCalculater: {fileID: 0}
   targetObj: {fileID: 0}
   explanation: 
-  heatPressure: 100
+  heatPressure: 0

@@ -15,5 +15,3 @@ MonoBehaviour:
   dmgCalculater: {fileID: 11400000, guid: 7a6b5c35a55575d42802b609d866b668, type: 2}
   targetObj: {fileID: 0}
   explanation: 
-  hitBoxOffset: {x: -0.5, y: 0.5}
-  hitBoxSize: {x: 5, y: 1}

@@ -45,12 +45,9 @@ public class DeBuff_Throwed : StatusEffectBase
         float dashSpeed = 50f; // 대쉬 속도
         float minSqrDistance = .5f;
 
-        Physics2D.queriesStartInColliders = false;
         while (true)
         {
-            hitted = Physics2D.Raycast(this.target.transform.position + new Vector3(0f, .5f), targetPos - origin, (col.size.x / 2) + .115f);
-            //Debug.DrawRay(this.target.transform.position + new Vector3(.5f, .5f), targetPos - origin, Color.red, 100f, true);
-            //Debug.Log(targetPos);
+            hitted = Physics2D.Raycast(this.target.transform.position + new Vector3(col.size.x / 2 + .1f, .5f), targetPos - origin, (col.size.x / 2) + .115f);
 
             if (hitted.collider != null)
             {

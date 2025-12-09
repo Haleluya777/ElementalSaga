@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SuperPressureBlowout_Explosion", menuName = "ScriptableObject/Skills/Active/YeonHaRyeon/SuperPressureBlowout_Explosion")]
 public class SuperPressureBlowout_Explosion : SkillBase
 {
-    [SerializeField] private Vector2 hitBoxOffset;
-    [SerializeField] private Vector2 hitBoxSize;
+    private Vector2 hitBoxOffset;
+    private Vector2 hitBoxSize;
     private GameObject hitBoxObj;
 
     public override bool UseSkill(ISkillCaster caster)
@@ -14,8 +14,8 @@ public class SuperPressureBlowout_Explosion : SkillBase
         GameObject hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
         GameObject effectObj = GameManager.instance.objectPoolManager.GetGo("Effect");
 
-        hitBox.transform.position = caster.GetHitBoxPos().position;
-        effectObj.transform.position = caster.GetHitBoxPos().position;
+        hitBox.transform.position = caster.GetPosition();
+        effectObj.transform.position = caster.GetPosition();
 
         HitBox hitBoxCom = hitBox.GetComponent<HitBox>();
         Effect effectCom = effectObj.GetComponent<Effect>();

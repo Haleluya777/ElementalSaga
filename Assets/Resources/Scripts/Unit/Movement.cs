@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Playables;
 
 public class Movement : MonoBehaviour, IMovable, IDataInitializable
 {
     [SerializeField] private GameObject parentObj;
+    private PlayerController controller;
     private Unit unit;
     private Rigidbody2D rigid;
     private Vector2 dir;
+    private Vector2 vel;
     public Vector2 Dir => dir;
 
     private float moveSpeed;
@@ -20,8 +20,17 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
 
     private void FixedUpdate()
     {
+        Debug.Log(dir.x);
         CheckingGround();
-        //Debug.DrawRay(parentObj.transform.position + new Vector3(0f, .5f), Vector2.right * .6f, Color.red, 100f, true);
+        if (unit.MoveSpeed == 0) return;
+
+        vel = rigid.velocity;
+
+        vel.x = dir.x * unit.MoveSpeed;
+        vel.y = rigid.velocity.y;
+
+        rigid.velocity = vel;
+        SetLocalScale((int)vel.x / (int)unit.MoveSpeed);
     }
 
     public void DataInit()
@@ -29,6 +38,23 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
         rigid = parentObj.GetComponent<Rigidbody2D>();
         unit = parentObj.GetComponent<Unit>();
         curJumpCount = unit.AddJumpCount;
+    }
+
+    void OnEnable()
+    {
+        if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
+        {
+            controller = parentObj.GetComponentInChildren<PlayerController>();
+            controller.moveInput += PerformMove;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
+        {
+            controller.moveInput -= PerformMove;
+        }
     }
 
     public void PerformJump()
@@ -56,11 +82,8 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
 
     public void PerformMove(Vector2 vector)
     {
-        if (unit.MoveSpeed == 0) return;
-        dir.x = vector.x * unit.MoveSpeed;
-        dir.y = rigid.velocity.y;
-        rigid.velocity = dir;
-        SetLocalScale((int)dir.x / (int)unit.MoveSpeed);
+        //Debug.Log("이동 호출");
+        dir = vector;
     }
 
     private void SetLocalScale(int dirX)
@@ -71,15 +94,16 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
 
     private void CheckingGround()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(parentObj.transform.position, new Vector2(.5f, .1f), 0, Vector2.down, 0, 1 << 3);
+        RaycastHit2D hit = Physics2D.BoxCast(parentObj.transform.position, new Vector2(.5f, .1f), 0, Vector2.down, .1f, 1 << 3);
         if (hit.collider != null)
         {
             //Debug.Log("땅을 딛고 있음");
             unit.isAirial = false;
             curJumpCount = unit.AddJumpCount;
         }
-        else
+        else if (hit.collider == null)
         {
+            Debug.Log("공중에 있음");
             unit.isAirial = true;
         }
 

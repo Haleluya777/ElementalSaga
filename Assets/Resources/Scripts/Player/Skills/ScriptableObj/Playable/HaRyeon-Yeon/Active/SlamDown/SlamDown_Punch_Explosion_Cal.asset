@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SlamDown_Punch_Explosion_Cal
   m_EditorClassIdentifier: 
   baseDmg: 0
-  weight: 2
+  weight: 0

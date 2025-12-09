@@ -17,7 +17,6 @@ public class PlayableCharacter : Unit
     private void Start()
     {
         CheckingControlState(controlState);
-
         DataInit();
     }
 

@@ -12,6 +12,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     [SerializeField] private GameObject parentObj;
     [SerializeField] private BoxCollider2D hitBox;
     [SerializeField] private Rigidbody2D rigid;
+    private PlayerController controller;
     private Unit unit;
     private Animator anim;
 
@@ -40,11 +41,17 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     {
         UpdateCoolDown();
         UsePassiveSkills();
-        ChangeAirialBasicAttack();
+        //ChangeAirialBasicAttack();
     }
 
     public void DataInit()
     {
+        //if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
+        //{
+        //    controller = parentObj.GetComponentInChildren<PlayerController>();
+        //    //controller.attackInput += PerformAttack;
+        //}
+
         unit = parentObj.GetComponent<Unit>();
         anim = parentObj.GetComponent<Animator>();
         rigid = parentObj.GetComponent<Rigidbody2D>();
@@ -94,6 +101,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
         rigid.velocity = new Vector2(0, rigid.velocity.y);
         if (unit.isAirial) //공중에서 스킬을 쓸 때.
         {
+            Debug.Log("할렐루야");
             if (!activeSkills[attNum].CanUseAirial) return false;
             else
             {
@@ -118,10 +126,17 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
 
         else //땅 위에서 스킬을 쓸 때.
         {
+
+
             int comboAnim = Combo;
             bool result = activeSkills[attNum].UseSkill(this);
 
-            if (!result) return false;
+            if (!result)
+            {
+
+                return false;
+            }
+
             else
             {
                 if (attNum == 0) //기본 공격을 했을 때.
@@ -179,6 +194,11 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     public GameObject GetGameObject()
     {
         return parentObj;
+    }
+
+    public Transform GetCatchPos()
+    {
+        return this.gameObject.transform.GetChild(1).transform;
     }
 
     public T GetCom<T>() => parentObj.GetComponentInChildren<T>();

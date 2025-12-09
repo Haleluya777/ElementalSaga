@@ -43,7 +43,6 @@ public class ThrowAway_Dash : SkillBase
         {
             if (Physics2D.Raycast(new Vector2(caster.GetGameObject().transform.position.x, caster.GetGameObject().transform.position.y + .5f), Vector2.right * caster.GetGameObject().transform.localScale.x, .75f, 1 << 3))
             {
-                Debug.Log("대쉬취소");
                 break;
             }
 

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SuperPressureBlowout_Cal
   m_EditorClassIdentifier: 
   baseDmg: 0
-  weight: 1
+  weight: 10

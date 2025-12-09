@@ -25,7 +25,8 @@ public class SlamDown_Jump : SkillBase
         }
         else //아닐 경우.
         {
-            target = Vector2.zero;
+            Debug.Log("목표 없음");
+            target = caster.GetGameObject().transform.position + new Vector3(2f, 0);
         }
 
         Vector2 startPos = caster.GetGameObject().transform.position;
@@ -56,8 +57,18 @@ public class SlamDown_Jump : SkillBase
             hit = Physics2D.Raycast(caster.GetGameObject().transform.position, Vector2.down, 0.1f, 1 << 3);
             if (hit.collider != null)
             {
-                Debug.Log("땅에 도착함");
                 targetObj.GetComponentInChildren<IDamageable>().TakeDamage(dmgCalculater.Calculate(caster), caster, targetObj);
+                var unit = targetObj.GetComponent<Unit>();
+                if (unit.activeEffect.TryGetValue("Catchted", out StatusEffectBase exisitngEffect))
+                {
+                    if (unit.activeEffectCoroutines.TryGetValue("Catchted", out Coroutine runningCoroutine))
+                    {
+                        //코루틴을 이용한 상태이상의 타이머 제거.
+                        GameManager.instance.coroutineRunner.StopCoroutine(runningCoroutine);
+                    }
+                    //적용 되어 있는 상태이상 또한 제거.
+                    exisitngEffect.RemoveEffect();
+                }
                 explosion.UseSkill(caster);
                 break;
             }

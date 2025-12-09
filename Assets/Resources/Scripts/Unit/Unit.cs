@@ -38,6 +38,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
 
     [SerializeField] protected UnitData unitData;
     private bool cantAction; //true일 경우 행동 불능.
+    private bool graceState; //무적 상태.
 
     #region Property
     public int CurHp { get => unitData.curHp; private set => unitData.curHp = Mathf.Max(0, value); }
@@ -51,6 +52,8 @@ public abstract class Unit : MonoBehaviour, IDamageable
     public int JumpForce { get => unitData.jumpForce; set => unitData.jumpForce = Mathf.Max(0, value); }
     public int AddJumpCount { get => unitData.addJumpCount; set => unitData.addJumpCount = Mathf.Max(0, value); }
     public bool isDead => CurHp <= 0;
+    public bool GraceState { get; set; }
+
     public bool CantAction
     {
         get { return cantAction; }
@@ -68,8 +71,8 @@ public abstract class Unit : MonoBehaviour, IDamageable
 
     public event Action<int, ISkillCaster, GameObject> TakeDamageEvent; //데미지를 받을 때 실행하는 이벤트 (받은 데미지, 데미지를 준 공격자와 피격자의 게임 오브젝트 인자.)
     public event Action<ISkillCaster> DeadEvent; //이 캐릭터가 사망할 때 실행하는 이벤트, 아직은 인자값이 필요 없어 보임.
-    private Dictionary<string, StatusEffectBase> activeEffect = new Dictionary<string, StatusEffectBase>(); //유닛에 진행중인 상태 이상들. 버프/디버프 등
-    private Dictionary<string, Coroutine> activeEffectCoroutines = new Dictionary<string, Coroutine>(); //상태이상 지속을 돕는 코루틴.
+    public Dictionary<string, StatusEffectBase> activeEffect = new Dictionary<string, StatusEffectBase>(); //유닛에 진행중인 상태 이상들. 버프/디버프 등
+    public Dictionary<string, Coroutine> activeEffectCoroutines = new Dictionary<string, Coroutine>(); //상태이상 지속을 돕는 코루틴.
     private Coroutine newCorutine;
     public bool isAirial;
     //public UnitData currentStats;
@@ -81,6 +84,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
 
     public void TakeDamage(int dmg, ISkillCaster attacker, GameObject character)
     {
+        if (GraceState) return;
         Debug.Log($"데미지 받음! 받은 데미지 : {dmg}");
 
         //데미지를 받을 때마다 피격 효과 발생.

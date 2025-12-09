@@ -74,7 +74,7 @@ public class SlamDown_Dash : SkillBase
             if (enemy != null) //Enemy가 비어 있지 않은 경우. (스킬을 시전할 때, 범위 내에 Enemy가 존재하는 경우.)
             {
                 var enemyUnit = enemy.GetComponent<Unit>();
-                enemyUnit.AddEffectProcess(new DeBuff_Catched(1.5f, enemyUnit, 0, "Catchted", caster.GetGameObject()));
+                enemyUnit.AddEffectProcess(new DeBuff_Catched(10f, enemyUnit, 0, "Catchted", caster.GetGameObject(), caster.GetCatchPos()));
                 chainedSkill_Jump.targetObj = enemy;
                 chainedSkill_Jump.UseSkill(caster);
             }

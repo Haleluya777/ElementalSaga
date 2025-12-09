@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class SkillBase : ScriptableObject
 {
+
     public Skill_Module parentModule { get; private set; }
     public DmgCalculator dmgCalculater;
     public GameObject targetObj; //타게팅 스킬에 사용
