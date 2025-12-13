@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
     private Vector2 dir;
     private Vector2 vel;
     public Vector2 Dir => dir;
+    public bool IsMovementLocked { get; set; }
 
     private float moveSpeed;
     private float jumpForce;
@@ -20,7 +21,9 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
 
     private void FixedUpdate()
     {
-        Debug.Log(dir.x);
+        if (IsMovementLocked) return;
+
+        //Debug.Log(dir.x);
         CheckingGround();
         if (unit.MoveSpeed == 0) return;
 
@@ -46,6 +49,7 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
         {
             controller = parentObj.GetComponentInChildren<PlayerController>();
             controller.moveInput += PerformMove;
+            controller.jumpInput += PerformJump;
         }
     }
 
@@ -54,6 +58,7 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
         if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
         {
             controller.moveInput -= PerformMove;
+            controller.jumpInput -= PerformJump;
         }
     }
 

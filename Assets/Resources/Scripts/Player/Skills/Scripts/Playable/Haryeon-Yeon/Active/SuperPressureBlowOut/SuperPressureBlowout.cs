@@ -35,7 +35,7 @@ public class SuperPressureBlowout : SkillBase
         yield return new WaitForSeconds(1f);
         for (int i = 1; i <= explosionCount; i++)
         {
-            Vector2 hitBoxSize = new Vector2((i * 2) - 1, 1);
+            float hitBoxSize = 1f + (.25f * i);
             Vector2 hitBoxOffset = new Vector2(0f, .5f);
 
             Debug.Log($"폭발! {i}단계!");

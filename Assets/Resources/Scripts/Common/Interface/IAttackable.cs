@@ -8,9 +8,10 @@ public interface IAttackable
     event Action<int> OnHitEvent;
 
     List<Skill_Module> ActiveSkills { get; set; }
+    List<Skill_Module> ModifiedActiveSkills { get; set; }
     List<Skill_Module> PassiveSkills { get; set; }
     List<DamagedEventBase> HitEvents { get; set; }
     int Combo { get; set; }
 
-    bool PerformAttack(int attNum);
+    bool PerformAttack(Skill_Module skill);
 }

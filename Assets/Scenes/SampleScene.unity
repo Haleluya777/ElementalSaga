@@ -242,8 +242,8 @@ GameObject:
   - component: {fileID: 217463231}
   - component: {fileID: 217463230}
   - component: {fileID: 217463229}
-  - component: {fileID: 217463228}
   - component: {fileID: 217463227}
+  - component: {fileID: 217463233}
   m_Layer: 6
   m_Name: Fatherofi
   m_TagString: Enemy
@@ -272,33 +272,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &217463228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 217463226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa877a852906b744c90f8a893f2336d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitData:
-    unitName: 
-    maxHp: 0
-    curHp: 0
-    att: 0
-    maxGage: 0
-    curGage: 0
-    moveSpeed: 0
-    jumpForce: 0
-    addJumpCount: 0
-    attSpeed: 0
-  isAirial: 0
-  maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}
-  id: 1
-  controlState: 1
 --- !u!61 &217463229
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -369,7 +342,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!212 &217463231
 SpriteRenderer:
@@ -432,7 +405,7 @@ Transform:
   m_GameObject: {fileID: 217463226}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.77, y: -1.84, z: 0}
+  m_LocalPosition: {x: -0.77, y: -0.687, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -441,6 +414,32 @@ Transform:
   - {fileID: 1729448570}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &217463233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217463226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c530b763b8c674497299d6032d9345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitData:
+    unitName: 
+    maxHp: 100
+    curHp: 100
+    att: 0
+    maxGage: 0
+    curGage: 0
+    moveSpeed: 0
+    jumpForce: 0
+    addJumpCount: 0
+    attSpeed: 0
+  isAirial: 0
+  maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}
+  id: 0
 --- !u!1 &241636123
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,7 +460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &241636124
 Animator:
   serializedVersion: 5
@@ -702,6 +701,12 @@ MonoBehaviour:
     count: 4
   - objectName: Effect
     perfab: {fileID: 6867935731776230418, guid: 73aa67195fbac664492f65b1a8f73b97, type: 3}
+    count: 4
+  - objectName: HitBox_Circle
+    perfab: {fileID: 4953278233350704614, guid: a95c6c694f636934aba682e9135004a2, type: 3}
+    count: 4
+  - objectName: Bullet
+    perfab: {fileID: 4796313417042235660, guid: eb3eb193a4a1bad458c971d529eb750f, type: 3}
     count: 4
 --- !u!1 &427367744
 GameObject:
@@ -1006,6 +1011,7 @@ MonoBehaviour:
   playerInput: {fileID: 692480976}
   curState: 0
   parentObj: {fileID: 241636123}
+  ModifierAtt: 0
 --- !u!114 &692480976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,7 +1024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4f22722fa008a8f4383063e863ebf6c5, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: e22ac98ce9037d14ea7e55f323ef6e0d, type: 3}
   m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -1033,7 +1039,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: PC
-  m_DefaultActionMap: Unit
+  m_DefaultActionMap: ActionUnit
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &735127195
@@ -1085,6 +1091,7 @@ MonoBehaviour:
   hitBox: {fileID: 0}
   rigid: {fileID: 0}
   activeSkills: []
+  modifiedActiveSkills: []
   passiveSkills: []
   hitEvents:
   - {fileID: 0}
@@ -1136,6 +1143,7 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   curState: 0
   parentObj: {fileID: 1925512077}
+  ModifierAtt: 0
 --- !u!1 &867291057
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,6 +1224,7 @@ MonoBehaviour:
   hitBox: {fileID: 0}
   rigid: {fileID: 0}
   activeSkills: []
+  modifiedActiveSkills: []
   passiveSkills: []
   hitEvents:
   - {fileID: 0}
@@ -1236,7 +1245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &998443274
 Transform:
   m_ObjectHideFlags: 0
@@ -1267,6 +1276,7 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   curState: 0
   parentObj: {fileID: 217463226}
+  ModifierAtt: 0
 --- !u!1 &1123581538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1426,7 +1436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1324509607
 Animator:
   serializedVersion: 5
@@ -1545,7 +1555,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!212 &1324509611
 SpriteRenderer:
@@ -1671,6 +1681,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1416807222}
+  - component: {fileID: 1416807223}
   m_Layer: 6
   m_Name: AI
   m_TagString: Untagged
@@ -1693,6 +1704,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 427367745}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1416807223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416807221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 982b4ba3643629e44897ad57f01bc2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentObj: {fileID: 217463226}
+  timer: 0
 --- !u!1 &1453128285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,7 +1928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1511228617
 Transform:
   m_ObjectHideFlags: 0
@@ -1952,7 +1977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1511970928
 Rigidbody2D:
   serializedVersion: 4
@@ -2048,8 +2073,6 @@ Transform:
   - {fileID: 1130913867}
   - {fileID: 1356851295}
   - {fileID: 1534712025}
-  - {fileID: 1872276423}
-  - {fileID: 1673535668}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1511970931
@@ -2198,10 +2221,11 @@ MonoBehaviour:
   hitBox: {fileID: 0}
   rigid: {fileID: 0}
   activeSkills:
+  - {fileID: 11400000, guid: 658b89326825c084096b3e52b19c0324, type: 2}
   - {fileID: 11400000, guid: 00d8ad544765b1b4da9ef3dc2bdb0cb3, type: 2}
   - {fileID: 11400000, guid: e2788230de2f4f844814f0c512d1b3ad, type: 2}
   - {fileID: 11400000, guid: 0624a4849c245834891f8f217f99164e, type: 2}
-  - {fileID: 11400000, guid: 658b89326825c084096b3e52b19c0324, type: 2}
+  modifiedActiveSkills: []
   passiveSkills:
   - {fileID: 11400000, guid: 2f9a42acde28fd04d88b5e39d292c158, type: 2}
   hitEvents:
@@ -2254,6 +2278,7 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   curState: 0
   parentObj: {fileID: 1324509606}
+  ModifierAtt: 0
 --- !u!1 &1659730363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2429,50 +2454,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!1 &1673535667
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1673535668}
-  - component: {fileID: 1673535669}
-  m_Layer: 7
-  m_Name: UnitAnimationEvent
-  m_TagString: Playable
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1673535668
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1673535667}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1511970930}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1673535669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1673535667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b88c78e6f700d7b478a1d554bd07cece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1729448569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,7 +2470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1729448570
 Transform:
   m_ObjectHideFlags: 0
@@ -2522,6 +2503,7 @@ MonoBehaviour:
   hitBox: {fileID: 0}
   rigid: {fileID: 0}
   activeSkills: []
+  modifiedActiveSkills: []
   passiveSkills: []
   hitEvents:
   - {fileID: 0}
@@ -2635,37 +2617,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentObj: {fileID: 241636123}
---- !u!1 &1872276422
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1872276423}
-  m_Layer: 7
-  m_Name: StatusEffect
-  m_TagString: Playable
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1872276423
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872276422}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1511970930}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1925512077
 GameObject:
   m_ObjectHideFlags: 0
@@ -3197,6 +3148,7 @@ MonoBehaviour:
   playerInput: {fileID: 2083430285}
   curState: 0
   parentObj: {fileID: 1511970927}
+  ModifierAtt: 0
 --- !u!114 &2083430285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3209,7 +3161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4f22722fa008a8f4383063e863ebf6c5, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: e22ac98ce9037d14ea7e55f323ef6e0d, type: 3}
   m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -3224,7 +3176,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: PC
-  m_DefaultActionMap: Unit
+  m_DefaultActionMap: DefaultUnit
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &2084657516
@@ -3280,9 +3232,14 @@ MonoBehaviour:
   hitBox: {fileID: 0}
   rigid: {fileID: 0}
   activeSkills:
-  - {fileID: 11400000, guid: 5f85d9ceb38e52b4d802b2cee4d352f8, type: 2}
+  - {fileID: 11400000, guid: aa36be881f2fa9f4dbea5e23a2c02365, type: 2}
+  - {fileID: 11400000, guid: 17c3c0c6ca9470946b05cfc1ddc52548, type: 2}
+  - {fileID: 11400000, guid: ac2bc5bda71a87e41ada3d25133243a8, type: 2}
+  - {fileID: 11400000, guid: 81a0534a1f973f14e891d329257d476d, type: 2}
+  modifiedActiveSkills:
+  - {fileID: 11400000, guid: 658b89326825c084096b3e52b19c0324, type: 2}
   - {fileID: 11400000, guid: a1e99e5b9b9560d43a11a8011fa1de79, type: 2}
-  - {fileID: 11400000, guid: ebefcb07cc4fb8c4484ee963d2881a62, type: 2}
+  - {fileID: 11400000, guid: 658b89326825c084096b3e52b19c0324, type: 2}
   passiveSkills:
   - {fileID: 11400000, guid: 006278a115ddc434d81e1b895af49261, type: 2}
   hitEvents:

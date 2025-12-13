@@ -8,6 +8,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Skill", menuName = "ScriptableObject/Skill/Skill Module")]
 public class Skill_Module : ScriptableObject
 {
+    public string AnimName; //재생할 애니메이션 이름.
     public IBlackBoard blackBoard = new BlackBoard(); //스킬 데이터를 담을 블랙보드.
     public enum ActiveType { OnDown, OnHold };
     [SerializeField] private string skillName; //최종 스킬 이름
@@ -16,6 +17,7 @@ public class Skill_Module : ScriptableObject
     public int consumption;
 
     private float remainingCoolDown; //남은 쿨타임
+    [SerializeField] private bool basicAttack; //기본 공격 모듈이지 체크.
     [SerializeField] private bool attackable; //공격 판정이 존재하는 스킬 체크
     [SerializeField] private bool cancleDelay; //기본 공격의 후딜레이를 캔슬하고 작동하는 스킬 체크
     [SerializeField] private bool havePassive; //기본 지속 효과를 가지고 있는지 여부 체크
@@ -24,6 +26,7 @@ public class Skill_Module : ScriptableObject
     [SerializeField] private List<SkillBase> activeSkills = new List<SkillBase>(); //이 스킬을 실행할 때 같이 실행되는 액티브 스킬들.
     [SerializeField] private List<SkillBase> passiveSkills = new List<SkillBase>(); //이 스킬을 착용하고 있을 때 발동하는 패시브 스킬들.
     public ActiveType activeType;
+
     //외부에서 접근할 수 있게 하는 프로퍼티
     #region Property
     public bool OnCoolDown => remainingCoolDown > 0;
@@ -32,6 +35,7 @@ public class Skill_Module : ScriptableObject
     public bool CancleDelay => cancleDelay;
     public bool HavePassive => havePassive;
     public bool CanUseAirial => canUseAirial;
+    public bool BasicAttack => basicAttack;
     #endregion EndProperty
 
     public void InitSkill()
@@ -39,16 +43,25 @@ public class Skill_Module : ScriptableObject
         //data.SkillName = skillName;
         //data.SkillDetail = skillDetail;
 
-        Debug.Log("스킬 초기화 완료");
+        //Debug.Log("스킬 초기화 완료");
         blackBoard.Set("Condition", true);
-        foreach (var skill in activeSkills)
+
+        for (int i = 0; i < activeSkills.Count; i++)
         {
-            if (skill != null) skill.Initialize(this);
+            if (activeSkills[i] != null)
+            {
+                activeSkills[i] = Instantiate(activeSkills[i]);
+                activeSkills[i].Initialize(this);
+            }
         }
 
-        foreach (var skill in passiveSkills)
+        for (int i = 0; i < passiveSkills.Count; i++)
         {
-            if (skill != null) skill.Initialize(this);
+            if (passiveSkills[i] != null)
+            {
+                passiveSkills[i] = Instantiate(passiveSkills[i]);
+                passiveSkills[i].Initialize(this);
+            }
         }
     }
 
@@ -71,7 +84,7 @@ public class Skill_Module : ScriptableObject
         // 쿨다운이 아니라면 모든 스킬을 실행
         foreach (var skill in new List<SkillBase>(activeSkills))
         {
-            skill.UseSkill(caster);
+            if (skill != null) skill.UseSkill(caster);
         }
 
         // 쿨다운 시작
@@ -93,6 +106,7 @@ public class Skill_Module : ScriptableObject
 
     public void ProccessPassive(ISkillCaster caster) //패시브 스킬 사용.
     {
+        Debug.Log("패시브 스킬 사용");
         foreach (var skill in new List<SkillBase>(passiveSkills))
         {
             skill.UseSkill(caster); //패시브 스킬들은 계속 실행되어야 함.

@@ -109,6 +109,24 @@ public partial class @ActionPlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ModifierAtt"",
+                    ""type"": ""Button"",
+                    ""id"": ""4528ecf8-b87c-4321-a23b-ca45817607ed"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a9866c0-81c9-426c-8893-881577905321"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -188,6 +206,28 @@ public partial class @ActionPlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""136d4356-ecf0-41e1-a96f-cb58306e32c4"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ModifierAtt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff465b31-10d5-4ca5-81b2-ee51fc1c949b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -215,6 +255,8 @@ public partial class @ActionPlayerControls: IInputActionCollection2, IDisposable
         m_Unit = asset.FindActionMap("Unit", throwIfNotFound: true);
         m_Unit_Movement = m_Unit.FindAction("Movement", throwIfNotFound: true);
         m_Unit_Attack = m_Unit.FindAction("Attack", throwIfNotFound: true);
+        m_Unit_ModifierAtt = m_Unit.FindAction("ModifierAtt", throwIfNotFound: true);
+        m_Unit_Jump = m_Unit.FindAction("Jump", throwIfNotFound: true);
     }
 
     ~@ActionPlayerControls()
@@ -297,6 +339,8 @@ public partial class @ActionPlayerControls: IInputActionCollection2, IDisposable
     private List<IUnitActions> m_UnitActionsCallbackInterfaces = new List<IUnitActions>();
     private readonly InputAction m_Unit_Movement;
     private readonly InputAction m_Unit_Attack;
+    private readonly InputAction m_Unit_ModifierAtt;
+    private readonly InputAction m_Unit_Jump;
     /// <summary>
     /// Provides access to input actions defined in input action map "Unit".
     /// </summary>
@@ -316,6 +360,14 @@ public partial class @ActionPlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Unit/Attack".
         /// </summary>
         public InputAction @Attack => m_Wrapper.m_Unit_Attack;
+        /// <summary>
+        /// Provides access to the underlying input action "Unit/ModifierAtt".
+        /// </summary>
+        public InputAction @ModifierAtt => m_Wrapper.m_Unit_ModifierAtt;
+        /// <summary>
+        /// Provides access to the underlying input action "Unit/Jump".
+        /// </summary>
+        public InputAction @Jump => m_Wrapper.m_Unit_Jump;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -348,6 +400,12 @@ public partial class @ActionPlayerControls: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @ModifierAtt.started += instance.OnModifierAtt;
+            @ModifierAtt.performed += instance.OnModifierAtt;
+            @ModifierAtt.canceled += instance.OnModifierAtt;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         /// <summary>
@@ -365,6 +423,12 @@ public partial class @ActionPlayerControls: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @ModifierAtt.started -= instance.OnModifierAtt;
+            @ModifierAtt.performed -= instance.OnModifierAtt;
+            @ModifierAtt.canceled -= instance.OnModifierAtt;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         /// <summary>
@@ -432,5 +496,19 @@ public partial class @ActionPlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ModifierAtt" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnModifierAtt(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnJump(InputAction.CallbackContext context);
     }
 }

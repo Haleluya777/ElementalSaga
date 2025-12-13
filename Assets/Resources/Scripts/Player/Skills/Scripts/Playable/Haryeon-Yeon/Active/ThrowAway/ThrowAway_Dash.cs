@@ -58,7 +58,7 @@ public class ThrowAway_Dash : SkillBase
         if (enemy != null)
         {
             var enemyUnit = enemy.GetComponent<Unit>();
-            enemyUnit.AddEffectProcess(new DeBuff_Throwed(100f, enemyUnit, 0, "Throwed", caster, 5f, chainedSkill));
+            enemyUnit.AddEffectProcess(new DeBuff_Throwed(100f, enemyUnit, 0, "Throwed", caster, 5f, chainedSkill, caster.GetDirection()));
         }
         yield return null;
     }

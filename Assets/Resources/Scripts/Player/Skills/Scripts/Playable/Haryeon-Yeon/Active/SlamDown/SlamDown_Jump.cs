@@ -12,11 +12,15 @@ public class SlamDown_Jump : SkillBase
     [SerializeField] private float defaultDuration; //목표가 정해지지 않을 경우 점프 거리
 
     private Rigidbody2D rigid;
+    private Movement movement;
     private RaycastHit2D enemyHitted;
     public override bool UseSkill(ISkillCaster caster)
     {
         Vector2 target;
         rigid = caster.GetCom<Rigidbody2D>();
+        movement = caster.GetCom<Movement>();
+        movement.IsMovementLocked = true;
+
         enemyHitted = Physics2D.Raycast(new Vector2(caster.GetPosition().x, caster.GetPosition().y + .5f), caster.GetDirection(), distance, 1 << 6);
 
         if (enemyHitted.collider != null) //범위 내 적이 존재할 경우.
@@ -70,6 +74,7 @@ public class SlamDown_Jump : SkillBase
                     exisitngEffect.RemoveEffect();
                 }
                 explosion.UseSkill(caster);
+                movement.IsMovementLocked = false;
                 break;
             }
             yield return new WaitForFixedUpdate();

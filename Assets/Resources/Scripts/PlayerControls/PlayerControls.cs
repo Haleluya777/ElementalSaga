@@ -89,7 +89,7 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
     ""name"": ""BasicPlayerControls"",
     ""maps"": [
         {
-            ""name"": ""Unit"",
+            ""name"": ""DefaultUnit"",
             ""id"": ""6178a8f3-819f-46ee-99f6-54c0956232be"",
             ""actions"": [
                 {
@@ -105,6 +105,15 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""a784f95c-b26b-43a1-b75e-94cd9128cdce"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""02967935-f651-4089-a129-a59119f2e011"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -148,11 +157,198 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""32531e9b-1bb9-4995-b0cf-0025ad352f3e"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a18501c0-b429-43cd-bcf0-714675ffe9f6"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""58f92cd0-8f22-472c-8929-c9b6138a7830"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89b68957-f9bb-48bd-a6c0-1742e33b622a"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""303c28b1-249e-4764-b0fb-e99a609064b0"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""ActionUnit"",
+            ""id"": ""05edc9e4-9f37-4df4-a620-f67e91879460"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""275bf113-5cf5-4c4a-bde1-ff81218c2157"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""67d06cac-ecb0-466c-8ae5-3979335bcb6b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""7b308347-a19d-4a82-9e1f-12bc51909e93"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ModifierAtt"",
+                    ""type"": ""Button"",
+                    ""id"": ""34c74f3e-c52e-43a7-b831-aea505e5feb6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""70cd1e57-324f-41bd-b1f6-3ab53f996927"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""03dc5458-c9dc-4952-944e-2e9c0b41dcd4"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""26a7b410-527e-4938-813c-ff4e7e215e60"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""345f31fa-1745-4910-9af4-f60a9f944845"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37f143d8-cd60-4ea7-a093-12ad0e355173"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""63f27a48-a660-4783-a860-75b47d05ad10"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1912b9a7-c9c0-4e2a-adca-a09c34a51fdf"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b0ccde9f-e9d2-4b00-a2aa-1aadacd16c2a"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""77a2d23b-89dd-4c83-bc51-6132e1864d20"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ModifierAtt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -178,15 +374,23 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Unit
-        m_Unit = asset.FindActionMap("Unit", throwIfNotFound: true);
-        m_Unit_Movement = m_Unit.FindAction("Movement", throwIfNotFound: true);
-        m_Unit_Attack = m_Unit.FindAction("Attack", throwIfNotFound: true);
+        // DefaultUnit
+        m_DefaultUnit = asset.FindActionMap("DefaultUnit", throwIfNotFound: true);
+        m_DefaultUnit_Movement = m_DefaultUnit.FindAction("Movement", throwIfNotFound: true);
+        m_DefaultUnit_Attack = m_DefaultUnit.FindAction("Attack", throwIfNotFound: true);
+        m_DefaultUnit_Jump = m_DefaultUnit.FindAction("Jump", throwIfNotFound: true);
+        // ActionUnit
+        m_ActionUnit = asset.FindActionMap("ActionUnit", throwIfNotFound: true);
+        m_ActionUnit_Movement = m_ActionUnit.FindAction("Movement", throwIfNotFound: true);
+        m_ActionUnit_Attack = m_ActionUnit.FindAction("Attack", throwIfNotFound: true);
+        m_ActionUnit_Jump = m_ActionUnit.FindAction("Jump", throwIfNotFound: true);
+        m_ActionUnit_ModifierAtt = m_ActionUnit.FindAction("ModifierAtt", throwIfNotFound: true);
     }
 
     ~@BasicPlayerControls()
     {
-        UnityEngine.Debug.Assert(!m_Unit.enabled, "This will cause a leak and performance issues, BasicPlayerControls.Unit.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_DefaultUnit.enabled, "This will cause a leak and performance issues, BasicPlayerControls.DefaultUnit.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_ActionUnit.enabled, "This will cause a leak and performance issues, BasicPlayerControls.ActionUnit.Disable() has not been called.");
     }
 
     /// <summary>
@@ -259,34 +463,39 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Unit
-    private readonly InputActionMap m_Unit;
-    private List<IUnitActions> m_UnitActionsCallbackInterfaces = new List<IUnitActions>();
-    private readonly InputAction m_Unit_Movement;
-    private readonly InputAction m_Unit_Attack;
+    // DefaultUnit
+    private readonly InputActionMap m_DefaultUnit;
+    private List<IDefaultUnitActions> m_DefaultUnitActionsCallbackInterfaces = new List<IDefaultUnitActions>();
+    private readonly InputAction m_DefaultUnit_Movement;
+    private readonly InputAction m_DefaultUnit_Attack;
+    private readonly InputAction m_DefaultUnit_Jump;
     /// <summary>
-    /// Provides access to input actions defined in input action map "Unit".
+    /// Provides access to input actions defined in input action map "DefaultUnit".
     /// </summary>
-    public struct UnitActions
+    public struct DefaultUnitActions
     {
         private @BasicPlayerControls m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public UnitActions(@BasicPlayerControls wrapper) { m_Wrapper = wrapper; }
+        public DefaultUnitActions(@BasicPlayerControls wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Unit/Movement".
+        /// Provides access to the underlying input action "DefaultUnit/Movement".
         /// </summary>
-        public InputAction @Movement => m_Wrapper.m_Unit_Movement;
+        public InputAction @Movement => m_Wrapper.m_DefaultUnit_Movement;
         /// <summary>
-        /// Provides access to the underlying input action "Unit/Attack".
+        /// Provides access to the underlying input action "DefaultUnit/Attack".
         /// </summary>
-        public InputAction @Attack => m_Wrapper.m_Unit_Attack;
+        public InputAction @Attack => m_Wrapper.m_DefaultUnit_Attack;
+        /// <summary>
+        /// Provides access to the underlying input action "DefaultUnit/Jump".
+        /// </summary>
+        public InputAction @Jump => m_Wrapper.m_DefaultUnit_Jump;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_Unit; }
+        public InputActionMap Get() { return m_Wrapper.m_DefaultUnit; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -294,9 +503,9 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="UnitActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="DefaultUnitActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(UnitActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(DefaultUnitActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -304,17 +513,20 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="UnitActions" />
-        public void AddCallbacks(IUnitActions instance)
+        /// <seealso cref="DefaultUnitActions" />
+        public void AddCallbacks(IDefaultUnitActions instance)
         {
-            if (instance == null || m_Wrapper.m_UnitActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_UnitActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_DefaultUnitActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DefaultUnitActionsCallbackInterfaces.Add(instance);
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         /// <summary>
@@ -323,8 +535,8 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="UnitActions" />
-        private void UnregisterCallbacks(IUnitActions instance)
+        /// <seealso cref="DefaultUnitActions" />
+        private void UnregisterCallbacks(IDefaultUnitActions instance)
         {
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
@@ -332,15 +544,18 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="UnitActions.UnregisterCallbacks(IUnitActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="DefaultUnitActions.UnregisterCallbacks(IDefaultUnitActions)" />.
         /// </summary>
-        /// <seealso cref="UnitActions.UnregisterCallbacks(IUnitActions)" />
-        public void RemoveCallbacks(IUnitActions instance)
+        /// <seealso cref="DefaultUnitActions.UnregisterCallbacks(IDefaultUnitActions)" />
+        public void RemoveCallbacks(IDefaultUnitActions instance)
         {
-            if (m_Wrapper.m_UnitActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_DefaultUnitActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -350,21 +565,150 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="UnitActions.AddCallbacks(IUnitActions)" />
-        /// <seealso cref="UnitActions.RemoveCallbacks(IUnitActions)" />
-        /// <seealso cref="UnitActions.UnregisterCallbacks(IUnitActions)" />
-        public void SetCallbacks(IUnitActions instance)
+        /// <seealso cref="DefaultUnitActions.AddCallbacks(IDefaultUnitActions)" />
+        /// <seealso cref="DefaultUnitActions.RemoveCallbacks(IDefaultUnitActions)" />
+        /// <seealso cref="DefaultUnitActions.UnregisterCallbacks(IDefaultUnitActions)" />
+        public void SetCallbacks(IDefaultUnitActions instance)
         {
-            foreach (var item in m_Wrapper.m_UnitActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_DefaultUnitActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_UnitActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_DefaultUnitActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="UnitActions" /> instance referencing this action map.
+    /// Provides a new <see cref="DefaultUnitActions" /> instance referencing this action map.
     /// </summary>
-    public UnitActions @Unit => new UnitActions(this);
+    public DefaultUnitActions @DefaultUnit => new DefaultUnitActions(this);
+
+    // ActionUnit
+    private readonly InputActionMap m_ActionUnit;
+    private List<IActionUnitActions> m_ActionUnitActionsCallbackInterfaces = new List<IActionUnitActions>();
+    private readonly InputAction m_ActionUnit_Movement;
+    private readonly InputAction m_ActionUnit_Attack;
+    private readonly InputAction m_ActionUnit_Jump;
+    private readonly InputAction m_ActionUnit_ModifierAtt;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "ActionUnit".
+    /// </summary>
+    public struct ActionUnitActions
+    {
+        private @BasicPlayerControls m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public ActionUnitActions(@BasicPlayerControls wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "ActionUnit/Movement".
+        /// </summary>
+        public InputAction @Movement => m_Wrapper.m_ActionUnit_Movement;
+        /// <summary>
+        /// Provides access to the underlying input action "ActionUnit/Attack".
+        /// </summary>
+        public InputAction @Attack => m_Wrapper.m_ActionUnit_Attack;
+        /// <summary>
+        /// Provides access to the underlying input action "ActionUnit/Jump".
+        /// </summary>
+        public InputAction @Jump => m_Wrapper.m_ActionUnit_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "ActionUnit/ModifierAtt".
+        /// </summary>
+        public InputAction @ModifierAtt => m_Wrapper.m_ActionUnit_ModifierAtt;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_ActionUnit; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="ActionUnitActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(ActionUnitActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="ActionUnitActions" />
+        public void AddCallbacks(IActionUnitActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ActionUnitActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ActionUnitActionsCallbackInterfaces.Add(instance);
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
+            @ModifierAtt.started += instance.OnModifierAtt;
+            @ModifierAtt.performed += instance.OnModifierAtt;
+            @ModifierAtt.canceled += instance.OnModifierAtt;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="ActionUnitActions" />
+        private void UnregisterCallbacks(IActionUnitActions instance)
+        {
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
+            @ModifierAtt.started -= instance.OnModifierAtt;
+            @ModifierAtt.performed -= instance.OnModifierAtt;
+            @ModifierAtt.canceled -= instance.OnModifierAtt;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="ActionUnitActions.UnregisterCallbacks(IActionUnitActions)" />.
+        /// </summary>
+        /// <seealso cref="ActionUnitActions.UnregisterCallbacks(IActionUnitActions)" />
+        public void RemoveCallbacks(IActionUnitActions instance)
+        {
+            if (m_Wrapper.m_ActionUnitActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="ActionUnitActions.AddCallbacks(IActionUnitActions)" />
+        /// <seealso cref="ActionUnitActions.RemoveCallbacks(IActionUnitActions)" />
+        /// <seealso cref="ActionUnitActions.UnregisterCallbacks(IActionUnitActions)" />
+        public void SetCallbacks(IActionUnitActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ActionUnitActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ActionUnitActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="ActionUnitActions" /> instance referencing this action map.
+    /// </summary>
+    public ActionUnitActions @ActionUnit => new ActionUnitActions(this);
     private int m_PCSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -379,11 +723,11 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         }
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Unit" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "DefaultUnit" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="UnitActions.AddCallbacks(IUnitActions)" />
-    /// <seealso cref="UnitActions.RemoveCallbacks(IUnitActions)" />
-    public interface IUnitActions
+    /// <seealso cref="DefaultUnitActions.AddCallbacks(IDefaultUnitActions)" />
+    /// <seealso cref="DefaultUnitActions.RemoveCallbacks(IDefaultUnitActions)" />
+    public interface IDefaultUnitActions
     {
         /// <summary>
         /// Method invoked when associated input action "Movement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
@@ -399,5 +743,48 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnJump(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "ActionUnit" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="ActionUnitActions.AddCallbacks(IActionUnitActions)" />
+    /// <seealso cref="ActionUnitActions.RemoveCallbacks(IActionUnitActions)" />
+    public interface IActionUnitActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Movement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMovement(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ModifierAtt" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnModifierAtt(InputAction.CallbackContext context);
     }
 }

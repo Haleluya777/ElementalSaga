@@ -14,6 +14,7 @@ public class ThrowAway_Action : SkillBase
 
     public override bool UseSkill(ISkillCaster caster, Vector3 skillPos)
     {
+        //Debug.Log("배애앰");
         //hitted = Physics2D.Raycast(new Vector2(caster.GetPosition().x, caster.GetPosition().y + .5f), caster.GetDirection(), 5f, 1 << 6);
 
         hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");

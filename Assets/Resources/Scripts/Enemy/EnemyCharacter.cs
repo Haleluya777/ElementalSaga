@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class EnemyCharacter : Unit
 {
+    [Header("적들의 기본 정보")]
+    [SerializeField] private PlayableCharacterDataMap maps;
+
+    [Header("캐릭터 ID")]
+    [SerializeField] private int id;
+
     void Awake()
     {
-        DataInit();
+        //DataInit();
     }
 
     private void DataInit()
     {
+        unitData = new UnitData(maps.GetDatas(id));
         foreach (var init in GetComponentsInChildren<IDataInitializable>())
         {
             init.DataInit();
         }
-    }
-
-    public override void Dead(ISkillCaster attacker)
-    {
-        base.Dead(attacker);
     }
 }

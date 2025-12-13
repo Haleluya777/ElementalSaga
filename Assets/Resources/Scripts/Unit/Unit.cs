@@ -133,7 +133,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
             if (activeEffectCoroutines.TryGetValue(effect.effectName, out Coroutine runningCoroutine))
             {
                 //코루틴을 이용한 상태이상의 타이머 제거.
-                StopCoroutine(runningCoroutine);
+                GameManager.instance.coroutineRunner.StopCoroutine(runningCoroutine);
             }
             //적용 되어 있는 상태이상 또한 제거.
             exisitngEffect.RemoveEffect();
@@ -142,7 +142,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
         activeEffect[effect.effectName] = effect;
         effect.ApplyEffect();
 
-        Coroutine newCoroutine = StartCoroutine(RemoveEffectAfterDuration(effect));
+        Coroutine newCoroutine = GameManager.instance.coroutineRunner.StartRunnerCoroutine(RemoveEffectAfterDuration(effect));
         activeEffectCoroutines[effect.effectName] = newCoroutine;
     }
 

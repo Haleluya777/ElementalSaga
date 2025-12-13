@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e1dc3f0d42fbc4d86343364a99e547, type: 3}
   m_Name: Basic_Attack_Module
   m_EditorClassIdentifier: 
+  AnimName: 
   skillName: Basic_Attack
   skillDetail: "\uAE30\uBCF8 \uACF5\uACA9"
   coolDown: 0.6
   consumption: 0
+  basicAttack: 1
   attackable: 1
   cancleDelay: 0
   havePassive: 0
@@ -23,3 +25,4 @@ MonoBehaviour:
   activeSkills:
   - {fileID: 11400000, guid: 04f32aeb6086fcc41959c780d57d8f9d, type: 2}
   passiveSkills: []
+  activeType: 0

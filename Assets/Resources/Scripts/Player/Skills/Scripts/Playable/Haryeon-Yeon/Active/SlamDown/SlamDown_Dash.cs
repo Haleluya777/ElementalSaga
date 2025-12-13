@@ -79,7 +79,6 @@ public class SlamDown_Dash : SkillBase
                 chainedSkill_Jump.UseSkill(caster);
             }
         }
-
         yield return null;
     }
 }

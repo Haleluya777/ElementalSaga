@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
@@ -11,22 +12,26 @@ public class PlayerController : MonoBehaviour, IDataInitializable
     [SerializeField] private PlayerInput playerInput;
     public Action<Vector2> moveInput;
     public Action<int> attackInput;
+    public Action jumpInput;
 
     private Vector2 moveX;
     private Coroutine continuousSkill;
     private Animator anim;
     private IMovable movement;
     private IAttackable attack;
-    [SerializeField] private UnitState curState;
 
+    [SerializeField] private UnitState curState;
     [SerializeField] private GameObject parentObj;
+
     private Vector2 targetVector; //플레이어 목표 방향.
     private bool isAirial;
+    public bool ModifierAtt;
 
     public void DataInit()
     {
         if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
         {
+            playerInput.onActionTriggered -= ActionTrigger;
             playerInput.onActionTriggered += ActionTrigger;
         }
 
@@ -36,14 +41,25 @@ public class PlayerController : MonoBehaviour, IDataInitializable
         isAirial = false;
     }
 
+    void OnDisable()
+    {
+        if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
+        {
+            playerInput.onActionTriggered -= ActionTrigger;
+        }
+    }
+
     void Update()
     {
-        PlayerIdle();
-        //PlayerMove();
-        PlayerJump();
-        //PlayerAttack();
         StateActions(curState);
         StateAnimation(curState);
+    }
+
+    void LateUpdate()
+    {
+        // LateUpdate에서 상태를 관리하여 타이밍 문제를 해결합니다.
+        PlayerIdle();
+        //ModifierAtt = false;
     }
 
     private void StateAnimation(UnitState state)
@@ -65,23 +81,45 @@ public class PlayerController : MonoBehaviour, IDataInitializable
         switch (context.action.name)
         {
             case "Movement":
-                curState = UnitState.Moving;
+                // 입력 값을 항상 moveX에 저장합니다.
                 moveX = context.ReadValue<Vector2>();
+                // 공격 중이 아닐 때만 moveInput 이벤트를 호출합니다.
+                if (curState != UnitState.Attacking)
+                {
+                    moveInput?.Invoke(moveX);
+                }
                 break;
+
+            case "ModifierAtt":
+                ModifierAtt = context.performed;
+                //Debug.Log("혼합 공격 사용");
+                break;
+
 
             case "Attack":
                 if (context.control is KeyControl keyControl)
                 {
                     if (Enum.TryParse<KeyCode>(keyControl.displayName, true, out var pressedKey))
                     {
-                        Debug.Log($"{pressedKey}를 누름");
-                        ProccessSkillInput(pressedKey);
+                        moveInput?.Invoke(Vector2.zero);
+                        if (context.performed)
+                        {
+                            //Debug.Log(pressedKey);
+                            SkillKeyDown(pressedKey, ModifierAtt);
+                        }
+                        else if (context.canceled)
+                        {
+                            SkillKeyUp(pressedKey, ModifierAtt);
+                        }
                     }
-                    //ProccessSkillInput(pressedKey);
                 }
                 break;
 
+            case "Dash":
+                break;
+
             case "Jump":
+                jumpInput?.Invoke();
                 break;
         }
     }
@@ -90,13 +128,22 @@ public class PlayerController : MonoBehaviour, IDataInitializable
     {
         if (curState == UnitState.Attacking)
         {
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")) curState = UnitState.Idle;
-            return;
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                curState = UnitState.Idle;
+                moveInput?.Invoke(moveX);
+            }
         }
-        else
+        else // 공격 중이 아닐 때
         {
-            if (targetVector.x == 0) curState = UnitState.Idle;
-            return;
+            if (moveX.x != 0)
+            {
+                curState = UnitState.Moving;
+            }
+            else
+            {
+                curState = UnitState.Idle;
+            }
         }
     }
 
@@ -104,7 +151,6 @@ public class PlayerController : MonoBehaviour, IDataInitializable
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Debug.Log("할렐루야");
             movement.PerformJump();
         }
     }
@@ -114,67 +160,60 @@ public class PlayerController : MonoBehaviour, IDataInitializable
         switch (state)
         {
             case UnitState.Attacking:
-                parentObj.transform.GetChild(1).gameObject.SetActive(false);
+                // parentObj.transform.GetChild(1).gameObject.SetActive(false);
                 break;
-
             case UnitState.Moving:
-                parentObj.transform.GetChild(1).gameObject.SetActive(true);
-                moveInput?.Invoke(moveX);
+                // parentObj.transform.GetChild(1).gameObject.SetActive(true);
+                break;
+            case UnitState.Idle:
+                // parentObj.transform.GetChild(1).gameObject.SetActive(true);
                 break;
         }
     }
 
-    private void PlayerMove()
+    private void SkillKeyDown(KeyCode keyCode, bool modifier)
     {
-        if (curState == UnitState.Attacking) //공격 상태일 경우.
-        {
-            parentObj.transform.GetChild(1).gameObject.SetActive(false);
-            return;
-        }
-        else
-        {
-            parentObj.transform.GetChild(1).gameObject.SetActive(true);
-            moveInput?.Invoke(moveX);
-        }
+        if (curState == UnitState.Attacking) return;
 
-        if (moveX.x != 0) curState = UnitState.Moving;
-    }
-
-    private void ProccessSkillInput(KeyCode keyCode)
-    {
         int attNum = GetAttNum(keyCode);
+        if (attNum == -1) return;
 
         if (attack == null || attNum >= attack.ActiveSkills.Count) return;
-        var skill = attack.ActiveSkills[attNum];
-        //Debug.Log("입력함");
+        var skill = !modifier ? attack.ActiveSkills[attNum] : attack.ModifiedActiveSkills[attNum];
+        Debug.Log(skill.name);
 
-        // 지속 스킬의 경우, 키를 뗄 때 코루틴을 중지 (상태와 무관하게 항상 체크)
-        if (skill.activeType != Skill_Module.ActiveType.OnDown && Input.GetKeyUp(keyCode))
+        if (skill.activeType == Skill_Module.ActiveType.OnDown) //단발성 스킬
+        {
+            if (attack.PerformAttack(skill))
+            {
+                curState = UnitState.Attacking;
+            }
+        }
+        else //지속성 스킬
+        {
+            if (attack.PerformAttack(skill))
+            {
+                curState = UnitState.Attacking;
+                if (continuousSkill != null) StopCoroutine(continuousSkill);
+                continuousSkill = StartCoroutine(SkillRoutine(skill, attNum));
+            }
+        }
+    }
+
+    private void SkillKeyUp(KeyCode keyCode, bool modifier)
+    {
+        int attNum = GetAttNum(keyCode);
+        if (attNum == -1) return;
+
+        if (attack == null || attNum >= attack.ActiveSkills.Count) return;
+        var skill = !modifier ? attack.ActiveSkills[attNum] : attack.ModifiedActiveSkills[attNum];
+
+        if (skill.activeType != Skill_Module.ActiveType.OnDown)
         {
             if (continuousSkill != null)
             {
                 StopCoroutine(continuousSkill);
                 continuousSkill = null;
-            }
-        }
-
-        // 키를 누르는 로직은 공격 중이 아닐 때만 실행
-        if (Input.GetKeyDown(keyCode))
-        {
-            if (curState == UnitState.Attacking) return;
-
-            if (skill.activeType == Skill_Module.ActiveType.OnDown) //단발성 스킬
-            {
-                if (attack.PerformAttack(attNum)) curState = UnitState.Attacking;
-            }
-            else //지속성 스킬
-            {
-                if (attack.PerformAttack(attNum))
-                {
-                    curState = UnitState.Attacking;
-                    if (continuousSkill != null) StopCoroutine(continuousSkill);
-                    continuousSkill = StartCoroutine(SkillRoutine(skill, attNum));
-                }
             }
         }
     }
@@ -189,7 +228,6 @@ public class PlayerController : MonoBehaviour, IDataInitializable
             KeyCode.V => 3,
             _ => -1
         };
-
         return attNum;
     }
 
@@ -197,10 +235,10 @@ public class PlayerController : MonoBehaviour, IDataInitializable
     {
         while (true)
         {
-            if (attack.PerformAttack(skillNum))
+            if (attack.PerformAttack(skill))
             {
                 curState = UnitState.Attacking;
-                yield return null; //애니메이션 상태가 바뀔 때까지 한 프레임 대기.
+                yield return null;
                 yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
                 curState = UnitState.Idle;
             }

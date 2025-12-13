@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e1dc3f0d42fbc4d86343364a99e547, type: 3}
   m_Name: SlamDown_Module
   m_EditorClassIdentifier: 
+  AnimName: Skill_1
   skillName: 
   skillDetail: 
   coolDown: 0
   consumption: 0
+  basicAttack: 0
   attackable: 0
   cancleDelay: 0
   havePassive: 0
@@ -23,3 +25,4 @@ MonoBehaviour:
   activeSkills:
   - {fileID: 11400000, guid: 7bb4a019f7cf1f44783703a890ab0134, type: 2}
   passiveSkills: []
+  activeType: 0

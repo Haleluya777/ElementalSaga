@@ -18,6 +18,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
 
     [Header("특정 키를 눌러 사용하는 액티브 스킬.")] //기본 공격도 포함.
     [SerializeField] private List<Skill_Module> activeSkills = new List<Skill_Module>();
+    [SerializeField] private List<Skill_Module> modifiedActiveSkills = new List<Skill_Module>();
 
     [Header("특정 조건을 만족하면 자동으로 사용되는 패시브 스킬")]
     [SerializeField] private List<Skill_Module> passiveSkills = new List<Skill_Module>();
@@ -34,6 +35,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     public int Combo { get => combo; set => combo = value; }
 
     public List<Skill_Module> ActiveSkills { get => activeSkills; set => activeSkills = value; }
+    public List<Skill_Module> ModifiedActiveSkills { get => modifiedActiveSkills; set => modifiedActiveSkills = value; }
     public List<Skill_Module> PassiveSkills { get => passiveSkills; set => passiveSkills = value; }
     public List<DamagedEventBase> HitEvents { get => hitEvents; set => hitEvents = value; }
 
@@ -46,12 +48,6 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
 
     public void DataInit()
     {
-        //if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
-        //{
-        //    controller = parentObj.GetComponentInChildren<PlayerController>();
-        //    //controller.attackInput += PerformAttack;
-        //}
-
         unit = parentObj.GetComponent<Unit>();
         anim = parentObj.GetComponent<Animator>();
         rigid = parentObj.GetComponent<Rigidbody2D>();
@@ -63,14 +59,25 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
             hitEvents[i].Initialize(unit);
         }
 
-        foreach (var skill in activeSkills)
+        for (int i = 0; i < activeSkills.Count; i++)
         {
-            skill.InitSkill();
+            if (activeSkills[i] == null) continue;
+            activeSkills[i] = Instantiate(activeSkills[i]);
+            activeSkills[i].InitSkill();
         }
 
-        foreach (var skill in passiveSkills)
+        for (int i = 0; i < modifiedActiveSkills.Count; i++)
         {
-            skill.InitSkill();
+            if (modifiedActiveSkills[i] == null) continue;
+            modifiedActiveSkills[i] = Instantiate(modifiedActiveSkills[i]);
+            modifiedActiveSkills[i].InitSkill();
+        }
+
+        for (int i = 0; i < passiveSkills.Count; i++)
+        {
+            if (passiveSkills[i] == null) continue;
+            passiveSkills[i] = Instantiate(passiveSkills[i]);
+            passiveSkills[i].InitSkill();
         }
     }
 
@@ -89,35 +96,42 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
 
     private void UsePassiveSkills()
     {
+        foreach (var skill in new List<Skill_Module>(activeSkills))
+        {
+            if (skill.HavePassive)
+            {
+                skill.ProccessPassive(this);
+            }
+        }
+
         foreach (var skill in new List<Skill_Module>(passiveSkills))
         {
             skill.UseSkill(this);
         }
     }
 
-    public bool PerformAttack(int attNum)
+    public bool PerformAttack(Skill_Module skill)
     {
-        if (attNum == -1) return false;
+        //if (attNum == -1) return false;
         rigid.velocity = new Vector2(0, rigid.velocity.y);
         if (unit.isAirial) //공중에서 스킬을 쓸 때.
         {
-            Debug.Log("할렐루야");
-            if (!activeSkills[attNum].CanUseAirial) return false;
+            if (!skill.CanUseAirial) return false;
             else
             {
-                bool result = activeSkills[attNum].UseSkill(this);
+                bool result = skill.UseSkill(this);
                 if (!result) return false;
 
                 else
                 {
-                    if (attNum == 0) //공중에서 기본 공격을 했을 때.
+                    if (skill.BasicAttack) //공중에서 기본 공격을 했을 때.
                     {
                         //Debug.Log(Combo);
                         anim.CrossFade($"BasicAttackAirial_{Combo}", 0f);
                     }
                     else
                     {
-                        anim.CrossFade($"AirialSkill_{attNum}", 0f);
+                        anim.CrossFade(skill.AnimName, 0f);
                     }
                 }
                 return true;
@@ -126,27 +140,26 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
 
         else //땅 위에서 스킬을 쓸 때.
         {
-
-
+            Debug.Log("할렐루야");
             int comboAnim = Combo;
-            bool result = activeSkills[attNum].UseSkill(this);
+            bool result = skill.UseSkill(this);
 
             if (!result)
             {
-
+                Debug.Log("공격 실패");
                 return false;
             }
 
             else
             {
-                if (attNum == 0) //기본 공격을 했을 때.
+                if (skill.BasicAttack) //기본 공격을 했을 때.
                 {
                     //Debug.Log(Combo);
                     anim.CrossFade($"BasicAttack_{comboAnim}", 0f);
                 }
                 else
                 {
-                    anim.CrossFade($"Skill_{attNum}", 0f);
+                    anim.CrossFade(skill.AnimName, 0f);
                 }
                 return true;
             }
@@ -156,6 +169,11 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     private void UpdateCoolDown()
     {
         foreach (var skill in new List<Skill_Module>(activeSkills))
+        {
+            skill.UpdateCoolDown(Time.deltaTime);
+        }
+
+        foreach (var skill in new List<Skill_Module>(modifiedActiveSkills))
         {
             skill.UpdateCoolDown(Time.deltaTime);
         }
