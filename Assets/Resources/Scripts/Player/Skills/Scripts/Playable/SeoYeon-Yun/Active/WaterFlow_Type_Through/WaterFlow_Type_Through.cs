@@ -34,9 +34,9 @@ public class WaterFlow_Type_Through : SkillBase
                 calculatedDamage = dmgCalculater.Calculate(caster);
             }
 
-            reinforced = flow.flowGage >= 6 ? true : false;
-            objComponent.ObjInit(caster.GetDirection(), calculatedDamage, caster.GetGameObject().tag, caster, reinforced);
-            if (reinforced) flow.flowGage = 0;
+            //reinforced = flow.flowGage >= 6 ? true : false;
+            //objComponent.ObjInit(caster.GetDirection(), calculatedDamage, caster.GetGameObject().tag, caster, reinforced);
+            //if (reinforced) flow.flowGage = 0;
         }
 
         return true;

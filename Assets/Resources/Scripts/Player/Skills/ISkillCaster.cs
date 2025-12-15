@@ -1,11 +1,12 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public interface ISkillCaster
 {
     int TotalDmg { get; set; }
     bool Attacking { get; set; }
     bool CancleAllSkill { get; }
-
+    void PlayAnimation(string animName);
     //int CurrentGage { get; set; }
     //string GetTag();
 

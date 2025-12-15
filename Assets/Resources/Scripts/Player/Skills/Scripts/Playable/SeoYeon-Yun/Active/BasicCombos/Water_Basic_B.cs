@@ -30,9 +30,8 @@ public class Water_Basic_B : SkillBase
         var hitBoxOffset = GroundhitBoxOffset;
         var hitBoxSize = GroundhitBoxSize;
 
-        var animName = unit.isAirial ? airialAnimName : groundAnimName;
-
-        parentModule.AnimName = animName;
+        animName = unit.isAirial ? airialAnimName : groundAnimName;
+        caster.PlayAnimation(animName);
 
         if (!unit.isAirial)
         {

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmgCalculater: {fileID: 11400000, guid: 935d84c7272a9954c93e31fc1bf2fa11, type: 2}
   targetObj: {fileID: 0}
+  animName: 
   explanation: 
   GroundhitBoxOffset: {x: 0, y: 0}
   GroundhitBoxSize: {x: 0, y: 0}

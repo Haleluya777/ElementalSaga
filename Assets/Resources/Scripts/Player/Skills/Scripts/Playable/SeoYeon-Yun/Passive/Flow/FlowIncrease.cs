@@ -8,7 +8,7 @@ public class FlowIncrease : OnHitEventBase
     [SerializeField] private Flow flow;
     public override void Execute(GameObject target, ISkillCaster caster, int dmg)
     {
-        if (flow.flowGage >= 6) return;
-        flow.flowGage++;
+        //if (flow.flowGage >= 6) return;
+        //flow.flowGage++;
     }
 }

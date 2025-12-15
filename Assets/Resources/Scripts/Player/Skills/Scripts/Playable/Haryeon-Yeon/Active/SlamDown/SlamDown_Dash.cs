@@ -37,6 +37,7 @@ public class SlamDown_Dash : SkillBase
             target = new Vector2(targetX, caster.GetGameObject().transform.position.y);
         }
 
+        caster.PlayAnimation(animName);
         GameManager.instance.coroutineRunner.StartRunnerCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), casterTransform, target, enemy));
         return true;
     }

@@ -9,6 +9,8 @@ public class ThrowAway_Dash : SkillBase
     [SerializeField] private SkillBase chainedSkill;
     [SerializeField] private float dashDistance = 2f; // 대쉬 거리
 
+    [SerializeField] private string throwAnim;
+
     public override bool UseSkill(ISkillCaster caster)
     {
         Transform casterTransform = caster.GetGameObject().transform;
@@ -19,9 +21,13 @@ public class ThrowAway_Dash : SkillBase
         float targetX = casterTransform.position.x + (direction * dashDistance);
 
         Vector2 target = Vector2.zero;
+        Vector2 target_Throw = Vector2.zero;
+
         if (enemyHitted.collider != null) //돌진 범위 내에 적이 존재할 때.
         {
             target = new Vector2(enemyHitted.point.x, caster.GetGameObject().transform.position.y);
+            target_Throw = new Vector2(target.x + 1f, caster.GetGameObject().transform.position.y);
+            Debug.Log(target_Throw);
             enemy = enemyHitted.collider.gameObject;
         }
 
@@ -30,15 +36,21 @@ public class ThrowAway_Dash : SkillBase
             target = new Vector2(targetX, caster.GetGameObject().transform.position.y);
         }
 
-        GameManager.instance.coroutineRunner.StartRunnerCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), casterTransform, target, enemy));
+        GameManager.instance.coroutineRunner.StartRunnerCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), casterTransform, target, target_Throw, enemy));
         return true;
     }
 
-    private IEnumerator PerformDash(ISkillCaster caster, Rigidbody2D rigid, Transform casterTransform, Vector3 target, GameObject enemy)
+    private IEnumerator PerformDash(ISkillCaster caster, Rigidbody2D rigid, Transform casterTransform, Vector3 target, Vector2 target_Throw, GameObject enemy)
     {
+        Unit enemyUnit;
+
         float dashSpeed = 25f; // 대쉬 속도
         float minSqrDistance = .5f;
 
+        //스킬 순서 = 목적지로 대쉬 => 앞으로 살짝 전진 => Throwed디버프 부여.
+
+        //목적지로 대쉬하는 부분.
+        caster.PlayAnimation(animName);
         while (((Vector2)target - rigid.position).magnitude > minSqrDistance)
         {
             if (Physics2D.Raycast(new Vector2(caster.GetGameObject().transform.position.x, caster.GetGameObject().transform.position.y + .5f), Vector2.right * caster.GetGameObject().transform.localScale.x, .75f, 1 << 3))
@@ -53,13 +65,44 @@ public class ThrowAway_Dash : SkillBase
 
             yield return new WaitForFixedUpdate();
         }
+        yield return null;
 
-        yield return new WaitForSeconds(.5f);
         if (enemy != null)
         {
-            var enemyUnit = enemy.GetComponent<Unit>();
+            enemyUnit = enemy.GetComponent<Unit>();
+            //앞으로 살짝 전진하는 부분.
+            caster.PlayAnimation(throwAnim);
+            enemyUnit.AddEffectProcess(new DeBuff_Catched(100f, enemyUnit, 0, "Catched", caster.GetGameObject(), caster.GetGameObject().transform));
+            while (((Vector2)target_Throw - rigid.position).magnitude > minSqrDistance)
+            {
+                if (Physics2D.Raycast(new Vector2(caster.GetGameObject().transform.position.x, caster.GetGameObject().transform.position.y + .5f), Vector2.right * caster.GetGameObject().transform.localScale.x, .75f, 1 << 3))
+                {
+                    break;
+                }
+
+                Vector2 direction = ((Vector2)target_Throw - rigid.position).normalized;
+                Vector3 newPos = rigid.position + direction * (dashSpeed / 10) * Time.fixedDeltaTime;
+
+                rigid.MovePosition(newPos);
+
+                yield return new WaitForFixedUpdate();
+            }
+            yield return null;
+
+            if (enemyUnit.activeEffect.TryGetValue("Catched", out StatusEffectBase exisitngEffect))
+            {
+                if (enemyUnit.activeEffectCoroutines.TryGetValue("Catched", out Coroutine runningCoroutine))
+                {
+                    //코루틴을 이용한 상태이상의 타이머 제거.
+                    GameManager.instance.coroutineRunner.StopCoroutine(runningCoroutine);
+                }
+                //적용 되어 있는 상태이상 또한 제거.
+                exisitngEffect.RemoveEffect();
+            }
+
             enemyUnit.AddEffectProcess(new DeBuff_Throwed(100f, enemyUnit, 0, "Throwed", caster, 5f, chainedSkill, caster.GetDirection()));
         }
+
         yield return null;
     }
 }

@@ -108,7 +108,7 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
         }
         else if (hit.collider == null)
         {
-            Debug.Log("공중에 있음");
+            //Debug.Log("공중에 있음");
             unit.isAirial = true;
         }
 

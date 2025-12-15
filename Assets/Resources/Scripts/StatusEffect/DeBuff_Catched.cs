@@ -27,6 +27,7 @@ public class DeBuff_Catched : StatusEffectBase
     public override void RemoveEffect()
     {
         //행동불가 Off
+        Debug.Log("잡기 풀림");
         target.GetComponent<Rigidbody2D>().simulated = true; //물리 효과 비활성화.
         target.GetComponent<BoxCollider2D>().enabled = true; //충돌 효과 비활성화.
         target.gameObject.transform.SetParent(null);

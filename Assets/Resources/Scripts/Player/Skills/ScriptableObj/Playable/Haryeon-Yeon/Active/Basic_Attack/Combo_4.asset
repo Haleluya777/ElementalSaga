@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Combo_4
   m_EditorClassIdentifier: 
   dmgCalculater: {fileID: 11400000, guid: 3b72c79561dbee946ad62d6e74faff48, type: 2}
+  targetObj: {fileID: 0}
+  animName: BasicAttack_1
   explanation: 
   onHitEvents:
   - {fileID: 11400000, guid: 098c7b339026ff644938338d74430d84, type: 2}

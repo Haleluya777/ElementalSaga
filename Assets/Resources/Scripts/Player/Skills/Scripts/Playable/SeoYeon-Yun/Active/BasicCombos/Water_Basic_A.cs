@@ -31,9 +31,10 @@ public class Water_Basic_A : SkillBase
 
         var hitBoxOffset = unit.isAirial ? AirialhitBoxOffset : GroundhitBoxOffset;
         var hitBoxSize = unit.isAirial ? AirialhitBoxSize : GroundhitBoxSize;
-        var animName = unit.isAirial ? airialAnimName : groundAnimName;
 
-        parentModule.AnimName = animName;
+        animName = unit.isAirial ? airialAnimName : groundAnimName;
+
+        caster.PlayAnimation(animName);
 
         GameObject hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
         GameObject effectObj = GameManager.instance.objectPoolManager.GetGo("Effect");

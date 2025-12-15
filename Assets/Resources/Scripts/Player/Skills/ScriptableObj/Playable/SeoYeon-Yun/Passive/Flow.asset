@@ -14,5 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmgCalculater: {fileID: 0}
   targetObj: {fileID: 0}
+  animName: 
   explanation: 
-  flowGage: 0
+  flowSkills:
+  - {fileID: 11400000, guid: f0bf669799fd2ad408abde74b7263bce, type: 2}
+  - {fileID: 11400000, guid: f0bf669799fd2ad408abde74b7263bce, type: 2}
+  - {fileID: 11400000, guid: f0bf669799fd2ad408abde74b7263bce, type: 2}
+  - {fileID: 11400000, guid: f0bf669799fd2ad408abde74b7263bce, type: 2}
+  basicSkills:
+  - {fileID: 11400000, guid: aa36be881f2fa9f4dbea5e23a2c02365, type: 2}
+  - {fileID: 11400000, guid: 17c3c0c6ca9470946b05cfc1ddc52548, type: 2}
+  - {fileID: 11400000, guid: ac2bc5bda71a87e41ada3d25133243a8, type: 2}
+  - {fileID: 11400000, guid: 81a0534a1f973f14e891d329257d476d, type: 2}

@@ -16,6 +16,7 @@ public class SuperPressureBlowout : SkillBase
         explosionCount = heatPressurePassive.heatPressure < 100 ? 3 : 4;
 
         Debug.Log($"{explosionCount} 번 폭발 예정");
+        caster.PlayAnimation(animName);
         GameManager.instance.coroutineRunner.StartCoroutine(ExplosionCoroutine(caster));
         GameManager.instance.coroutineRunner.StartCoroutine(GraceTime(caster.GetCom<Unit>()));
 

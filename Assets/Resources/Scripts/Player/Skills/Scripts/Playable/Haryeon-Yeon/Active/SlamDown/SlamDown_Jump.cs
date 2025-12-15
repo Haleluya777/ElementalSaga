@@ -38,6 +38,7 @@ public class SlamDown_Jump : SkillBase
         Vector2 requiredVelocity = (target - startPos) / t - .5f * Physics2D.gravity * t;
 
         rigid.velocity = requiredVelocity;
+        caster.PlayAnimation(animName);
         GameManager.instance.coroutineRunner.StartCoroutine(CheckGround(caster));
         return true;
     }

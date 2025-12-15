@@ -708,6 +708,9 @@ MonoBehaviour:
   - objectName: Bullet
     perfab: {fileID: 4796313417042235660, guid: eb3eb193a4a1bad458c971d529eb750f, type: 3}
     count: 4
+  - objectName: Bullet_Through
+    perfab: {fileID: 4796313417042235660, guid: eb3eb193a4a1bad458c971d529eb750f, type: 3}
+    count: 4
 --- !u!1 &427367744
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,7 +726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &427367745
 Transform:
   m_ObjectHideFlags: 0
@@ -1711,7 +1714,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416807221}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 982b4ba3643629e44897ad57f01bc2de, type: 3}
   m_Name: 
@@ -1951,7 +1954,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511228616}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dba5995141ba1d543be307d52d53b1a6, type: 3}
   m_Name: 
@@ -3237,9 +3240,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ac2bc5bda71a87e41ada3d25133243a8, type: 2}
   - {fileID: 11400000, guid: 81a0534a1f973f14e891d329257d476d, type: 2}
   modifiedActiveSkills:
-  - {fileID: 11400000, guid: 658b89326825c084096b3e52b19c0324, type: 2}
   - {fileID: 11400000, guid: a1e99e5b9b9560d43a11a8011fa1de79, type: 2}
-  - {fileID: 11400000, guid: 658b89326825c084096b3e52b19c0324, type: 2}
+  - {fileID: 11400000, guid: c61914481e5b4824aa3be01096f3bd5d, type: 2}
+  - {fileID: 11400000, guid: 977d421c05a638d45a5e02751d8084c0, type: 2}
+  - {fileID: 11400000, guid: 5f2fc80474c412c4daaaa6496f15ac43, type: 2}
+  - {fileID: 11400000, guid: 23918b6d2c4b7bc46a8fa5ce6b0bf4be, type: 2}
   passiveSkills:
   - {fileID: 11400000, guid: 006278a115ddc434d81e1b895af49261, type: 2}
   hitEvents:

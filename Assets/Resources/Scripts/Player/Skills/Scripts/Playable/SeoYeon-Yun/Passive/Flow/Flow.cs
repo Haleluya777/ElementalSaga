@@ -1,66 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Flow", menuName = "ScriptableObject/Skills/Passive/YunSeoYeon/Flow")]
 public class Flow : SkillBase
 {
     private Unit unit;
-    public int flowGage = 0;
-    private int previousFlowGage = 0;
+    private IAttackable attack;
 
-    //원본 스탯 변수.
-    private bool statsCaptured = false;
-    private int baseAtt;
+    [SerializeField] private List<Skill_Module> flowSkills = new List<Skill_Module>();
+    [SerializeField] private List<Skill_Module> basicSkills = new List<Skill_Module>();
+
     public override void Initialize(Skill_Module module)
     {
         base.Initialize(module);
-        statsCaptured = false;
+        flowSkills = SkillInit(flowSkills);
+        basicSkills = SkillInit(basicSkills);
     }
 
     public override bool UseSkill(ISkillCaster caster)
     {
-        if (unit == null)
-        {
-            unit = caster.GetGameObject().GetComponent<Unit>();
-        }
+        if (unit == null) unit = caster.GetCom<Unit>();
+        if (attack == null) attack = caster.GetCom<IAttackable>();
 
-        // 처음 unit을 얻었을 때, 원본 스탯을 한 번만 저장.
-        if (unit != null && !statsCaptured)
+        if (!unit.FindEffect("Flow"))
         {
-            baseAtt = unit.Att;
-            statsCaptured = true;
-            //Debug.Log($"원본 스탯 저장: Att({baseAtt}), MoveSpeed({baseMoveSpeed}), JumpForce({baseJumpForce})");
+            if (attack.ActiveSkills != basicSkills)
+            {
+                attack.ActiveSkills = basicSkills;
+            }
+            else return true;
         }
-
-        if (flowGage != previousFlowGage)
+        else
         {
-            UpdateStats();
-            previousFlowGage = flowGage;
-        }
-
-        if (flowGage == 6)
-        {
-            GameManager.instance.coroutineRunner.StartCoroutine(ResetFlow());
-            return true;
+            if (attack.ActiveSkills != flowSkills)
+            {
+                attack.ActiveSkills = flowSkills;
+            }
+            else return true;
         }
 
         return true;
     }
 
-    private void UpdateStats()
+    private List<T> SkillInit<T>(List<T> skills) where T : class
     {
-        if (!statsCaptured) return;
+        for (int i = 0; i < skills.Count; i++)
+        {
+            if (skills[i] == null) continue;
 
-        // 항상 원본 스탯을 기준으로 현재 heatPressure에 맞는 스탯을 계산하여 적용합니다.
-        unit.Att = baseAtt + ((baseAtt * 5 / 100) * flowGage);
+            var original = skills[i] as UnityEngine.Object;
+            if (original == null) continue;
 
-        Debug.Log($"스탯 업데이트: Flow({flowGage}) -> Att({unit.Att})");
-    }
+            var newInstance = Instantiate(original);
 
-    private IEnumerator ResetFlow()
-    {
-        yield return new WaitForSeconds(5f);
-        flowGage = 0;
+            if (newInstance is DamagedEventBase damagedEvent)
+            {
+                damagedEvent.Initialize(unit);
+            }
+            else if (newInstance is Skill_Module skillModule)
+            {
+                skillModule.InitSkill();
+            }
+
+            skills[i] = newInstance as T;
+        }
+        return skills;
     }
 }

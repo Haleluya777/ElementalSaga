@@ -29,6 +29,7 @@ public class SlamDown_Punch : SkillBase
         hitBoxCom.Initialize(dmgCalculater.Calculate(caster), caster, null, .5f);
         effectCom.Initialize(.5f);
 
+        caster.PlayAnimation(animName);
         GameManager.instance.coroutineRunner.StartCoroutine(PunchExplosion(caster));
         return true;
     }

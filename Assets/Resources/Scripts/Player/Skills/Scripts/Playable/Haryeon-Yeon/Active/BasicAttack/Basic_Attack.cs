@@ -41,6 +41,7 @@ public class Basic_Attack : SkillBase
 
         hitBoxCom.Initialize(dmgCalculater.Calculate(caster), caster, onHitEvents, .5f);
 
+        caster.PlayAnimation(animName);
 
         //스킬 사용 후 상황.
         //연결된 스킬 사용.

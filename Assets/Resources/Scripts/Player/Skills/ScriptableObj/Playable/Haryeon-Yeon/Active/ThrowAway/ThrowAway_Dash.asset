@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmgCalculater: {fileID: 0}
   targetObj: {fileID: 0}
+  animName: BasicAttack_0
   explanation: 
   chainedSkill: {fileID: 11400000, guid: 04f2454e8fbb31349aaaf4b4ecf18991, type: 2}
-  dashDistance: 2
+  dashDistance: 4
+  throwAnim: BasicAttack_1

@@ -41,6 +41,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
     private bool graceState; //무적 상태.
 
     #region Property
+    public int MaxHp { get => unitData.maxHp; private set => unitData.maxHp = Mathf.Max(0, value); }
     public int CurHp { get => unitData.curHp; private set => unitData.curHp = Mathf.Max(0, value); }
 
     public int Att { get => unitData.att; set => unitData.att = Mathf.Max(0, value); }
@@ -76,6 +77,11 @@ public abstract class Unit : MonoBehaviour, IDamageable
     private Coroutine newCorutine;
     public bool isAirial;
     //public UnitData currentStats;
+
+    void FixedUpdate()
+    {
+
+    }
 
     void OnEnable()
     {
@@ -144,6 +150,11 @@ public abstract class Unit : MonoBehaviour, IDamageable
 
         Coroutine newCoroutine = GameManager.instance.coroutineRunner.StartRunnerCoroutine(RemoveEffectAfterDuration(effect));
         activeEffectCoroutines[effect.effectName] = newCoroutine;
+    }
+
+    public bool FindEffect(string effectName) //해당 이름의 상태 이상이 존재하는지 체크.
+    {
+        return activeEffect.ContainsKey(effectName);
     }
 
     IEnumerator RemoveEffectAfterDuration(StatusEffectBase effect) //상태 이상 삭제.

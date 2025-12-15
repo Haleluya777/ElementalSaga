@@ -7,6 +7,7 @@ public abstract class SkillBase : ScriptableObject
     public Skill_Module parentModule { get; private set; }
     public DmgCalculator dmgCalculater;
     public GameObject targetObj; //타게팅 스킬에 사용
+    public string animName; //실행할 애니메이션 이름
     public string explanation; //스킬 설명.
 
     public virtual void Initialize(Skill_Module module)

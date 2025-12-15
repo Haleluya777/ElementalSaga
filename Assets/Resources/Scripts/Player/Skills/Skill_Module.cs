@@ -8,7 +8,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Skill", menuName = "ScriptableObject/Skill/Skill Module")]
 public class Skill_Module : ScriptableObject
 {
-    public string AnimName; //재생할 애니메이션 이름.
     public IBlackBoard blackBoard = new BlackBoard(); //스킬 데이터를 담을 블랙보드.
     public enum ActiveType { OnDown, OnHold };
     [SerializeField] private string skillName; //최종 스킬 이름
