@@ -15,7 +15,7 @@ public class WaterFlow_Type_Through : SkillBase
     {
         killCount = 0;
         base.Initialize(module);
-        GameManager.instance.eventManager.DeadEvent += KillCount;
+        // /GameManager.instance.eventManager.DeadEvent += KillCount;
     }
 
     public override bool UseSkill(ISkillCaster caster)
@@ -35,7 +35,7 @@ public class WaterFlow_Type_Through : SkillBase
             }
 
             //reinforced = flow.flowGage >= 6 ? true : false;
-            //objComponent.ObjInit(caster.GetDirection(), calculatedDamage, caster.GetGameObject().tag, caster, reinforced);
+            objComponent.ObjInit(caster.GetDirection(), calculatedDamage, caster.GetGameObject().tag, caster, reinforced, this);
             //if (reinforced) flow.flowGage = 0;
         }
 

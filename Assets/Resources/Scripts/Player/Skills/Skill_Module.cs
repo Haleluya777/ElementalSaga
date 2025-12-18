@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -127,6 +128,11 @@ public class Skill_Module : ScriptableObject
             // 교체하려는 스킬을 찾지 못하면 오류가 발생하므로, 경고를 출력하고 실행을 중단합니다.
             Debug.LogWarning($"Warning: Skill '{previousSkill?.name}' not found in module '{this.name}' and could not be replaced by '{currentSkill?.name}'.");
         }
+    }
+
+    public T FindInternalSkill<T>() where T : SkillBase
+    {
+        return activeSkills.OfType<T>().FirstOrDefault() ?? passiveSkills.OfType<T>().FirstOrDefault();
     }
 
     public void ResetCoolDown()

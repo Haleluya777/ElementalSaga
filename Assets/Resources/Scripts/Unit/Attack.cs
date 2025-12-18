@@ -90,6 +90,23 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
         }
     }
 
+    public T FindSkill<T>(T skill) where T : SkillBase
+    {
+        var allSkillModule = activeSkills.Concat(modifiedActiveSkills).Concat(passiveSkills);
+
+        foreach (var module in allSkillModule)
+        {
+            if (module == null) continue;
+
+            var foundSkill = module.FindInternalSkill<T>();
+            if (foundSkill != null)
+            {
+                return foundSkill;
+            }
+        }
+        return null;
+    }
+
     private void ChangeAirialBasicAttack()
     {
         if (activeSkills.Count == 0 || basicAttacks.Length == 0) return;

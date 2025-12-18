@@ -14,4 +14,5 @@ public interface IAttackable
     int Combo { get; set; }
 
     bool PerformAttack(Skill_Module skill);
+    T FindSkill<T>(T skill) where T : SkillBase;
 }

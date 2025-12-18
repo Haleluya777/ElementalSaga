@@ -32,7 +32,7 @@ public class BulletThroughObj : SkillObjBase
         rigid.velocity = Vector2.right * dir.x * OBJECT_SPEED;
     }
 
-    public override void ObjInit(Vector2 _dir, int _dmg, string _tag, ISkillCaster _caster, bool _reinforced)
+    public override void ObjInit(Vector2 _dir, int _dmg, string _tag, ISkillCaster _caster, bool _reinforced, SkillBase parentSkill)
     {
         rigid = this.GetComponent<Rigidbody2D>();
         dir = _dir;

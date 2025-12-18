@@ -75,7 +75,7 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
         }
         else if (rigid.velocity.y == 0)
         {
-            Debug.Log("호놀룰루");
+            //Debug.Log("호놀룰루");
             Jump();
         }
     }

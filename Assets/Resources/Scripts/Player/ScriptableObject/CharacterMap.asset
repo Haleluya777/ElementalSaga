@@ -31,3 +31,12 @@ MonoBehaviour:
     jumpForce: 5
     addJumpCount: 0
     attSpeed: 1
+  - id: 3
+    name: HaRyeong-Yeon
+    hp: 500
+    att: 130
+    gage: 0
+    moveSpeed: 5
+    jumpForce: 5
+    addJumpCount: 0
+    attSpeed: 1

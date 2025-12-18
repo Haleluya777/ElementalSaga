@@ -12,7 +12,7 @@ public class HeatPressure : SkillBase
     // 유닛의 원본 스탯을 저장할 변수들
     private bool statsCaptured = false;
     private int baseAtt;
-    private int baseMoveSpeed;
+    private float baseMoveSpeed;
     private int baseJumpForce;
 
     public override void Initialize(Skill_Module module)
@@ -59,7 +59,7 @@ public class HeatPressure : SkillBase
         // {
         //     //skill.
         // }
-        unit.MoveSpeed = baseMoveSpeed - (int)(heatPressure * 0.05f);
+        unit.MoveSpeed = baseMoveSpeed - (heatPressure * 0.05f);
         unit.JumpForce = baseJumpForce - (int)(heatPressure * 0.05f);
 
         Debug.Log($"스탯 업데이트: Heat({heatPressure}) -> Att({unit.Att}), MoveSpeed({unit.MoveSpeed}), JumpForce({unit.JumpForce})");

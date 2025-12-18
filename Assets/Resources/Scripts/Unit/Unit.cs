@@ -15,7 +15,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
         //public int def;
         public int maxGage;
         public int curGage;
-        public int moveSpeed;
+        public float moveSpeed;
         public int jumpForce;
         public int addJumpCount;
         public float attSpeed;
@@ -37,19 +37,23 @@ public abstract class Unit : MonoBehaviour, IDamageable
     }
 
     [SerializeField] protected UnitData unitData;
+    [SerializeField] private float dmgRate = 1; //피해 비율.
     private bool cantAction; //true일 경우 행동 불능.
     private bool graceState; //무적 상태.
+    private bool hpRegain;
+    private bool gageRegain;
 
     #region Property
-    public int MaxHp { get => unitData.maxHp; private set => unitData.maxHp = Mathf.Max(0, value); }
-    public int CurHp { get => unitData.curHp; private set => unitData.curHp = Mathf.Max(0, value); }
+    public float DmgRate { get => dmgRate; set => dmgRate = value; }
+    public int MaxHp { get => unitData.maxHp; set => unitData.maxHp = Mathf.Max(0, value); }
+    public int CurHp { get => unitData.curHp; set => unitData.curHp = Mathf.Max(0, value); }
 
     public int Att { get => unitData.att; set => unitData.att = Mathf.Max(0, value); }
     public float AttSpeed { get => unitData.attSpeed; set => unitData.attSpeed = Mathf.Max(0, value); }
     //public int Def { get => unitData.def; set => unitData.def = Mathf.Max(0, value); }
     public int MaxGage { get => unitData.maxGage; set => unitData.maxGage = value; }
     public int curGage { get => unitData.curGage; set => unitData.curGage = value; }
-    public int MoveSpeed { get => unitData.moveSpeed; set => unitData.moveSpeed = Mathf.Max(0, value); }
+    public float MoveSpeed { get => unitData.moveSpeed; set => unitData.moveSpeed = Mathf.Max(0, value); }
     public int JumpForce { get => unitData.jumpForce; set => unitData.jumpForce = Mathf.Max(0, value); }
     public int AddJumpCount { get => unitData.addJumpCount; set => unitData.addJumpCount = Mathf.Max(0, value); }
     public bool isDead => CurHp <= 0;
@@ -67,6 +71,9 @@ public abstract class Unit : MonoBehaviour, IDamageable
             }
         }
     }
+
+    public bool HpRegain { get { return hpRegain; } set { hpRegain = value; } }
+    public bool GageRegain { get { return gageRegain; } set { gageRegain = value; } }
 
     #endregion
 
@@ -96,7 +103,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
         //데미지를 받을 때마다 피격 효과 발생.
         TakeDamageEvent?.Invoke(dmg, attacker, character);
 
-        CurHp -= (dmg);// - Def);
+        CurHp -= (int)(dmg * dmgRate);// - Def);
         if (isDead) Dead(attacker);
     }
 

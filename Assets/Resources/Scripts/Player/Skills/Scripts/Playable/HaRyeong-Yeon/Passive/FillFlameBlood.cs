@@ -8,6 +8,7 @@ public class FillFlameBlood : OnHitEventBase
 
     public override void Execute(GameObject target, ISkillCaster caster, int dmg)
     {
+        if(flameBlood.flameBloodGage >= 50) return;
         flameBlood.flameBloodGage += 1;
     }
 
