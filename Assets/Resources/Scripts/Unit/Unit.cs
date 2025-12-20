@@ -149,7 +149,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
                 GameManager.instance.coroutineRunner.StopCoroutine(runningCoroutine);
             }
             //적용 되어 있는 상태이상 또한 제거.
-            exisitngEffect.RemoveEffect();
+            exisitngEffect.RemoveEffect(true);
         }
 
         activeEffect[effect.effectName] = effect;

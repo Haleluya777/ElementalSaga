@@ -18,7 +18,7 @@ public class DeBuff_IncreaseDmgRate : StatusEffectBase
         target.DmgRate += increase;
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
         target.DmgRate -= increase;
     }

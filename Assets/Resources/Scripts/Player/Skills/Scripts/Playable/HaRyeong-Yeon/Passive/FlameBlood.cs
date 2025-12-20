@@ -68,9 +68,9 @@ public class FlameBlood : SkillBase
             {
                 Debug.Log("폭혈! 터져라!");
                 flameBloodGage = 0;
-                unit.AddEffectProcess(new Buff_ExplosionBlood(6f, unit, 150, 50, "ExplosionBlood", basicSkill, reinforcedSkill));
                 unit.HpRegain = true;
                 unit.DmgRate = 1;
+                GameManager.instance.coroutineRunner.StartCoroutine(ExplosionBloodMode());
             }
 
             UpdateStats(flameBloodGage);
@@ -78,6 +78,12 @@ public class FlameBlood : SkillBase
         }
 
         return true;
+    }
+
+    private IEnumerator ExplosionBloodMode()
+    {
+        yield return new WaitForFixedUpdate();
+        unit.AddEffectProcess(new Buff_ExplosionBlood(6f, unit, 150, 50, "ExplosionBlood", basicSkill, reinforcedSkill));
     }
 
     private void UpdateStats(int gage)

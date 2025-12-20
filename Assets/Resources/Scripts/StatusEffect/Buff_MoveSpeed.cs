@@ -19,7 +19,7 @@ public class Buff_MoveSpeed : StatusEffectBase
         target.MoveSpeed += (int)increase;
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
         target.MoveSpeed -= (int)increase;
         Debug.Log("이동 속도 버프 삭제.");

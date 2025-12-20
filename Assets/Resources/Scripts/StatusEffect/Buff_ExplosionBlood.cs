@@ -39,22 +39,20 @@ public class Buff_ExplosionBlood : StatusEffectBase
         target.Att += (int)attIncrease;
         target.MoveSpeed += (int)moveIncrease;
         target.JumpForce += (int)jumpIncrease;
-
-        Debug.Log("폭혈 상태 돌입");
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
         GameManager.instance.coroutineRunner.StopCoroutine(coroutine);
         attack.ActiveSkills[0] = basic;
-
         target.Att -= (int)attIncrease;
         target.MoveSpeed -= (int)moveIncrease;
         target.JumpForce -= (int)jumpIncrease;
 
-        target.AddEffectProcess(new Debuff_SlowMoveSpeed(3f, 75f, target, "Slow"));
-
-        Debug.Log("폭혈 상태 제거");
+        if (!isRefresh)
+        {
+            target.AddEffectProcess(new Debuff_SlowMoveSpeed(3f, 75f, target, "Slow")); //상태 이상 갱신이 아닌 완전한 종료일 때 슬로우 디버프 적용.
+        }
     }
 
     private IEnumerator BloodLoss(Unit unit)
@@ -64,7 +62,6 @@ public class Buff_ExplosionBlood : StatusEffectBase
         {
             yield return interval;
             unit.CurHp -= dmgRate;
-            Debug.Log($"체력 감소! 현재 체력 {unit.CurHp}");
         }
     }
 }

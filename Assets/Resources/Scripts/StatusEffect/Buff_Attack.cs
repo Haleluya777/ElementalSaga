@@ -20,7 +20,7 @@ public class Buff_Attack : StatusEffectBase
         Debug.Log("버프 받음");
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
         target.Att -= (int)increase;
         Debug.Log($"버프 제거됨 증가량 : {increase}");

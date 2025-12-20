@@ -19,7 +19,7 @@ public class DeBuff_LatedDamage : StatusEffectBase
         Debug.Log("타이머 시작");
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
         Debug.Log($"타이머 종료. 데미지 들어감 : {damage}.");
         target.TakeDamage(damage, attacker.GetComponentInChildren<ISkillCaster>(), null);

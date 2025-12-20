@@ -15,7 +15,7 @@ public class Debuff_Stun : StatusEffectBase
         target.CantAction = true;
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
         Debug.Log("행동가능");
         target.CantAction = false;

@@ -19,7 +19,7 @@ public class Debuff_SlowMoveSpeed : StatusEffectBase
         target.MoveSpeed -= decrease;
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
         target.MoveSpeed += decrease;
     }

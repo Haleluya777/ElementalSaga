@@ -20,7 +20,7 @@ public class Buff_ReinforcedBasicSkill : StatusEffectBase
         target.GetComponentInChildren<IAttackable>().ActiveSkills[0] = reinforcedSkill;
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
         Debug.Log("평타 강화 제거");
         target.GetComponentInChildren<IAttackable>().ActiveSkills[0] = basicSkill;

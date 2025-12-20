@@ -14,6 +14,6 @@ public abstract class StatusEffectBase
         this.target = target;
     }
 
-    public abstract void RemoveEffect();
+    public abstract void RemoveEffect(bool isRefresh = false);
     public abstract void ApplyEffect();
 }

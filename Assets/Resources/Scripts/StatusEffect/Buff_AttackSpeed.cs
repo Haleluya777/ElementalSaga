@@ -23,7 +23,7 @@ public class Buff_AttackSpeed : StatusEffectBase
         anim.SetFloat("AnimationSpeed", target.AttSpeed);
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
         Debug.Log("공격 속도 버프 삭제.");
         var anim = target.GetComponent<Animator>();

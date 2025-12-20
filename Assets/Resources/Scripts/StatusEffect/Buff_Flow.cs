@@ -14,7 +14,7 @@ public class Buff_Flow : StatusEffectBase
 
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
 
     }

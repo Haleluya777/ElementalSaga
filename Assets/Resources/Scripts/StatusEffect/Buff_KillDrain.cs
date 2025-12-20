@@ -17,7 +17,7 @@ public class Buff_KillDrain : StatusEffectBase
         GameManager.instance.eventManager.DeadEvent += KillDrain;
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
         GameManager.instance.eventManager.DeadEvent -= KillDrain;
     }

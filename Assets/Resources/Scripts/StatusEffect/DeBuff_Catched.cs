@@ -24,7 +24,7 @@ public class DeBuff_Catched : StatusEffectBase
         target.gameObject.transform.position = parent.position; //위치 조정.
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
         //행동불가 Off
         Debug.Log("잡기 풀림");

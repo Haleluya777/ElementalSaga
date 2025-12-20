@@ -36,7 +36,7 @@ public class DeBuff_Throwed : StatusEffectBase
         GameManager.instance.coroutineRunner.StartCoroutine(Throwing(unitTransform.position));
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(bool isRefresh = false)
     {
         Debug.Log("도착. 버프 제거");
         if (explosion)
