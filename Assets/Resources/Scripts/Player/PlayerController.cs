@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, IDataInitializable
     public Action<Vector2> moveInput;
     public Action<int> attackInput;
     public Action jumpInput;
+    public Action interaction;
 
     private Vector2 moveX;
     private Coroutine continuousSkill;
@@ -92,7 +93,6 @@ public class PlayerController : MonoBehaviour, IDataInitializable
 
             case "ModifierAtt":
                 ModifierAtt = context.performed;
-                //Debug.Log("혼합 공격 사용");
                 break;
 
 
@@ -120,6 +120,10 @@ public class PlayerController : MonoBehaviour, IDataInitializable
 
             case "Jump":
                 jumpInput?.Invoke();
+                break;
+
+            case "Interaction":
+                interaction?.Invoke();
                 break;
         }
     }

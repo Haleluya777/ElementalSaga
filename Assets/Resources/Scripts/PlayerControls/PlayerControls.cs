@@ -118,6 +118,15 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""28c7af64-be5a-428a-92db-7c96c28fda24"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -208,6 +217,17 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9dc14101-a564-426b-9a66-560a0c903da4"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -246,6 +266,15 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""ModifierAtt"",
                     ""type"": ""Button"",
                     ""id"": ""34c74f3e-c52e-43a7-b831-aea505e5feb6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""f99cff56-72dc-4753-9a78-433e1b18f9e3"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -351,6 +380,17 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ModifierAtt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f31a95a6-e9db-4620-a3fa-da0a46b31548"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -379,12 +419,14 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         m_DefaultUnit_Movement = m_DefaultUnit.FindAction("Movement", throwIfNotFound: true);
         m_DefaultUnit_Attack = m_DefaultUnit.FindAction("Attack", throwIfNotFound: true);
         m_DefaultUnit_Jump = m_DefaultUnit.FindAction("Jump", throwIfNotFound: true);
+        m_DefaultUnit_Interaction = m_DefaultUnit.FindAction("Interaction", throwIfNotFound: true);
         // ActionUnit
         m_ActionUnit = asset.FindActionMap("ActionUnit", throwIfNotFound: true);
         m_ActionUnit_Movement = m_ActionUnit.FindAction("Movement", throwIfNotFound: true);
         m_ActionUnit_Attack = m_ActionUnit.FindAction("Attack", throwIfNotFound: true);
         m_ActionUnit_Jump = m_ActionUnit.FindAction("Jump", throwIfNotFound: true);
         m_ActionUnit_ModifierAtt = m_ActionUnit.FindAction("ModifierAtt", throwIfNotFound: true);
+        m_ActionUnit_Interaction = m_ActionUnit.FindAction("Interaction", throwIfNotFound: true);
     }
 
     ~@BasicPlayerControls()
@@ -469,6 +511,7 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_DefaultUnit_Movement;
     private readonly InputAction m_DefaultUnit_Attack;
     private readonly InputAction m_DefaultUnit_Jump;
+    private readonly InputAction m_DefaultUnit_Interaction;
     /// <summary>
     /// Provides access to input actions defined in input action map "DefaultUnit".
     /// </summary>
@@ -492,6 +535,10 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "DefaultUnit/Jump".
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_DefaultUnit_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "DefaultUnit/Interaction".
+        /// </summary>
+        public InputAction @Interaction => m_Wrapper.m_DefaultUnit_Interaction;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -527,6 +574,9 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Interaction.started += instance.OnInteraction;
+            @Interaction.performed += instance.OnInteraction;
+            @Interaction.canceled += instance.OnInteraction;
         }
 
         /// <summary>
@@ -547,6 +597,9 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Interaction.started -= instance.OnInteraction;
+            @Interaction.performed -= instance.OnInteraction;
+            @Interaction.canceled -= instance.OnInteraction;
         }
 
         /// <summary>
@@ -588,6 +641,7 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_ActionUnit_Attack;
     private readonly InputAction m_ActionUnit_Jump;
     private readonly InputAction m_ActionUnit_ModifierAtt;
+    private readonly InputAction m_ActionUnit_Interaction;
     /// <summary>
     /// Provides access to input actions defined in input action map "ActionUnit".
     /// </summary>
@@ -615,6 +669,10 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "ActionUnit/ModifierAtt".
         /// </summary>
         public InputAction @ModifierAtt => m_Wrapper.m_ActionUnit_ModifierAtt;
+        /// <summary>
+        /// Provides access to the underlying input action "ActionUnit/Interaction".
+        /// </summary>
+        public InputAction @Interaction => m_Wrapper.m_ActionUnit_Interaction;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -653,6 +711,9 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
             @ModifierAtt.started += instance.OnModifierAtt;
             @ModifierAtt.performed += instance.OnModifierAtt;
             @ModifierAtt.canceled += instance.OnModifierAtt;
+            @Interaction.started += instance.OnInteraction;
+            @Interaction.performed += instance.OnInteraction;
+            @Interaction.canceled += instance.OnInteraction;
         }
 
         /// <summary>
@@ -676,6 +737,9 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
             @ModifierAtt.started -= instance.OnModifierAtt;
             @ModifierAtt.performed -= instance.OnModifierAtt;
             @ModifierAtt.canceled -= instance.OnModifierAtt;
+            @Interaction.started -= instance.OnInteraction;
+            @Interaction.performed -= instance.OnInteraction;
+            @Interaction.canceled -= instance.OnInteraction;
         }
 
         /// <summary>
@@ -750,6 +814,13 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Interaction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteraction(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "ActionUnit" which allows adding and removing callbacks.
@@ -786,5 +857,12 @@ public partial class @BasicPlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnModifierAtt(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Interaction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteraction(InputAction.CallbackContext context);
     }
 }
