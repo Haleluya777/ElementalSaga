@@ -7,7 +7,7 @@ public class PlayableCharacter : Unit
     public enum ControlState { Player, AI }
 
     [Header("플레이 가능한 캐릭터들의 기본 정보")]
-    [SerializeField] private PlayableCharacterDataMap maps;
+    [SerializeField] private UnitDataMap maps;
 
     [Header("캐릭터 ID")]
     [SerializeField] private int id;

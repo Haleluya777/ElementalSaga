@@ -2,26 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room : PoolAble, IRoomInitable, IInteractable
+public class Room : PoolAble, IInteractable
 {
-    [SerializeField] private List<RoomInfo> rooms = new List<RoomInfo>();
-    [SerializeField] private RoomInfo thisRoom;
-    [SerializeField] private int total;
+    public RoomInfo thisRoom;
 
-    private void Awake()
+    public void Init()
     {
-        WeightInit();
-
-        //디버깅용
-        RandomRoom();
-    }
-
-    private void WeightInit()
-    {
-        for (int i = 0; i < rooms.Count; i++)
-        {
-            total += rooms[i].weight;
-        }
+        this.GetComponent<SpriteRenderer>().sprite = thisRoom.sprite;
     }
 
     public void Interaction()
@@ -60,28 +47,5 @@ public class Room : PoolAble, IRoomInitable, IInteractable
                 Debug.Log("퍼즐 방");
                 break;
         }
-    }
-
-    public void RandomRoom()
-    {
-        thisRoom = SetRoom();
-    }
-
-    private RoomInfo SetRoom()
-    {
-        int weight = 0;
-        int num = 0;
-
-        num = Random.Range(0, total) + 1;
-        for (int i = 0; i < rooms.Count; i++)
-        {
-            weight += rooms[i].weight;
-            if (num <= weight)
-            {
-                RoomInfo temp = new RoomInfo(rooms[i]);
-                return temp;
-            }
-        }
-        return null;
     }
 }

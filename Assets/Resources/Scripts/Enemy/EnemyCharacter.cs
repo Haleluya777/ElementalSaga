@@ -5,10 +5,10 @@ using UnityEngine;
 public class EnemyCharacter : Unit
 {
     [Header("적들의 기본 정보")]
-    [SerializeField] private PlayableCharacterDataMap maps;
+    [SerializeField] private UnitDataMap maps;
 
     [Header("캐릭터 ID")]
-    [SerializeField] private int id;
+    public int id;
 
     void Awake()
     {

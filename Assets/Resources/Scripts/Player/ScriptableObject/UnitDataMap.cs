@@ -31,7 +31,7 @@ public class Datas
 }
 
 [CreateAssetMenu(fileName = "CharacterMap", menuName = "ScriptableObject/DataMaps/PlayableCharacter/CharcterMap")]
-public class PlayableCharacterDataMap : ScriptableObject
+public class UnitDataMap : ScriptableObject
 {
     public Datas[] datas;
     public Datas GetDatas(int id)

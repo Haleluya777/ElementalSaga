@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public CoroutineRunner coroutineRunner;
     public ObjectPoolManager objectPoolManager;
     public EventManager eventManager;
+    public RoomManager roomManager;
+    public StageManager stageManager;
 
     private void Awake()
     {
@@ -22,6 +24,18 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("웨이브 종료");
+            for (int i = 0; i < 2; i++)
+            {
+                roomManager.MakeRoom(new Vector2(-2 + (i * 2), -1));
+            }
         }
     }
 }
