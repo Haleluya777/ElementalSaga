@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Profiling;
 using UnityEngine;
 
 public abstract class Unit : MonoBehaviour, IDamageable
@@ -8,6 +9,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
     [Serializable]
     public struct UnitData //유닛들의 모든 데이터.
     {
+        public UnitType type;
         public string unitName;
         public int maxHp;
         public int curHp;
@@ -22,6 +24,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
 
         public UnitData(Datas datas)
         {
+            type = datas.Type;
             unitName = datas.Name;
             maxHp = datas.Hp;
             curHp = maxHp;
@@ -58,6 +61,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
     public int AddJumpCount { get => unitData.addJumpCount; set => unitData.addJumpCount = Mathf.Max(0, value); }
     public bool isDead => CurHp <= 0;
     public bool GraceState { get; set; }
+    public UnitType Type => unitData.type;
 
     public bool CantAction
     {

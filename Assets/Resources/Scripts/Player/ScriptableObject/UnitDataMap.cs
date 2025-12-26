@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum UnitType { PlayableCharacter, Enemy, Elite, Boss }
+
 [Serializable]
 public class Datas
 {
+    [SerializeField] private UnitType type;
     [SerializeField] private int id;
 
     [SerializeField] private string name;
@@ -18,6 +21,7 @@ public class Datas
     [SerializeField] private int addJumpCount;
     [SerializeField] private float attSpeed;
 
+    public UnitType Type => type;
     public int Id => id;
     public string Name => name;
     public int Hp => hp;

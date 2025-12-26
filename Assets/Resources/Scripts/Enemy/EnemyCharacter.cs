@@ -10,9 +10,9 @@ public class EnemyCharacter : Unit
     [Header("캐릭터 ID")]
     public int id;
 
-    void Awake()
+    void Start()
     {
-        //DataInit();
+        DataInit();
     }
 
     private void DataInit()

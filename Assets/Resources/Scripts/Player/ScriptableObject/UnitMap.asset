@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: UnitMap
   m_EditorClassIdentifier: 
   datas:
-  - id: 1
+  - type: 0
+    id: 1
     name: HaRyeon-Yeon
     hp: 450
     att: 150
@@ -22,7 +23,8 @@ MonoBehaviour:
     jumpForce: 5
     addJumpCount: 0
     attSpeed: 1
-  - id: 2
+  - type: 0
+    id: 2
     name: SeoYeon-Yun
     hp: 300
     att: 90
@@ -31,8 +33,39 @@ MonoBehaviour:
     jumpForce: 5
     addJumpCount: 0
     attSpeed: 1
-  - id: 3
+  - type: 0
+    id: 3
     name: HaRyeong-Yeon
+    hp: 500
+    att: 130
+    gage: 0
+    moveSpeed: 5
+    jumpForce: 5
+    addJumpCount: 0
+    attSpeed: 1
+  - type: 1
+    id: 10
+    name: Enemy1
+    hp: 500
+    att: 130
+    gage: 0
+    moveSpeed: 5
+    jumpForce: 5
+    addJumpCount: 0
+    attSpeed: 1
+  - type: 1
+    id: 11
+    name: Enemy2
+    hp: 500
+    att: 130
+    gage: 0
+    moveSpeed: 5
+    jumpForce: 5
+    addJumpCount: 0
+    attSpeed: 1
+  - type: 2
+    id: 12
+    name: Enem32
     hp: 500
     att: 130
     gage: 0

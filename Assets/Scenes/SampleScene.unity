@@ -489,6 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData:
+    type: 0
     unitName: 
     maxHp: 100
     curHp: 100
@@ -558,6 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData:
+    type: 0
     unitName: 
     maxHp: 0
     curHp: 0
@@ -771,6 +773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData:
+    type: 0
     unitName: 
     maxHp: 0
     curHp: 0
@@ -1020,6 +1023,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4315e59e88d04d54eb26f303543745a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyLists:
+  - enemyIds: 0a0000000a0000000a000000
+  - enemyIds: 0a0000000b0000000c000000
+  enemySpawnPoint: []
+  eliteSpawnPoint: []
   totalCount: 0
 --- !u!4 &313917372
 Transform:
@@ -2048,6 +2056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData:
+    type: 0
     unitName: 
     maxHp: 0
     curHp: 0
@@ -2742,6 +2751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData:
+    type: 0
     unitName: 
     maxHp: 0
     curHp: 0
@@ -3458,6 +3468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData:
+    type: 0
     unitName: 
     maxHp: 0
     curHp: 0
