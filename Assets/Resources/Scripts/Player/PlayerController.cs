@@ -104,7 +104,6 @@ public class PlayerController : MonoBehaviour, IDataInitializable
                         moveInput?.Invoke(Vector2.zero);
                         if (context.performed)
                         {
-                            //Debug.Log(pressedKey);
                             SkillKeyDown(pressedKey, ModifierAtt);
                         }
                         else if (context.canceled)
@@ -119,11 +118,11 @@ public class PlayerController : MonoBehaviour, IDataInitializable
                 break;
 
             case "Jump":
-                jumpInput?.Invoke();
+                if (context.performed) jumpInput?.Invoke();
                 break;
 
             case "Interaction":
-                interaction?.Invoke();
+                if (context.performed) interaction?.Invoke();
                 break;
         }
     }

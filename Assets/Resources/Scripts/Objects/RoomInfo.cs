@@ -2,22 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public enum RoomType { Battle, EliteBattle, Shop, Heal, Boss, Treasure, Mimic, Puzzle }
-
-[System.Serializable]
-public class RoomInfo
+public class RoomInfo : PoolAble
 {
-    public int num;
-    public Sprite sprite;
-    public int weight;
-    public RoomType type;
-
-    public RoomInfo(RoomInfo info)
-    {
-        this.num = info.num;
-        this.sprite = info.sprite;
-        this.weight = info.weight;
-        this.type = info.type;
-    }
+    public List<int> enemyList = new List<int>();
+    public List<Transform> enemyPos = new List<Transform>();
+    public List<Transform> elitePos = new List<Transform>();
+    public Transform[] doorPos = new Transform[2];
 }

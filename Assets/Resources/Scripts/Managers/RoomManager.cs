@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField] private List<RoomInfo> rooms = new List<RoomInfo>();
+    [SerializeField] private List<DoorInfo> rooms = new List<DoorInfo>();
     [SerializeField] private int total;
 
     void Awake()
@@ -12,15 +12,14 @@ public class RoomManager : MonoBehaviour
         WeightInit();
     }
 
-    public void MakeRoom(Vector2 pos)
+    public void MakeDoor(Vector2 pos, bool boss = false)
     {
-        GameObject roomObj = GameManager.instance.objectPoolManager.GetGo("Room");
-        Room room = roomObj.GetComponent<Room>();
+        GameObject doorObj = GameManager.instance.objectPoolManager.GetGo("Room");
+        Door door = doorObj.GetComponent<Door>();
 
-        roomObj.transform.position = pos;
-
-        room.thisRoom = SetRoom();
-        room.Init();
+        doorObj.transform.position = pos;
+        door.thisRoom = boss ? SetDoor(true) : SetDoor();
+        door.Init();
     }
 
     private void WeightInit()
@@ -31,7 +30,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    private RoomInfo SetRoom()
+    private DoorInfo SetDoor(bool boss = false)
     {
         int weight = 0;
         int num = 0;
@@ -42,7 +41,7 @@ public class RoomManager : MonoBehaviour
             weight += rooms[i].weight;
             if (num <= weight)
             {
-                RoomInfo temp = new RoomInfo(rooms[i]);
+                DoorInfo temp = new DoorInfo(rooms[i]);
                 return temp;
             }
         }

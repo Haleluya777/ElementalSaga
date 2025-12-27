@@ -16,7 +16,9 @@ public class Interaction : MonoBehaviour, IDataInitializable
         if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
         {
             controller = parentObj.GetComponentInChildren<PlayerController>();
-            controller.interaction += Interaciton;
+            // 구독 전에 항상 이전 구독을 제거하여 중복을 방지합니다.
+            controller.interaction -= Interacte;
+            controller.interaction += Interacte;
         }
     }
 
@@ -24,13 +26,12 @@ public class Interaction : MonoBehaviour, IDataInitializable
     {
         if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
         {
-            controller.interaction -= Interaciton;
+            controller.interaction -= Interacte;
         }
     }
 
-    public void Interaciton()
+    public void Interacte()
     {
-        Debug.Log("상호작용 시도");
         RaycastHit2D hitted;
         if (hitted = Physics2D.BoxCast(parentObj.transform.position + new Vector3(0f, .5f), new Vector2(1, 1), 0, Vector2.zero, 0f, 1 << 9))
         {

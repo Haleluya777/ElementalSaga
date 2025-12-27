@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Profiling;
 using UnityEngine;
 
-public abstract class Unit : MonoBehaviour, IDamageable
+public abstract class Unit : PoolAble, IDamageable
 {
     [Serializable]
     public struct UnitData //유닛들의 모든 데이터.

@@ -34,8 +34,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("웨이브 종료");
             for (int i = 0; i < 2; i++)
             {
-                roomManager.MakeRoom(new Vector2(-2 + (i * 2), -1));
+                roomManager.MakeDoor(new Vector2(-1 + (i * 2), -1));
             }
+
         }
     }
 }

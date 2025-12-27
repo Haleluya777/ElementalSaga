@@ -18,4 +18,4 @@ MonoBehaviour:
   explanation: 
   reinforcedSkill: {fileID: 11400000, guid: 7d579c0b4e316a14fb33a25932e63f50, type: 2}
   basicSkill: {fileID: 11400000, guid: 658b89326825c084096b3e52b19c0324, type: 2}
-  flameBloodGage: 50
+  flameBloodGage: 0
