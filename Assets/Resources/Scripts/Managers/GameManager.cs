@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public DialogueRunner dialogueRunner;
     public CoroutineRunner coroutineRunner;
     public ObjectPoolManager objectPoolManager;
     public EventManager eventManager;

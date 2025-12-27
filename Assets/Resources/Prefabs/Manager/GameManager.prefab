@@ -414,6 +414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8655515003210742526}
+  - component: {fileID: 3085351009310456513}
   m_Layer: 0
   m_Name: Parser
   m_TagString: Untagged
@@ -436,6 +437,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7538656244849743884}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3085351009310456513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406744717253315515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ed0fe87c2f8d8469266f2e83983916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7842086574007931202
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +458,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1224993535346406069}
+  - component: {fileID: 5233821233548568442}
   m_Layer: 0
   m_Name: Runner
   m_TagString: Untagged
@@ -467,3 +481,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7538656244849743884}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5233821233548568442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842086574007931202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6280aa238b4cf204eabaf219812402e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
