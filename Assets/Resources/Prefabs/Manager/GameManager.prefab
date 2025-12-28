@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11bd16e7c6aefa4a86f3cb1f9402cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueRunner: {fileID: 5233821233548568442}
   coroutineRunner: {fileID: 4411978498289260415}
   objectPoolManager: {fileID: 5830188255516489707}
   eventManager: {fileID: 7412978915637958240}
@@ -493,3 +494,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6280aa238b4cf204eabaf219812402e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parser: {fileID: 3085351009310456513}
+  DialogueFile: {fileID: 0}
