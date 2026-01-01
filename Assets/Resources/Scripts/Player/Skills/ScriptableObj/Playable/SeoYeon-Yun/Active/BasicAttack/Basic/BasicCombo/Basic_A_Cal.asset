@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Basic_A_Cal
   m_EditorClassIdentifier: 
   baseDmg: 0
-  weight: 0
+  weight: 2

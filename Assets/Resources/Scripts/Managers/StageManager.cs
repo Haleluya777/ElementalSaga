@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class StageManager : MonoBehaviour
@@ -7,25 +8,61 @@ public class StageManager : MonoBehaviour
     //[SerializeField] private List<StageEnemyInfo> enemyList = new List<StageEnemyInfo>();
     [SerializeField] private List<int> enemyList = new List<int>();
     [SerializeField] private List<GameObject> roomObj = new List<GameObject>();
+    public int stage; //현재 스테이지 번호.
+
     public int currentRoomId; //currentRoom의 값은 Door클래스가 정해줌.
-    private GameObject currentRoom;
-    private RoomInfo currentRoomInfo;
+    [SerializeField] private GameObject currentRoom; //현재 플레이어가 위치한 방 오브젝트
+    [SerializeField] private RoomInfo currentRoomInfo; //현재 플레이어가 위치한 방의 방 정보 클래스
+
+    private int previousTotalCound;
     public int totalCount;
+
+    void Start()
+    {
+        StageStart();
+    }
+
+    void FixedUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            GiveAmends(currentRoomInfo);
+            StageClear();
+        }
+
+        if (previousTotalCound != totalCount)
+        {
+            if (totalCount == 0)
+            {
+                GiveAmends(currentRoomInfo);
+                StageClear();
+            }
+            previousTotalCound = totalCount;
+        }
+    }
 
     public void StageStart() //스테이지 시작할 때 등장할 몬스터 리스트 만들기.
     {
-        totalCount = enemyList.Count; //총 Enemy수.
+        if (stage == 0)
+        {
+            StageClear();
+            return;
+        }
 
         //방 프리팹 중 랜덤으로 하나 생성.
         if (currentRoom != null) //이전에 방을 생성했다면
         {
-            currentRoomInfo.ReleaseObject();
+            if (currentRoom.name == "StartRoom") currentRoom.SetActive(false);
+            else currentRoomInfo.ReleaseObject();
         }
         currentRoom = GameManager.instance.objectPoolManager.GetGo(roomObj[currentRoomId].name);
         currentRoomInfo = currentRoom.GetComponent<RoomInfo>();
 
         currentRoom.SetActive(true);
         currentRoom.transform.position = new Vector2(0, 0);
+
+        totalCount = currentRoomInfo.enemyList.Count; //총 Enemy수.
+        previousTotalCound = totalCount;
 
         //Enemy소환.
         foreach (var enemyId in currentRoomInfo.enemyList)
@@ -34,7 +71,7 @@ public class StageManager : MonoBehaviour
             GameObject enemy = GameManager.instance.objectPoolManager.GetGo("Unit");
             EnemyCharacter enemyCom = enemy.GetComponent<EnemyCharacter>();
 
-            Debug.Log(enemyCom is null);
+            //Debug.Log(enemyCom is null);
 
             enemyCom.id = enemyId;
             enemy.name = enemyCom.name;
@@ -53,13 +90,16 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    public void GiveAmends()
+    public void GiveAmends(RoomInfo roomInfo)
     {
         //보상 UI어쩌고저쩌고
+        GameManager.instance.canvasManager.ActiveAmendPanel(roomInfo);
     }
 
     public void StageClear(bool boss = false)
     {
+        if (totalCount > 0) return;
+
         if (boss)
         {
             Debug.Log("보스방 생성");
@@ -71,5 +111,6 @@ public class StageManager : MonoBehaviour
         {
             GameManager.instance.roomManager.MakeDoor(currentRoomInfo.doorPos[i].position);
         }
+        stage++;
     }
 }

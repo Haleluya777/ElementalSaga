@@ -12,6 +12,22 @@ public class Door : PoolAble, IInteractable
         this.GetComponent<SpriteRenderer>().sprite = thisRoom.sprite;
     }
 
+    void OnEnable()
+    {
+        if (GameManager.instance is not null)
+        {
+            GameManager.instance.eventManager.SelectDoor += ReleaseObject;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (GameManager.instance is not null)
+        {
+            GameManager.instance.eventManager.SelectDoor -= ReleaseObject;
+        }
+    }
+
     public void Interaction()
     {
         switch (thisRoom.type)
@@ -64,5 +80,7 @@ public class Door : PoolAble, IInteractable
                 GameManager.instance.stageManager.StageStart();
                 break;
         }
+        GameManager.instance.stageManager.stage++;
+        GameManager.instance.eventManager.ReleaseDoor();
     }
 }

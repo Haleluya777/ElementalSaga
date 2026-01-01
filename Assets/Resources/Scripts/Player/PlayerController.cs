@@ -122,7 +122,11 @@ public class PlayerController : MonoBehaviour, IDataInitializable
                 break;
 
             case "Interaction":
-                if (context.performed) interaction?.Invoke();
+                if (context.performed)
+                {
+                    interaction?.Invoke();
+                    Debug.Log("상호작용 시도");
+                }
                 break;
         }
     }

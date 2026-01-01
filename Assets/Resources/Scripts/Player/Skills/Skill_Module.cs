@@ -106,7 +106,7 @@ public class Skill_Module : ScriptableObject
 
     public void ProccessPassive(ISkillCaster caster) //패시브 스킬 사용.
     {
-        Debug.Log("패시브 스킬 사용");
+        //Debug.Log("패시브 스킬 사용");
         foreach (var skill in new List<SkillBase>(passiveSkills))
         {
             skill.UseSkill(caster); //패시브 스킬들은 계속 실행되어야 함.

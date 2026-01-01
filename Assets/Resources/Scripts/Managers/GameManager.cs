@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public EventManager eventManager;
     public RoomManager roomManager;
     public StageManager stageManager;
+    public CanvasManager canvasManager;
+    public UnitManager unitManager; //현재 조종 중인 현재 플레이어 유닛에 관련된 매니저.
 
     private void Awake()
     {
@@ -26,6 +28,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        foreach (var init in GetComponentsInChildren<IDataInitializable>())
+        {
+            init.DataInit();
+        }
     }
 
     void Update()
@@ -35,9 +42,13 @@ public class GameManager : MonoBehaviour
             Debug.Log("웨이브 종료");
             for (int i = 0; i < 2; i++)
             {
-                roomManager.MakeDoor(new Vector2(-1 + (i * 2), -1));
+                //stageManager.GiveAmends();
             }
+        }
 
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            dialogueRunner.ProccessNextLine();
         }
     }
 }

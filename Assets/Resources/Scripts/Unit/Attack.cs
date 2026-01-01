@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializable
 {
@@ -23,6 +24,9 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     [Header("특정 조건을 만족하면 자동으로 사용되는 패시브 스킬")]
     [SerializeField] private List<Skill_Module> passiveSkills = new List<Skill_Module>();
 
+    [Header("유물 효과들")]
+    [SerializeField] private List<Skill_Module> relicPowers = new List<Skill_Module>();
+
     [Header("맞을 때 실행할 효과들")]
     //맞을 때 실행할 효과들은 공격자의 정보가 필요한 경우도 존재하므로, 새로운 클래스를 만들어 사용.
     [SerializeField] private List<DamagedEventBase> hitEvents = new List<DamagedEventBase>();
@@ -37,6 +41,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     public List<Skill_Module> ActiveSkills { get => activeSkills; set => activeSkills = value; }
     public List<Skill_Module> ModifiedActiveSkills { get => modifiedActiveSkills; set => modifiedActiveSkills = value; }
     public List<Skill_Module> PassiveSkills { get => passiveSkills; set => passiveSkills = value; }
+    public List<Skill_Module> RelicPowers { get => relicPowers; set => relicPowers = value; }
     public List<DamagedEventBase> HitEvents { get => hitEvents; set => hitEvents = value; }
 
     void Update()

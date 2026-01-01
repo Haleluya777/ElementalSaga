@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 7814932733407216218}
   - component: {fileID: 2184660296811781551}
   - component: {fileID: 6907170980835293018}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6463786194084290079}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlatForms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,6 +345,19 @@ MonoBehaviour:
   doorPos:
   - {fileID: 5038715390192759813}
   - {fileID: 8369742875132282321}
+  RelicWeights:
+    _serializedList:
+    - Key: 1
+      Value: 20
+    - Key: 2
+      Value: 0
+    - Key: 3
+      Value: 0
+    - Key: 4
+      Value: 0
+    - Key: 5
+      Value: 0
+  relicMap: {fileID: 11400000, guid: f5edbb310f047f84e998c96c0cd581d2, type: 2}
 --- !u!1 &3823192249091736733
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +370,7 @@ GameObject:
   - component: {fileID: 1247874216995553126}
   - component: {fileID: 2952722564710747521}
   - component: {fileID: 6818482245142565252}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,7 +654,7 @@ GameObject:
   - component: {fileID: 244743996500616358}
   - component: {fileID: 7116151401041135736}
   - component: {fileID: 2680933744056526365}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -799,7 +812,7 @@ GameObject:
   - component: {fileID: 3021858323375549638}
   - component: {fileID: 2226640969184224004}
   - component: {fileID: 6726109189770812059}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

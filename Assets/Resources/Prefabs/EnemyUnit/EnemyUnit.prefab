@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2025510394478418220}
   - component: {fileID: 4854126033296319487}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Movement
   m_TagString: Playable
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4907610793899808461}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: CatchPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8494738562592685444}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: AI
   m_TagString: Playable
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5018514375087378156}
   - component: {fileID: 355719493413752523}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Attack
   m_TagString: Playable
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 35082505536634534}
   - component: {fileID: 7637936340051212790}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Interaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 3731252802714915655}
   - component: {fileID: 948411803333833783}
   - component: {fileID: 7867314018917231715}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Playable
   m_TagString: Playable
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 702647385951371248}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: BehaviorManager
   m_TagString: Playable
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1730192531929270445}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: HitBoxPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,9 +371,9 @@ GameObject:
   - component: {fileID: 680626970780420500}
   - component: {fileID: 6175166969586863343}
   - component: {fileID: -4536389143866271814}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: EnemyUnit
-  m_TagString: Playable
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

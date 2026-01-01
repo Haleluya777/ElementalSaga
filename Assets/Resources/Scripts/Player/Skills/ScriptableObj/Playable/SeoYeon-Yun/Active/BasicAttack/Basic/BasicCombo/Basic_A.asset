@@ -16,8 +16,8 @@ MonoBehaviour:
   targetObj: {fileID: 0}
   animName: 
   explanation: 
-  GroundhitBoxOffset: {x: 0, y: 0}
-  GroundhitBoxSize: {x: 0, y: 0}
+  GroundhitBoxOffset: {x: 0, y: 0.5}
+  GroundhitBoxSize: {x: 1, y: 1}
   AirialhitBoxOffset: {x: 0, y: 0}
   AirialhitBoxSize: {x: 0, y: 0}
   groundAnimName: BasicAttack_0

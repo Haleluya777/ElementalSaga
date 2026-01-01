@@ -19,8 +19,9 @@ public class DialogueParser : MonoBehaviour
 {
     public struct ParsedLine
     {
-        public string Actor;
+        public string Action;
         public string Detail;
+        public string Actor;
         public int LineNum;
     }
 
@@ -46,13 +47,14 @@ public class DialogueParser : MonoBehaviour
             for (int j = 0; j < parts.Count; j++)
             {
                 parts[j] = parts[j].Trim();
-                //Debug.Log(parts[j]);
+                Debug.Log(parts[j]);
             }
 
             ParsedLine parsedLine = new ParsedLine
             {
-                Actor = parts[0],
+                Action = parts[0],
                 Detail = parts[1],
+                Actor = parts[2],
                 LineNum = i
             };
 

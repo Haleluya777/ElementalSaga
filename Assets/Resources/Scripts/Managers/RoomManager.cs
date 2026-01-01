@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class RoomManager : MonoBehaviour
+public class RoomManager : MonoBehaviour, IDataInitializable
 {
     [SerializeField] private List<DoorInfo> rooms = new List<DoorInfo>();
     [SerializeField] private int total;
 
     void Awake()
     {
-        WeightInit();
+        //WeightInit();
     }
 
+    public void DataInit()
+    {
+        WeightInit();
+    }
     public void MakeDoor(Vector2 pos, bool boss = false)
     {
         GameObject doorObj = GameManager.instance.objectPoolManager.GetGo("Room");

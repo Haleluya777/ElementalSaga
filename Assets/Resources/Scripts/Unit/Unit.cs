@@ -114,7 +114,7 @@ public abstract class Unit : PoolAble, IDamageable
     public virtual void Dead(ISkillCaster attacker)
     {
         //사망 시 적용되는 이벤트 실행
-        GameManager.instance.eventManager.ReportDead(attacker);
+        GameManager.instance.eventManager.ReportDead(attacker, this.gameObject);
         Debug.Log("사망!");
         this.gameObject.SetActive(false);
     }

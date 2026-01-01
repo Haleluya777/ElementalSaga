@@ -26,8 +26,8 @@ public class DialogueRunner : MonoBehaviour, IDataInitializable
 
     public void RunDialogue()
     {
-        parser.Parse(DialogueFile.text);
-        ProccessNextLine();
+        scriptLines = parser.Parse(DialogueFile.text);
+        //ProccessNextLine();
     }
 
     public void EndDialogue()
@@ -35,8 +35,9 @@ public class DialogueRunner : MonoBehaviour, IDataInitializable
         Debug.Log("대화 종료.");
     }
 
-    private void ProccessNextLine()
+    public void ProccessNextLine()
     {
+        if (currentLineNum == 0) RunDialogue();
         if (scriptLines.Count <= currentLineNum)
         {
             EndDialogue();
@@ -45,11 +46,25 @@ public class DialogueRunner : MonoBehaviour, IDataInitializable
 
         DialogueParser.ParsedLine line = scriptLines[currentLineNum];
 
-        RunningDialogue(line);
+        switch (line.Action)
+        {
+            case "T":
+                RunningDialogue(line);
+                break;
+
+            default:
+                currentLineNum++;
+                ProccessNextLine();
+                break;
+        }
+
+
+        currentLineNum++;
     }
 
     private void RunningDialogue(DialogueParser.ParsedLine line)
     {
         if (line.Detail.Contains("\\n")) line.Detail = line.Detail.Replace("\\n", "\n");
+        Debug.Log(line.Detail);
     }
 }
