@@ -8,6 +8,7 @@ public class EventManager : MonoBehaviour
     public event Action<ISkillCaster> DeadEvent;
     public event Action SelectDoor;
     public event Action ReleaseAllRelicButton;
+    public event Action<string[]> InitChar;
 
     public void ReportDead(ISkillCaster attacker, GameObject deadObj)
     {
@@ -24,5 +25,11 @@ public class EventManager : MonoBehaviour
     {
         ReleaseAllRelicButton?.Invoke();
         GameManager.instance.canvasManager.amendPanel.SetActive(false);
+    }
+
+    public void InitDialogueCharacter(string[] name)
+    {
+        Debug.Log("등장인물 초기화");
+        InitChar?.Invoke(name);
     }
 }

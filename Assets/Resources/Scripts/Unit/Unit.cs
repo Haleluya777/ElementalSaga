@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using Unity.Profiling;
 using UnityEngine;
 
@@ -87,16 +89,33 @@ public abstract class Unit : PoolAble, IDamageable
     public Dictionary<string, Coroutine> activeEffectCoroutines = new Dictionary<string, Coroutine>(); //상태이상 지속을 돕는 코루틴.
     private Coroutine newCorutine;
     public bool isAirial;
+    [SerializeField] private GameObject textBox; //이 유닛의 말풍선에 사용할 텍스트 박스.
     //public UnitData currentStats;
-
-    void FixedUpdate()
-    {
-
-    }
 
     void OnEnable()
     {
         //currentStats = unitData;
+        if (GameManager.instance is not null)
+        {
+            GameManager.instance.eventManager.InitChar += SetUnitInDialogue;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (GameManager.instance is not null)
+        {
+            GameManager.instance.eventManager.InitChar -= SetUnitInDialogue;
+        }
+    }
+
+    public void SetUnitInDialogue(string[] name)
+    {
+        if (name.Contains(this.gameObject.name))
+        {
+            Debug.Log(this.gameObject.name);
+            GameManager.instance.dialogueRunner.DialogueTextDic.Add(this.gameObject.name, textBox.GetComponentInChildren<TextMeshProUGUI>());
+        }
     }
 
     public void TakeDamage(int dmg, ISkillCaster attacker, GameObject character)

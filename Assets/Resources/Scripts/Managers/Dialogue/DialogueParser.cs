@@ -47,7 +47,7 @@ public class DialogueParser : MonoBehaviour
             for (int j = 0; j < parts.Count; j++)
             {
                 parts[j] = parts[j].Trim();
-                Debug.Log(parts[j]);
+                //Debug.Log(parts[j]);
             }
 
             ParsedLine parsedLine = new ParsedLine
