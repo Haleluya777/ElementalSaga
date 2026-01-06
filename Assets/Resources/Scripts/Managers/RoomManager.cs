@@ -17,6 +17,7 @@ public class RoomManager : MonoBehaviour, IDataInitializable
     {
         WeightInit();
     }
+
     public void MakeDoor(Vector2 pos, bool boss = false)
     {
         GameObject doorObj = GameManager.instance.objectPoolManager.GetGo("Room");
@@ -25,6 +26,15 @@ public class RoomManager : MonoBehaviour, IDataInitializable
         doorObj.transform.position = pos;
         door.thisRoom = boss ? SetDoor(true) : SetDoor();
         door.Init();
+    }
+
+    public void MakeAmendChest(AmendChest.ChestTier tier, Vector2 pos, List<RelicInfo> confirmedRelics, bool boss = false)
+    {
+        GameObject chestObj = GameManager.instance.objectPoolManager.GetGo("AmendChest");
+        AmendChest chest = chestObj.GetComponent<AmendChest>();
+
+        chestObj.transform.position = pos;
+        chest.ChestInit(tier, confirmedRelics);
     }
 
     private void WeightInit()

@@ -15,7 +15,7 @@ public class SlamDown_Dash : SkillBase
     public override bool UseSkill(ISkillCaster caster)
     {
         Transform casterTransform = caster.GetGameObject().transform;
-        RaycastHit2D enemyHitted = Physics2D.Raycast(new Vector2(caster.GetPosition().x, caster.GetPosition().y + .5f), caster.GetDirection(), dashDistance, 1 << 6);
+        RaycastHit2D enemyHitted = Physics2D.Raycast(caster.GetPosition(), caster.GetDirection(), dashDistance, 1 << 6);
         GameObject enemy = null;
 
         //돌진 범위 설정 (50미만 : 3f, 50이상 100미만 : 1.5f, 100 : 0, 돌진없음)

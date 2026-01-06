@@ -30,7 +30,7 @@ public class SlamDown_Jump : SkillBase
         else //아닐 경우.
         {
             Debug.Log("목표 없음");
-            target = caster.GetGameObject().transform.position + new Vector3(2f, 0);
+            target = caster.GetGameObject().transform.position + new Vector3(2f * caster.GetDirection().x, 0);
         }
 
         Vector2 startPos = caster.GetGameObject().transform.position;
@@ -49,7 +49,7 @@ public class SlamDown_Jump : SkillBase
 
         while (true)
         {
-            hit = Physics2D.Raycast(caster.GetGameObject().transform.position, Vector2.down, 0.1f, 1 << 3);
+            hit = Physics2D.Raycast(caster.GetPosition(), Vector2.down, 0.6f, 1 << 3);
             if (hit.collider == null)
             {
                 break;
@@ -59,7 +59,7 @@ public class SlamDown_Jump : SkillBase
 
         while (true)
         {
-            hit = Physics2D.Raycast(caster.GetGameObject().transform.position, Vector2.down, 0.1f, 1 << 3);
+            hit = Physics2D.Raycast(caster.GetPosition(), Vector2.down, 0.6f, 1 << 3);
             if (hit.collider != null)
             {
                 targetObj.GetComponentInChildren<IDamageable>().TakeDamage(dmgCalculater.Calculate(caster), caster, targetObj);

@@ -116,7 +116,7 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
     private void CheckingGround()
     {
         // 지상 판정을 위한 박스캐스트
-        RaycastHit2D hit = Physics2D.BoxCast(parentObj.transform.position, new Vector2(.5f, .1f), 0, Vector2.down, .1f, 1 << 3);
+        RaycastHit2D hit = Physics2D.BoxCast(parentObj.transform.position, new Vector2(.5f, .1f), 0, Vector2.down, 1f, 1 << 3);
         if (hit.collider != null)
         {
             if (unit.isAirial) // 공중에 있다가 처음 땅에 닿는 순간

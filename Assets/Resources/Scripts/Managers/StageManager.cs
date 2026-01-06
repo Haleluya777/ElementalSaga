@@ -16,6 +16,7 @@ public class StageManager : MonoBehaviour
 
     private int previousTotalCound;
     public int totalCount;
+    public int amendCount; //줄 보상의 개수
 
     void Start()
     {
@@ -26,7 +27,7 @@ public class StageManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            GiveAmends(currentRoomInfo);
+            //GiveAmends(currentRoomInfo);
             StageClear();
         }
 
@@ -34,7 +35,7 @@ public class StageManager : MonoBehaviour
         {
             if (totalCount == 0)
             {
-                GiveAmends(currentRoomInfo);
+                //GiveAmends(currentRoomInfo);
                 StageClear();
             }
             previousTotalCound = totalCount;
@@ -93,7 +94,7 @@ public class StageManager : MonoBehaviour
     public void GiveAmends(RoomInfo roomInfo)
     {
         //보상 UI어쩌고저쩌고
-        GameManager.instance.canvasManager.ActiveAmendPanel(roomInfo);
+        //GameManager.instance.canvasManager.ActiveAmendPanel(roomInfo);
     }
 
     public void StageClear(bool boss = false)
@@ -111,6 +112,9 @@ public class StageManager : MonoBehaviour
         {
             GameManager.instance.roomManager.MakeDoor(currentRoomInfo.doorPos[i].position);
         }
+
+        //보상 상자 생성.
+        GameManager.instance.roomManager.MakeAmendChest(currentRoomInfo.SetChestTier(), new Vector2(0, -1), currentRoomInfo.confirmedRelics);
         stage++;
     }
 }

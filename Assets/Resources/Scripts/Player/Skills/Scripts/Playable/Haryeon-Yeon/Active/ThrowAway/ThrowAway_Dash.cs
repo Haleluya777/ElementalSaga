@@ -13,8 +13,10 @@ public class ThrowAway_Dash : SkillBase
 
     public override bool UseSkill(ISkillCaster caster)
     {
+        //Debug.Log("돌진");
         Transform casterTransform = caster.GetGameObject().transform;
-        RaycastHit2D enemyHitted = Physics2D.Raycast(new Vector2(caster.GetPosition().x, caster.GetPosition().y + .5f), caster.GetDirection(), dashDistance, 1 << 6);
+        //RaycastHit2D enemyHitted = Physics2D.Raycast(new Vector2(caster.GetPosition().x, caster.GetPosition().y + .5f), caster.GetDirection(), dashDistance, 1 << 6);
+        RaycastHit2D enemyHitted = Physics2D.Raycast(caster.GetPosition(), caster.GetDirection(), dashDistance, 1 << 6);
         GameObject enemy = null;
 
         float direction = Mathf.Sign(casterTransform.localScale.x);
@@ -25,15 +27,15 @@ public class ThrowAway_Dash : SkillBase
 
         if (enemyHitted.collider != null) //돌진 범위 내에 적이 존재할 때.
         {
-            target = new Vector2(enemyHitted.point.x, caster.GetGameObject().transform.position.y);
-            target_Throw = new Vector2(target.x + 1f, caster.GetGameObject().transform.position.y);
+            target = new Vector2(enemyHitted.point.x, caster.GetPosition().y);
+            target_Throw = new Vector2(target.x + (1f * (target - caster.GetPosition()).normalized.x), caster.GetPosition().y);
             Debug.Log(target_Throw);
             enemy = enemyHitted.collider.gameObject;
         }
 
         else //돌진 범위 내에 적이 없을 때.
         {
-            target = new Vector2(targetX, caster.GetGameObject().transform.position.y);
+            target = new Vector2(targetX, caster.GetPosition().y);
         }
 
         GameManager.instance.coroutineRunner.StartRunnerCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), casterTransform, target, target_Throw, enemy));
@@ -73,6 +75,7 @@ public class ThrowAway_Dash : SkillBase
             //앞으로 살짝 전진하는 부분.
             caster.PlayAnimation(throwAnim);
             enemyUnit.AddEffectProcess(new DeBuff_Catched(100f, enemyUnit, 0, "Catched", caster.GetGameObject(), caster.GetGameObject().transform));
+
             while (((Vector2)target_Throw - rigid.position).magnitude > minSqrDistance)
             {
                 if (Physics2D.Raycast(new Vector2(caster.GetGameObject().transform.position.x, caster.GetGameObject().transform.position.y + .5f), Vector2.right * caster.GetGameObject().transform.localScale.x, .75f, 1 << 3))
@@ -87,8 +90,8 @@ public class ThrowAway_Dash : SkillBase
 
                 yield return new WaitForFixedUpdate();
             }
-            yield return null;
 
+            yield return new WaitForSeconds(.03f);
             if (enemyUnit.activeEffect.TryGetValue("Catched", out StatusEffectBase exisitngEffect))
             {
                 if (enemyUnit.activeEffectCoroutines.TryGetValue("Catched", out Coroutine runningCoroutine))
@@ -99,7 +102,6 @@ public class ThrowAway_Dash : SkillBase
                 //적용 되어 있는 상태이상 또한 제거.
                 exisitngEffect.RemoveEffect();
             }
-
             enemyUnit.AddEffectProcess(new DeBuff_Throwed(100f, enemyUnit, 0, "Throwed", caster, 5f, chainedSkill, caster.GetDirection()));
         }
 

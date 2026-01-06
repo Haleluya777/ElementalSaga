@@ -81,6 +81,7 @@ public class DialogueRunner : MonoBehaviour, IDataInitializable
 
     private void RunningDialogue(DialogueParser.ParsedLine line)
     {
+        DialogueTextDic.ContainsValue(DialogueText);
         if (line.Detail.Contains("\\n")) line.Detail = line.Detail.Replace("\\n", "\n");
         //Debug.Log(line.Detail);
         DialogueText = DialogueTextDic[line.Actor];

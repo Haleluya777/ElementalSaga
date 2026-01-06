@@ -350,13 +350,13 @@ MonoBehaviour:
     - Key: 1
       Value: 20
     - Key: 2
-      Value: 0
+      Value: 20
     - Key: 3
-      Value: 0
+      Value: 20
     - Key: 4
-      Value: 0
+      Value: 20
     - Key: 5
-      Value: 0
+      Value: 20
   relicMap: {fileID: 11400000, guid: f5edbb310f047f84e998c96c0cd581d2, type: 2}
 --- !u!1 &3823192249091736733
 GameObject:

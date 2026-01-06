@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmgCalculater: {fileID: 11400000, guid: 09ec66a83ba100449b7ecbb9615eee51, type: 2}
   targetObj: {fileID: 0}
+  animName: SlamDown
   explanation: 
   explosion: {fileID: 11400000, guid: 99b9f01a521db804eac4ac3823c2c2b0, type: 2}
   distance: 5

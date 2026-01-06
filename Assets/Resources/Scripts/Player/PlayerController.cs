@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour, IDataInitializable
 
         if (attack == null || attNum >= attack.ActiveSkills.Count) return;
         var skill = !modifier ? attack.ActiveSkills[attNum] : attack.ModifiedActiveSkills[attNum];
-        Debug.Log(skill.name);
+        //Debug.Log(skill.name);
 
         if (skill.activeType == Skill_Module.ActiveType.OnDown) //단발성 스킬
         {

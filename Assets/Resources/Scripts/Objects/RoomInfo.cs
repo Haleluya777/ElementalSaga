@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using AYellowpaper.SerializedCollections;
 using Unity.VisualScripting;
+using Cinemachine;
 
 public class RoomInfo : PoolAble
 {
@@ -18,39 +19,37 @@ public class RoomInfo : PoolAble
     [Header("스테이지 클리어 후 다음 스테이지로 진행하게 하는 문이 등장할 위치.")]
     public Transform[] doorPos = new Transform[2];
 
-    [Header("해당 스테이지에서 보상으로 등장할 유물 번호와 등장 가중치")]
-    public SerializedDictionary<int, int> RelicWeights = new SerializedDictionary<int, int>();
+    [Header("해당 스테이지에서 등장할 보상 상자와 등장 가중치")]
+    public SerializedDictionary<AmendChest.ChestTier, int> ChestWeights = new SerializedDictionary<AmendChest.ChestTier, int>();
 
-    [Header("모든 유물 맵")]
-    [SerializeField] private Relic_Dic relicMap;
+    [Header("해당 스테이지에서 확정적으로 등장할 유물 리스트")]
+    public List<RelicInfo> confirmedRelics = new List<RelicInfo>();
 
     private int SetTotalWeight()
     {
         int total = 0;
-        foreach (var relic in RelicWeights)
+        foreach (var chest in ChestWeights)
         {
-            total += relic.Value;
+            total += chest.Value;
         }
         return total;
     }
 
-    public RelicInfo SetRelic()
+    public AmendChest.ChestTier SetChestTier()
     {
         int total = SetTotalWeight();
         int weight = 0;
         int num;
 
         num = Random.Range(0, total) + 1;
-
-        for (int i = 1; i <= RelicWeights.Count; i++)
+        foreach (var chest in ChestWeights)
         {
-            weight += RelicWeights[i];
+            weight += chest.Value;
             if (num <= weight)
             {
-                RelicInfo temp = relicMap.relic[i];
-                return temp;
+                return chest.Key;
             }
         }
-        return null;
+        return AmendChest.ChestTier.Bronze;
     }
 }

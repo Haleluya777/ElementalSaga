@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmgCalculater: {fileID: 11400000, guid: 8e766981311f59948aaa49886890069e, type: 2}
   targetObj: {fileID: 0}
+  animName: ThrowAway
   explanation: 
   hitBoxOffset: {x: 0, y: 0}
   hitBoxSize: {x: 0, y: 0}

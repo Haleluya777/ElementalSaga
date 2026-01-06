@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmgCalculater: {fileID: 0}
   targetObj: {fileID: 0}
+  animName: ThrowAway_Dash
   explanation: 
   chainedSkill_Jump: {fileID: 11400000, guid: 3ac131b6147f91546b65599784c1af67, type: 2}
   chainedSkill_FirePunch: {fileID: 11400000, guid: acb7b1e6f98787047b9dc39d7e5038f0, type: 2}

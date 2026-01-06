@@ -152,6 +152,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     public bool PerformAttack(Skill_Module skill)
     {
         //if (attNum == -1) return false;
+        Debug.Log("하하");
         rigid.velocity = new Vector2(0, rigid.velocity.y);
         if (unit.isAirial) //공중에서 스킬을 쓸 때.
         {
