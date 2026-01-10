@@ -38,6 +38,7 @@ public class DialogueRunner : MonoBehaviour, IDataInitializable
 
     public void EndDialogue()
     {
+        DialogueText.transform.parent.gameObject.SetActive(false);
         Debug.Log("대화 종료.");
     }
 
@@ -81,10 +82,17 @@ public class DialogueRunner : MonoBehaviour, IDataInitializable
 
     private void RunningDialogue(DialogueParser.ParsedLine line)
     {
-        DialogueTextDic.ContainsValue(DialogueText);
-        if (line.Detail.Contains("\\n")) line.Detail = line.Detail.Replace("\\n", "\n");
-        //Debug.Log(line.Detail);
-        DialogueText = DialogueTextDic[line.Actor];
+        if (line.Detail.Contains("\\n")) line.Detail = line.Detail.Replace("\\n", "\n"); //줄바꿈 처리.
+
+        //이미 활성화 된 말풍선이 있으면 현재 말풍선 비활성화.
+        if (DialogueText is not null && DialogueText != DialogueTextDic[line.Actor])
+        {
+            DialogueText.transform.parent.gameObject.SetActive(false);
+        }
+
+        if (DialogueText != DialogueTextDic[line.Actor]) DialogueText = DialogueTextDic[line.Actor];
+        if (!DialogueText.transform.parent.gameObject.activeSelf) DialogueText.transform.parent.gameObject.SetActive(true);
+
         StartCoroutine(TypingTxt(line.Detail));
     }
 

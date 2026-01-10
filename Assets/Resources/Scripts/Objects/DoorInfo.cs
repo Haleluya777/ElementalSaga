@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum DoorType { Battle, EliteBattle, Shop, Heal, Boss, Treasure, Mimic, Puzzle }
+public enum RoomType { Battle, EliteBattle, Shop, Heal, Boss, Treasure, Mimic, Puzzle, StartRoom }
 
 [System.Serializable]
 public class DoorInfo
@@ -11,7 +11,7 @@ public class DoorInfo
     public int num;
     public Sprite sprite;
     public int weight;
-    public DoorType type;
+    public RoomType type;
 
     public DoorInfo(DoorInfo info)
     {

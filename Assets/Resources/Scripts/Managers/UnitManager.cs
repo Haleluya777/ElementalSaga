@@ -8,8 +8,12 @@ public class UnitManager : MonoBehaviour, IDataInitializable
     private Unit unit;
     private IAttackable unitAttack;
 
+    [Header("플레이어의 돈 잔량")]
+    public int money;
+
     public void DataInit()
     {
+        money = 100;
         unit = PlayerUnit.GetComponent<Unit>();
         unitAttack = unit.GetComponentInChildren<IAttackable>();
     }

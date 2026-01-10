@@ -21,83 +21,23 @@ public class AmendChest : PoolAble, IInteractable
         if (confirmedRelicList is not null)
         {
             relics = confirmedRelicList;
-            relicCount -= confirmedRelicList.Count;
+            relicCount = relicCount - confirmedRelicList.Count > 0 ? relicCount - confirmedRelicList.Count : 0;
         }
 
         switch (_tier)
         {
             case ChestTier.Bronze:
-                relics.AddRange(SetRelics(bronzeRelics, relicCount));
+                relics.AddRange(bronzeRelics.GetRandomRelicList(relicCount));
                 break;
 
             case ChestTier.Silver:
-                relics.AddRange(SetRelics(silverRelics, relicCount));
+                relics.AddRange(silverRelics.GetRandomRelicList(relicCount));
                 break;
 
             case ChestTier.Gold:
-                relics.AddRange(SetRelics(goldRelics, relicCount));
+                relics.AddRange(goldRelics.GetRandomRelicList(relicCount));
                 break;
         }
-    }
-
-    virtual public List<RelicInfo> SetRelics(BronzeRankRelics relicDic, int _count)
-    {
-        List<RelicInfo> _relics = new List<RelicInfo>();
-        List<RelicInfo> random = new List<RelicInfo>();
-        int count = _count;
-
-        foreach (var relic in relicDic.relic.Values)
-        {
-            random.Add(relic);
-        }
-
-        for (int i = 0; i < count; i++)
-        {
-            RelicInfo relic = random[Random.Range(0, relicDic.relic.Count)];
-            _relics.Add(relic);
-            random.Remove(relic);
-        }
-        return _relics;
-    }
-
-    public List<RelicInfo> SetRelics(SilverRankRelics relicDic, int _count)
-    {
-        List<RelicInfo> _relics = new List<RelicInfo>();
-        List<RelicInfo> random = new List<RelicInfo>();
-        int count = _count;
-
-        foreach (var relic in relicDic.relic.Values)
-        {
-            random.Add(relic);
-        }
-
-        for (int i = 0; i < count; i++)
-        {
-            RelicInfo relic = random[Random.Range(0, relicDic.relic.Count)];
-            _relics.Add(relic);
-            random.Remove(relic);
-        }
-        return _relics;
-    }
-
-    public List<RelicInfo> SetRelics(GoldRankRelics relicDic, int _count)
-    {
-        List<RelicInfo> _relics = new List<RelicInfo>();
-        List<RelicInfo> random = new List<RelicInfo>();
-        int count = _count;
-
-        foreach (var relic in relicDic.relic.Values)
-        {
-            random.Add(relic);
-        }
-
-        for (int i = 0; i < count; i++)
-        {
-            RelicInfo relic = random[Random.Range(0, relicDic.relic.Count)];
-            _relics.Add(relic);
-            random.Remove(relic);
-        }
-        return _relics;
     }
 
     public void Interaction()

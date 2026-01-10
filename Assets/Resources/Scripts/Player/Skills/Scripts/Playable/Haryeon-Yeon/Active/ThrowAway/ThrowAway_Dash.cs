@@ -9,7 +9,8 @@ public class ThrowAway_Dash : SkillBase
     [SerializeField] private SkillBase chainedSkill;
     [SerializeField] private float dashDistance = 2f; // 대쉬 거리
 
-    [SerializeField] private string throwAnim;
+    [SerializeField] private string secondDashAnim; //두번째 살짝 대쉬 할 때 사용할 애니메이션.
+    [SerializeField] private string throwAnim; //던지기 애니메이션.
 
     public override bool UseSkill(ISkillCaster caster)
     {
@@ -72,10 +73,11 @@ public class ThrowAway_Dash : SkillBase
         if (enemy != null)
         {
             enemyUnit = enemy.GetComponent<Unit>();
-            //앞으로 살짝 전진하는 부분.
-            caster.PlayAnimation(throwAnim);
-            enemyUnit.AddEffectProcess(new DeBuff_Catched(100f, enemyUnit, 0, "Catched", caster.GetGameObject(), caster.GetGameObject().transform));
+            //Enemy를 잡은 뒤 두 번째 대쉬 애니메이션 실행.
+            enemyUnit.AddEffectProcess(new DeBuff_Catched(100f, enemyUnit, 0, "Catched", caster.GetGameObject(), caster.GetCatchPos()));
+            caster.PlayAnimation(secondDashAnim);
 
+            //두 번째 대쉬 실행.
             while (((Vector2)target_Throw - rigid.position).magnitude > minSqrDistance)
             {
                 if (Physics2D.Raycast(new Vector2(caster.GetGameObject().transform.position.x, caster.GetGameObject().transform.position.y + .5f), Vector2.right * caster.GetGameObject().transform.localScale.x, .75f, 1 << 3))
@@ -90,8 +92,11 @@ public class ThrowAway_Dash : SkillBase
 
                 yield return new WaitForFixedUpdate();
             }
+            //두 번째 대쉬가 끝난 뒤 한프레임 쉬고 던지기 애니메이션 실행.
+            yield return null;
+            caster.PlayAnimation(throwAnim);
+            yield return new WaitForSeconds(4f * (1f / 30f));
 
-            yield return new WaitForSeconds(.03f);
             if (enemyUnit.activeEffect.TryGetValue("Catched", out StatusEffectBase exisitngEffect))
             {
                 if (enemyUnit.activeEffectCoroutines.TryGetValue("Catched", out Coroutine runningCoroutine))

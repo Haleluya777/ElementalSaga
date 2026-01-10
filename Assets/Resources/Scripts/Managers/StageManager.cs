@@ -42,7 +42,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    public void StageStart() //스테이지 시작할 때 등장할 몬스터 리스트 만들기.
+    public void StageStart(RoomType roomType = RoomType.StartRoom) //스테이지 시작할 때 등장할 몬스터 리스트 만들기.
     {
         if (stage == 0)
         {
@@ -58,10 +58,27 @@ public class StageManager : MonoBehaviour
         }
         currentRoom = GameManager.instance.objectPoolManager.GetGo(roomObj[currentRoomId].name);
         currentRoomInfo = currentRoom.GetComponent<RoomInfo>();
+        currentRoomInfo.type = roomType;
 
+        //방 오브젝트 활성화 및 위치 조정.
         currentRoom.SetActive(true);
         currentRoom.transform.position = new Vector2(0, 0);
 
+        //방의 타입에 따른 메서드 실행
+        switch (roomType)
+        {
+            case RoomType.Shop:
+                currentRoomInfo.SetShopRelics();
+                break;
+
+            default: //전투가 필요한 방일 때.
+                SettingEnemy();
+                break;
+        }
+    }
+
+    private void SettingEnemy()
+    {
         totalCount = currentRoomInfo.enemyList.Count; //총 Enemy수.
         previousTotalCound = totalCount;
 
@@ -89,12 +106,6 @@ public class StageManager : MonoBehaviour
                 enemy.transform.position = currentRoomInfo.elitePos[Random.Range(0, currentRoomInfo.elitePos.Count)].position;
             }
         }
-    }
-
-    public void GiveAmends(RoomInfo roomInfo)
-    {
-        //보상 UI어쩌고저쩌고
-        //GameManager.instance.canvasManager.ActiveAmendPanel(roomInfo);
     }
 
     public void StageClear(bool boss = false)

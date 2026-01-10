@@ -33,9 +33,12 @@ public class Interaction : MonoBehaviour, IDataInitializable
     public void Interacte()
     {
         RaycastHit2D hitted;
-        if (hitted = Physics2D.BoxCast(parentObj.transform.position, new Vector2(1, 1), 0, Vector2.zero, 0f, 1 << 9))
+        if (hitted = Physics2D.BoxCast(parentObj.transform.position, new Vector2(2, 2), 0, Vector2.down, 0f, 1 << 9 | 1 << 10))
         {
-            hitted.collider.GetComponent<IInteractable>().Interaction();
+            if (hitted.collider.gameObject.TryGetComponent<IInteractable>(out var interactable))
+            {
+                interactable.Interaction();
+            }
         }
     }
 

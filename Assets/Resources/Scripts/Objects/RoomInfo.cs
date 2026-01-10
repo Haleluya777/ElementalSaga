@@ -7,6 +7,9 @@ using Cinemachine;
 
 public class RoomInfo : PoolAble
 {
+    [Header("현재 방 타입")]
+    public RoomType type;
+
     [Header("등장할 적 종류.")]
     public List<int> enemyList = new List<int>(); //등장할 적 종류
 
@@ -25,6 +28,12 @@ public class RoomInfo : PoolAble
     [Header("해당 스테이지에서 확정적으로 등장할 유물 리스트")]
     public List<RelicInfo> confirmedRelics = new List<RelicInfo>();
 
+    [Header("해당 스테이지가 상점 스테이질 경우, 등장할 유물 목록")]
+    public List<RelicInfo> shopRelics = new List<RelicInfo>();
+    [SerializeField] private BronzeRankRelics bronzeRankRelics;
+    [SerializeField] private SilverRankRelics silverRankRelics;
+    [SerializeField] private GoldRankRelics goldRankRelics;
+
     private int SetTotalWeight()
     {
         int total = 0;
@@ -33,6 +42,15 @@ public class RoomInfo : PoolAble
             total += chest.Value;
         }
         return total;
+    }
+
+    public void SetShopRelics()
+    {
+        shopRelics.AddRange(bronzeRankRelics.GetRandomRelicList(3));
+        shopRelics.AddRange(silverRankRelics.GetRandomRelicList(1));
+        shopRelics.AddRange(goldRankRelics.GetRandomRelicList(1));
+
+        GameManager.instance.canvasManager.SetShopPanel(shopRelics);
     }
 
     public AmendChest.ChestTier SetChestTier()

@@ -30,56 +30,50 @@ public class Door : PoolAble, IInteractable
 
     public void Interaction()
     {
+        Debug.Log("할렐루야");
         switch (thisRoom.type)
         {
-            case DoorType.Battle:
+            case RoomType.Battle:
                 Debug.Log("전투 방");
                 GameManager.instance.stageManager.currentRoomId = 0;
-                GameManager.instance.stageManager.StageStart();
                 break;
 
-            case DoorType.EliteBattle:
+            case RoomType.EliteBattle:
                 Debug.Log("엘리트 전투 방");
                 GameManager.instance.stageManager.currentRoomId = 0;
-                GameManager.instance.stageManager.StageStart();
                 break;
 
-            case DoorType.Boss:
+            case RoomType.Boss:
                 Debug.Log("보스 방");
                 GameManager.instance.stageManager.currentRoomId = 0;
-                GameManager.instance.stageManager.StageStart();
                 break;
 
-            case DoorType.Heal:
+            case RoomType.Heal:
                 Debug.Log("회복 방");
                 GameManager.instance.stageManager.currentRoomId = 0;
-                GameManager.instance.stageManager.StageStart();
                 break;
 
-            case DoorType.Shop:
+            case RoomType.Shop:
                 Debug.Log("상점 방");
-                GameManager.instance.stageManager.currentRoomId = 0;
-                GameManager.instance.stageManager.StageStart();
+                GameManager.instance.stageManager.currentRoomId = 1;
                 break;
 
-            case DoorType.Treasure:
+            case RoomType.Treasure:
                 Debug.Log("보상 방");
                 GameManager.instance.stageManager.currentRoomId = 0;
-                GameManager.instance.stageManager.StageStart();
                 break;
 
-            case DoorType.Mimic:
+            case RoomType.Mimic:
                 Debug.Log("미믹 방");
                 GameManager.instance.stageManager.currentRoomId = 0;
-                GameManager.instance.stageManager.StageStart();
                 break;
 
-            case DoorType.Puzzle:
+            case RoomType.Puzzle:
                 Debug.Log("퍼즐 방");
                 GameManager.instance.stageManager.currentRoomId = 0;
-                GameManager.instance.stageManager.StageStart();
                 break;
         }
+        GameManager.instance.stageManager.StageStart(thisRoom.type);
         GameManager.instance.stageManager.stage++;
         GameManager.instance.eventManager.ReleaseDoor();
     }

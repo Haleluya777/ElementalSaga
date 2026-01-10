@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum UnitType { PlayableCharacter, Enemy, Elite, Boss }
+public enum UnitType { PlayableCharacter, Enemy, Elite, Boss, NPC }
 
 [Serializable]
 public class Datas

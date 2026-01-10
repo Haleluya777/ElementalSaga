@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using AYellowpaper.SerializedCollections;
+using Unity.VisualScripting;
+using System;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -13,11 +15,23 @@ public class CanvasManager : MonoBehaviour
     public GameObject amendPanel;
     [SerializeField] private GameObject amendContents;
 
+    [Header("상점 NPC 상호작용 시 띄울 상점 UI요소")]
+    public GameObject shopPanel;
+    [SerializeField] private GameObject productContents;
+
+    [Header("판매 완료 스프라이")]
+    [SerializeField] private Sprite soldOutSprite;
+
+    private const int PRODUCT_COUNT = 5;
+
     public void ActiveAmendPanel(List<RelicInfo> relics)
     {
         amendPanel.SetActive(true);
         for (int i = 0; i < relics.Count; i++)
         {
+            //번호 할당
+            int index = i;
+
             //버튼 오브젝트 가져온 후, Contents에 자식으로 넣음.
             var button = GameManager.instance.objectPoolManager.GetGo("RelicSelectButton");
             button.transform.SetParent(amendContents.transform);
@@ -36,8 +50,58 @@ public class CanvasManager : MonoBehaviour
 
             Button buttonEvent = button.GetComponent<Button>();
 
-            buttonEvent.onClick.AddListener(() => GameManager.instance.unitManager.EquipRelic(relics[i]));
+            buttonEvent.onClick.AddListener(() => GameManager.instance.unitManager.EquipRelic(relics[index]));
             buttonEvent.onClick.AddListener(() => GameManager.instance.eventManager.ReleaseRelicButton());
+        }
+    }
+
+    public void ActiveShopPanel()
+    {
+        shopPanel.SetActive(true);
+    }
+
+    public void SetShopPanel(List<RelicInfo> relics)
+    {
+        for (int i = 0; i < relics.Count; i++)
+        {
+            //번호 할당
+            int index = i;
+
+            //오브젝트 풀에서 버튼을 가져온 뒤 컨텐츠 자식으로 할당.
+            var button = GameManager.instance.objectPoolManager.GetGo("ProductButton");
+            button.transform.SetParent(productContents.transform);
+
+            //버튼의 이미지, 유물 설명 및 가격 등의 정보를 가져옴.
+            var relicImg = button.transform.GetChild(0).GetComponent<Image>();
+            var relicTxt = button.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            var priceTxt = button.transform.GetChild(2).transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+
+            //크기 조정.
+            button.transform.localScale = new Vector2(1, 1);
+
+            //이미지 및 설명 텍스트 변경.
+            relicImg.sprite = relics[i].sprite;
+            relicTxt.text = relics[i].explain;
+            priceTxt.text = relics[i].price.ToString();
+
+            //클릭 시 실행될 이벤트 등록.
+            Button buttonEvent = button.GetComponent<Button>();
+            buttonEvent.onClick.AddListener(() =>
+            {
+                if (GameManager.instance.unitManager.money - relics[index].price >= 0)
+                {
+                    GameManager.instance.unitManager.money -= relics[index].price;
+                    buttonEvent.interactable = false;
+                    buttonEvent.GetComponent<Image>().sprite = soldOutSprite;
+
+                    buttonEvent.transform.GetChild(0).gameObject.SetActive(false);
+                    buttonEvent.transform.GetChild(1).gameObject.SetActive(false);
+                    buttonEvent.transform.GetChild(2).gameObject.SetActive(false);
+
+                    GameManager.instance.unitManager.EquipRelic(relics[index]);
+                }
+                else Debug.Log("돈이 부족합니다!");
+            });
         }
     }
 }

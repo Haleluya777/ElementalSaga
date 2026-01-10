@@ -18,4 +18,5 @@ MonoBehaviour:
   explanation: 
   chainedSkill: {fileID: 11400000, guid: 04f2454e8fbb31349aaaf4b4ecf18991, type: 2}
   dashDistance: 4
+  secondDashAnim: SecondDash
   throwAnim: ThrowAway

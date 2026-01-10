@@ -8,6 +8,7 @@ public class EventManager : MonoBehaviour
     public event Action<ISkillCaster> DeadEvent;
     public event Action SelectDoor;
     public event Action ReleaseAllRelicButton;
+    public event Action ReleaseAllProductButton;
     public event Action<string[]> InitChar;
 
     public void ReportDead(ISkillCaster attacker, GameObject deadObj)
