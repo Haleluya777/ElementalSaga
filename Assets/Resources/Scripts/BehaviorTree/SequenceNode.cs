@@ -1,35 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XNode;
 
-public class SequenceNode : INode
+public class SequenceNode : BTNode
 {
-    List<INode> childs;
+    [Output] public List<BTNode> childs;
 
-    public SequenceNode(List<INode> _childs)
+    public override NodeState Evaluate()
     {
-        childs = _childs;
-    }
-
-    public INode.NodeState Evaluate()
-    {
-        if (childs == null || childs.Count == 0) return INode.NodeState.Failure;
-
         foreach (var child in childs)
         {
             switch (child.Evaluate())
             {
-                case INode.NodeState.Running:
-                    return INode.NodeState.Running;
-
-                case INode.NodeState.Success:
+                case NodeState.Success:
                     continue;
 
-                case INode.NodeState.Failure:
-                    return INode.NodeState.Failure;
+                case NodeState.Failure:
+                    return NodeState.Failure;
             }
         }
-
-        return INode.NodeState.Success;
+        return NodeState.Success;
     }
 }

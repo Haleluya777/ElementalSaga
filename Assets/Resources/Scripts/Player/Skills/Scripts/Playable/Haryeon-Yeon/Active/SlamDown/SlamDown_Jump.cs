@@ -30,7 +30,7 @@ public class SlamDown_Jump : SkillBase
         else //아닐 경우.
         {
             Debug.Log("목표 없음");
-            target = caster.GetGameObject().transform.position + new Vector3(2f * caster.GetDirection().x, 0);
+            target = caster.GetGameObject().transform.position + new Vector3(2.5f * caster.GetDirection().x, 0);
         }
 
         Vector2 startPos = caster.GetGameObject().transform.position;

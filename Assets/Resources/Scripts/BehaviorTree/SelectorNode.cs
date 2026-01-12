@@ -1,35 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XNode;
 
-public class SelectorNode : INode
+public class SelectorNode : BTNode
 {
-    List<INode> childs;
+    [Output] public List<BTNode> childs;
 
-    public SelectorNode(List<INode> _childs)
+    public override NodeState Evaluate()
     {
-        childs = _childs;
-    }
-
-    public INode.NodeState Evaluate()
-    {
-        if (childs == null)
-        {
-            return INode.NodeState.Failure;
-        }
-
         foreach (var child in childs)
         {
             switch (child.Evaluate())
             {
-                case INode.NodeState.Running:
-                    return INode.NodeState.Running;
+                case NodeState.Success:
+                    return NodeState.Success;
 
-                case INode.NodeState.Success:
-                    return INode.NodeState.Success;
+                case NodeState.Running:
+                    return NodeState.Running;
+
+                case NodeState.Failure:
+                    continue;
             }
         }
-
-        return INode.NodeState.Failure;
+        return NodeState.Failure;
     }
 }

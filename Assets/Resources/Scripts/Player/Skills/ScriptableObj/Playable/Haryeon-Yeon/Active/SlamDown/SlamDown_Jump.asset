@@ -18,5 +18,5 @@ MonoBehaviour:
   explanation: 
   explosion: {fileID: 11400000, guid: 99b9f01a521db804eac4ac3823c2c2b0, type: 2}
   distance: 5
-  jumpDuration: 1.5
+  jumpDuration: 1.25
   defaultDuration: 0
