@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour, IDataInitializable
     {
         StateActions(curState);
         StateAnimation(curState);
+        Debug.DrawRay(transform.position, Vector2.down * .7f, Color.red, .2f);
     }
 
     void LateUpdate()
@@ -101,7 +102,6 @@ public class PlayerController : MonoBehaviour, IDataInitializable
                 {
                     if (Enum.TryParse<KeyCode>(keyControl.displayName, true, out var pressedKey))
                     {
-                        moveInput?.Invoke(Vector2.zero);
                         if (context.performed)
                         {
                             SkillKeyDown(pressedKey, ModifierAtt);
@@ -193,14 +193,18 @@ public class PlayerController : MonoBehaviour, IDataInitializable
         {
             if (attack.PerformAttack(skill))
             {
+                Debug.Log("할렐루야");
                 curState = UnitState.Attacking;
+                moveInput?.Invoke(Vector2.zero);
             }
+            else return;
         }
         else //지속성 스킬
         {
             if (attack.PerformAttack(skill))
             {
                 curState = UnitState.Attacking;
+                moveInput?.Invoke(Vector2.zero);
                 if (continuousSkill != null) StopCoroutine(continuousSkill);
                 continuousSkill = StartCoroutine(SkillRoutine(skill, attNum));
             }

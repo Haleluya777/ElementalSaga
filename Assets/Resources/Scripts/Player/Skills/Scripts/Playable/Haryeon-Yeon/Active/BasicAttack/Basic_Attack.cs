@@ -12,6 +12,8 @@ public class Basic_Attack : SkillBase
     [SerializeField] private SkillBase chainedSkill;
     [SerializeField] private SkillBase firstComboSkill;
     [SerializeField] private GameObject hitBoxObj;
+    [SerializeField] private float dashDistance;
+    private Vector2 tagetPos;
     private Coroutine coroutine;
 
     public override bool UseSkill(ISkillCaster caster)
@@ -31,6 +33,7 @@ public class Basic_Attack : SkillBase
         GameObject hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
 
         hitBox.transform.position = caster.GetHitBoxPos().position;
+        hitBox.transform.SetParent(caster.GetGameObject().transform.GetChild(2).transform.GetChild(0));
 
         HitBox hitBoxCom = hitBox.GetComponent<HitBox>();
 
@@ -41,7 +44,11 @@ public class Basic_Attack : SkillBase
 
         hitBoxCom.Initialize(dmgCalculater.Calculate(caster), caster, onHitEvents, .5f);
 
+        tagetPos = new Vector2(caster.GetPosition().x + (caster.GetDirection().normalized.x * dashDistance), caster.GetPosition().y);
+
+        Debug.Log(tagetPos.x);
         caster.PlayAnimation(animName);
+        GameManager.instance.coroutineRunner.StartCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), caster.GetGameObject().transform, tagetPos));
 
         //스킬 사용 후 상황.
         //연결된 스킬 사용.
@@ -70,5 +77,27 @@ public class Basic_Attack : SkillBase
         //parentModule.coolDown = 3f;
         caster.GetCom<IAttackable>().Combo = 0;
         Debug.Log("3초지남. 콤보 초기화!");
+    }
+
+    private IEnumerator PerformDash(ISkillCaster caster, Rigidbody2D rigid, Transform casterTransform, Vector2 tagetPos)
+    {
+        float dashSpeed = 35f; // 대쉬 속도
+        float minSqrDistance = .5f;
+
+        while (((Vector2)tagetPos - rigid.position).magnitude > minSqrDistance)
+        {
+            if (Physics2D.Raycast(new Vector2(caster.GetGameObject().transform.position.x, caster.GetGameObject().transform.position.y + .5f), Vector2.right * caster.GetGameObject().transform.localScale.x, .75f, 1 << 3))
+            {
+                break;
+            }
+
+            Vector2 direction = ((Vector2)tagetPos - rigid.position).normalized;
+            Vector3 newPos = rigid.position + direction * (dashSpeed / 10) * Time.fixedDeltaTime;
+
+            rigid.MovePosition(newPos);
+
+            yield return new WaitForFixedUpdate();
+        }
+        yield return null;
     }
 }

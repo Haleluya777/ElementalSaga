@@ -49,17 +49,19 @@ public class SlamDown_Jump : SkillBase
 
         while (true)
         {
-            hit = Physics2D.Raycast(caster.GetPosition(), Vector2.down, 0.6f, 1 << 3);
+            hit = Physics2D.Raycast(caster.GetPosition(), Vector2.down, 0.7f, 1 << 3);
             if (hit.collider == null)
             {
                 break;
             }
             yield return new WaitForFixedUpdate();
         }
+        yield return null;
 
         while (true)
         {
-            hit = Physics2D.Raycast(caster.GetPosition(), Vector2.down, 0.6f, 1 << 3);
+            hit = Physics2D.Raycast(caster.GetPosition(), Vector2.down, .7f, 1 << 3);
+            Debug.Log(hit.collider is null);
             if (hit.collider != null)
             {
                 targetObj.GetComponentInChildren<IDamageable>().TakeDamage(dmgCalculater.Calculate(caster), caster, targetObj);

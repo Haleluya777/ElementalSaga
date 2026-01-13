@@ -152,7 +152,6 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     public bool PerformAttack(Skill_Module skill)
     {
         //if (attNum == -1) return false;
-        Debug.Log("하하");
         rigid.velocity = new Vector2(0, rigid.velocity.y);
         if (unit.isAirial) //공중에서 스킬을 쓸 때.
         {
@@ -160,7 +159,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
             else
             {
                 bool result = skill.UseSkill(this);
-                if (!result) return false;
+                //if (!result) return false;
 
                 // else
                 // {
@@ -174,16 +173,15 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
                 //         anim.CrossFade(skill.AnimName, 0f);
                 //     }
                 // }
-                return true;
+                return result;
             }
         }
 
         else //땅 위에서 스킬을 쓸 때.
         {
-            Debug.Log("할렐루야");
             int comboAnim = Combo;
             bool result = skill.UseSkill(this);
-            return true;
+            return result;
             // if (!result)
             // {
             //     Debug.Log("공격 실패");

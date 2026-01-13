@@ -95,7 +95,7 @@ public class ThrowAway_Dash : SkillBase
             //두 번째 대쉬가 끝난 뒤 한프레임 쉬고 던지기 애니메이션 실행.
             yield return null;
             caster.PlayAnimation(throwAnim);
-            yield return new WaitForSeconds(4f * (1f / 30f));
+            yield return new WaitForSeconds(6f * (1f / 30f));
 
             if (enemyUnit.activeEffect.TryGetValue("Catched", out StatusEffectBase exisitngEffect))
             {

@@ -18,8 +18,9 @@ MonoBehaviour:
   explanation: 
   onHitEvents:
   - {fileID: 11400000, guid: 098c7b339026ff644938338d74430d84, type: 2}
-  hitBoxOffset: {x: 0, y: 0.5}
-  hitBoxSize: {x: 0.5, y: 0.5}
+  hitBoxOffset: {x: -0.1, y: -0.1}
+  hitBoxSize: {x: 0.5, y: 0.3}
   chainedSkill: {fileID: 11400000, guid: 0efe20ddacffaf8439138cf82fd63c0f, type: 2}
   firstComboSkill: {fileID: 11400000}
   hitBoxObj: {fileID: 2777659332053925459, guid: b77ee40dc4b61cd4485a30dc37ecdfeb, type: 3}
+  dashDistance: 1
