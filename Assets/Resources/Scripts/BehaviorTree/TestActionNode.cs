@@ -7,6 +7,7 @@ public class TestActionNode : BTNode
 {
     public override NodeState Evaluate()
     {
+        Debug.Log("행동중");
         return NodeState.Success;
     }
 }

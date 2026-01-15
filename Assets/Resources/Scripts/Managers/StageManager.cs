@@ -7,7 +7,8 @@ public class StageManager : MonoBehaviour
 {
     //[SerializeField] private List<StageEnemyInfo> enemyList = new List<StageEnemyInfo>();
     [SerializeField] private List<int> enemyList = new List<int>();
-    [SerializeField] private List<GameObject> roomObj = new List<GameObject>();
+    [SerializeField] private List<GameObject> roomObj = new List<GameObject>(); //방들 중 하나를 랜덤으로 가져올 리스트(삭제 예정)
+    [SerializeField] private List<RoomSerializedDic> roomMaps = new List<RoomSerializedDic>();
     public int stage; //현재 스테이지 번호.
 
     public int currentRoomId; //currentRoom의 값은 Door클래스가 정해줌.
@@ -25,18 +26,12 @@ public class StageManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            //GiveAmends(currentRoomInfo);
-            StageClear();
-        }
-
         if (previousTotalCound != totalCount)
         {
             if (totalCount == 0)
             {
-                //GiveAmends(currentRoomInfo);
-                StageClear();
+                if (stage > 9) StageClear(true);
+                else StageClear();
             }
             previousTotalCound = totalCount;
         }
@@ -44,9 +39,11 @@ public class StageManager : MonoBehaviour
 
     public void StageStart(RoomType roomType = RoomType.StartRoom) //스테이지 시작할 때 등장할 몬스터 리스트 만들기.
     {
-        if (stage == 0)
+        Debug.Log(roomType);
+        if (currentRoomInfo.type == roomType)
         {
-            StageClear();
+            Debug.Log("시작방임");
+            //StageClear();
             return;
         }
 
@@ -56,9 +53,16 @@ public class StageManager : MonoBehaviour
             if (currentRoom.name == "StartRoom") currentRoom.SetActive(false);
             else currentRoomInfo.ReleaseObject();
         }
-        currentRoom = GameManager.instance.objectPoolManager.GetGo(roomObj[currentRoomId].name);
+
+        //이 부분 수정 필요
+        currentRoom = GameManager.instance.objectPoolManager.poolDic["Rooms"].GetGo("CombatRoom_1");
+        //여기까지
+
+        //수정본
+        //CreateRoom(roomType);
         currentRoomInfo = currentRoom.GetComponent<RoomInfo>();
         currentRoomInfo.type = roomType;
+
 
         //방 오브젝트 활성화 및 위치 조정.
         currentRoom.SetActive(true);
@@ -83,24 +87,23 @@ public class StageManager : MonoBehaviour
         previousTotalCound = totalCount;
 
         //Enemy소환.
-        foreach (var enemyId in currentRoomInfo.enemyList)
+        foreach (var enemyName in currentRoomInfo.enemyList)
         {
             //일반 몬스터 소환.
-            GameObject enemy = GameManager.instance.objectPoolManager.GetGo("Unit");
+            GameObject enemy = GameManager.instance.objectPoolManager.poolDic["Units"].GetGo(enemyName);
             EnemyCharacter enemyCom = enemy.GetComponent<EnemyCharacter>();
 
             //Debug.Log(enemyCom is null);
 
-            enemyCom.id = enemyId;
-            enemy.name = enemyCom.name;
             enemy.tag = "Enemy";
 
             if (enemyCom.Type == UnitType.Enemy)
             {
+                Debug.Log("일반 몬스터 소환");
                 //일반 몬스터 스폰 위치에 몬스터 이동.
                 enemy.transform.position = currentRoomInfo.enemyPos[Random.Range(0, currentRoomInfo.enemyPos.Count)].position;
             }
-            else if (enemyCom.Type == UnitType.Elite)
+            else if (enemyCom.Type == UnitType.Elite || enemyCom.Type == UnitType.Boss)
             {
                 //엘리트 몬스터 스폰 위치에 몬스터 이동.
                 enemy.transform.position = currentRoomInfo.elitePos[Random.Range(0, currentRoomInfo.elitePos.Count)].position;
@@ -110,6 +113,7 @@ public class StageManager : MonoBehaviour
 
     public void StageClear(bool boss = false)
     {
+        Debug.Log("스테이지 클리어!");
         if (totalCount > 0) return;
 
         if (boss)
@@ -126,6 +130,14 @@ public class StageManager : MonoBehaviour
 
         //보상 상자 생성.
         GameManager.instance.roomManager.MakeAmendChest(currentRoomInfo.SetChestTier(), new Vector2(0, -1), currentRoomInfo.confirmedRelics);
-        stage++;
+    }
+
+    private GameObject CreateRoom(RoomType type)
+    {
+        switch (type)
+        {
+
+        }
+        return null;
     }
 }

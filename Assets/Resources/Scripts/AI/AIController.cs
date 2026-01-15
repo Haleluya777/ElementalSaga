@@ -1,27 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class AIController : MonoBehaviour, IDataInitializable
+using System;
+public class AIController : MonoBehaviour, IDataInitializable, IControllable
 {
     [SerializeField] private GameObject parentObj;
     private Rigidbody2D rigid;
     public float timer;
 
+    public event Action<Vector2> moveInput;
+    public event Action<int> attackInput;
+    public event Action jumpInput;
+    public event Action interaction;
+
+    [Header("AI모듈")]
+    public BehaviorTreeGraph behaviorTree;
+    private BehaviorTreeGraph runTimeTree;
+    private BTNode root;
+
     void Awake()
     {
+        runTimeTree = Instantiate(behaviorTree);
         rigid = parentObj.GetComponent<Rigidbody2D>();
+        root = runTimeTree.rootNode;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > 3f)
-        {
-            rigid.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
-            timer = 0;
-        }
+        root.Evaluate();
     }
 
     public void DataInit()

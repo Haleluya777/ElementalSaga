@@ -12,8 +12,8 @@ public class SuperPressureBlowout_Explosion : SkillBase
     public override bool UseSkill(ISkillCaster caster)
     {
         //오브젝트풀에서 히트박스와 이펙트 오브젝트 가져옴.
-        GameObject hitBoxObj = GameManager.instance.objectPoolManager.GetGo("HitBox_Circle");
-        GameObject effectObj = GameManager.instance.objectPoolManager.GetGo("Effect");
+        GameObject hitBoxObj = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox_Circle");
+        GameObject effectObj = GameManager.instance.objectPoolManager.poolDic["Effect"].GetGo("Effect");
 
         //위치 조정.
         hitBoxObj.transform.position = caster.GetPosition();

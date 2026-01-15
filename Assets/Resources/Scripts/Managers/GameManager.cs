@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public StageManager stageManager;
     public CanvasManager canvasManager;
     public UnitManager unitManager; //현재 조종 중인 현재 플레이어 유닛에 관련된 매니저.
+    public RelicManager relicManager;
 
     private void Awake()
     {

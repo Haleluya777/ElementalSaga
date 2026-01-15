@@ -23,8 +23,8 @@ public class Special_C_Chained : SkillBase
         if (unit == null) unit = caster.GetCom<Unit>();
         if (rigid == null) rigid = caster.GetCom<Rigidbody2D>();
 
-        GameObject hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
-        GameObject effectObj = GameManager.instance.objectPoolManager.GetGo("Effect");
+        GameObject hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
+        GameObject effectObj = GameManager.instance.objectPoolManager.poolDic["Effect"].GetGo("Effect");
 
         hitBox.transform.position = caster.GetHitBoxPos().position;
         effectObj.transform.position = caster.GetHitBoxPos().position;
@@ -39,7 +39,7 @@ public class Special_C_Chained : SkillBase
 
         hitBoxCom.Initialize(dmgCalculater.Calculate(caster), caster, null, .5f);
         effectCom.Initialize(.5f);
-        
+
         if (unit.isAirial)
         {
             GameManager.instance.coroutineRunner.StartCoroutine(HangTime(caster, rigid));

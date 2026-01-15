@@ -73,3 +73,13 @@ MonoBehaviour:
     jumpForce: 5
     addJumpCount: 0
     attSpeed: 1
+  - type: 3
+    id: 13
+    name: Boss01
+    hp: 500
+    att: 130
+    gage: 0
+    moveSpeed: 5
+    jumpForce: 5
+    addJumpCount: 0
+    attSpeed: 1

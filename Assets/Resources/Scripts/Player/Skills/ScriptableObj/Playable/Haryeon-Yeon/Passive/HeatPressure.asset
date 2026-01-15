@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmgCalculater: {fileID: 0}
   targetObj: {fileID: 0}
+  animName: 
   explanation: 
-  heatPressure: 0
+  heatPressure: 72

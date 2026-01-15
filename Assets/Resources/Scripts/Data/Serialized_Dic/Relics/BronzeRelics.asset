@@ -14,21 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   relic:
     _serializedList:
+    - Key: 0
+      Value:
+        sprite: {fileID: 21300000, guid: 106f774b0ddd73242989afce0b4bd5da, type: 3}
+        relicModule: {fileID: 0}
+        tier: 0
+        explain: Bronze Relic 1
+        price: 100
     - Key: 1
       Value:
         sprite: {fileID: 21300000, guid: 106f774b0ddd73242989afce0b4bd5da, type: 3}
         relicModule: {fileID: 0}
-        explain: Bronze Relic 1
+        tier: 0
+        explain: Bronze Relic 2
         price: 100
     - Key: 2
       Value:
-        sprite: {fileID: 21300000, guid: 9927a7d8567e7e34b82acc336e946ba4, type: 3}
-        relicModule: {fileID: 0}
-        explain: Bronze Relic 2
-        price: 120
-    - Key: 3
-      Value:
         sprite: {fileID: 21300000, guid: 86519313fdafbd943bc980317200e99e, type: 3}
         relicModule: {fileID: 0}
+        tier: 0
         explain: Bronze Relic 3
         price: 135

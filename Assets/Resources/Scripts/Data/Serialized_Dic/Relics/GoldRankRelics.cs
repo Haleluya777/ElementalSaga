@@ -6,18 +6,38 @@ namespace AYellowpaper.SerializedCollections
 {
     [CreateAssetMenu(fileName = "GoldRelics", menuName = "ScriptableObject/SerializedDic/GoldRelics")]
     [System.Serializable]
-    public class GoldRankRelics : ScriptableObject
+    public class GoldRankRelics : RelicSerializedDic
     {
         [SerializedDictionary("Num", "Relic")]
         public SerializedDictionary<int, RelicInfo> relic;
-
+        private SerializedDictionary<int, RelicInfo> currentRelics;
         private List<RelicInfo> relics = new List<RelicInfo>();
 
-        public List<RelicInfo> GetRandomRelicList(int cnt)
+        public override void RelicInit()
+        {
+            foreach (var _relic in relic)
+            {
+                _relic.Value.tier = AmendChest.RelicTier.Gold;
+            }
+            currentRelics = relic;
+        }
+
+        public override void RemoveRelic(RelicInfo relic)
+        {
+            for (int i = 0; i < currentRelics.Count; i++)
+            {
+                if (currentRelics[i] == relic)
+                {
+                    currentRelics.Remove(i);
+                }
+            }
+        }
+
+        public override List<RelicInfo> GetRandomRelicList(int cnt)
         {
             List<RelicInfo> randomRelics = new List<RelicInfo>();
 
-            foreach (var _relic in relic)
+            foreach (var _relic in currentRelics)
             {
                 relics.Add(_relic.Value);
             }

@@ -26,8 +26,8 @@ public class Special_D_Chained : SkillBase
 
         //parentModule.AnimName = animName;
 
-        GameObject hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
-        GameObject effectObj = GameManager.instance.objectPoolManager.GetGo("Effect");
+        GameObject hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
+        GameObject effectObj = GameManager.instance.objectPoolManager.poolDic["Effect"].GetGo("Effect");
 
         hitBox.transform.position = caster.GetHitBoxPos().position;
         effectObj.transform.position = caster.GetHitBoxPos().position;

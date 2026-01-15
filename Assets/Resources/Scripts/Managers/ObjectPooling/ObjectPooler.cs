@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class ObjectPoolManager : MonoBehaviour
+[System.Serializable]
+public class ObjectPooler : MonoBehaviour
 {
     [System.Serializable]
     private class ObjectInfo
@@ -42,8 +43,7 @@ public class ObjectPoolManager : MonoBehaviour
 
         for (int idx = 0; idx < objectInfos.Length; idx++)
         {
-            IObjectPool<GameObject> pool = new ObjectPool<GameObject>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool,
-            OnDestroyPoolObject, true, objectInfos[idx].count, objectInfos[idx].count);
+            IObjectPool<GameObject> pool = new ObjectPool<GameObject>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, true, objectInfos[idx].count, objectInfos[idx].count);
 
             if (goDic.ContainsKey(objectInfos[idx].objectName))
             {

@@ -5,15 +5,15 @@ using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-public class PlayerController : MonoBehaviour, IDataInitializable
+public class PlayerController : MonoBehaviour, IDataInitializable, IControllable
 {
     private enum UnitState { Idle, Attacking, Moving }
 
     [SerializeField] private PlayerInput playerInput;
-    public Action<Vector2> moveInput;
-    public Action<int> attackInput;
-    public Action jumpInput;
-    public Action interaction;
+    public event Action<Vector2> moveInput;
+    public event Action<int> attackInput;
+    public event Action jumpInput;
+    public event Action interaction;
 
     private Vector2 moveX;
     private Coroutine continuousSkill;
@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour, IDataInitializable
         {
             if (attack.PerformAttack(skill))
             {
-                Debug.Log("할렐루야");
+                //Debug.Log("할렐루야");
                 curState = UnitState.Attacking;
                 moveInput?.Invoke(Vector2.zero);
             }

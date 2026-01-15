@@ -26,8 +26,8 @@ public class ControlBloodDegree : SkillBase
             Debug.Log("폭발한다!");
             GameManager.instance.coroutineRunner.StartCoroutine(RemoveExplosionBlood(unit));
 
-            GameObject hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
-            GameObject effectObj = GameManager.instance.objectPoolManager.GetGo("Effect");
+            GameObject hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
+            GameObject effectObj = GameManager.instance.objectPoolManager.poolDic["Effect"].GetGo("Effect");
 
             hitBox.transform.position = caster.GetGameObject().transform.position;
             effectObj.transform.position = caster.GetGameObject().transform.position;

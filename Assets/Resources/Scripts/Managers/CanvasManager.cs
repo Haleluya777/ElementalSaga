@@ -24,6 +24,7 @@ public class CanvasManager : MonoBehaviour
 
     private const int PRODUCT_COUNT = 5;
 
+    //스테이지 클리어 후 보상 상자와 상호작용할 때 나타는 UI판넬
     public void ActiveAmendPanel(List<RelicInfo> relics)
     {
         amendPanel.SetActive(true);
@@ -33,7 +34,7 @@ public class CanvasManager : MonoBehaviour
             int index = i;
 
             //버튼 오브젝트 가져온 후, Contents에 자식으로 넣음.
-            var button = GameManager.instance.objectPoolManager.GetGo("RelicSelectButton");
+            var button = GameManager.instance.objectPoolManager.poolDic["UI"].GetGo("RelicSelectButton");
             button.transform.SetParent(amendContents.transform);
 
             //버튼의 이미지, 텍스트 및 착용할 유물 관련 정보 가져오기.
@@ -52,6 +53,8 @@ public class CanvasManager : MonoBehaviour
 
             buttonEvent.onClick.AddListener(() => GameManager.instance.unitManager.EquipRelic(relics[index]));
             buttonEvent.onClick.AddListener(() => GameManager.instance.eventManager.ReleaseRelicButton());
+            //선택한 유물이 더 이상 다시 등장하지 않게 하기 위해 리스트에서 삭제하는 이벤트 추가.
+            buttonEvent.onClick.AddListener(() => GameManager.instance.relicManager.RemoveRelic(relics[index]));
         }
     }
 
@@ -60,6 +63,7 @@ public class CanvasManager : MonoBehaviour
         shopPanel.SetActive(true);
     }
 
+    //상점에 나타낼 유물 구입 버튼을 미리 초기화하는 함수.
     public void SetShopPanel(List<RelicInfo> relics)
     {
         for (int i = 0; i < relics.Count; i++)
@@ -68,7 +72,7 @@ public class CanvasManager : MonoBehaviour
             int index = i;
 
             //오브젝트 풀에서 버튼을 가져온 뒤 컨텐츠 자식으로 할당.
-            var button = GameManager.instance.objectPoolManager.GetGo("ProductButton");
+            var button = GameManager.instance.objectPoolManager.poolDic["UI"].GetGo("ProductButton");
             button.transform.SetParent(productContents.transform);
 
             //버튼의 이미지, 유물 설명 및 가격 등의 정보를 가져옴.
@@ -99,6 +103,8 @@ public class CanvasManager : MonoBehaviour
                     buttonEvent.transform.GetChild(2).gameObject.SetActive(false);
 
                     GameManager.instance.unitManager.EquipRelic(relics[index]);
+                    //해당 유물을 데이터에서 삭제하는 로직 추가.
+                    GameManager.instance.relicManager.RemoveRelic(relics[index]);
                 }
                 else Debug.Log("돈이 부족합니다!");
             });

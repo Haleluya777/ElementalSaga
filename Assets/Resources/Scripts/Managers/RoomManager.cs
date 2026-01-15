@@ -20,7 +20,7 @@ public class RoomManager : MonoBehaviour, IDataInitializable
 
     public void MakeDoor(Vector2 pos, bool boss = false)
     {
-        GameObject doorObj = GameManager.instance.objectPoolManager.GetGo("Room");
+        GameObject doorObj = GameManager.instance.objectPoolManager.poolDic["Door"].GetGo("Door");
         Door door = doorObj.GetComponent<Door>();
 
         doorObj.transform.position = pos;
@@ -28,9 +28,9 @@ public class RoomManager : MonoBehaviour, IDataInitializable
         door.Init();
     }
 
-    public void MakeAmendChest(AmendChest.ChestTier tier, Vector2 pos, List<RelicInfo> confirmedRelics, bool boss = false)
+    public void MakeAmendChest(AmendChest.RelicTier tier, Vector2 pos, List<RelicInfo> confirmedRelics)
     {
-        GameObject chestObj = GameManager.instance.objectPoolManager.GetGo("AmendChest");
+        GameObject chestObj = GameManager.instance.objectPoolManager.poolDic["Amend"].GetGo("AmendChest");
         AmendChest chest = chestObj.GetComponent<AmendChest>();
 
         chestObj.transform.position = pos;
@@ -47,11 +47,17 @@ public class RoomManager : MonoBehaviour, IDataInitializable
 
     private DoorInfo SetDoor(bool boss = false)
     {
+        if (boss)
+        {
+            Debug.Log("보스방 생성.");
+            return new DoorInfo(rooms[4]);
+        }
+
         int weight = 0;
         int num = 0;
 
         num = Random.Range(0, total) + 1;
-        for (int i = 0; i < rooms.Count; i++)
+        for (int i = 0; i < rooms.Count - 1; i++)
         {
             weight += rooms[i].weight;
             if (num <= weight)

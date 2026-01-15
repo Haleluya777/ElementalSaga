@@ -38,8 +38,8 @@ public class Water_Basic_D : SkillBase
 
         caster.PlayAnimation(animName);
 
-        GameObject hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
-        GameObject effectObj = GameManager.instance.objectPoolManager.GetGo("Effect");
+        GameObject hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
+        GameObject effectObj = GameManager.instance.objectPoolManager.poolDic["Effect"].GetGo("Effect");
 
         hitBox.transform.position = caster.GetHitBoxPos().position;
         effectObj.transform.position = caster.GetHitBoxPos().position;

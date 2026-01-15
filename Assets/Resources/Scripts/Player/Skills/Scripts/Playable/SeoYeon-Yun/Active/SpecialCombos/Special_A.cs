@@ -22,10 +22,10 @@ public class Special_A : SkillBase
         }
         else
         {
-            GameObject bullet = GameManager.instance.objectPoolManager.GetGo("Bullet_Through");
-            SkillObjBase objComponent = bullet.GetComponent<SkillObjBase>();
-            caster.PlayAnimation(animName);
-            objComponent.ObjInit(caster.GetDirection(), dmgCalculater.Calculate(caster), caster.GetGameObject().tag, caster, false);
+            //GameObject bullet = GameManager.instance.objectPoolManager.pools[0].GetGo("Bullet_Through");
+            //SkillObjBase objComponent = bullet.GetComponent<SkillObjBase>();
+            //caster.PlayAnimation(animName);
+            //objComponent.ObjInit(caster.GetDirection(), dmgCalculater.Calculate(caster), caster.GetGameObject().tag, caster, false);
         }
 
         return true;
@@ -38,13 +38,13 @@ public class Special_A : SkillBase
 
         while (count < 2)
         {
-            count++;
-            GameObject bullet = GameManager.instance.objectPoolManager.GetGo("Bullet");
-            objComponent = bullet.GetComponent<SkillObjBase>();
-
-            objComponent.ObjInit(caster.GetDirection(), dmgCalculater.Calculate(caster), caster.GetGameObject().tag, caster, false);
-
-            yield return new WaitForSeconds(.2f);
+            //count++;
+            //GameObject bullet = GameManager.instance.objectPoolManager.pools[0].GetGo("Bullet");
+            //objComponent = bullet.GetComponent<SkillObjBase>();
+            //
+            //objComponent.ObjInit(caster.GetDirection(), dmgCalculater.Calculate(caster), caster.GetGameObject().tag, caster, false);
+            //
+            //yield return new WaitForSeconds(.2f);
         }
         yield return null;
     }

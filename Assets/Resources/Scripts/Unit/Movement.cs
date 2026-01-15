@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 public class Movement : MonoBehaviour, IMovable, IDataInitializable
 {
     [SerializeField] private GameObject parentObj;
-    private PlayerController controller;
+    private IControllable controller;
     private Unit unit;
     private Rigidbody2D rigid;
     private Vector2 dir;
@@ -51,13 +51,10 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
         unit = parentObj.GetComponent<Unit>();
         curJumpCount = unit.AddJumpCount;
         _jumpRequested = false;
-    }
+        controller = parentObj.GetComponentInChildren<IControllable>();
 
-    void OnEnable()
-    {
-        if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
+        if (controller is not null)
         {
-            controller = parentObj.GetComponentInChildren<PlayerController>();
             controller.moveInput += PerformMove;
             controller.jumpInput += PerformJump;
         }
@@ -65,11 +62,8 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
 
     void OnDisable()
     {
-        if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
-        {
-            controller.moveInput -= PerformMove;
-            controller.jumpInput -= PerformJump;
-        }
+        controller.moveInput -= PerformMove;
+        controller.jumpInput -= PerformJump;
     }
 
     // 점프 '요청'만 기록합니다.

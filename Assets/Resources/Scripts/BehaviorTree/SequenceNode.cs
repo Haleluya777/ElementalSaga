@@ -5,12 +5,13 @@ using XNode;
 
 public class SequenceNode : BTNode
 {
-    [Output] public List<BTNode> childs;
+    [Output(dynamicPortList = true)] public List<BTNode> childs;
 
     public override NodeState Evaluate()
     {
-        foreach (var child in childs)
+        foreach (var port in DynamicOutputs)
         {
+            BTNode child = port.Connection.node as BTNode;
             switch (child.Evaluate())
             {
                 case NodeState.Success:

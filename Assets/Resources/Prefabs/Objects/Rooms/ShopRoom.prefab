@@ -161,20 +161,21 @@ MonoBehaviour:
   confirmedRelics:
   - sprite: {fileID: 21300000, guid: 0fad535d9a11b4f418ce7cb545ec2bfb, type: 3}
     relicModule: {fileID: 0}
+    tier: 0
     explain: Confirmed Relic
     price: 0
   - sprite: {fileID: 21300000, guid: 0fad535d9a11b4f418ce7cb545ec2bfb, type: 3}
     relicModule: {fileID: 0}
+    tier: 0
     explain: Confirmed Relic
     price: 0
   - sprite: {fileID: 21300000, guid: 0fad535d9a11b4f418ce7cb545ec2bfb, type: 3}
     relicModule: {fileID: 0}
+    tier: 0
     explain: Confirmed Relic
     price: 0
   shopRelics: []
-  bronzeRankRelics: {fileID: 11400000, guid: 682eb1ff8de3b2d4b9877c3e56cdf174, type: 2}
-  silverRankRelics: {fileID: 11400000, guid: 87bd500fa72c7434e84fb7dab770d2aa, type: 2}
-  goldRankRelics: {fileID: 11400000, guid: 78157a398ae775c49941949016b4c2ee, type: 2}
+  counts: 030000000100000001000000
 --- !u!1 &2332192594150705526
 GameObject:
   m_ObjectHideFlags: 0

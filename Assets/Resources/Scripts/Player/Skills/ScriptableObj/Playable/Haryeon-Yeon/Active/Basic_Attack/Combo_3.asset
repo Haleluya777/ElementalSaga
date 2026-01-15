@@ -23,4 +23,4 @@ MonoBehaviour:
   chainedSkill: {fileID: 11400000, guid: fe2556cc1137b334fa32b368ba34e821, type: 2}
   firstComboSkill: {fileID: 11400000, guid: 04f32aeb6086fcc41959c780d57d8f9d, type: 2}
   hitBoxObj: {fileID: 2777659332053925459, guid: b77ee40dc4b61cd4485a30dc37ecdfeb, type: 3}
-  dashDistance: 1
+  dashDistance: 1.5

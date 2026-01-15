@@ -17,8 +17,8 @@ public class ThrowAway_Action : SkillBase
         //Debug.Log("배애앰");
         //hitted = Physics2D.Raycast(new Vector2(caster.GetPosition().x, caster.GetPosition().y + .5f), caster.GetDirection(), 5f, 1 << 6);
 
-        hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
-        effect = GameManager.instance.objectPoolManager.GetGo("Effect");
+        hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
+        effect = GameManager.instance.objectPoolManager.poolDic["Effect"].GetGo("Effect");
 
         hitBox.transform.position = skillPos;
         effect.transform.position = skillPos;

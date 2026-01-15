@@ -30,7 +30,7 @@ public class Basic_Attack : SkillBase
         //caster.GetHitBox().offset = hitBoxOffset;
         //caster.GetHitBox().size = hitBoxSize;
         //GameObject hitBox = Instantiate(hitBoxObj, caster.GetPosition(), caster.GetRotation());
-        GameObject hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
+        GameObject hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
 
         hitBox.transform.position = caster.GetHitBoxPos().position;
         hitBox.transform.SetParent(caster.GetGameObject().transform.GetChild(2).transform.GetChild(0));
@@ -46,7 +46,7 @@ public class Basic_Attack : SkillBase
 
         tagetPos = new Vector2(caster.GetPosition().x + (caster.GetDirection().normalized.x * dashDistance), caster.GetPosition().y);
 
-        Debug.Log(tagetPos.x);
+        //Debug.Log(tagetPos.x);
         caster.PlayAnimation(animName);
         GameManager.instance.coroutineRunner.StartCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), caster.GetGameObject().transform, tagetPos));
 

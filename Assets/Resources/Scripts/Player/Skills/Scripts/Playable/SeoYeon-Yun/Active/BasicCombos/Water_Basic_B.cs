@@ -35,8 +35,8 @@ public class Water_Basic_B : SkillBase
 
         if (!unit.isAirial)
         {
-            GameObject hitBox = GameManager.instance.objectPoolManager.GetGo("HitBox");
-            GameObject effectObj = GameManager.instance.objectPoolManager.GetGo("Effect");
+            GameObject hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
+            GameObject effectObj = GameManager.instance.objectPoolManager.poolDic["Effect"].GetGo("Effect");
 
             hitBox.transform.position = caster.GetHitBoxPos().position;
             effectObj.transform.position = caster.GetHitBoxPos().position;
@@ -56,7 +56,7 @@ public class Water_Basic_B : SkillBase
         else
         {
             //오브젝트 풀에서 탄환 가져옴.
-            GameObject objInstance = GameManager.instance.objectPoolManager.GetGo("Bullet");
+            GameObject objInstance = GameManager.instance.objectPoolManager.poolDic["Bullet"].GetGo("Bullet");
             //탄환 시작 위치 조정.
             objInstance.transform.position = caster.GetPosition() + new Vector2(0f, .5f);
 

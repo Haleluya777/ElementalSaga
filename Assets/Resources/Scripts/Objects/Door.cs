@@ -30,7 +30,7 @@ public class Door : PoolAble, IInteractable
 
     public void Interaction()
     {
-        Debug.Log("할렐루야");
+        //Debug.Log("할렐루야");
         switch (thisRoom.type)
         {
             case RoomType.Battle:
@@ -45,7 +45,7 @@ public class Door : PoolAble, IInteractable
 
             case RoomType.Boss:
                 Debug.Log("보스 방");
-                GameManager.instance.stageManager.currentRoomId = 0;
+                GameManager.instance.stageManager.currentRoomId = 4;
                 break;
 
             case RoomType.Heal:

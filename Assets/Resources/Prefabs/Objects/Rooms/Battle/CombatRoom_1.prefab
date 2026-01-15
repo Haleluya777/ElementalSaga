@@ -335,7 +335,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42438a665329a18478f5f4a1bcf7133b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyList: 0a0000000a0000000b000000
+  type: 0
+  enemyList:
+  - Goblin
+  - Goblin
+  - Goblin
   enemyPos:
   - {fileID: 6495470880462505864}
   - {fileID: 8773340115863033523}
@@ -345,19 +349,11 @@ MonoBehaviour:
   doorPos:
   - {fileID: 5038715390192759813}
   - {fileID: 8369742875132282321}
-  RelicWeights:
-    _serializedList:
-    - Key: 1
-      Value: 20
-    - Key: 2
-      Value: 20
-    - Key: 3
-      Value: 20
-    - Key: 4
-      Value: 20
-    - Key: 5
-      Value: 20
-  relicMap: {fileID: 11400000, guid: f5edbb310f047f84e998c96c0cd581d2, type: 2}
+  ChestWeights:
+    _serializedList: []
+  confirmedRelics: []
+  shopRelics: []
+  counts: 
 --- !u!1 &3823192249091736733
 GameObject:
   m_ObjectHideFlags: 0

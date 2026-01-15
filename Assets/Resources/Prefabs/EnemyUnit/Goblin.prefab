@@ -166,6 +166,7 @@ MonoBehaviour:
   modifiedActiveSkills: []
   passiveSkills:
   - {fileID: 11400000, guid: 11189c77d1dfb6345a05adc87e84d64b, type: 2}
+  relicPowers: []
   hitEvents:
   - {fileID: 0}
   combo: 0
@@ -372,7 +373,7 @@ GameObject:
   - component: {fileID: 6175166969586863343}
   - component: {fileID: -4536389143866271814}
   m_Layer: 6
-  m_Name: EnemyUnit
+  m_Name: Goblin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -568,5 +569,6 @@ MonoBehaviour:
     attSpeed: 0
   dmgRate: 1
   isAirial: 0
+  textBox: {fileID: 0}
   maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}
-  id: 0
+  id: 10
