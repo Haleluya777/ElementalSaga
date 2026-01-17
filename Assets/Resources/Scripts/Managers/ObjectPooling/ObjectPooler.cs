@@ -84,6 +84,7 @@ public class ObjectPooler : MonoBehaviour
     // 반환
     private void OnReturnedToPool(GameObject poolGo)
     {
+        poolGo.transform.SetParent(null);
         poolGo.SetActive(false);
     }
 

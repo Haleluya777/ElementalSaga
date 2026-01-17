@@ -76,5 +76,6 @@ public class Door : PoolAble, IInteractable
         GameManager.instance.stageManager.StageStart(thisRoom.type);
         GameManager.instance.stageManager.stage++;
         GameManager.instance.eventManager.ReleaseDoor();
+        GameManager.instance.eventManager.ReleaseRelicButton();
     }
 }

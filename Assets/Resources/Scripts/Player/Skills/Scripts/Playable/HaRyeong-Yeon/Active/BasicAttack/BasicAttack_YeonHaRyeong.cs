@@ -1,23 +1,65 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Basic_Attack", menuName = "ScriptableObject/Skills/Basic_Attack")]
-public class Basic_Attack : SkillBase
+[CreateAssetMenu(fileName = "Basic_Attack", menuName = "ScriptableObject/Skills/Active/YeonHaRyeong/Basic_Attack")]
+public class BasicAttack_YeonHaRyeong : SkillBase
 {
-    [SerializeField] private List<OnHitEventBase> onHitEvents = new List<OnHitEventBase>();
     [SerializeField] private Vector2 hitBoxOffset;
     [SerializeField] private Vector2 hitBoxSize;
     [SerializeField] private SkillBase chainedSkill;
     [SerializeField] private SkillBase firstComboSkill;
     [SerializeField] private GameObject hitBoxObj;
     [SerializeField] private float dashDistance;
+    [SerializeField] private List<OnHitEventBase> onHitEvents = new List<OnHitEventBase>();
     private Vector2 tagetPos;
     private Coroutine coroutine;
+    private IAttackable attack;
+    private bool eventsInitialized = false;
+
+    // 이 스킬에 필요한 OnHitEvent 타입을 new()로 생성하는 대신 typeof()로 타입 정보만 저장합니다.
+    private List<Type> needEventTypes = new List<Type> { typeof(FillFlameBlood) };
+
+    private void OnEnable()
+    {
+        // 초기화 상태 플래그를 리셋하여 게임을 시작할 때마다 이벤트가 새로 할당되도록 합니다.
+        eventsInitialized = false;
+        onHitEvents.Clear();
+    }
+
+    private void InitializeOnHitEvents(ISkillCaster caster)
+    {
+        if (attack == null) attack = caster.GetCom<IAttackable>();
+        if (attack == null) return;
+
+        // onHitEvents 리스트를 초기화
+        onHitEvents.Clear();
+
+        // needEventTypes에 정의된 각 이벤트 타입을 Attack 컴포넌트에서 찾아 onHitEvents 리스트에 추가
+        foreach (var eventType in needEventTypes)
+        {
+            var foundEvent = attack.FindOnHitEvent(eventType);
+            if (foundEvent != null)
+            {
+                onHitEvents.Add(foundEvent);
+            }
+            else
+            {
+                Debug.LogWarning($"'{eventType.Name}' 이벤트를 Attack 컴포넌트에서 찾을 수 없습니다.");
+            }
+        }
+        eventsInitialized = true;
+    }
 
     public override bool UseSkill(ISkillCaster caster)
     {
+        // 이벤트가 초기화되지 않았다면 한번만 실행합니다.
+        if (!eventsInitialized)
+        {
+            InitializeOnHitEvents(caster);
+        }
+
         if (parentModule.blackBoard.HasKey("Basic_Combo")) //이미 3초 타이머가 진행중인 상태에서 스킬을 사용한다면.
         {
             //타이머 역할을 하는 코루틴 종료 후 스킬 실행.
@@ -27,9 +69,6 @@ public class Basic_Attack : SkillBase
 
         //스킬 사용 중 상황.
         //히트 박스 사이즈 및 위치 조정.
-        //caster.GetHitBox().offset = hitBoxOffset;
-        //caster.GetHitBox().size = hitBoxSize;
-        //GameObject hitBox = Instantiate(hitBoxObj, caster.GetPosition(), caster.GetRotation());
         GameObject hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
 
         hitBox.transform.position = caster.GetHitBoxPos().position;
@@ -99,5 +138,10 @@ public class Basic_Attack : SkillBase
             yield return new WaitForFixedUpdate();
         }
         yield return null;
+    }
+
+    private void OnApplicationQuit()
+    {
+        onHitEvents.Clear();
     }
 }

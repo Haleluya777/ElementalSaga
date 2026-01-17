@@ -26,12 +26,24 @@ public class HitBox : PoolAble
         if (damageable != null)
         {
             damageable.TakeDamage(totalDmg, caster, other.gameObject);
-            if (onHitEvents != null)
+            if (onHitEvents.Count > 0)
             {
                 foreach (var effect in onHitEvents)
                 {
-                    if (effect != null) effect.Execute(other.gameObject, caster, totalDmg);
+                    if (effect != null)
+                    {
+                        Debug.Log("타격 이벤트!");
+                        effect.Execute(other.gameObject, caster, totalDmg);
+                    }
+                    else
+                    {
+                        Debug.Log("타격 이벤트가 할당 되어 있지 않음.");
+                    }
                 }
+            }
+            else
+            {
+                Debug.Log("타격 이벤트가 할당 되어 있지 않음.");
             }
         }
     }

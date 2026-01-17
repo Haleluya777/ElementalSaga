@@ -10,11 +10,20 @@ public class AmendChest : PoolAble, IInteractable
 
     [SerializeField] private RelicTier tier;
     [SerializeField] private List<RelicInfo> relics = new List<RelicInfo>();
+    private bool firstInteraction = true;
 
     public void ChestInit(RelicTier _tier, List<RelicInfo> confirmedRelicList = null)
     {
+        relics.Clear();
         tier = _tier;
         int relicCount = GameManager.instance.stageManager.amendCount;
+
+        if (GameManager.instance is not null)
+        {
+            GameManager.instance.eventManager.ReleaseAllRelicButton -= ReleaseObject;
+            GameManager.instance.eventManager.ReleaseAllRelicButton += ReleaseObject;
+        }
+
         if (confirmedRelicList.Count > 0)
         {
             Debug.Log("고정 등장 유물이 존재.");
@@ -38,8 +47,15 @@ public class AmendChest : PoolAble, IInteractable
         }
     }
 
+    void OnDisable()
+    {
+        GameManager.instance.eventManager.ReleaseAllRelicButton -= ReleaseObject;
+        firstInteraction = true;
+    }
+
     public void Interaction()
     {
-        GameManager.instance.canvasManager.ActiveAmendPanel(relics);
+        GameManager.instance.canvasManager.ActiveAmendPanel(relics, firstInteraction);
+        if (firstInteraction) firstInteraction = false;
     }
 }

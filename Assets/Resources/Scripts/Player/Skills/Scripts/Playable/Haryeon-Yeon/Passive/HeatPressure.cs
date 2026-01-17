@@ -8,6 +8,7 @@ public class HeatPressure : SkillBase
     private Unit unit;
     public int heatPressure = 0;
     private int previousHeatPressure = 0;
+    private const int MAX_AMOUNT = 100;
 
     // 유닛의 원본 스탯을 저장할 변수들
     private bool statsCaptured = false;
@@ -36,7 +37,7 @@ public class HeatPressure : SkillBase
             baseMoveSpeed = unit.MoveSpeed;
             baseJumpForce = unit.JumpForce;
             statsCaptured = true;
-            //Debug.Log($"원본 스탯 저장: Att({baseAtt}), MoveSpeed({baseMoveSpeed}), JumpForce({baseJumpForce})");
+            Debug.Log($"원본 스탯 저장: Att({baseAtt}), MoveSpeed({baseMoveSpeed}), JumpForce({baseJumpForce})");
         }
 
         // heatPressure 값이 변경되었을 때만 스탯을 업데이트.
@@ -44,6 +45,10 @@ public class HeatPressure : SkillBase
         {
             UpdateStats();
             previousHeatPressure = heatPressure;
+        }
+        else
+        {
+            //Debug.Log("열압 변경 없음.");
         }
 
         return true;
@@ -55,12 +60,10 @@ public class HeatPressure : SkillBase
 
         // 항상 원본 스탯을 기준으로 현재 heatPressure에 맞는 스탯을 계산하여 적용합니다.
         unit.Att = baseAtt + heatPressure;
-        // foreach (var skill in unit.GetComponentInChildren<IAttackable>().ActiveSkills)
-        // {
-        //     //skill.
-        // }
-        unit.MoveSpeed = baseMoveSpeed - (heatPressure * 0.05f);
-        unit.JumpForce = baseJumpForce - (int)(heatPressure * 0.05f);
+
+        //열압 수치에 따른 이동속도및 점프 높이 감소. 현재 테스트를 위해 주석 처리. 추후 주석 제거.
+        //unit.MoveSpeed = baseMoveSpeed - (heatPressure * 0.05f);
+        //unit.JumpForce = baseJumpForce - (int)(heatPressure * 0.05f);
 
         Debug.Log($"스탯 업데이트: Heat({heatPressure}) -> Att({unit.Att}), MoveSpeed({unit.MoveSpeed}), JumpForce({unit.JumpForce})");
     }

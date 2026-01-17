@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a74bb7d0ca14f304081d8ddf5eaa1f49, type: 3}
-  m_Name: Combo_1
+  m_Script: {fileID: 11500000, guid: 9680048a3acf2bf4d8f869aac3314a62, type: 3}
+  m_Name: Combo_2
   m_EditorClassIdentifier: 
-  dmgCalculater: {fileID: 11400000, guid: 60e92f47cf10769498a0a80482afada5, type: 2}
+  dmgCalculater: {fileID: 11400000, guid: a66946c3369af72438c9a87e50dea4b3, type: 2}
   targetObj: {fileID: 0}
-  animName: BasicAttack_0
+  animName: BasicAttack_2
   explanation: 
   hitBoxOffset: {x: -0.1, y: -0.1}
   hitBoxSize: {x: 0.5, y: 0.3}
-  chainedSkill: {fileID: 11400000, guid: 0efe20ddacffaf8439138cf82fd63c0f, type: 2}
-  firstComboSkill: {fileID: 11400000}
-  hitBoxObj: {fileID: 2777659332053925459, guid: b77ee40dc4b61cd4485a30dc37ecdfeb, type: 3}
+  chainedSkill: {fileID: 11400000, guid: 1804ddc438ceb3b4c8837850ee99732e, type: 2}
+  firstComboSkill: {fileID: 11400000, guid: bf99e639bdf68634cb6acc3e947e67cd, type: 2}
+  hitBoxObj: {fileID: 0}
   dashDistance: 1.5
   onHitEvents:
   - {fileID: 0}

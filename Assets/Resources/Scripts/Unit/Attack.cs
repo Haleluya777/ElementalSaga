@@ -27,9 +27,12 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     [Header("유물 효과들")]
     [SerializeField] private List<Skill_Module> relicPowers = new List<Skill_Module>();
 
-    [Header("맞을 때 실행할 효과들")]
+    [Header("피격되어 데미지를 받을 때 실행할 효과들")]
     //맞을 때 실행할 효과들은 공격자의 정보가 필요한 경우도 존재하므로, 새로운 클래스를 만들어 사용.
     [SerializeField] private List<DamagedEventBase> hitEvents = new List<DamagedEventBase>();
+
+    [Header("공격 성공 시 적용할 이벤트 리스트들")]
+    [SerializeField] private List<OnHitEventBase> onHitEvents = new List<OnHitEventBase>();
 
     [SerializeField] private int combo;
 
@@ -43,6 +46,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     public List<Skill_Module> PassiveSkills { get => passiveSkills; set => passiveSkills = value; }
     public List<Skill_Module> RelicPowers { get => relicPowers; set => relicPowers = value; }
     public List<DamagedEventBase> HitEvents { get => hitEvents; set => hitEvents = value; }
+    public List<OnHitEventBase> OnHitEvents { get => onHitEvents; set => onHitEvents = value; }
 
     void Update()
     {
@@ -62,6 +66,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
         SkillInit(activeSkills);
         SkillInit(modifiedActiveSkills);
         SkillInit(passiveSkills);
+        SkillInit(onHitEvents);
     }
 
     private void SkillInit<T>(List<T> skills) where T : class
@@ -81,6 +86,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
             // 타입에 따라 적절한 Initialize 메서드를 호출합니다.
             if (newInstance is DamagedEventBase damagedEvent)
             {
+                Debug.Log("피격 이벤트 초기화");
                 damagedEvent.Initialize(unit);
             }
             else if (newInstance is Skill_Module skillModule)
@@ -88,6 +94,11 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
                 // Skill_Module은 ISkillCaster(자기 자신 'this')를 넘겨주어 초기화한다고 가정합니다.
                 // 만약 다른 파라미터가 필요하다면 이 부분을 수정해야 합니다.
                 skillModule.InitSkill();
+            }
+            else if (newInstance is OnHitEventBase onHitEventBase)
+            {
+                Debug.Log("타격 이벤트 초기화");
+                onHitEventBase.Initialize(unit);
             }
 
             // 새로 생성된 인스턴스를 다시 리스트에 할당합니다.
@@ -107,6 +118,43 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
             if (foundSkill != null)
             {
                 return foundSkill;
+            }
+        }
+        return null;
+    }
+
+    //public T FindOnHitEvent<T>() where T : OnHitEventBase
+    //{
+    //    // onHitEvents 리스트를 순회합니다.
+    //    foreach (var hitevent in onHitEvents)
+    //    {
+    //        // 'is' 키워드를 사용해 현재 이벤트(hitevent)가 찾고자 하는 타입(T)인지 확인합니다.
+    //        if (hitevent is T)
+    //        {
+    //            // 타입이 맞다면 'as' 키워드로 형변환하여 반환합니다.
+    //            return hitevent as T;
+    //        }
+    //    }
+    //    // 리스트에서 해당 타입의 이벤트를 찾지 못하면 null을 반환합니다.
+    //    return null;
+    //}
+
+    // Type 객체를 받아 이벤트를 찾는 메서드 오버로드를 추가합니다.
+    public OnHitEventBase FindOnHitEvent(Type type)
+    {
+        // 전달된 타입이 OnHitEventBase를 상속하는지 확인합니다.
+        if (!typeof(OnHitEventBase).IsAssignableFrom(type))
+        {
+            Debug.LogWarning($"요청된 타입 '{type.Name}'은 OnHitEventBase를 상속하지 않습니다.");
+            return null;
+        }
+
+        foreach (var hitevent in onHitEvents)
+        {
+            // 정확한 타입이 일치하는지 확인합니다.
+            if (hitevent.GetType() == type)
+            {
+                return hitevent;
             }
         }
         return null;

@@ -39,8 +39,7 @@ public class StageManager : MonoBehaviour
 
     public void StageStart(RoomType roomType = RoomType.StartRoom) //스테이지 시작할 때 등장할 몬스터 리스트 만들기.
     {
-        Debug.Log(roomType);
-        if (currentRoomInfo.type == roomType)
+        if (roomType == RoomType.StartRoom)
         {
             Debug.Log("시작방임");
             //StageClear();
@@ -129,7 +128,7 @@ public class StageManager : MonoBehaviour
         }
 
         //보상 상자 생성.
-        GameManager.instance.roomManager.MakeAmendChest(currentRoomInfo.SetChestTier(), new Vector2(0, -1), currentRoomInfo.confirmedRelics);
+        GameManager.instance.roomManager.MakeAmendChest(currentRoomInfo.SetChestTier(), new Vector2(0, -4), currentRoomInfo.confirmedRelics);
     }
 
     private GameObject CreateRoom(RoomType type)

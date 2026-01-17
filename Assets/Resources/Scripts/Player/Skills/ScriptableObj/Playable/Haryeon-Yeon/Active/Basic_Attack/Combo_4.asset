@@ -16,11 +16,11 @@ MonoBehaviour:
   targetObj: {fileID: 0}
   animName: BasicAttack_3
   explanation: 
-  onHitEvents:
-  - {fileID: 11400000, guid: 098c7b339026ff644938338d74430d84, type: 2}
   hitBoxOffset: {x: -0.1, y: -0.1}
   hitBoxSize: {x: 0.5, y: 0.3}
   chainedSkill: {fileID: 0}
   firstComboSkill: {fileID: 11400000, guid: 04f32aeb6086fcc41959c780d57d8f9d, type: 2}
   hitBoxObj: {fileID: 2777659332053925459, guid: b77ee40dc4b61cd4485a30dc37ecdfeb, type: 3}
   dashDistance: 1.5
+  onHitEvents:
+  - {fileID: 0}

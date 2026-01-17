@@ -617,13 +617,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicAttacks:
-  - {fileID: 11400000, guid: 5f85d9ceb38e52b4d802b2cee4d352f8, type: 2}
+  - {fileID: 11400000, guid: 43f795afcd1bf0943912caeb812f43e5, type: 2}
   - {fileID: 11400000, guid: 4ebd79865a84d70488a1a1c2f4ab1244, type: 2}
   parentObj: {fileID: 221587132}
   hitBox: {fileID: 0}
   rigid: {fileID: 0}
   activeSkills:
-  - {fileID: 11400000, guid: 658b89326825c084096b3e52b19c0324, type: 2}
+  - {fileID: 11400000, guid: 43f795afcd1bf0943912caeb812f43e5, type: 2}
   - {fileID: 11400000, guid: 56bd1b3db72e49c42b2f44159ad1f4b2, type: 2}
   - {fileID: 11400000, guid: f7ca0cbaceebb4a47a5c6dd8b5464423, type: 2}
   modifiedActiveSkills: []
@@ -632,6 +632,8 @@ MonoBehaviour:
   relicPowers: []
   hitEvents:
   - {fileID: 0}
+  onHitEvents:
+  - {fileID: 11400000, guid: 94da1b27b49a97c4587a219bb49bca83, type: 2}
   combo: 0
 --- !u!1 &191505364
 GameObject:
@@ -972,7 +974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &221587133
 Animator:
   serializedVersion: 5
@@ -1056,7 +1058,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.53}
+  m_Offset: {x: 0, y: -0.08}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1067,7 +1069,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.1}
+  m_Size: {x: 0.6, y: 1.2}
   m_EdgeRadius: 0
 --- !u!50 &221587136
 Rigidbody2D:
@@ -1753,7 +1755,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.18, y: -0.28999972, z: -10}
+  m_LocalPosition: {x: -3.48, y: 3.5000002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1985,6 +1987,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2138,7 +2168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &691252291
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2645,6 +2675,7 @@ MonoBehaviour:
   relicPowers: []
   hitEvents:
   - {fileID: 0}
+  onHitEvents: []
   combo: 0
 --- !u!1 &735646347
 GameObject:
@@ -3247,6 +3278,7 @@ MonoBehaviour:
   relicPowers: []
   hitEvents:
   - {fileID: 0}
+  onHitEvents: []
   combo: 0
 --- !u!1 &945178285
 GameObject:
@@ -3852,7 +3884,7 @@ PrefabInstance:
     - target: {fileID: 6125983688667034802, guid: b057e0ba0b24d9c4b931535c047b60dd, type: 3}
       propertyPath: PlayerUnit
       value: 
-      objectReference: {fileID: 1511970927}
+      objectReference: {fileID: 221587132}
     - target: {fileID: 8328093875306687297, guid: b057e0ba0b24d9c4b931535c047b60dd, type: 3}
       propertyPath: rooms.Array.data[0].weight
       value: 100
@@ -4010,7 +4042,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 1511970930}
+  m_Follow: {fileID: 221587138}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -5157,6 +5189,10 @@ PrefabInstance:
       propertyPath: RelicWeights._serializedList.Array.data[4].Value
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5038715390192759813, guid: a18b57602ece8af488359268283adbc6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 6519626108165637039, guid: a18b57602ece8af488359268283adbc6, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -5204,6 +5240,10 @@ PrefabInstance:
     - target: {fileID: 6996575870376510487, guid: a18b57602ece8af488359268283adbc6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369742875132282321, guid: a18b57602ece8af488359268283adbc6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5546,6 +5586,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029177713323053179, guid: 25dbd78327cf7f84a9f3d7956cd28089, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5877,7 +5945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1511970928
 Rigidbody2D:
   serializedVersion: 4
@@ -6413,10 +6481,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00d8ad544765b1b4da9ef3dc2bdb0cb3, type: 2}
   - {fileID: 11400000, guid: 0624a4849c245834891f8f217f99164e, type: 2}
   modifiedActiveSkills: []
-  passiveSkills: []
+  passiveSkills:
+  - {fileID: 11400000, guid: 2f9a42acde28fd04d88b5e39d292c158, type: 2}
   relicPowers: []
-  hitEvents:
-  - {fileID: 0}
+  hitEvents: []
+  onHitEvents:
+  - {fileID: 11400000, guid: 098c7b339026ff644938338d74430d84, type: 2}
   combo: 0
 --- !u!1 &1572324264
 GameObject:
@@ -6911,6 +6981,7 @@ MonoBehaviour:
   relicPowers: []
   hitEvents:
   - {fileID: 0}
+  onHitEvents: []
   combo: 0
 --- !u!1 &1762603758
 GameObject:
@@ -8254,6 +8325,7 @@ MonoBehaviour:
   relicPowers: []
   hitEvents:
   - {fileID: 0}
+  onHitEvents: []
   combo: 0
 --- !u!1 &2104654056
 GameObject:

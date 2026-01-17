@@ -15,6 +15,11 @@ public abstract class SkillBase : ScriptableObject
         parentModule = module;
     }
 
+    public virtual void Initialize(Skill_Module module, IAttackable attack)
+    {
+        parentModule = module;
+    }
+
     public virtual void HitBoxInit(Vector2 hitBoxSize, Vector2 hitBoxOffSet)
     {
 

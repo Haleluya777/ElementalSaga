@@ -12,8 +12,10 @@ public interface IAttackable
     List<Skill_Module> PassiveSkills { get; set; }
     List<Skill_Module> RelicPowers { get; set; }
     List<DamagedEventBase> HitEvents { get; set; }
+    List<OnHitEventBase> OnHitEvents { get; set; }
     int Combo { get; set; }
 
     bool PerformAttack(Skill_Module skill);
     T FindSkill<T>(T skill) where T : SkillBase;
+    OnHitEventBase FindOnHitEvent(Type type);
 }

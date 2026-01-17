@@ -25,36 +25,41 @@ public class CanvasManager : MonoBehaviour
     private const int PRODUCT_COUNT = 5;
 
     //스테이지 클리어 후 보상 상자와 상호작용할 때 나타는 UI판넬
-    public void ActiveAmendPanel(List<RelicInfo> relics)
+    public void ActiveAmendPanel(List<RelicInfo> relics, bool firstInteraction = true)
     {
         amendPanel.SetActive(true);
-        for (int i = 0; i < relics.Count; i++)
+
+        if (firstInteraction)
         {
-            //번호 할당
-            int index = i;
+            for (int i = 0; i < relics.Count; i++)
+            {
+                //번호 할당
+                int index = i;
 
-            //버튼 오브젝트 가져온 후, Contents에 자식으로 넣음.
-            var button = GameManager.instance.objectPoolManager.poolDic["UI"].GetGo("RelicSelectButton");
-            button.transform.SetParent(amendContents.transform);
+                //버튼 오브젝트 가져온 후, Contents에 자식으로 넣음.
+                var button = GameManager.instance.objectPoolManager.poolDic["UI"].GetGo("RelicSelectButton");
+                button.transform.SetParent(amendContents.transform);
 
-            //버튼의 이미지, 텍스트 및 착용할 유물 관련 정보 가져오기.
-            var relicImg = button.transform.GetChild(0).GetComponent<Image>();
-            var relicTxt = button.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-            //RelicInfo relic = chestInfo.SetRelic();
+                //버튼의 이미지, 텍스트 및 착용할 유물 관련 정보 가져오기.
+                var relicImg = button.transform.GetChild(0).GetComponent<Image>();
+                var relicTxt = button.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+                //RelicInfo relic = chestInfo.SetRelic();
 
-            //크기 조정.
-            button.transform.localScale = new Vector2(1, 1);
+                //크기 조정.
+                button.transform.localScale = new Vector2(1, 1);
 
-            //이미지 및 설명 텍스트 변경.
-            relicImg.sprite = relics[i].sprite;
-            relicTxt.text = relics[i].explain;
+                //이미지 및 설명 텍스트 변경.
+                relicImg.sprite = relics[i].sprite;
+                relicTxt.text = relics[i].explain;
 
-            Button buttonEvent = button.GetComponent<Button>();
+                Button buttonEvent = button.GetComponent<Button>();
 
-            buttonEvent.onClick.AddListener(() => GameManager.instance.unitManager.EquipRelic(relics[index]));
-            buttonEvent.onClick.AddListener(() => GameManager.instance.eventManager.ReleaseRelicButton());
-            //선택한 유물이 더 이상 다시 등장하지 않게 하기 위해 리스트에서 삭제하는 이벤트 추가.
-            buttonEvent.onClick.AddListener(() => GameManager.instance.relicManager.RemoveRelic(relics[index]));
+                buttonEvent.onClick.AddListener(() => GameManager.instance.unitManager.EquipRelic(relics[index]));
+                buttonEvent.onClick.AddListener(() => GameManager.instance.eventManager.ReleaseRelicButton());
+                //선택한 유물이 더 이상 다시 등장하지 않게 하기 위해 리스트에서 삭제하는 이벤트 추가.
+                buttonEvent.onClick.AddListener(() => GameManager.instance.relicManager.RemoveRelic(relics[index]));
+                buttonEvent.onClick.AddListener(() => GameManager.instance.canvasManager.amendPanel.SetActive(false));
+            }
         }
     }
 
