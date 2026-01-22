@@ -7,12 +7,12 @@ public class SequenceNode : BTNode
 {
     [Output(dynamicPortList = true)] public List<BTNode> childs;
 
-    public override NodeState Evaluate()
+    public override NodeState Evaluate(AIController controller)
     {
         foreach (var port in DynamicOutputs)
         {
             BTNode child = port.Connection.node as BTNode;
-            switch (child.Evaluate())
+            switch (child.Evaluate(controller))
             {
                 case NodeState.Success:
                     continue;

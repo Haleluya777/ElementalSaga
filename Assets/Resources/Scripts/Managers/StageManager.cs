@@ -18,6 +18,7 @@ public class StageManager : MonoBehaviour
     private int previousTotalCound;
     public int totalCount;
     public int amendCount; //줄 보상의 개수
+    private List<Transform> pos = new List<Transform>();
 
     void Start()
     {
@@ -85,29 +86,50 @@ public class StageManager : MonoBehaviour
         totalCount = currentRoomInfo.enemyList.Count; //총 Enemy수.
         previousTotalCound = totalCount;
 
+        // 중복 소환 방지를 위한 가용 위치 리스트 복사
+        List<Transform> availableEnemyPos = new List<Transform>(currentRoomInfo.enemyPos);
+        List<Transform> availableElitePos = new List<Transform>(currentRoomInfo.elitePos);
+
         //Enemy소환.
         foreach (var enemyName in currentRoomInfo.enemyList)
         {
             //일반 몬스터 소환.
             GameObject enemy = GameManager.instance.objectPoolManager.poolDic["Units"].GetGo(enemyName);
             EnemyCharacter enemyCom = enemy.GetComponent<EnemyCharacter>();
-
             //Debug.Log(enemyCom is null);
 
             enemy.tag = "Enemy";
 
             if (enemyCom.Type == UnitType.Enemy)
             {
-                Debug.Log("일반 몬스터 소환");
                 //일반 몬스터 스폰 위치에 몬스터 이동.
-                enemy.transform.position = currentRoomInfo.enemyPos[Random.Range(0, currentRoomInfo.enemyPos.Count)].position;
+                if (availableEnemyPos.Count > 0)
+                {
+                    int randIdx = Random.Range(0, availableEnemyPos.Count);
+                    enemy.transform.position = availableEnemyPos[randIdx].position;
+                    availableEnemyPos.RemoveAt(randIdx);
+                }
+                else
+                {
+                    Debug.LogWarning("일반 몬스터 스폰 위치가 부족합니다.");
+                }
             }
             else if (enemyCom.Type == UnitType.Elite || enemyCom.Type == UnitType.Boss)
             {
                 //엘리트 몬스터 스폰 위치에 몬스터 이동.
-                enemy.transform.position = currentRoomInfo.elitePos[Random.Range(0, currentRoomInfo.elitePos.Count)].position;
+                if (availableElitePos.Count > 0)
+                {
+                    int randIdx = Random.Range(0, availableElitePos.Count);
+                    enemy.transform.position = availableElitePos[randIdx].position;
+                    availableElitePos.RemoveAt(randIdx);
+                }
+                else
+                {
+                    Debug.LogWarning("엘리트/보스 몬스터 스폰 위치가 부족합니다.");
+                }
             }
         }
+        pos.Clear();
     }
 
     public void StageClear(bool boss = false)

@@ -630,8 +630,7 @@ MonoBehaviour:
   passiveSkills:
   - {fileID: 11400000, guid: 11189c77d1dfb6345a05adc87e84d64b, type: 2}
   relicPowers: []
-  hitEvents:
-  - {fileID: 0}
+  hitEvents: []
   onHitEvents:
   - {fileID: 11400000, guid: 94da1b27b49a97c4587a219bb49bca83, type: 2}
   combo: 0
@@ -761,7 +760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &217463227
 Animator:
   serializedVersion: 5
@@ -954,6 +953,8 @@ MonoBehaviour:
   textBox: {fileID: 0}
   maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}
   id: 10
+  MeleeRange: 1
+  RangerRange: 3
 --- !u!1 &221587132
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,7 +975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &221587133
 Animator:
   serializedVersion: 5
@@ -1755,7 +1756,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.48, y: 3.5000002, z: -10}
+  m_LocalPosition: {x: 3.18, y: -0.28999972, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3884,7 +3885,7 @@ PrefabInstance:
     - target: {fileID: 6125983688667034802, guid: b057e0ba0b24d9c4b931535c047b60dd, type: 3}
       propertyPath: PlayerUnit
       value: 
-      objectReference: {fileID: 221587132}
+      objectReference: {fileID: 1511970927}
     - target: {fileID: 8328093875306687297, guid: b057e0ba0b24d9c4b931535c047b60dd, type: 3}
       propertyPath: rooms.Array.data[0].weight
       value: 100
@@ -3923,7 +3924,7 @@ PrefabInstance:
       objectReference: {fileID: 1769898525}
     - target: {fileID: 8411145481632358394, guid: b057e0ba0b24d9c4b931535c047b60dd, type: 3}
       propertyPath: roomObj.Array.size
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8411145481632358394, guid: b057e0ba0b24d9c4b931535c047b60dd, type: 3}
       propertyPath: roomMaps.Array.size
@@ -4042,7 +4043,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 221587138}
+  m_Follow: {fileID: 1511970930}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -5945,7 +5946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1511970928
 Rigidbody2D:
   serializedVersion: 4

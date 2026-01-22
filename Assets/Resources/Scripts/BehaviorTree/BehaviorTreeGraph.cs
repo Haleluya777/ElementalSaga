@@ -5,4 +5,5 @@ using XNode;
 public class BehaviorTreeGraph : NodeGraph
 {
     public BTNode rootNode;
+    public BlackBoard blackboard;
 }

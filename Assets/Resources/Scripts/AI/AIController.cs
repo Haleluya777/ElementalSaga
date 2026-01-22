@@ -5,8 +5,11 @@ using System;
 public class AIController : MonoBehaviour, IDataInitializable, IControllable
 {
     [SerializeField] private GameObject parentObj;
+    public GameObject ParentObj { get => parentObj; set => value = parentObj; }
     private Rigidbody2D rigid;
-    public float timer;
+
+    private IMovable movement;
+    public IAttackable attack;
 
     public event Action<Vector2> moveInput;
     public event Action<int> attackInput;
@@ -18,17 +21,19 @@ public class AIController : MonoBehaviour, IDataInitializable, IControllable
     private BehaviorTreeGraph runTimeTree;
     private BTNode root;
 
-    void Awake()
-    {
-        runTimeTree = Instantiate(behaviorTree);
-        rigid = parentObj.GetComponent<Rigidbody2D>();
-        root = runTimeTree.rootNode;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        root.Evaluate();
+        root.Evaluate(this);
+    }
+
+    public void CallMoveEvent(Vector2 dir)
+    {
+        moveInput?.Invoke(dir);
+    }
+
+    public void CallAttackEvent()
+    {
+        attackInput?.Invoke(0);
     }
 
     public void DataInit()
@@ -43,5 +48,11 @@ public class AIController : MonoBehaviour, IDataInitializable, IControllable
         // attack = parentObj.GetComponentInChildren<IAttackable>();
         // anim = parentObj.GetComponent<Animator>();
         // isAirial = false;
+
+        runTimeTree = behaviorTree.Copy() as BehaviorTreeGraph;
+        rigid = parentObj.GetComponent<Rigidbody2D>();
+        root = runTimeTree.rootNode;
+        movement = parentObj.GetComponentInChildren<IMovable>();
+        attack = parentObj.GetComponentInChildren<IAttackable>();
     }
 }

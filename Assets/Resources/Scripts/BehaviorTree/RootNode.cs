@@ -7,8 +7,8 @@ public class RootNode : BTNode
 {
     [Output] public BTNode selectorNode;
 
-    public override NodeState Evaluate()
+    public override NodeState Evaluate(AIController controller)
     {
-        return selectorNode.Evaluate();
+        return selectorNode.Evaluate(controller);
     }
 }

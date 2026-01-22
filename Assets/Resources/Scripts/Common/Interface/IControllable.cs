@@ -5,6 +5,7 @@ using System;
 
 public interface IControllable
 {
+    public GameObject ParentObj { get; set; }
     event Action<Vector2> moveInput;
     event Action<int> attackInput;
     event Action jumpInput;

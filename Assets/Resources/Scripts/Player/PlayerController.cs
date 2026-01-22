@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour, IDataInitializable, IControllable
 
     [SerializeField] private UnitState curState;
     [SerializeField] private GameObject parentObj;
+    public GameObject ParentObj { get => parentObj; set => value = parentObj; }
 
     private Vector2 targetVector; //플레이어 목표 방향.
     private bool isAirial;

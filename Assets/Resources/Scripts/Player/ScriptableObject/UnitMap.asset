@@ -49,7 +49,7 @@ MonoBehaviour:
     hp: 500
     att: 130
     gage: 0
-    moveSpeed: 5
+    moveSpeed: 2
     jumpForce: 5
     addJumpCount: 0
     attSpeed: 1
@@ -59,7 +59,7 @@ MonoBehaviour:
     hp: 500
     att: 130
     gage: 0
-    moveSpeed: 5
+    moveSpeed: 2
     jumpForce: 5
     addJumpCount: 0
     attSpeed: 1
@@ -69,7 +69,7 @@ MonoBehaviour:
     hp: 500
     att: 130
     gage: 0
-    moveSpeed: 5
+    moveSpeed: 2
     jumpForce: 5
     addJumpCount: 0
     attSpeed: 1
@@ -79,7 +79,7 @@ MonoBehaviour:
     hp: 500
     att: 130
     gage: 0
-    moveSpeed: 5
+    moveSpeed: 2
     jumpForce: 5
     addJumpCount: 0
     attSpeed: 1

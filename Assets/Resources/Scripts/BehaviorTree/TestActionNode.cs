@@ -5,7 +5,7 @@ using XNode;
 
 public class TestActionNode : BTNode
 {
-    public override NodeState Evaluate()
+    public override NodeState Evaluate(AIController controller)
     {
         Debug.Log("행동중");
         return NodeState.Success;
