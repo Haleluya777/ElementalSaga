@@ -21,9 +21,11 @@ public class AIController : MonoBehaviour, IDataInitializable, IControllable
     private BehaviorTreeGraph runTimeTree;
     private BTNode root;
 
+    private bool runningBT = false;
+
     void Update()
     {
-        root.Evaluate(this);
+        if (runningBT) root.Evaluate(this);
     }
 
     public void CallMoveEvent(Vector2 dir)
@@ -50,9 +52,13 @@ public class AIController : MonoBehaviour, IDataInitializable, IControllable
         // isAirial = false;
 
         runTimeTree = behaviorTree.Copy() as BehaviorTreeGraph;
+        runTimeTree.blackboard = new BlackBoard();
+
         rigid = parentObj.GetComponent<Rigidbody2D>();
         root = runTimeTree.rootNode;
         movement = parentObj.GetComponentInChildren<IMovable>();
         attack = parentObj.GetComponentInChildren<IAttackable>();
+
+        runningBT = true;
     }
 }
