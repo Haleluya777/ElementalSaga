@@ -44,7 +44,7 @@ public abstract class Unit : PoolAble, IDamageable
     [SerializeField] protected UnitData unitData;
     [SerializeField] private float dmgRate = 1; //피해 비율.
     private bool cantAction; //true일 경우 행동 불능.
-    private bool graceState; //무적 상태.
+    public bool graceState; //무적 상태.
     private bool hpRegain;
     private bool gageRegain;
 
@@ -62,7 +62,7 @@ public abstract class Unit : PoolAble, IDamageable
     public int JumpForce { get => unitData.jumpForce; set => unitData.jumpForce = Mathf.Max(0, value); }
     public int AddJumpCount { get => unitData.addJumpCount; set => unitData.addJumpCount = Mathf.Max(0, value); }
     public bool isDead => CurHp <= 0;
-    public bool GraceState { get; set; }
+    public bool GraceState { get => graceState; set => graceState = value; }
     public UnitType Type => unitData.type;
 
     public bool CantAction

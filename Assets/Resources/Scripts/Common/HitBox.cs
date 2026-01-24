@@ -26,7 +26,7 @@ public class HitBox : PoolAble
         if (damageable != null)
         {
             damageable.TakeDamage(totalDmg, caster, other.gameObject);
-            if (onHitEvents.Count > 0)
+            if (onHitEvents is not null && onHitEvents.Count > 0)
             {
                 foreach (var effect in onHitEvents)
                 {

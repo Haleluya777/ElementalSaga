@@ -949,6 +949,7 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  graceState: 0
   isAirial: 0
   textBox: {fileID: 0}
   maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}
@@ -1022,6 +1023,7 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  graceState: 0
   isAirial: 0
   textBox: {fileID: 0}
   maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}
@@ -1238,6 +1240,7 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  graceState: 0
   isAirial: 0
   textBox: {fileID: 1572324264}
   maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}
@@ -3991,6 +3994,37 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 715577598}
   m_SourcePrefab: {fileID: 100100000, guid: b057e0ba0b24d9c4b931535c047b60dd, type: 3}
+--- !u!1 &1221620726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1221620727}
+  m_Layer: 7
+  m_Name: HitBoxPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1221620727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221620726}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1729448570}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1227202984
 GameObject:
   m_ObjectHideFlags: 0
@@ -4687,6 +4721,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1767825004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1266558957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1266558958}
+  m_Layer: 7
+  m_Name: CatchPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1266558958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266558957}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1729448570}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1286478629
 GameObject:
   m_ObjectHideFlags: 0
@@ -4903,6 +4968,7 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  graceState: 0
   isAirial: 0
   textBox: {fileID: 0}
   maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}
@@ -5508,8 +5574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982b4ba3643629e44897ad57f01bc2de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curState: 0
   parentObj: {fileID: 217463226}
-  timer: 0
   behaviorTree: {fileID: 11400000, guid: 4ea846a6305c6ac439ee83f027d1079e, type: 2}
 --- !u!1001 &1445601000
 PrefabInstance:
@@ -6116,6 +6182,7 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  graceState: 1
   isAirial: 0
   textBox: {fileID: 1312039465}
   maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}
@@ -6944,7 +7011,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1729448570
 Transform:
   m_ObjectHideFlags: 0
@@ -6957,7 +7024,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1221620727}
+  - {fileID: 1266558958}
   m_Father: {fileID: 217463232}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1729448571
@@ -6976,7 +7045,9 @@ MonoBehaviour:
   parentObj: {fileID: 217463226}
   hitBox: {fileID: 0}
   rigid: {fileID: 0}
-  activeSkills: []
+  activeSkills:
+  - {fileID: 11400000, guid: 658b89326825c084096b3e52b19c0324, type: 2}
+  - {fileID: 11400000, guid: d2cc2ef550c31484a96e81e562f0e23b, type: 2}
   modifiedActiveSkills: []
   passiveSkills: []
   relicPowers: []
@@ -7628,6 +7699,7 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  graceState: 0
   isAirial: 0
   textBox: {fileID: 0}
   maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}

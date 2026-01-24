@@ -53,9 +53,9 @@ public class PlayerController : MonoBehaviour, IDataInitializable, IControllable
 
     void Update()
     {
-        StateActions(curState);
+        //StateActions(curState);
         StateAnimation(curState);
-        Debug.DrawRay(transform.position, Vector2.down * .7f, Color.red, .2f);
+        //Debug.DrawRay(transform.position, Vector2.down * .7f, Color.red, .2f);
     }
 
     void LateUpdate()

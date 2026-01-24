@@ -4,9 +4,15 @@ using UnityEngine;
 using System;
 public class AIController : MonoBehaviour, IDataInitializable, IControllable
 {
+    public enum UnitState { Idle, Attacking, Moving }
+
+    [Header("AI의 현재 상태")]
+    public UnitState curState;
+
     [SerializeField] private GameObject parentObj;
     public GameObject ParentObj { get => parentObj; set => value = parentObj; }
     private Rigidbody2D rigid;
+    private Animator anim;
 
     private IMovable movement;
     public IAttackable attack;
@@ -26,6 +32,7 @@ public class AIController : MonoBehaviour, IDataInitializable, IControllable
     void Update()
     {
         if (runningBT) root.Evaluate(this);
+        UpdateUnitState();
     }
 
     public void CallMoveEvent(Vector2 dir)
@@ -53,12 +60,24 @@ public class AIController : MonoBehaviour, IDataInitializable, IControllable
 
         runTimeTree = behaviorTree.Copy() as BehaviorTreeGraph;
         runTimeTree.blackboard = new BlackBoard();
+        root = runTimeTree.rootNode;
 
         rigid = parentObj.GetComponent<Rigidbody2D>();
-        root = runTimeTree.rootNode;
+        anim = parentObj.GetComponentInChildren<Animator>();
         movement = parentObj.GetComponentInChildren<IMovable>();
         attack = parentObj.GetComponentInChildren<IAttackable>();
 
         runningBT = true;
+    }
+
+    private void UpdateUnitState()
+    {
+        if (curState == UnitState.Attacking)
+        {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                curState = UnitState.Idle;
+            }
+        }
     }
 }
