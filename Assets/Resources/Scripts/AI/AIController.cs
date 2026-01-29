@@ -7,7 +7,21 @@ public class AIController : MonoBehaviour, IDataInitializable, IControllable
     public enum UnitState { Idle, Attacking, Moving }
 
     [Header("AI의 현재 상태")]
-    public UnitState curState;
+    [SerializeField] private UnitState _curState;
+    private float lastStateChangeTime;
+
+    public UnitState curState
+    {
+        get => _curState;
+        set
+        {
+            if (_curState != value)
+            {
+                _curState = value;
+                lastStateChangeTime = Time.time;
+            }
+        }
+    }
 
     [SerializeField] private GameObject parentObj;
     public GameObject ParentObj { get => parentObj; set => value = parentObj; }
@@ -37,6 +51,7 @@ public class AIController : MonoBehaviour, IDataInitializable, IControllable
 
     public void CallMoveEvent(Vector2 dir)
     {
+        if (curState != UnitState.Moving) curState = UnitState.Moving;
         moveInput?.Invoke(dir);
     }
 
@@ -74,9 +89,27 @@ public class AIController : MonoBehaviour, IDataInitializable, IControllable
     {
         if (curState == UnitState.Attacking)
         {
+            if (Time.time - lastStateChangeTime < 0.2f) return;
+
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
                 curState = UnitState.Idle;
+                Debug.Log("공격 종료.");
+                CallMoveEvent(Vector2.zero);
+            }
+        }
+
+        else
+        {
+            if (rigid.velocity.x == 0)
+            {
+                curState = UnitState.Idle;
+                anim.CrossFade("Idle", 0f);
+            }
+            else
+            {
+                curState = UnitState.Moving;
+                anim.CrossFade("Run", 0f);
             }
         }
     }

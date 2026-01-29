@@ -954,8 +954,8 @@ MonoBehaviour:
   textBox: {fileID: 0}
   maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}
   id: 10
-  MeleeRange: 1
-  RangerRange: 3
+  MeleeRange: 2
+  RangerRange: 5
 --- !u!1 &221587132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1759,7 +1759,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.18, y: -0.28999972, z: -10}
+  m_LocalPosition: {x: -2.7, y: -0.28999972, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5308,6 +5308,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7331448962713018559, guid: a18b57602ece8af488359268283adbc6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7915959284498745755, guid: a18b57602ece8af488359268283adbc6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8369742875132282321, guid: a18b57602ece8af488359268283adbc6, type: 3}
       propertyPath: m_LocalPosition.y
       value: -3
@@ -5574,7 +5582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982b4ba3643629e44897ad57f01bc2de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curState: 0
+  _curState: 0
   parentObj: {fileID: 217463226}
   behaviorTree: {fileID: 11400000, guid: 4ea846a6305c6ac439ee83f027d1079e, type: 2}
 --- !u!1001 &1445601000
@@ -6101,7 +6109,7 @@ Transform:
   m_GameObject: {fileID: 1511970927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.18, y: -3.79, z: 0}
+  m_LocalPosition: {x: -2.7, y: -3.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7048,6 +7056,7 @@ MonoBehaviour:
   activeSkills:
   - {fileID: 11400000, guid: 658b89326825c084096b3e52b19c0324, type: 2}
   - {fileID: 11400000, guid: d2cc2ef550c31484a96e81e562f0e23b, type: 2}
+  - {fileID: 11400000, guid: 1705460b44fab9941a24f9146d17de0f, type: 2}
   modifiedActiveSkills: []
   passiveSkills: []
   relicPowers: []

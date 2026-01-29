@@ -2,25 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XNode;
+using System.Linq;
 
 public class SequenceNode : BTNode
 {
     [Output(dynamicPortList = true)] public List<BTNode> childs;
 
+    private int currentChildIndex = 0;
+    private int lastFrameVisited = -1;
+
     public override NodeState Evaluate(AIController controller)
     {
-        foreach (var port in DynamicOutputs)
+        // 연속된 프레임 방문이 아니면 인덱스 초기화
+        if (Time.frameCount != lastFrameVisited + 1)
         {
-            BTNode child = port.Connection.node as BTNode;
-            switch (child.Evaluate(controller))
+            currentChildIndex = 0;
+        }
+        lastFrameVisited = Time.frameCount;
+
+        var ports = DynamicOutputs.ToList();
+
+        for (int i = currentChildIndex; i < ports.Count; i++)
+        {
+            BTNode child = ports[i].Connection.node as BTNode;
+            NodeState state = child.Evaluate(controller);
+
+            switch (state)
             {
                 case NodeState.Success:
                     continue;
 
                 case NodeState.Failure:
+                    currentChildIndex = 0;
                     return NodeState.Failure;
+
+                case NodeState.Running:
+                    currentChildIndex = i;
+                    return NodeState.Running;
             }
         }
+
+        currentChildIndex = 0;
         return NodeState.Success;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using XNode;
 
 
@@ -6,10 +7,10 @@ public enum NodeState { Running, Success, Failure }
 
 public abstract class BTNode : Node
 {
-    [Input] public BTNode parent;
+    [Input(dynamicPortList = true)] public List<BTNode> parent;
 
     //모든 행동트리 노드가 실행해야 할 메서드
     public abstract NodeState Evaluate(AIController controller);
-
+    public virtual bool CanExecute(AIController controller) => true;
     public BlackBoard blackboard => (graph as BehaviorTreeGraph)?.blackboard;
 }

@@ -17,3 +17,4 @@ MonoBehaviour:
   animName: ThrowAway_Dash
   explanation: 
   chainedSkill_Jump: {fileID: 11400000, guid: 7dd9c5872c99636439683db778caa3ab, type: 2}
+  dashDistance: 3

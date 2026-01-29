@@ -53,6 +53,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
         UpdateCoolDown();
         UsePassiveSkills();
         //ChangeAirialBasicAttack();
+        //Debug.Log($"{parentObj.name}의 x가속도 : {rigid.velocity.x}");
     }
 
     public void DataInit()

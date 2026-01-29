@@ -59,7 +59,7 @@ public class EnemySlamDown_Jump : SkillBase
         while (true)
         {
             hit = Physics2D.Raycast(caster.GetPosition(), Vector2.down, .7f, 1 << 3);
-            Debug.Log(hit.collider is null);
+            //Debug.Log(hit.collider is null);
             if (hit.collider != null)
             {
                 targetObj.GetComponentInChildren<IDamageable>().TakeDamage(dmgCalculater.Calculate(caster), caster, targetObj);

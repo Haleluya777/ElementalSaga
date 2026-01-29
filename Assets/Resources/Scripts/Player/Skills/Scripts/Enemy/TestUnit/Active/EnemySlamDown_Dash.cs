@@ -7,7 +7,7 @@ public class EnemySlamDown_Dash : SkillBase
 {
     [SerializeField] private SkillBase chainedSkill_Jump;
 
-    private float dashDistance = 3; // 대쉬 거리
+    public float dashDistance; // 대쉬 거리
 
     public override bool UseSkill(ISkillCaster caster)
     {
@@ -38,7 +38,7 @@ public class EnemySlamDown_Dash : SkillBase
 
     private IEnumerator PerformDash(ISkillCaster caster, Rigidbody2D rigid, Transform casterTransform, Vector3 target, GameObject enemy)
     {
-        float dashSpeed = 50f; // 대쉬 속도
+        float dashSpeed = 25f; // 대쉬 속도
         float minSqrDistance = .5f;
 
         while (((Vector2)target - rigid.position).magnitude > minSqrDistance) //목적지 까지 돌진.

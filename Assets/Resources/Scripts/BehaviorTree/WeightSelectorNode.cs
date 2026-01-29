@@ -6,59 +6,71 @@ using XNode;
 public class WeightSelectorNode : BTNode
 {
     [Output(dynamicPortList = true)] public List<float> WeightList;
+    private BTNode runningChild = null;
+    private int lastFrameVisited = -1;
 
     public override NodeState Evaluate(AIController controller)
     {
+        // 노드에 새로 진입했거나 실행이 끊겼었다면 상태 초기화
+        if (Time.frameCount != lastFrameVisited + 1)
+        {
+            runningChild = null;
+        }
+        lastFrameVisited = Time.frameCount;
+
+        if (runningChild != null)
+        {
+            NodeState state = runningChild.Evaluate(controller);
+            if (state == NodeState.Running)
+            {
+                return NodeState.Running;
+            }
+            runningChild = null;
+            return state;
+        }
+
         //NodePort port = GetOutputPort("WeightList");
         //Debug.Log(port.ConnectionCount);
         float total = 0;
-        List<NodePort> connectedPorts = new List<NodePort>();
-        //for (int i = 0; i < port.ConnectionCount; i++) total += WeightList[i];
+        List<int> availableIndices = new List<int>();
 
-        for (int i = 0; i < WeightList.Count; i++)
-        {
-            // "WeightList 0", "WeightList 1" 처럼 인덱스가 붙은 포트 이름을 찾습니다.
-            NodePort port = GetOutputPort("WeightList " + i);
-
-            if (port != null && port.IsConnected)
-            {
-                total += WeightList[i];
-                connectedPorts.Add(port);
-            }
-        }
-
-        float roll = Random.Range(0, total);
-        float cumulative = 0;
-
+        // 1. 현재 실행 가능한 노드들만 골라내고 전체 가중치 합산
         for (int i = 0; i < WeightList.Count; i++)
         {
             NodePort port = GetOutputPort("WeightList " + i);
             if (port == null || !port.IsConnected) continue;
 
-            cumulative += WeightList[i];
-            if (roll <= cumulative)
+            BTNode child = port.Connection.node as BTNode;
+            // 핵심: 자식 노드에게 실행 가능 여부를 물어봅니다.
+            if (child != null && child.CanExecute(controller))
             {
-                // 연결된 포트에서 상대방 노드를 가져옴
-                BTNode child = port.Connection.node as BTNode;
-                if (child != null)
-                {
-                    return child.Evaluate(controller);
-                }
+                total += WeightList[i];
+                availableIndices.Add(i); // 실행 가능한 인덱스만 저장
             }
         }
 
-        // for (int i = 0; i < port.ConnectionCount - 1; i++)
-        // {
-        //     cumulative += WeightList[i];
-        //     Debug.Log("공격 시작");
-        //     if (roll <= cumulative)
-        //     {
+        // 모든 스킬이 쿨타임이라면 실패 반환
+        if (total <= 0 || availableIndices.Count == 0) return NodeState.Failure;
 
-        //         BTNode child = port.GetConnection(i).node as BTNode;
-        //         return child.Evaluate(controller);
-        //     }
-        // }
+        // 2. 가용한 노드들 사이에서 주사위 굴리기
+        float roll = Random.Range(0, total);
+        float cumulative = 0;
 
+        foreach (int index in availableIndices)
+        {
+            cumulative += WeightList[index];
+            if (roll <= cumulative)
+            {
+                NodePort port = GetOutputPort("WeightList " + index);
+                BTNode child = port.Connection.node as BTNode;
+                NodeState state = child.Evaluate(controller);
+                if (state == NodeState.Running)
+                {
+                    runningChild = child;
+                }
+                return state;
+            }
+        }
         return NodeState.Failure;
     }
 }

@@ -9,7 +9,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Skill", menuName = "ScriptableObject/Skill/Skill Module")]
 public class Skill_Module : ScriptableObject
 {
-    public IBlackBoard blackBoard = new BlackBoard(); //스킬 데이터를 담을 블랙보드.
+    public IBlackBoard blackBoard; //스킬 데이터를 담을 블랙보드.
     public enum ActiveType { OnDown, OnHold };
     [SerializeField] private string skillName; //최종 스킬 이름
     [SerializeField] private string skillDetail; //최종 스킬의 상세 설명
@@ -37,6 +37,11 @@ public class Skill_Module : ScriptableObject
     public bool CanUseAirial => canUseAirial;
     public bool BasicAttack => basicAttack;
     #endregion EndProperty
+
+    void Awake()
+    {
+        blackBoard = new BlackBoard();
+    }
 
     public void InitSkill()
     {
@@ -74,7 +79,6 @@ public class Skill_Module : ScriptableObject
         if (unit.curGage - consumption < 0) return false;
 
         unit.curGage -= consumption;
-
         if (OnCoolDown || !blackBoard.Get<bool>("Condition"))
         {
             Debug.Log($"쿨타임 상황 : {OnCoolDown}, 조건 상황 : {blackBoard.Get<bool>("Condition")}.");

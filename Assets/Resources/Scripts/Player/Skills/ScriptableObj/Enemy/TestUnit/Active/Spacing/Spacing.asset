@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eafecb4550a52a6428ffa2f9c8d278e0, type: 3}
-  m_Name: SlamDown_Jump
+  m_Script: {fileID: 11500000, guid: 2888629b486dc594fa695c6e0321447c, type: 3}
+  m_Name: Spacing
   m_EditorClassIdentifier: 
-  dmgCalculater: {fileID: 11400000, guid: a521c7d403aee804b9e9e40e54fe1c7e, type: 2}
+  dmgCalculater: {fileID: 0}
   targetObj: {fileID: 0}
-  animName: SlamDown
+  animName: ThrowAway_Dash
   explanation: 
-  distance: 3
-  jumpDuration: 1.25
-  defaultDuration: 3
+  dashDistance: 3
