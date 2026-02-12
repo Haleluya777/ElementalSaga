@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyCharacter : Unit
 {
     [Header("적들의 기본 정보")]
-    [SerializeField] private UnitDataMap maps;
+    [SerializeField] private EnemyMap maps;
 
     [Header("캐릭터 ID")]
     public int id;
@@ -13,10 +13,12 @@ public class EnemyCharacter : Unit
     [Header("적들만이 가지고 있는 고유한 스탯들")]
     public float MeleeRange;
     public float RangerRange;
+    public bool init = false;
+    public int stunGage;
 
     void Start()
     {
-        DataInit();
+        if (init) DataInit();
     }
 
     private void DataInit()

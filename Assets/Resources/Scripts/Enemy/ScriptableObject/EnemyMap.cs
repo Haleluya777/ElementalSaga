@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public class EnemyDatas
 {
+    [SerializeField] private UnitType type;
     [SerializeField] private int id;
 
     [SerializeField] private string name;
@@ -18,6 +19,7 @@ public class EnemyDatas
     [SerializeField] private int addJumpCount;
     [SerializeField] private float attSpeed;
 
+    public UnitType Type => type;
     public int Id => id;
     public string Name => name;
     public int Hp => hp;
@@ -30,8 +32,8 @@ public class EnemyDatas
     public float AttSpeed => attSpeed;
 }
 
-[CreateAssetMenu(fileName = "CharacterMap", menuName = "ScriptableObject/DataMaps/PlayableCharacter/CharcterMap")]
-public class EnemyMap : MonoBehaviour
+[CreateAssetMenu(fileName = "EnemyMap", menuName = "ScriptableObject/DataMaps/Enemy/EnemyMap")]
+public class EnemyMap : ScriptableObject
 {
     public Datas[] datas;
     public Datas GetDatas(int id)

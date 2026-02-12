@@ -42,7 +42,8 @@ public abstract class Unit : PoolAble, IDamageable
     }
 
     [SerializeField] protected UnitData unitData;
-    [SerializeField] private float dmgRate = 1; //피해 비율.
+    [SerializeField] private float dmgRate = 1; //받는 피해 비율.
+    [SerializeField] private float givingDmgRate = 0; //주는 피해 비율.
     private bool cantAction; //true일 경우 행동 불능.
     public bool graceState; //무적 상태.
     private bool hpRegain;
@@ -50,6 +51,7 @@ public abstract class Unit : PoolAble, IDamageable
 
     #region Property
     public float DmgRate { get => dmgRate; set => dmgRate = value; }
+    public float GivingDmgRate { get => givingDmgRate; set => givingDmgRate = value; }
     public int MaxHp { get => unitData.maxHp; set => unitData.maxHp = Mathf.Max(0, value); }
     public int CurHp { get => unitData.curHp; set => unitData.curHp = Mathf.Max(0, value); }
 
@@ -91,6 +93,12 @@ public abstract class Unit : PoolAble, IDamageable
     public bool isAirial;
     [SerializeField] private GameObject textBox; //이 유닛의 말풍선에 사용할 텍스트 박스.
     //public UnitData currentStats;
+
+    void Update()
+    {
+        //디버깅 용
+        Debug.Log($"현재 주는 데미지 비율 : {GivingDmgRate}");
+    }
 
     void OnEnable()
     {
@@ -178,8 +186,26 @@ public abstract class Unit : PoolAble, IDamageable
         activeEffect[effect.effectName] = effect;
         effect.ApplyEffect();
 
-        Coroutine newCoroutine = GameManager.instance.coroutineRunner.StartRunnerCoroutine(RemoveEffectAfterDuration(effect));
-        activeEffectCoroutines[effect.effectName] = newCoroutine;
+        if (effect.duration > 0)
+        {
+            Coroutine newCoroutine = GameManager.instance.coroutineRunner.StartRunnerCoroutine(RemoveEffectAfterDuration(effect));
+            activeEffectCoroutines[effect.effectName] = newCoroutine;
+        }
+    }
+
+    public void RemoveEffect(string effectName)
+    {
+        if (activeEffect.TryGetValue(effectName, out StatusEffectBase effect))
+        {
+            if (activeEffectCoroutines.TryGetValue(effectName, out Coroutine runningCoroutine))
+            {
+                GameManager.instance.coroutineRunner.StopCoroutine(runningCoroutine);
+                activeEffectCoroutines.Remove(effectName);
+            }
+
+            effect.RemoveEffect();
+            activeEffect.Remove(effectName);
+        }
     }
 
     public bool FindEffect(string effectName) //해당 이름의 상태 이상이 존재하는지 체크.

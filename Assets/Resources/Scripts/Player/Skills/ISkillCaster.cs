@@ -17,6 +17,7 @@ public interface ISkillCaster
     Quaternion GetRotation();
 
     int GetAttackPower();
+    float GetGiveDmgRate();
 
     IDamageable GetDamageable();
     GameObject GetGameObject();

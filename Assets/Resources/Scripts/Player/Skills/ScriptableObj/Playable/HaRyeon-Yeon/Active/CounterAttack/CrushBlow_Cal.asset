@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 320e9171e13eb0e4e8f5591ed1e46c33, type: 3}
-  m_Name: Combo_3_Cal
+  m_Name: CrushBlow_Cal
   m_EditorClassIdentifier: 
   baseDmg: 0
   weight: 0

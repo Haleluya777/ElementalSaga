@@ -41,11 +41,12 @@ public class AIController : MonoBehaviour, IDataInitializable, IControllable
     private BehaviorTreeGraph runTimeTree;
     private BTNode root;
 
-    private bool runningBT = false;
+    [SerializeField] private bool runningBT = false;
 
     void Update()
     {
-        if (runningBT) root.Evaluate(this);
+        //if (runningBT) 
+        root.Evaluate(this);
         UpdateUnitState();
     }
 

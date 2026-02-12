@@ -169,6 +169,7 @@ MonoBehaviour:
   relicPowers: []
   hitEvents:
   - {fileID: 0}
+  onHitEvents: []
   combo: 0
 --- !u!1 &6687188506135578078
 GameObject:
@@ -439,7 +440,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 50bb2f941ebbfd248991a65d8525914a, type: 3}
+  m_Sprite: {fileID: 2106706557, guid: 1e969bf9a03316441bcd3d38b05cec8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -509,18 +510,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.53}
+  m_Offset: {x: 0, y: -0.08}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 4}
+    oldSize: {x: 1.3333334, y: 1.3333334}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.1}
+  m_Size: {x: 0.6, y: 1.2}
   m_EdgeRadius: 0
 --- !u!95 &6175166969586863343
 Animator:
@@ -568,7 +569,13 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  givingDmgRate: 0
+  graceState: 0
   isAirial: 0
   textBox: {fileID: 0}
-  maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}
+  maps: {fileID: 0}
   id: 10
+  MeleeRange: 0
+  RangerRange: 0
+  init: 0
+  stunGage: 0

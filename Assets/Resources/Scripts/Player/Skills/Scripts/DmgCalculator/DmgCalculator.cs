@@ -13,6 +13,6 @@ public class DmgCalculator : ScriptableObject
 
     public int Calculate(ISkillCaster caster)
     {
-        return baseDmg + (int)(caster.GetAttackPower() * weight);
+        return (caster.GetAttackPower() + (int)(caster.GetAttackPower() * weight)) + (int)((caster.GetAttackPower() + (int)(caster.GetAttackPower() * weight)) * (caster.GetGiveDmgRate() / 100f));
     }
 }

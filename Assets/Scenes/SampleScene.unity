@@ -760,7 +760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &217463227
 Animator:
   serializedVersion: 5
@@ -939,8 +939,8 @@ MonoBehaviour:
   unitData:
     type: 1
     unitName: 
-    maxHp: 100
-    curHp: 100
+    maxHp: 10000
+    curHp: 10000
     att: 0
     maxGage: 0
     curGage: 0
@@ -949,13 +949,16 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  givingDmgRate: 1
   graceState: 0
   isAirial: 0
   textBox: {fileID: 0}
-  maps: {fileID: 11400000, guid: 9c766db64ab89c84da469258473f4e10, type: 2}
-  id: 10
+  maps: {fileID: 11400000, guid: 730db466ba903084fb71c325223ab0be, type: 2}
+  id: 0
   MeleeRange: 2
   RangerRange: 5
+  init: 0
+  stunGage: 0
 --- !u!1 &221587132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,6 +1026,7 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  givingDmgRate: 1
   graceState: 0
   isAirial: 0
   textBox: {fileID: 0}
@@ -1240,6 +1244,7 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  givingDmgRate: 1
   graceState: 0
   isAirial: 0
   textBox: {fileID: 1572324264}
@@ -1481,7 +1486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &427367745
 Transform:
   m_ObjectHideFlags: 0
@@ -1759,7 +1764,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7, y: -0.28999972, z: -10}
+  m_LocalPosition: {x: -3.03, y: -0.28999972, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4968,6 +4973,7 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  givingDmgRate: 1
   graceState: 0
   isAirial: 0
   textBox: {fileID: 0}
@@ -5310,11 +5316,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7331448962713018559, guid: a18b57602ece8af488359268283adbc6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7915959284498745755, guid: a18b57602ece8af488359268283adbc6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8369742875132282321, guid: a18b57602ece8af488359268283adbc6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5554,7 +5560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1416807222
 Transform:
   m_ObjectHideFlags: 0
@@ -5585,6 +5591,7 @@ MonoBehaviour:
   _curState: 0
   parentObj: {fileID: 217463226}
   behaviorTree: {fileID: 11400000, guid: 4ea846a6305c6ac439ee83f027d1079e, type: 2}
+  runningBT: 1
 --- !u!1001 &1445601000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5971,7 +5978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1511228617
 Transform:
   m_ObjectHideFlags: 0
@@ -6109,7 +6116,7 @@ Transform:
   m_GameObject: {fileID: 1511970927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7, y: -3.79, z: 0}
+  m_LocalPosition: {x: -3.03, y: -3.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6190,6 +6197,7 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  givingDmgRate: 1
   graceState: 1
   isAirial: 0
   textBox: {fileID: 1312039465}
@@ -6553,16 +6561,15 @@ MonoBehaviour:
   rigid: {fileID: 0}
   activeSkills:
   - {fileID: 11400000, guid: 658b89326825c084096b3e52b19c0324, type: 2}
-  - {fileID: 11400000, guid: e2788230de2f4f844814f0c512d1b3ad, type: 2}
-  - {fileID: 11400000, guid: 00d8ad544765b1b4da9ef3dc2bdb0cb3, type: 2}
-  - {fileID: 11400000, guid: 0624a4849c245834891f8f217f99164e, type: 2}
+  - {fileID: 11400000, guid: 7529c1af44ea2224c92352270c067066, type: 2}
+  - {fileID: 11400000, guid: 186fd0be3bb78b74a885f7c7d918d8f5, type: 2}
   modifiedActiveSkills: []
   passiveSkills:
-  - {fileID: 11400000, guid: 2f9a42acde28fd04d88b5e39d292c158, type: 2}
+  - {fileID: 11400000, guid: 8c8f082022aac4942a5aeea6d7a8b1c1, type: 2}
   relicPowers: []
   hitEvents: []
   onHitEvents:
-  - {fileID: 11400000, guid: 098c7b339026ff644938338d74430d84, type: 2}
+  - {fileID: 11400000, guid: 744eb440dc0a0c1439e9afa26e5b6f57, type: 2}
   combo: 0
 --- !u!1 &1572324264
 GameObject:
@@ -7708,6 +7715,7 @@ MonoBehaviour:
     addJumpCount: 0
     attSpeed: 0
   dmgRate: 1
+  givingDmgRate: 1
   graceState: 0
   isAirial: 0
   textBox: {fileID: 0}

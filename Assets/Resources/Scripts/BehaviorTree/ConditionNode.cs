@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConditionNode : BTNode
 {
-    public enum ConditionType { Hp, Melee_Distance, PlayerAction, Attacking }
+    public enum ConditionType { Hp, Melee_Distance, Range_Distance, PlayerAction, Attacking }
     public enum SignType { Greater, Lower, EqualGreater, EqualLower, Equal, NotEqual }
 
     public ConditionType type;
@@ -28,31 +28,61 @@ public class ConditionNode : BTNode
             case ConditionType.Hp:
                 break;
 
-            case ConditionType.Melee_Distance:
-                float currentDist = (graph as BehaviorTreeGraph).blackboard.Get<float>("Distance");
-                switch (sign)
+            case ConditionType.Range_Distance:
                 {
-                    case SignType.Greater:
-                        {
-                            if (currentDist > unit.MeleeRange)
+                    float currentDist = (graph as BehaviorTreeGraph).blackboard.Get<float>("Distance");
+                    switch (sign)
+                    {
+                        case SignType.Greater:
                             {
-                                Debug.Log("근접 공격 거리 밖임. 이동해야 함.");
-                                return NodeState.Success;
+                                if (currentDist > unit.RangerRange)
+                                {
+                                    Debug.Log("원거리 공격 거리 밖임. 이동해야 함.");
+                                    return NodeState.Success;
+                                }
+                                else return NodeState.Failure;
                             }
-                            else return NodeState.Failure;
-                        }
 
-                    case SignType.EqualLower:
-                        {
-                            if (currentDist <= unit.MeleeRange)
+                        case SignType.EqualLower:
                             {
-                                //Debug.Log("근접 공격 거리 안으로 들어옴.");
-                                return NodeState.Success;
+                                if (currentDist <= unit.RangerRange)
+                                {
+                                    //Debug.Log("근접 공격 거리 안으로 들어옴.");
+                                    return NodeState.Success;
+                                }
+                                else return NodeState.Failure;
                             }
-                            else return NodeState.Failure;
-                        }
+                    }
+                    break;
                 }
-                break;
+
+            case ConditionType.Melee_Distance:
+                {
+                    float currentDist = (graph as BehaviorTreeGraph).blackboard.Get<float>("Distance");
+                    switch (sign)
+                    {
+                        case SignType.Greater:
+                            {
+                                if (currentDist > unit.MeleeRange)
+                                {
+                                    Debug.Log("근접 공격 거리 밖임. 이동해야 함.");
+                                    return NodeState.Success;
+                                }
+                                else return NodeState.Failure;
+                            }
+
+                        case SignType.EqualLower:
+                            {
+                                if (currentDist <= unit.MeleeRange)
+                                {
+                                    //Debug.Log("근접 공격 거리 안으로 들어옴.");
+                                    return NodeState.Success;
+                                }
+                                else return NodeState.Failure;
+                            }
+                    }
+                    break;
+                }
 
             case ConditionType.PlayerAction:
                 break;

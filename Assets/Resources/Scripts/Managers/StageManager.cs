@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ public class StageManager : MonoBehaviour
     public int totalCount;
     public int amendCount; //줄 보상의 개수
     private List<Transform> pos = new List<Transform>();
+    private int wave = 2;
 
     void Start()
     {
@@ -27,13 +29,26 @@ public class StageManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        //몬스터의 수가 하나씩 줄어들 때마다 체크.
         if (previousTotalCound != totalCount)
         {
             if (totalCount == 0)
             {
-                if (stage > 9) StageClear(true);
-                else StageClear();
+                if (wave != 0) //남은 웨이브가 존재할 때.
+                {
+                    Debug.Log("몬스터 리젠");
+                    SettingEnemy();
+                    wave--;
+                }
+
+                if (wave == 0) //남은 웨이브가 없을 때
+                {
+                    //현재 스테이지 상황에 따라서 스테이지 클리어.
+                    if (stage > 9) StageClear(true);
+                    if (stage <= 8) StageClear();
+                }
             }
+            //몬스터 수 초기화
             previousTotalCound = totalCount;
         }
     }
@@ -139,6 +154,7 @@ public class StageManager : MonoBehaviour
 
         if (boss)
         {
+            wave = 0;
             Debug.Log("보스방 생성");
             GameManager.instance.roomManager.MakeDoor(new Vector2(0, -1), true);
             return;
@@ -149,6 +165,7 @@ public class StageManager : MonoBehaviour
             GameManager.instance.roomManager.MakeDoor(currentRoomInfo.doorPos[i].position);
         }
 
+        wave = 2;
         //보상 상자 생성.
         GameManager.instance.roomManager.MakeAmendChest(currentRoomInfo.SetChestTier(), new Vector2(0, -4), currentRoomInfo.confirmedRelics);
     }

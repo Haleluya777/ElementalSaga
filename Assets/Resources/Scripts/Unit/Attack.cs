@@ -296,6 +296,11 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
         return unit.Att;
     }
 
+    public float GetGiveDmgRate()
+    {
+        return unit.GivingDmgRate;
+    }
+
     public IDamageable GetDamageable()
     {
         return parentObj.GetComponent<IDamageable>();

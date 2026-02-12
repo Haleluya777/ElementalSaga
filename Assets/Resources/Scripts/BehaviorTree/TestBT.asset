@@ -35,9 +35,8 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: parent
       _node: {fileID: -8847607027219802341}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections: []
       _direction: 0
       _connectionType: 0
@@ -63,11 +62,8 @@ MonoBehaviour:
       _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections:
-      - fieldName: parent
-        node: {fileID: 7126315851370159549}
-        reroutePoints: []
       - fieldName: parent 0
-        node: {fileID: 7126315851370159549}
+        node: {fileID: 5827901208721313000}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -100,11 +96,10 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   WeightList:
-  - 0
-  - 0
+  - 4
+  - 2
   - 1
 --- !u!114 &-8839126538064229889
 MonoBehaviour:
@@ -127,9 +122,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: -8839126538064229889}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: childs 0
         node: {fileID: -4924321027858809564}
@@ -150,9 +144,8 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
-  type: 3
+  parent: {fileID: 0}
+  type: 2
   sign: 5
 --- !u!114 &-7051444670059929666
 MonoBehaviour:
@@ -175,9 +168,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: -7051444670059929666}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections: []
       _direction: 0
       _connectionType: 0
@@ -195,9 +187,8 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
-  SkillNum: 2
+  parent: {fileID: 0}
+  SkillNum: 1
 --- !u!114 &-5104874190892378407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,9 +210,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: -5104874190892378407}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections: []
       _direction: 0
       _connectionType: 0
@@ -239,8 +229,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   directionKey: Direction
 --- !u!114 &-4990907939156246877
 MonoBehaviour:
@@ -276,9 +265,8 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: parent
       _node: {fileID: -4990907939156246877}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: childs 1
         node: {fileID: 3726294477152994244}
@@ -323,8 +311,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   childs:
   - {fileID: 0}
   - {fileID: 0}
@@ -350,7 +337,6 @@ MonoBehaviour:
     - childs 1
     - childs 2
     - parent 0
-    - parent 1
     values:
     - _fieldName: childs
       _node: {fileID: -4924321027858809564}
@@ -364,9 +350,8 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: parent
       _node: {fileID: -4924321027858809564}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: childs 2
         node: {fileID: 3726294477152994244}
@@ -432,18 +417,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-    - _fieldName: parent 1
-      _node: {fileID: -4924321027858809564}
-      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-  parent:
-  - {fileID: 0}
-  - {fileID: 0}
+  parent: {fileID: 0}
   childs:
   - {fileID: 0}
   - {fileID: 0}
@@ -458,7 +432,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce8f58d664c8b074ebdbbd0e33f3b1e8, type: 3}
-  m_Name: Perform Attack
+  m_Name: Punch
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
   position: {x: 1304, y: -72}
@@ -469,9 +443,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: -4303310506793269253}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: WeightList 0
         node: {fileID: -8847607027219802341}
@@ -492,8 +465,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   SkillNum: 0
 --- !u!114 &-2552529777817678292
 MonoBehaviour:
@@ -516,9 +488,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: -2552529777817678292}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: childs 2
         node: {fileID: -4924321027858809564}
@@ -539,8 +510,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   directionKey: Direction
 --- !u!114 &-1767988035583742608
 MonoBehaviour:
@@ -563,9 +533,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: -1767988035583742608}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: childs 0
         node: {fileID: 2176353916692943296}
@@ -586,10 +555,9 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
-  type: 1
-  sign: 0
+  parent: {fileID: 0}
+  type: 2
+  sign: 3
 --- !u!114 &-443172365625811835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,9 +579,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: -443172365625811835}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: childs 0
         node: {fileID: 5020570559389794316}
@@ -634,9 +601,8 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
-  type: 3
+  parent: {fileID: 0}
+  type: 4
   sign: 5
 --- !u!114 &-333841277087308264
 MonoBehaviour:
@@ -659,9 +625,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: -333841277087308264}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: childs 1
         node: {fileID: 5020570559389794316}
@@ -682,8 +647,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   type: 1
   sign: 3
 --- !u!114 &11400000
@@ -714,7 +678,6 @@ MonoBehaviour:
   - {fileID: 5289527765678991327}
   - {fileID: -1767988035583742608}
   - {fileID: -7051444670059929666}
-  - {fileID: 7126315851370159549}
   - {fileID: -443172365625811835}
   - {fileID: -8839126538064229889}
   - {fileID: 7431229778362231148}
@@ -722,6 +685,7 @@ MonoBehaviour:
   - {fileID: 7718287303062001620}
   - {fileID: 1576828528863436864}
   - {fileID: -5104874190892378407}
+  - {fileID: 5827901208721313000}
   rootNode: {fileID: 8126462084898758689}
   blackboard:
     entries:
@@ -731,7 +695,7 @@ MonoBehaviour:
       intVal: 0
       floatVal: 0
       boolVal: 0
-      vector3Val: {x: -3.5103188, y: -3.8018186, z: -0.1}
+      vector3Val: {x: 5.238566, y: -3.8050013, z: -0.1}
     - key: Direction
       type: 1
       stringVal: 
@@ -743,7 +707,7 @@ MonoBehaviour:
       type: 2
       stringVal: 
       intVal: 0
-      floatVal: 1.9457364
+      floatVal: 0.55802107
       boolVal: 0
       vector3Val: {x: 0, y: 0, z: 0}
 --- !u!114 &1576828528863436864
@@ -767,9 +731,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: 1576828528863436864}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections: []
       _direction: 0
       _connectionType: 0
@@ -787,8 +750,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
 --- !u!114 &2176353916692943296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,9 +786,8 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: parent
       _node: {fileID: 2176353916692943296}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections: []
       _direction: 0
       _connectionType: 0
@@ -886,8 +847,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   childs:
   - {fileID: 0}
   - {fileID: 0}
@@ -927,9 +887,8 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: parent
       _node: {fileID: 3726294477152994244}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: selectorNode
         node: {fileID: 8126462084898758689}
@@ -995,8 +954,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   childs:
   - {fileID: 0}
   - {fileID: 0}
@@ -1034,9 +992,8 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: parent
       _node: {fileID: 4465247298138276047}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: childs 0
         node: {fileID: 3726294477152994244}
@@ -1072,8 +1029,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   childs:
   - {fileID: 0}
 --- !u!114 &5020570559389794316
@@ -1112,9 +1068,8 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: parent
       _node: {fileID: 5020570559389794316}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections: []
       _direction: 0
       _connectionType: 0
@@ -1189,8 +1144,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   childs:
   - {fileID: 0}
   - {fileID: 0}
@@ -1230,9 +1184,8 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: parent
       _node: {fileID: 5289527765678991327}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: childs 2
         node: {fileID: 2176353916692943296}
@@ -1277,12 +1230,11 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   WeightList:
-  - 0
+  - 9
   - 1
---- !u!114 &7126315851370159549
+--- !u!114 &5827901208721313000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1292,7 +1244,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce8f58d664c8b074ebdbbd0e33f3b1e8, type: 3}
-  m_Name: Perform Attack
+  m_Name: SlamDown
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
   position: {x: 1304, y: 72}
@@ -1302,20 +1254,16 @@ MonoBehaviour:
     - parent 0
     values:
     - _fieldName: parent
-      _node: {fileID: 7126315851370159549}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: WeightList 1
-        node: {fileID: -8847607027219802341}
-        reroutePoints: []
+      _node: {fileID: 5827901208721313000}
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: parent 0
-      _node: {fileID: 7126315851370159549}
+      _node: {fileID: 5827901208721313000}
       _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
@@ -1326,8 +1274,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   SkillNum: 1
 --- !u!114 &7431229778362231148
 MonoBehaviour:
@@ -1350,9 +1297,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: 7431229778362231148}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: childs 2
         node: {fileID: 5020570559389794316}
@@ -1373,8 +1319,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   directionKey: Direction
 --- !u!114 &7718287303062001620
 MonoBehaviour:
@@ -1386,7 +1331,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce8f58d664c8b074ebdbbd0e33f3b1e8, type: 3}
-  m_Name: Perform Attack
+  m_Name: Spacing
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
   position: {x: 1304, y: 216}
@@ -1397,9 +1342,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: 7718287303062001620}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: WeightList 2
         node: {fileID: -8847607027219802341}
@@ -1420,8 +1364,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   SkillNum: 2
 --- !u!114 &8126462084898758689
 MonoBehaviour:
@@ -1460,9 +1403,8 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: parent
       _node: {fileID: 8126462084898758689}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections: []
       _direction: 0
       _connectionType: 0
@@ -1477,8 +1419,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   selectorNode: {fileID: 3726294477152994244}
 --- !u!114 &9012018746309119671
 MonoBehaviour:
@@ -1501,9 +1442,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: 9012018746309119671}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: childs 0
         node: {fileID: 4465247298138276047}
@@ -1524,8 +1464,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
 --- !u!114 &9077922893873276469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1547,9 +1486,8 @@ MonoBehaviour:
     values:
     - _fieldName: parent
       _node: {fileID: 9077922893873276469}
-      _typeQualifiedName: System.Collections.Generic.List`1[[BTNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       connections:
       - fieldName: childs 1
         node: {fileID: -4924321027858809564}
@@ -1570,6 +1508,5 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  parent:
-  - {fileID: 0}
+  parent: {fileID: 0}
   directionKey: Direction

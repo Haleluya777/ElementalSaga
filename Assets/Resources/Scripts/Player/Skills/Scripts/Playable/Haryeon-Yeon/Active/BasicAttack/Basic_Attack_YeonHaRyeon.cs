@@ -19,7 +19,7 @@ public class Basic_Attack_YeonHaRyeon : SkillBase
     private bool eventsInitialized = false;
 
     // 이 스킬에 필요한 OnHitEvent 타입을 new()로 생성하는 대신 typeof()로 타입 정보만 저장합니다.
-    private List<Type> needEventTypes = new List<Type> { typeof(FillHeatPressure) };
+    private List<Type> needEventTypes = new List<Type> { typeof(FillHeatSeal) };
 
     // ScriptableObject가 로드될 때 호출됩니다. (게임 시작 시 등)
     private void OnEnable()
@@ -79,8 +79,10 @@ public class Basic_Attack_YeonHaRyeon : SkillBase
 
         hitBox.tag = caster.GetGameObject().tag;
 
-        hitBoxCom.GetComponent<BoxCollider2D>().size = hitBoxSize;
-        hitBoxCom.GetComponent<BoxCollider2D>().offset = hitBoxOffset;
+        var hitBoxCol = hitBoxCom.GetComponent<BoxCollider2D>();
+
+        hitBoxCol.size = hitBoxSize;
+        hitBoxCol.offset = hitBoxOffset;
 
         hitBoxCom.Initialize(dmgCalculater.Calculate(caster), caster, onHitEvents, .5f);
 
