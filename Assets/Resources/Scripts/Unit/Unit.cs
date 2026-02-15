@@ -128,13 +128,15 @@ public abstract class Unit : PoolAble, IDamageable
 
     public void TakeDamage(int dmg, ISkillCaster attacker, GameObject character)
     {
-        if (GraceState) return;
-        Debug.Log($"데미지 받음! 받은 데미지 : {dmg}");
+        //Debug.Log($"데미지 받음! 받은 데미지 : {dmg}");
 
         //데미지를 받을 때마다 피격 효과 발생.
         TakeDamageEvent?.Invoke(dmg, attacker, character);
 
-        CurHp -= (int)(dmg * dmgRate);// - Def);
+        if (GraceState) Debug.Log("피격당했으나 무적 상태라 데미지를 안받음.");
+        else Debug.Log($"피격당함! 받은 데미지 : {(int)(dmg * dmgRate)}");
+
+        if (!GraceState) CurHp -= (int)(dmg * dmgRate);// - Def);
         if (isDead) Dead(attacker);
     }
 
