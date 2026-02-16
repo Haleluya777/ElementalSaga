@@ -24,5 +24,6 @@ public class Buff_Counter : StatusEffectBase
     public void AutoDodge(int dmg, ISkillCaster attacker, GameObject obj)
     {
         Debug.Log("공격 무시!");
+        RemoveEffect();
     }
 }
