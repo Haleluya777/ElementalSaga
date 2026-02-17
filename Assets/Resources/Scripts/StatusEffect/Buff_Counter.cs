@@ -24,6 +24,27 @@ public class Buff_Counter : StatusEffectBase
     public void AutoDodge(int dmg, ISkillCaster attacker, GameObject obj)
     {
         Debug.Log("공격 무시!");
-        RemoveEffect();
+        int dir = (int)attacker.GetDirection().x;
+        GameManager.instance.coroutineRunner.StartCoroutine(DodgeMovement(obj, new Vector2((obj.transform.position.x) + (3 * dir), obj.transform.position.y)));
+        //RemoveEffect();
+    }
+
+    private IEnumerator DodgeMovement(GameObject obj, Vector2 tagetPos)
+    {
+        float dashSpeed = 100f; // 대쉬 속도
+        float minSqrDistance = .5f;
+        Rigidbody2D rigid = obj.GetComponent<Rigidbody2D>();
+
+        while (((Vector2)tagetPos - rigid.position).magnitude > minSqrDistance)
+        {
+            Vector2 direction = ((Vector2)tagetPos - rigid.position).normalized;
+            Vector3 newPos = rigid.position + direction * (dashSpeed / 10) * Time.fixedDeltaTime;
+
+            rigid.MovePosition(newPos);
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        yield return null;
     }
 }
