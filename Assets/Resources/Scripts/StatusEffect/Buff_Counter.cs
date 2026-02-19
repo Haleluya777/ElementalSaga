@@ -26,12 +26,11 @@ public class Buff_Counter : StatusEffectBase
         Debug.Log("공격 무시!");
         int dir = (int)attacker.GetDirection().x;
         GameManager.instance.coroutineRunner.StartCoroutine(DodgeMovement(obj, new Vector2((obj.transform.position.x) + (3 * dir), obj.transform.position.y)));
-        //RemoveEffect();
     }
 
     private IEnumerator DodgeMovement(GameObject obj, Vector2 tagetPos)
     {
-        float dashSpeed = 100f; // 대쉬 속도
+        float dashSpeed = 500f; // 대쉬 속도
         float minSqrDistance = .5f;
         Rigidbody2D rigid = obj.GetComponent<Rigidbody2D>();
 
@@ -44,7 +43,7 @@ public class Buff_Counter : StatusEffectBase
 
             yield return new WaitForFixedUpdate();
         }
-
+        RemoveEffect();
         yield return null;
     }
 }
