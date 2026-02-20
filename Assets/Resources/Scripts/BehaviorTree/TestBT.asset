@@ -695,7 +695,7 @@ MonoBehaviour:
       intVal: 0
       floatVal: 0
       boolVal: 0
-      vector3Val: {x: 5.238566, y: -3.8050013, z: -0.1}
+      vector3Val: {x: -0.94, y: -3.8017836, z: -0.1}
     - key: Direction
       type: 1
       stringVal: 
@@ -707,7 +707,7 @@ MonoBehaviour:
       type: 2
       stringVal: 
       intVal: 0
-      floatVal: 0.55802107
+      floatVal: 2.09
       boolVal: 0
       vector3Val: {x: 0, y: 0, z: 0}
 --- !u!114 &1576828528863436864

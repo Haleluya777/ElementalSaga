@@ -9,6 +9,7 @@ public class SelectorNode : BTNode
 
     public override NodeState Evaluate(AIController controller)
     {
+        Debug.Log("할렐루야");
         foreach (var port in DynamicOutputs)
         {
             BTNode child = port.Connection.node as BTNode;
