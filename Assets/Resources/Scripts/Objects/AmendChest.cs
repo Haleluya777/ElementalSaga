@@ -49,7 +49,7 @@ public class AmendChest : PoolAble, IInteractable
 
     void OnDisable()
     {
-        GameManager.instance.eventManager.ReleaseAllRelicButton -= ReleaseObject;
+        if (GameManager.instance is not null) GameManager.instance.eventManager.ReleaseAllRelicButton -= ReleaseObject;
         firstInteraction = true;
     }
 
