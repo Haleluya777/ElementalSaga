@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   skillDetail: 
-  coolDown: 0
-  consumption: 0
+  coolDown: 3
+  consumption: 30
   basicAttack: 0
   attackable: 1
   cancleDelay: 0

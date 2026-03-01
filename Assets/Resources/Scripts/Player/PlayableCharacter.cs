@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayableCharacter : Unit
 {
@@ -14,6 +15,11 @@ public class PlayableCharacter : Unit
 
     public ControlState controlState;
 
+    [Header("Player UI Element")]
+    [SerializeField] private Slider hpBar;
+    [SerializeField] private Slider ellBar;
+    [SerializeField] private Slider[] skillCools = new Slider[4];
+
     private void Start()
     {
         CheckingControlState(controlState);
@@ -23,10 +29,29 @@ public class PlayableCharacter : Unit
     private void DataInit()
     {
         unitData = new UnitData(maps.GetDatas(id));
+
+        hpBar = LocalGameManager.instance.playerUIManager.HpBar;
+        ellBar = LocalGameManager.instance.playerUIManager.EllBar;
+
+        skillCools = LocalGameManager.instance.playerUIManager.SkillCools;
+
+        base.TakeDamageEvent += UpdateHpBar;
+        GetComponentInChildren<Attack>().UpdateSkillGage += UpdateEllBar;
+
         foreach (var init in GetComponentsInChildren<IDataInitializable>())
         {
             init.DataInit();
         }
+    }
+
+    private void UpdateHpBar(int dmg, ISkillCaster caster, GameObject obj)
+    {
+        hpBar.value = CurHp / (float)MaxHp;
+    }
+
+    private void UpdateEllBar()
+    {
+        ellBar.value = curGage / (float)MaxGage;
     }
 
     public void CheckingControlState(ControlState state)

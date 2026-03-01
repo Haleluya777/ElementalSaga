@@ -5,7 +5,7 @@ using UnityEngine;
 
 public interface IAttackable
 {
-    event Action<int> OnHitEvent;
+    //event Action<int> OnHitEvent;
 
     List<Skill_Module> ActiveSkills { get; set; }
     List<Skill_Module> ModifiedActiveSkills { get; set; }

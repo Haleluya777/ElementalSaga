@@ -7,7 +7,8 @@ using UnityEngine.UIElements;
 
 public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializable
 {
-    public event Action<int> OnHitEvent;
+    //public event Action<int> OnHitEvent;
+    public event Action UpdateSkillGage;
 
     [SerializeField] private Skill_Module[] basicAttacks = new Skill_Module[2]; //유닛이 땅/공중에 있을 때 교체할 기본 공격 모듈.
     [SerializeField] private GameObject parentObj;
@@ -62,7 +63,6 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
         anim = parentObj.GetComponent<Animator>();
         rigid = parentObj.GetComponent<Rigidbody2D>();
 
-        // 모든 스킬 및 이벤트 리스트를 순회하며 초기화합니다.
         SkillInit(hitEvents);
         SkillInit(activeSkills);
         SkillInit(modifiedActiveSkills);
@@ -72,19 +72,15 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
 
     private void SkillInit<T>(List<T> skills) where T : class
     {
-        // ScriptableObject는 Instantiate로 복제해서 개별 상태(쿨타임 등)를 관리해야 합니다.
         for (int i = 0; i < skills.Count; i++)
         {
             if (skills[i] == null) continue;
 
-            // UnityEngine.Object로 캐스팅하여 Instantiate를 사용합니다.
             var original = skills[i] as UnityEngine.Object;
             if (original == null) continue;
 
             var newInstance = Instantiate(original);
 
-            // C# 7.0부터 지원하는 is 표현식 + 패턴 매칭을 사용하여 코드를 간결하게 만듭니다.
-            // 타입에 따라 적절한 Initialize 메서드를 호출합니다.
             if (newInstance is DamagedEventBase damagedEvent)
             {
                 Debug.Log("피격 이벤트 초기화");
@@ -92,8 +88,6 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
             }
             else if (newInstance is Skill_Module skillModule)
             {
-                // Skill_Module은 ISkillCaster(자기 자신 'this')를 넘겨주어 초기화한다고 가정합니다.
-                // 만약 다른 파라미터가 필요하다면 이 부분을 수정해야 합니다.
                 skillModule.InitSkill();
             }
             else if (newInstance is OnHitEventBase onHitEventBase)
@@ -102,7 +96,6 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
                 onHitEventBase.Initialize(unit);
             }
 
-            // 새로 생성된 인스턴스를 다시 리스트에 할당합니다.
             skills[i] = newInstance as T;
         }
     }
@@ -201,56 +194,24 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
     public bool PerformAttack(Skill_Module skill)
     {
         //if (attNum == -1) return false;
+        bool result;
         rigid.velocity = new Vector2(0, rigid.velocity.y);
         if (unit.isAirial) //공중에서 스킬을 쓸 때.
         {
             if (!skill.CanUseAirial) return false;
-            else
-            {
-                bool result = skill.UseSkill(this);
-                //if (!result) return false;
-
-                // else
-                // {
-                //     if (skill.BasicAttack) //공중에서 기본 공격을 했을 때.
-                //     {
-                //         //Debug.Log(Combo);
-                //         anim.CrossFade($"BasicAttackAirial_{Combo}", 0f);
-                //     }
-                //     else
-                //     {
-                //         anim.CrossFade(skill.AnimName, 0f);
-                //     }
-                // }
-                return result;
-            }
+            else result = skill.UseSkill(this);
         }
 
         else //땅 위에서 스킬을 쓸 때.
         {
             int comboAnim = Combo;
-            bool result = skill.UseSkill(this);
-            return result;
-            // if (!result)
-            // {
-            //     Debug.Log("공격 실패");
-            //     return false;
-            // }
+            result = skill.UseSkill(this);
 
-            // else
-            // {
-            //     if (skill.BasicAttack) //기본 공격을 했을 때.
-            //     {
-            //         //Debug.Log(Combo);
-            //         anim.CrossFade($"BasicAttack_{comboAnim}", 0f);
-            //     }
-            //     else
-            //     {
-            //         anim.CrossFade(skill.AnimName, 0f);
-            //     }
-            //     return true;
-            // }
         }
+
+        //엘 게이지 업데이트.
+        UpdateSkillGage?.Invoke();
+        return result;
     }
 
     public void PlayAnimation(string animName)

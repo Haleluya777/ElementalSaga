@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitManager : MonoBehaviour, IDataInitializable
 {
-    public GameObject PlayerUnit;
+    public PlayableCharacter PlayerUnit;
     private Unit unit;
     private IAttackable unitAttack;
 

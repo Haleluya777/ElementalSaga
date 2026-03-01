@@ -15,6 +15,8 @@ public abstract class Unit : PoolAble, IDamageable
         public string unitName;
         public int maxHp;
         public int curHp;
+        //public int maxStunGage;
+        //public int curStunGage;
         public int att;
         //public int def;
         public int maxGage;
@@ -31,9 +33,8 @@ public abstract class Unit : PoolAble, IDamageable
             maxHp = datas.Hp;
             curHp = maxHp;
             att = datas.Att;
-            //def = datas.Def;
             maxGage = datas.Gage;
-            curGage = 0;
+            curGage = maxGage;
             moveSpeed = datas.MoveSpeed;
             jumpForce = datas.JumpForce;
             addJumpCount = datas.AddJumpCount;
@@ -97,7 +98,6 @@ public abstract class Unit : PoolAble, IDamageable
     void Update()
     {
         //디버깅 용
-        Debug.Log($"현재 주는 데미지 비율 : {GivingDmgRate}");
     }
 
     void OnEnable()
