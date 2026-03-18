@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74bb7d0ca14f304081d8ddf5eaa1f49, type: 3}
+  m_Name: Combo_1
+  m_EditorClassIdentifier: 
+  dmgCalculater: {fileID: 11400000, guid: 60e92f47cf10769498a0a80482afada5, type: 2}
+  stunDmg: 10
+  targetObj: {fileID: 0}
+  animName: BasicAttack_0
+  explanation: 
+  hitBoxOffset: {x: -0.1, y: -0.1}
+  hitBoxSize: {x: 0.5, y: 0.3}
+  chainedSkill: {fileID: 11400000, guid: 0efe20ddacffaf8439138cf82fd63c0f, type: 2}
+  firstComboSkill: {fileID: 11400000}
+  hitBoxObj: {fileID: 2777659332053925459, guid: b77ee40dc4b61cd4485a30dc37ecdfeb, type: 3}
+  dashDistance: 1.5
+  onHitEvents: []

@@ -44,7 +44,7 @@ public class PerformAttack : BTNode
 
         controller.curState = AIController.UnitState.Attacking;
 
-        controller.attack.PerformAttack(skill);
+        controller.attack.PerformSkill(skill);
         isExecuting = true;
 
         return NodeState.Running;

@@ -15,12 +15,12 @@ public abstract class Unit : PoolAble, IDamageable
         public string unitName;
         public int maxHp;
         public int curHp;
-        //public int maxStunGage;
-        //public int curStunGage;
+        public int maxStunGage;
+        public int curStunGage;
         public int att;
         //public int def;
-        public int maxGage;
-        public int curGage;
+        public float maxGage;
+        public float curGage;
         public float moveSpeed;
         public int jumpForce;
         public int addJumpCount;
@@ -32,6 +32,8 @@ public abstract class Unit : PoolAble, IDamageable
             unitName = datas.Name;
             maxHp = datas.Hp;
             curHp = maxHp;
+            maxStunGage = datas.MaxStunGage;
+            curStunGage = 0;
             att = datas.Att;
             maxGage = datas.Gage;
             curGage = maxGage;
@@ -56,11 +58,14 @@ public abstract class Unit : PoolAble, IDamageable
     public int MaxHp { get => unitData.maxHp; set => unitData.maxHp = Mathf.Max(0, value); }
     public int CurHp { get => unitData.curHp; set => unitData.curHp = Mathf.Max(0, value); }
 
+    public int MaxStunGage { get => unitData.maxStunGage; set => unitData.maxStunGage = value; }
+    public int CurStunGage { get => unitData.curStunGage; set => unitData.curStunGage = value; }
+
     public int Att { get => unitData.att; set => unitData.att = Mathf.Max(0, value); }
     public float AttSpeed { get => unitData.attSpeed; set => unitData.attSpeed = Mathf.Max(0, value); }
     //public int Def { get => unitData.def; set => unitData.def = Mathf.Max(0, value); }
-    public int MaxGage { get => unitData.maxGage; set => unitData.maxGage = value; }
-    public int curGage { get => unitData.curGage; set => unitData.curGage = value; }
+    public float MaxGage { get => unitData.maxGage; set => unitData.maxGage = value; }
+    public float curGage { get => unitData.curGage; set => unitData.curGage = value; }
     public float MoveSpeed { get => unitData.moveSpeed; set => unitData.moveSpeed = Mathf.Max(0, value); }
     public int JumpForce { get => unitData.jumpForce; set => unitData.jumpForce = Mathf.Max(0, value); }
     public int AddJumpCount { get => unitData.addJumpCount; set => unitData.addJumpCount = Mathf.Max(0, value); }
@@ -126,7 +131,7 @@ public abstract class Unit : PoolAble, IDamageable
         }
     }
 
-    public void TakeDamage(int dmg, ISkillCaster attacker, GameObject character)
+    public void TakeDamage(int dmg, int stunDmg, ISkillCaster attacker, GameObject character)
     {
         //Debug.Log($"데미지 받음! 받은 데미지 : {dmg}");
 
@@ -136,7 +141,19 @@ public abstract class Unit : PoolAble, IDamageable
         if (GraceState) Debug.Log("피격당했으나 무적 상태라 데미지를 안받음.");
         else Debug.Log($"피격당함! 받은 데미지 : {(int)(dmg * dmgRate)}");
 
-        if (!GraceState) CurHp -= (int)(dmg * dmgRate);// - Def);
+        if (!GraceState)
+        {
+            CurHp -= (int)(dmg * dmgRate);// - Def);
+            if (stunDmg > 0)
+            {
+                CurStunGage += stunDmg;
+                if (CurStunGage >= MaxStunGage)
+                {
+                    Debug.Log("스턴 상태");
+                    AddEffectProcess(new Debuff_Stun(3f, this, "GrogeStun", attacker.GetGameObject()));
+                }
+            }
+        }
         if (isDead) Dead(attacker);
     }
 

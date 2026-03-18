@@ -6,11 +6,13 @@ public class DeBuff_LatedDamage : StatusEffectBase
 {
     private GameObject attacker;
     private int damage;
+    private int stunDmg;
 
-    public DeBuff_LatedDamage(float duration, Unit target, string _effectName, GameObject _attacker, int _damage) : base(duration, target)
+    public DeBuff_LatedDamage(float duration, Unit target, string _effectName, GameObject _attacker, int _damage, int _stunDmg) : base(duration, target)
     {
         effectName = _effectName;
         damage = _damage;
+        stunDmg = _stunDmg;
         attacker = _attacker;
     }
 
@@ -22,6 +24,6 @@ public class DeBuff_LatedDamage : StatusEffectBase
     public override void RemoveEffect(bool isRefresh = false)
     {
         Debug.Log($"타이머 종료. 데미지 들어감 : {damage}.");
-        target.TakeDamage(damage, attacker.GetComponentInChildren<ISkillCaster>(), null);
+        target.TakeDamage(damage, stunDmg, attacker.GetComponentInChildren<ISkillCaster>(), null);
     }
 }

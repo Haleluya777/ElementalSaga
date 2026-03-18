@@ -16,6 +16,7 @@ public class Datas
     [SerializeField] private int att;
     //[SerializeField] private int def;
     [SerializeField] private int gage;
+    [SerializeField] private int maxStunGage;
     [SerializeField] private int moveSpeed;
     [SerializeField] private int jumpForce;
     [SerializeField] private int addJumpCount;
@@ -25,6 +26,7 @@ public class Datas
     public int Id => id;
     public string Name => name;
     public int Hp => hp;
+    public int MaxStunGage => maxStunGage;
     public int Att => att;
     //public int Def => def;
     public int Gage => gage;

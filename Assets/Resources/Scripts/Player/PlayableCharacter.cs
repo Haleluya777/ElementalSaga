@@ -26,6 +26,15 @@ public class PlayableCharacter : Unit
         DataInit();
     }
 
+    void FixedUpdate()
+    {
+        if (curGage < MaxGage)
+        {
+            curGage += Time.deltaTime * 5;
+            UpdateEllBar();
+        }
+    }
+
     private void DataInit()
     {
         unitData = new UnitData(maps.GetDatas(id));
@@ -51,7 +60,7 @@ public class PlayableCharacter : Unit
 
     private void UpdateEllBar()
     {
-        ellBar.value = curGage / (float)MaxGage;
+        ellBar.value = curGage / MaxGage;
     }
 
     public void CheckingControlState(ControlState state)

@@ -14,8 +14,6 @@ public class EnemyCharacter : Unit
     public float MeleeRange;
     public float RangerRange;
     public bool init = false;
-    public int maxStunGage;
-    public int curStunGage;
 
     void Start()
     {
@@ -25,10 +23,15 @@ public class EnemyCharacter : Unit
     private void DataInit()
     {
         unitData = new UnitData(maps.GetDatas(id));
-        curStunGage = maxStunGage;
+        base.TakeDamageEvent += GetStunGage;
         foreach (var init in GetComponentsInChildren<IDataInitializable>())
         {
             init.DataInit();
         }
+    }
+
+    private void GetStunGage(int dmg, ISkillCaster attacker, GameObject character)
+    {
+
     }
 }

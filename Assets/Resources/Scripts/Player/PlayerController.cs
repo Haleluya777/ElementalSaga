@@ -187,12 +187,12 @@ public class PlayerController : MonoBehaviour, IDataInitializable, IControllable
         if (attNum == -1) return;
 
         if (attack == null || attNum >= attack.ActiveSkills.Count) return;
-        var skill = !modifier ? attack.ActiveSkills[attNum] : attack.ModifiedActiveSkills[attNum];
+        var skill = attack.ActiveSkills[attNum];
         //Debug.Log(skill.name);
 
         if (skill.activeType == Skill_Module.ActiveType.OnDown) //단발성 스킬
         {
-            if (attack.PerformAttack(skill))
+            if (attack.PerformSkill(skill))
             {
                 //Debug.Log("할렐루야");
                 curState = UnitState.Attacking;
@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour, IDataInitializable, IControllable
         }
         else //지속성 스킬
         {
-            if (attack.PerformAttack(skill))
+            if (attack.PerformSkill(skill))
             {
                 curState = UnitState.Attacking;
                 moveInput?.Invoke(Vector2.zero);
@@ -214,18 +214,28 @@ public class PlayerController : MonoBehaviour, IDataInitializable, IControllable
 
     private void SkillKeyUp(KeyCode keyCode, bool modifier)
     {
+        //현재 입력한 키와 대응되는 스킬 번호 가져옴.
         int attNum = GetAttNum(keyCode);
+
         if (attNum == -1) return;
-
         if (attack == null || attNum >= attack.ActiveSkills.Count) return;
-        var skill = !modifier ? attack.ActiveSkills[attNum] : attack.ModifiedActiveSkills[attNum];
 
+        //해당되는 스킬 모듈
+        var skill = attack.ActiveSkills[attNum];
+
+        //스킬 모듈의 입력 타입이 지속형 타입일 때. (단발성 입력이 아닌, OnHold형일 때.)
         if (skill.activeType != Skill_Module.ActiveType.OnDown)
         {
-            if (continuousSkill != null)
+            if (continuousSkill != null) //스킬 종료.
             {
                 StopCoroutine(continuousSkill);
                 continuousSkill = null;
+
+                if (attack.PerformOnReleaseSkill(skill))
+                {
+                    curState = UnitState.Attacking;
+                    moveInput?.Invoke(Vector2.zero);
+                }
             }
         }
     }
@@ -247,7 +257,7 @@ public class PlayerController : MonoBehaviour, IDataInitializable, IControllable
     {
         while (true)
         {
-            if (attack.PerformAttack(skill))
+            if (attack.PerformSkill(skill))
             {
                 curState = UnitState.Attacking;
                 yield return null;
