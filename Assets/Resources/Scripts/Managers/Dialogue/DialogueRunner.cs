@@ -8,7 +8,7 @@ using System.Linq;
 using TMPro;
 using System.Text;
 
-public class DialogueRunner : MonoBehaviour, IDataInitializable
+public class DialogueRunner : MonoBehaviour, IDataInitializeable
 {
     [Header("DialogueParser")]
     [SerializeField] private DialogueParser parser;
@@ -25,7 +25,7 @@ public class DialogueRunner : MonoBehaviour, IDataInitializable
     private List<DialogueParser.ParsedLine> scriptLines;
     private int currentLineNum = 0;
 
-    public void DataInit()
+    public void DataInitialize()
     {
 
     }

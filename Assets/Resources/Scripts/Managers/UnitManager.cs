@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitManager : MonoBehaviour, IDataInitializable
+public class UnitManager : MonoBehaviour, IDataInitializeable
 {
     public PlayableCharacter PlayerUnit;
     private Unit unit;
@@ -11,7 +11,7 @@ public class UnitManager : MonoBehaviour, IDataInitializable
     [Header("플레이어의 돈 잔량")]
     public int money;
 
-    public void DataInit()
+    public void DataInitialize()
     {
         money = 100;
         unit = PlayerUnit.GetComponent<Unit>();

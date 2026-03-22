@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillChanger : MonoBehaviour, IDataInitializable
+public class SkillChanger : MonoBehaviour, IDataInitializeable
 {
     private IAttackable attack;
     [SerializeField] private GameObject parentObj;
 
-    public void DataInit()
+    public void DataInitialize()
     {
         attack = parentObj.GetComponentInChildren<IAttackable>();
     }

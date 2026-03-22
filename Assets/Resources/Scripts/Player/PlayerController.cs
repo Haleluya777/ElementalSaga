@@ -5,7 +5,7 @@ using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-public class PlayerController : MonoBehaviour, IDataInitializable, IControllable
+public class PlayerController : MonoBehaviour, IDataInitializeable, IControllable
 {
     private enum UnitState { Idle, Attacking, Moving }
 
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour, IDataInitializable, IControllable
     private bool isAirial;
     public bool ModifierAtt;
 
-    public void DataInit()
+    public void DataInitialize()
     {
         if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
         {

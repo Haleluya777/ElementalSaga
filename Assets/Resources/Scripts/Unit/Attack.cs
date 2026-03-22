@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializable
+public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializeable
 {
     //public event Action<int> OnHitEvent;
     public event Action UpdateSkillGage;
@@ -59,7 +59,7 @@ public class Attack : MonoBehaviour, IAttackable, ISkillCaster, IDataInitializab
         //Debug.Log($"{parentObj.name}의 x가속도 : {rigid.velocity.x}");
     }
 
-    public void DataInit()
+    public void DataInitialize()
     {
         unit = parentObj.GetComponent<Unit>();
         anim = parentObj.GetComponent<Animator>();

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class AIController : MonoBehaviour, IDataInitializable, IControllable
+public class AIController : MonoBehaviour, IDataInitializeable, IControllable
 {
     public enum UnitState { Idle, Attacking, Moving }
 
@@ -61,7 +61,7 @@ public class AIController : MonoBehaviour, IDataInitializable, IControllable
         attackInput?.Invoke(0);
     }
 
-    public void DataInit()
+    public void DataInitialize()
     {
         // if (parentObj.GetComponent<PlayableCharacter>().controlState == PlayableCharacter.ControlState.Player)
         // {

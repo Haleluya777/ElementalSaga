@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interaction : MonoBehaviour, IDataInitializable
+public class Interaction : MonoBehaviour, IDataInitializeable
 {
     [SerializeField] private GameObject parentObj;
     private PlayerController controller;
@@ -42,7 +42,7 @@ public class Interaction : MonoBehaviour, IDataInitializable
         }
     }
 
-    public void DataInit()
+    public void DataInitialize()
     {
 
     }

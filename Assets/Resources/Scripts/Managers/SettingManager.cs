@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
-public class SettingManager : MonoBehaviour, IDataInitializable
+public class SettingManager : MonoBehaviour, IDataInitializeable
 {
     private List<Resolution> Resolutions = new List<Resolution>()
     {
@@ -18,7 +18,7 @@ public class SettingManager : MonoBehaviour, IDataInitializable
     public bool Windowed;
 
 
-    public void DataInit()
+    public void DataInitialize()
     {
         SettingInit();
     }

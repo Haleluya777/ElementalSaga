@@ -22,9 +22,9 @@ public class GlobalGameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        foreach (var init in GetComponentsInChildren<IDataInitializable>())
+        foreach (var init in GetComponentsInChildren<IDataInitializeable>())
         {
-            init.DataInit();
+            init.DataInitialize();
         }
     }
 }

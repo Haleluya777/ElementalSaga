@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
-public class RelicManager : MonoBehaviour, IDataInitializable
+public class RelicManager : MonoBehaviour, IDataInitializeable
 {
     public List<RelicSerializedDic> relicMaps;
 
-    public void DataInit()
+    public void DataInitialize()
     {
         foreach (var relicMap in relicMaps)
         {

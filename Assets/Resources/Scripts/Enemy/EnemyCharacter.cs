@@ -24,9 +24,9 @@ public class EnemyCharacter : Unit
     {
         unitData = new UnitData(maps.GetDatas(id));
         base.TakeDamageEvent += GetStunGage;
-        foreach (var init in GetComponentsInChildren<IDataInitializable>())
+        foreach (var init in GetComponentsInChildren<IDataInitializeable>())
         {
-            init.DataInit();
+            init.DataInitialize();
         }
     }
 

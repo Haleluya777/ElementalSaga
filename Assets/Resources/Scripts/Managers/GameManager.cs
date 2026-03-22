@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public CanvasManager canvasManager;
     public UnitManager unitManager; //현재 조종 중인 현재 플레이어 유닛에 관련된 매니저.
     public RelicManager relicManager;
+    public SoundManager soundManager;
+    public ScreenManager screenManager;
 
     private void Awake()
     {
@@ -31,9 +33,9 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        foreach (var init in GetComponentsInChildren<IDataInitializable>())
+        foreach (var init in GetComponentsInChildren<IDataInitializeable>())
         {
-            init.DataInit();
+            init.DataInitialize();
         }
     }
 

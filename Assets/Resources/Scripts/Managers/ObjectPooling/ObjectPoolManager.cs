@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
-public class ObjectPoolManager : MonoBehaviour, IDataInitializable
+public class ObjectPoolManager : MonoBehaviour, IDataInitializeable
 {
     public Dictionary<string, ObjectPooler> poolDic = new Dictionary<string, ObjectPooler>();
 
-    public void DataInit()
+    public void DataInitialize()
     {
         poolDic.Add("Rooms", transform.GetChild(0).GetComponent<ObjectPooler>());
         poolDic.Add("UI", transform.GetChild(1).GetComponent<ObjectPooler>());

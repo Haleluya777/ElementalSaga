@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class Movement : MonoBehaviour, IMovable, IDataInitializable
+public class Movement : MonoBehaviour, IMovable, IDataInitializeable
 {
     [SerializeField] private GameObject parentObj;
     private IControllable controller;
@@ -45,7 +45,7 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializable
         SetLocalScale((int)vel.x / (int)unit.MoveSpeed);
     }
 
-    public void DataInit()
+    public void DataInitialize()
     {
         rigid = parentObj.GetComponent<Rigidbody2D>();
         unit = parentObj.GetComponent<Unit>();

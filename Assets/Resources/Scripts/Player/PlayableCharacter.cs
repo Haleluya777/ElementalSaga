@@ -47,9 +47,9 @@ public class PlayableCharacter : Unit
         base.TakeDamageEvent += UpdateHpBar;
         GetComponentInChildren<Attack>().UpdateSkillGage += UpdateEllBar;
 
-        foreach (var init in GetComponentsInChildren<IDataInitializable>())
+        foreach (var init in GetComponentsInChildren<IDataInitializeable>())
         {
-            init.DataInit();
+            init.DataInitialize();
         }
     }
 

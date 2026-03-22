@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class RoomManager : MonoBehaviour, IDataInitializable
+public class RoomManager : MonoBehaviour, IDataInitializeable
 {
     [SerializeField] private List<DoorInfo> rooms = new List<DoorInfo>();
     [SerializeField] private int total;
@@ -13,7 +13,7 @@ public class RoomManager : MonoBehaviour, IDataInitializable
         //WeightInit();
     }
 
-    public void DataInit()
+    public void DataInitialize()
     {
         WeightInit();
     }
