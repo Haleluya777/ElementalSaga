@@ -70,7 +70,7 @@ public class StageManager : MonoBehaviour
         }
 
         //이 부분 수정 필요
-        currentRoom = GameManager.instance.objectPoolManager.poolDic["Rooms"].GetGo("CombatRoom_1");
+        currentRoom = LocalGameManager.instance.objectPoolManager.poolDic["Rooms"].GetGo("CombatRoom_1");
         //여기까지
 
         //수정본
@@ -109,7 +109,7 @@ public class StageManager : MonoBehaviour
         foreach (var enemyName in currentRoomInfo.enemyList)
         {
             //일반 몬스터 소환.
-            GameObject enemy = GameManager.instance.objectPoolManager.poolDic["Units"].GetGo(enemyName);
+            GameObject enemy = LocalGameManager.instance.objectPoolManager.poolDic["Units"].GetGo(enemyName);
             EnemyCharacter enemyCom = enemy.GetComponent<EnemyCharacter>();
             //Debug.Log(enemyCom is null);
 
@@ -156,18 +156,18 @@ public class StageManager : MonoBehaviour
         {
             wave = 0;
             Debug.Log("보스방 생성");
-            GameManager.instance.roomManager.MakeDoor(new Vector2(0, -1), true);
+            //GameManager.instance.roomManager.MakeDoor(new Vector2(0, -1), true);
             return;
         }
         //다음 방으로 이동할 문 두 개 생성.
         for (int i = 0; i < 2; i++)
         {
-            GameManager.instance.roomManager.MakeDoor(currentRoomInfo.doorPos[i].position);
+            //GameManager.instance.roomManager.MakeDoor(currentRoomInfo.doorPos[i].position);
         }
 
         wave = 2;
         //보상 상자 생성.
-        GameManager.instance.roomManager.MakeAmendChest(currentRoomInfo.SetChestTier(), new Vector2(0, -4), currentRoomInfo.confirmedRelics);
+        //GameManager.instance.roomManager.MakeAmendChest(currentRoomInfo.SetChestTier(), new Vector2(0, -4), currentRoomInfo.confirmedRelics);
     }
 
     private GameObject CreateRoom(RoomType type)

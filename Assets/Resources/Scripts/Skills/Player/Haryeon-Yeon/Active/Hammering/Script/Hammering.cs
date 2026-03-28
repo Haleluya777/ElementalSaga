@@ -19,7 +19,7 @@ public class Hammering : SkillBase
 
         Debug.Log("해머링~");
 
-        GameObject hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
+        GameObject hitBox = LocalGameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
 
         hitBox.transform.position = caster.GetHitBoxPos().position;
         hitBox.transform.SetParent(caster.GetGameObject().transform.GetChild(2).transform.GetChild(0));
@@ -41,7 +41,7 @@ public class Hammering : SkillBase
             RaycastHit2D enemyHitted = Physics2D.Raycast(caster.GetPosition(), caster.GetDirection(), 1, 1 << 6);
             if (enemyHitted.collider != null)
             {
-                GameManager.instance.StartCoroutine(Explosion(enemyHitted.collider.gameObject, caster));
+                LocalGameManager.instance.StartCoroutine(Explosion(enemyHitted.collider.gameObject, caster));
             }
         }
 
@@ -55,7 +55,7 @@ public class Hammering : SkillBase
         yield return new WaitForSeconds(.4f);
 
         Debug.Log("폭발!");
-        GameObject hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
+        GameObject hitBox = LocalGameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
 
         hitBox.transform.position = enemy.gameObject.transform.position;
         hitBox.transform.SetParent(caster.GetGameObject().transform.GetChild(2).transform.GetChild(0));

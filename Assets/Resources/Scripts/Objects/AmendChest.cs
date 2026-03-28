@@ -16,7 +16,7 @@ public class AmendChest : PoolAble, IInteractable
     {
         relics.Clear();
         tier = _tier;
-        int relicCount = GameManager.instance.stageManager.amendCount;
+        //int relicCount = GameManager.instance.stageManager.amendCount;
 
         if (GameManager.instance is not null)
         {
@@ -28,21 +28,21 @@ public class AmendChest : PoolAble, IInteractable
         {
             Debug.Log("고정 등장 유물이 존재.");
             relics = confirmedRelicList;
-            relicCount = relicCount - confirmedRelicList.Count > 0 ? relicCount - confirmedRelicList.Count : 0;
+            //relicCount = relicCount - confirmedRelicList.Count > 0 ? relicCount - confirmedRelicList.Count : 0;
         }
 
         switch (_tier)
         {
             case RelicTier.Bronze:
-                relics.AddRange(GameManager.instance.relicManager.relicMaps[0].GetRandomRelicList(relicCount));
+                //relics.AddRange(GameManager.instance.relicManager.relicMaps[0].GetRandomRelicList(relicCount));
                 break;
 
             case RelicTier.Silver:
-                relics.AddRange(GameManager.instance.relicManager.relicMaps[1].GetRandomRelicList(relicCount));
+                //relics.AddRange(GameManager.instance.relicManager.relicMaps[1].GetRandomRelicList(relicCount));
                 break;
 
             case RelicTier.Gold:
-                relics.AddRange(GameManager.instance.relicManager.relicMaps[2].GetRandomRelicList(relicCount));
+                //relics.AddRange(GameManager.instance.relicManager.relicMaps[2].GetRandomRelicList(relicCount));
                 break;
         }
     }

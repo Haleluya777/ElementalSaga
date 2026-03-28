@@ -108,7 +108,7 @@ public abstract class Unit : PoolAble, IDamageable
     void OnEnable()
     {
         //currentStats = unitData;
-        if (GameManager.instance is not null)
+        if (LocalGameManager.instance is not null)
         {
             GameManager.instance.eventManager.InitChar += SetUnitInDialogue;
         }
@@ -116,7 +116,7 @@ public abstract class Unit : PoolAble, IDamageable
 
     void OnDisable()
     {
-        if (GameManager.instance is not null)
+        if (LocalGameManager.instance is not null)
         {
             GameManager.instance.eventManager.InitChar -= SetUnitInDialogue;
         }
@@ -127,7 +127,7 @@ public abstract class Unit : PoolAble, IDamageable
         if (name.Contains(this.gameObject.name))
         {
             Debug.Log(this.gameObject.name);
-            GameManager.instance.dialogueRunner.DialogueTextDic.Add(this.gameObject.name, textBox.GetComponentInChildren<TextMeshProUGUI>());
+            //LocalGameManager.instance.dialogueManager.dialogueRunner.DialogueTextDic.Add(this.gameObject.name, textBox.GetComponentInChildren<TextMeshProUGUI>());
         }
     }
 
@@ -196,7 +196,7 @@ public abstract class Unit : PoolAble, IDamageable
             if (activeEffectCoroutines.TryGetValue(effect.effectName, out Coroutine runningCoroutine))
             {
                 //코루틴을 이용한 상태이상의 타이머 제거.
-                GameManager.instance.coroutineRunner.StopCoroutine(runningCoroutine);
+                LocalGameManager.instance.coroutineRunner.StopCoroutine(runningCoroutine);
             }
             //적용 되어 있는 상태이상 또한 제거.
             exisitngEffect.RemoveEffect(true);
@@ -207,7 +207,7 @@ public abstract class Unit : PoolAble, IDamageable
 
         if (effect.duration > 0)
         {
-            Coroutine newCoroutine = GameManager.instance.coroutineRunner.StartRunnerCoroutine(RemoveEffectAfterDuration(effect));
+            Coroutine newCoroutine = LocalGameManager.instance.coroutineRunner.StartRunnerCoroutine(RemoveEffectAfterDuration(effect));
             activeEffectCoroutines[effect.effectName] = newCoroutine;
         }
     }
@@ -218,7 +218,7 @@ public abstract class Unit : PoolAble, IDamageable
         {
             if (activeEffectCoroutines.TryGetValue(effectName, out Coroutine runningCoroutine))
             {
-                GameManager.instance.coroutineRunner.StopCoroutine(runningCoroutine);
+                LocalGameManager.instance.coroutineRunner.StopCoroutine(runningCoroutine);
                 activeEffectCoroutines.Remove(effectName);
             }
 

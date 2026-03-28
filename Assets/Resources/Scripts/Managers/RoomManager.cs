@@ -20,7 +20,7 @@ public class RoomManager : MonoBehaviour, IDataInitializeable
 
     public void MakeDoor(Vector2 pos, bool boss = false)
     {
-        GameObject doorObj = GameManager.instance.objectPoolManager.poolDic["Door"].GetGo("Door");
+        GameObject doorObj = LocalGameManager.instance.objectPoolManager.poolDic["Door"].GetGo("Door");
         Door door = doorObj.GetComponent<Door>();
 
         doorObj.transform.position = pos;
@@ -30,7 +30,7 @@ public class RoomManager : MonoBehaviour, IDataInitializeable
 
     public void MakeAmendChest(AmendChest.RelicTier tier, Vector2 pos, List<RelicInfo> confirmedRelics)
     {
-        GameObject chestObj = GameManager.instance.objectPoolManager.poolDic["Amend"].GetGo("AmendChest");
+        GameObject chestObj = LocalGameManager.instance.objectPoolManager.poolDic["Amend"].GetGo("AmendChest");
         AmendChest chest = chestObj.GetComponent<AmendChest>();
 
         chestObj.transform.position = pos;

@@ -14,8 +14,8 @@ public class Purgatory_Explosion : SkillBase
     {
         if (attack is null) attack = caster.GetCom<IAttackable>();
 
-        GameObject hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
-        GameObject effect = GameManager.instance.objectPoolManager.poolDic["Effect"].GetGo("Effect");
+        GameObject hitBox = LocalGameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
+        GameObject effect = LocalGameManager.instance.objectPoolManager.poolDic["Effect"].GetGo("Effect");
 
         hitBox.transform.position = caster.GetHitBoxPos().position;
         hitBox.transform.SetParent(caster.GetGameObject().transform.GetChild(2).transform.GetChild(0));

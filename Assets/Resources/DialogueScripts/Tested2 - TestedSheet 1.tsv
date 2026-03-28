@@ -1,0 +1,7 @@
+Action(행동)	Detail(세부 내용)	BG(배경)	Face(표정)	Actor(주체)	BGM(브금)	SE(효과음)
+Char	7_A | D | E									
+T	First		Default	0_HaRyeon		
+	Second		Default	1_HaRyeong		
+	Third		Default	0_HaRyeon		
+CU	1					
+T	Fourth		Default	2_YeoBin		

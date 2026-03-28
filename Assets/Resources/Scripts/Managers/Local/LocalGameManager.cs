@@ -6,6 +6,11 @@ public class LocalGameManager : MonoBehaviour
 {
     public static LocalGameManager instance;
     public PlayerUIManager playerUIManager;
+    public DialogueManager dialogueManager;
+    public CoroutineRunner coroutineRunner;
+    public ObjectPoolManager objectPoolManager;
+    public TimeLineManager timeLineManager;
+    public UnitManager unitManager; //현재 조종 중인 현재 플레이어 유닛에 관련된 매니저.
 
     void Awake()
     {
@@ -16,6 +21,14 @@ public class LocalGameManager : MonoBehaviour
         else
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            dialogueManager.dialogueRunner.RunDialogue();
         }
     }
 }

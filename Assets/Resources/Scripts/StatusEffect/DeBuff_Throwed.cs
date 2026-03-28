@@ -33,7 +33,7 @@ public class DeBuff_Throwed : StatusEffectBase
 
         targetPos = new Vector2(unitTransform.position.x + (dir.x * distance), unitTransform.position.y + (dir.y * distance));
 
-        GameManager.instance.coroutineRunner.StartCoroutine(Throwing(unitTransform.position));
+        LocalGameManager.instance.coroutineRunner.StartCoroutine(Throwing(unitTransform.position));
     }
 
     public override void RemoveEffect(bool isRefresh = false)

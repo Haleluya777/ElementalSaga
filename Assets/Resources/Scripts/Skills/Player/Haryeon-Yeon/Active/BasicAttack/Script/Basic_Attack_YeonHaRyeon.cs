@@ -64,13 +64,13 @@ public class Basic_Attack_YeonHaRyeon : SkillBase
         if (parentModule.blackBoard.HasKey("Basic_Combo")) //이미 3초 타이머가 진행중인 상태에서 스킬을 사용한다면.
         {
             //타이머 역할을 하는 코루틴 종료 후 스킬 실행.
-            GameManager.instance.coroutineRunner.StopCoroutine(parentModule.blackBoard.Get<Coroutine>("Basic_Combo"));
+            LocalGameManager.instance.coroutineRunner.StopCoroutine(parentModule.blackBoard.Get<Coroutine>("Basic_Combo"));
             parentModule.blackBoard.Remove("Basic_Combo");
         }
 
         //스킬 사용 중 상황.
         //히트 박스 사이즈 및 위치 조정.
-        GameObject hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
+        GameObject hitBox = LocalGameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
 
         hitBox.transform.position = caster.GetHitBoxPos().position;
         hitBox.transform.SetParent(caster.GetGameObject().transform.GetChild(2).transform.GetChild(0));
@@ -90,7 +90,7 @@ public class Basic_Attack_YeonHaRyeon : SkillBase
 
         //Debug.Log(tagetPos.x);
         caster.PlayAnimation(animName);
-        GameManager.instance.coroutineRunner.StartCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), caster.GetGameObject().transform, tagetPos));
+        LocalGameManager.instance.coroutineRunner.StartCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), caster.GetGameObject().transform, tagetPos));
 
         //스킬 사용 후 상황.
         //연결된 스킬 사용.
@@ -103,7 +103,7 @@ public class Basic_Attack_YeonHaRyeon : SkillBase
         else //다음 콤보가 존재할 때.
         {
             parentModule.ChangeSkillModule(this, chainedSkill); //다음 콤보 진행.
-            coroutine = GameManager.instance.coroutineRunner.StartRunnerCoroutine(ReturnCombo(caster)); //타이머 실행
+            coroutine = LocalGameManager.instance.coroutineRunner.StartRunnerCoroutine(ReturnCombo(caster)); //타이머 실행
             parentModule.blackBoard.Set("Basic_Combo", coroutine);
             caster.GetCom<IAttackable>().Combo++;
         }

@@ -37,7 +37,7 @@ public class EnemySlamDown_Jump : SkillBase
 
         rigid.velocity = requiredVelocity;
         caster.PlayAnimation(animName);
-        GameManager.instance.coroutineRunner.StartCoroutine(CheckGround(caster));
+        LocalGameManager.instance.coroutineRunner.StartCoroutine(CheckGround(caster));
         return true;
     }
 
@@ -69,7 +69,7 @@ public class EnemySlamDown_Jump : SkillBase
                     if (unit.activeEffectCoroutines.TryGetValue("Catchted", out Coroutine runningCoroutine))
                     {
                         //코루틴을 이용한 상태이상의 타이머 제거.
-                        GameManager.instance.coroutineRunner.StopCoroutine(runningCoroutine);
+                        LocalGameManager.instance.coroutineRunner.StopCoroutine(runningCoroutine);
                     }
                     //적용 되어 있는 상태이상 또한 제거.
                     exisitngEffect.RemoveEffect();

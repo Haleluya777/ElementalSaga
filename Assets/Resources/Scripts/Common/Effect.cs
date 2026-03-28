@@ -9,7 +9,7 @@ public class Effect : PoolAble
     public void Initialize(float _limitTime)
     {
         limitTime = _limitTime;
-        GameManager.instance.coroutineRunner.StartCoroutine(ReturnToPool());
+        LocalGameManager.instance.coroutineRunner.StartCoroutine(ReturnToPool());
     }
 
     private IEnumerator ReturnToPool()

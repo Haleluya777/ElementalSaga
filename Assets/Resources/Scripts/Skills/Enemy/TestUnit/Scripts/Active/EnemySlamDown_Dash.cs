@@ -32,7 +32,7 @@ public class EnemySlamDown_Dash : SkillBase
         }
 
         caster.PlayAnimation(animName);
-        GameManager.instance.coroutineRunner.StartRunnerCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), casterTransform, target, enemy));
+        LocalGameManager.instance.coroutineRunner.StartRunnerCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), casterTransform, target, enemy));
         return true;
     }
 

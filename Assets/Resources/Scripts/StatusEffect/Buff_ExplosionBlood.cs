@@ -29,7 +29,7 @@ public class Buff_ExplosionBlood : StatusEffectBase
 
     public override void ApplyEffect()
     {
-        coroutine = GameManager.instance.coroutineRunner.StartCoroutine(BloodLoss(target));
+        coroutine = LocalGameManager.instance.coroutineRunner.StartCoroutine(BloodLoss(target));
         attack.ActiveSkills[0] = reinforced;
 
         attIncrease = (target.Att * attRate) / 100;
@@ -43,7 +43,7 @@ public class Buff_ExplosionBlood : StatusEffectBase
 
     public override void RemoveEffect(bool isRefresh = false)
     {
-        GameManager.instance.coroutineRunner.StopCoroutine(coroutine);
+        LocalGameManager.instance.coroutineRunner.StopCoroutine(coroutine);
         attack.ActiveSkills[0] = basic;
         target.Att -= (int)attIncrease;
         target.MoveSpeed -= (int)moveIncrease;

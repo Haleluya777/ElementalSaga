@@ -17,7 +17,7 @@ public class HitBox : PoolAble
         onHitEvents = _onHitEvents;
         limitTime = _limitTime;
         stunDmg = _stunDmg;
-        GameManager.instance.coroutineRunner.StartCoroutine(ReturnToPool());
+        LocalGameManager.instance.coroutineRunner.StartCoroutine(ReturnToPool());
     }
 
     void OnTriggerEnter2D(Collider2D other)

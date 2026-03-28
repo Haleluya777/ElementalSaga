@@ -25,7 +25,7 @@ public class Buff_Counter : StatusEffectBase
     {
         Debug.Log("공격 무시!");
         int dir = (int)attacker.GetDirection().x;
-        GameManager.instance.coroutineRunner.StartCoroutine(DodgeMovement(obj, new Vector2((obj.transform.position.x) + (3 * dir), obj.transform.position.y)));
+        LocalGameManager.instance.coroutineRunner.StartCoroutine(DodgeMovement(obj, new Vector2((obj.transform.position.x) + (3 * dir), obj.transform.position.y)));
     }
 
     private IEnumerator DodgeMovement(GameObject obj, Vector2 tagetPos)

@@ -1,0 +1,8 @@
+Action(행동)	Detail(세부 내용)	BG(배경)	Face(표정)	Actor(주체)	BGM(브금)	SE(효과음)
+Char	7_A | B | C					
+CU	6					
+T	First		Default	0_HaRyeon		
+	Second		Default	1_HaRyeong		
+	Third		Default	0_HaRyeon		
+T	Fourth		Default	2_YeoBin		
+	이건 테스트용 대사야. (0.5) {텍스트의 색 변경과 흔들림 효과}를 테스트 하기 위한 부분이지.		Default	1_HaRyeong		

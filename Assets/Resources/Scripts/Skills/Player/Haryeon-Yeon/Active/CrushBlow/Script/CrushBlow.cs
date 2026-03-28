@@ -21,7 +21,7 @@ public class CrushBlow : SkillBase
 
         attackCount = heatSeal.heatSeal == 3 ? 3 : 2;
 
-        GameManager.instance.coroutineRunner.StartCoroutine(Combo(caster));
+        LocalGameManager.instance.coroutineRunner.StartCoroutine(Combo(caster));
 
         return true;
     }
@@ -41,7 +41,7 @@ public class CrushBlow : SkillBase
                 _ => ""
             };
 
-            GameObject hitBox = GameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
+            GameObject hitBox = LocalGameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
 
             hitBox.transform.position = caster.GetHitBoxPos().position;
             hitBox.transform.SetParent(caster.GetGameObject().transform.GetChild(2).transform.GetChild(0));

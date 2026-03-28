@@ -6,7 +6,7 @@ public class RelicButton : PoolAble
 {
     void OnEnable()
     {
-        if (GameManager.instance is not null)
+        if (LocalGameManager.instance is not null)
         {
             GameManager.instance.eventManager.ReleaseAllRelicButton -= ReleaseObject;
             GameManager.instance.eventManager.ReleaseAllRelicButton += ReleaseObject;

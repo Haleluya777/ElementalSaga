@@ -14,7 +14,7 @@ public class Spacing : SkillBase
 
         Debug.Log("잠깐 후퇴!");
         caster.PlayAnimation(animName);
-        GameManager.instance.coroutineRunner.StartRunnerCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), target));
+        LocalGameManager.instance.coroutineRunner.StartRunnerCoroutine(PerformDash(caster, caster.GetCom<Rigidbody2D>(), target));
         return true;
     }
 

@@ -48,7 +48,7 @@ public class RoomInfo : PoolAble
     {
         for (int i = 0; i < 3; i++)
         {
-            shopRelics.AddRange(GameManager.instance.relicManager.relicMaps[i].GetRandomRelicList(counts[i]));
+            //shopRelics.AddRange(GameManager.instance.relicManager.relicMaps[i].GetRandomRelicList(counts[i]));
         }
 
         GameManager.instance.canvasManager.SetShopPanel(shopRelics);

@@ -10,7 +10,7 @@ public class SettingDistance : BTNode
     public override NodeState Evaluate(AIController controller)
     {
         unitPos = controller.ParentObj.transform.position;
-        playerPos = GameManager.instance.unitManager.PlayerUnit.transform.position;
+        playerPos = LocalGameManager.instance.unitManager.PlayerUnit.transform.position;
 
         blackboard.Set<Vector3>("UnitPos", unitPos);
         blackboard.Set<float>("Distance", Mathf.Abs((playerPos.x - unitPos.x)));

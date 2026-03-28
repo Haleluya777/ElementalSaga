@@ -37,7 +37,7 @@ public class CanvasManager : MonoBehaviour
                 int index = i;
 
                 //버튼 오브젝트 가져온 후, Contents에 자식으로 넣음.
-                var button = GameManager.instance.objectPoolManager.poolDic["UI"].GetGo("RelicSelectButton");
+                var button = LocalGameManager.instance.objectPoolManager.poolDic["UI"].GetGo("RelicSelectButton");
                 button.transform.SetParent(amendContents.transform);
 
                 //버튼의 이미지, 텍스트 및 착용할 유물 관련 정보 가져오기.
@@ -54,10 +54,10 @@ public class CanvasManager : MonoBehaviour
 
                 Button buttonEvent = button.GetComponent<Button>();
 
-                buttonEvent.onClick.AddListener(() => GameManager.instance.unitManager.EquipRelic(relics[index]));
+                buttonEvent.onClick.AddListener(() => LocalGameManager.instance.unitManager.EquipRelic(relics[index]));
                 buttonEvent.onClick.AddListener(() => GameManager.instance.eventManager.ReleaseRelicButton());
                 //선택한 유물이 더 이상 다시 등장하지 않게 하기 위해 리스트에서 삭제하는 이벤트 추가.
-                buttonEvent.onClick.AddListener(() => GameManager.instance.relicManager.RemoveRelic(relics[index]));
+                //buttonEvent.onClick.AddListener(() => GameManager.instance.relicManager.RemoveRelic(relics[index]));
                 buttonEvent.onClick.AddListener(() => GameManager.instance.canvasManager.amendPanel.SetActive(false));
             }
         }
@@ -77,7 +77,7 @@ public class CanvasManager : MonoBehaviour
             int index = i;
 
             //오브젝트 풀에서 버튼을 가져온 뒤 컨텐츠 자식으로 할당.
-            var button = GameManager.instance.objectPoolManager.poolDic["UI"].GetGo("ProductButton");
+            var button = LocalGameManager.instance.objectPoolManager.poolDic["UI"].GetGo("ProductButton");
             button.transform.SetParent(productContents.transform);
 
             //버튼의 이미지, 유물 설명 및 가격 등의 정보를 가져옴.
@@ -95,11 +95,11 @@ public class CanvasManager : MonoBehaviour
 
             //클릭 시 실행될 이벤트 등록.
             Button buttonEvent = button.GetComponent<Button>();
-            buttonEvent.onClick.AddListener(() =>
+            buttonEvent.onClick.AddListener((UnityEngine.Events.UnityAction)(() =>
             {
-                if (GameManager.instance.unitManager.money - relics[index].price >= 0)
+                if (LocalGameManager.instance.unitManager.money - relics[index].price >= 0)
                 {
-                    GameManager.instance.unitManager.money -= relics[index].price;
+                    LocalGameManager.instance.unitManager.money -= relics[index].price;
                     buttonEvent.interactable = false;
                     buttonEvent.GetComponent<Image>().sprite = soldOutSprite;
 
@@ -107,12 +107,12 @@ public class CanvasManager : MonoBehaviour
                     buttonEvent.transform.GetChild(1).gameObject.SetActive(false);
                     buttonEvent.transform.GetChild(2).gameObject.SetActive(false);
 
-                    GameManager.instance.unitManager.EquipRelic(relics[index]);
+                    LocalGameManager.instance.unitManager.EquipRelic(relics[index]);
                     //해당 유물을 데이터에서 삭제하는 로직 추가.
-                    GameManager.instance.relicManager.RemoveRelic(relics[index]);
+                    //GameManager.instance.relicManager.RemoveRelic(relics[index]);
                 }
                 else Debug.Log("돈이 부족합니다!");
-            });
+            }));
         }
     }
 }

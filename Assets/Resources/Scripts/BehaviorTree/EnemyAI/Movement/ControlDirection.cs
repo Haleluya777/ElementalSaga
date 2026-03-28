@@ -14,10 +14,10 @@ public class ControlDirection : BTNode
         blackboard.Set<Vector3>("UnitPos", controller.ParentObj.transform.position);
 
         Vector3 unitPos = blackboard.Get<Vector3>("UnitPos");
-        Vector3 playerPos = GameManager.instance.unitManager.PlayerUnit.transform.position;
+        Vector3 playerPos = LocalGameManager.instance.unitManager.PlayerUnit.transform.position;
 
         blackboard.Set<int>(directionKey, (int)Mathf.Sign((playerPos.x - unitPos.x)));
-        
+
         controller.ParentObj.transform.localScale = new Vector3(Mathf.Sign(playerPos.x - unitPos.x), 1, 1);
 
         return NodeState.Success;
