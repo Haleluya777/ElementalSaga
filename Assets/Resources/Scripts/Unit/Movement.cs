@@ -22,6 +22,10 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializeable
 
     private bool _jumpRequested;
 
+    //Test
+    [SerializeField] private float acc;
+    //
+
     private void FixedUpdate()
     {
         CheckingGround();
@@ -44,7 +48,7 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializeable
         //Test
         if (unit.isAirial && rigid.velocity.y < 0) //낙하 중일 때.
         {
-            rigid.gravityScale += Time.deltaTime * 3f;
+            rigid.gravityScale += Time.deltaTime * acc;
         }
         else //땅을 딛고 있을 때.
         {
