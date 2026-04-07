@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -32,17 +33,24 @@ public class Movement : MonoBehaviour, IMovable, IDataInitializeable
         }
 
         if (IsMovementLocked) return;
-
         if (unit.MoveSpeed == 0) return;
 
         vel = rigid.velocity;
-
         vel.x = dir.x * unit.MoveSpeed;
-        // y 속도는 점프와 중력에 의해 제어되므로 여기서는 x만 변경합니다.
-        // vel.y = rigid.velocity.y; 
 
         rigid.velocity = vel;
         SetLocalScale((int)vel.x / (int)unit.MoveSpeed);
+
+        //Test
+        if (unit.isAirial && rigid.velocity.y < 0) //낙하 중일 때.
+        {
+            rigid.gravityScale += Time.deltaTime * 3f;
+        }
+        else //땅을 딛고 있을 때.
+        {
+            rigid.gravityScale = 1.5f;
+        }
+        //
     }
 
     public void DataInitialize()

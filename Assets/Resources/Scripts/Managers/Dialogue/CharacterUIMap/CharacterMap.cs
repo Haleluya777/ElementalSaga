@@ -25,11 +25,6 @@ public class CharacterMap : ScriptableObject
 
     public CharacterData GetCharacter(int index)
     {
-        //if (index < 0 || index > characters.Length)
-        //{
-        //    Debug.Log($"유효하지 않은 캐릭터 인덱스. Index : {index}");
-        //    return null;
-        //}
         foreach (var character in characters)
         {
             if (character.id == index) return character;

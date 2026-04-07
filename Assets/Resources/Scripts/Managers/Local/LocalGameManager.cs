@@ -22,6 +22,11 @@ public class LocalGameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        // foreach (var data in GetComponentsInChildren<IDataInitializeable>())
+        // {
+        //     data.DataInitialize();
+        // }
     }
 
     void Update()

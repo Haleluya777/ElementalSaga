@@ -37,8 +37,8 @@ public class DialogueRunner : MonoBehaviour, IDataInitializeable
     [SerializeField] private bool autoTrigger; //대화가 자동으로 진행될지 체크하는 트리거
     [SerializeField] private bool skipTrigger; //대화가 스킵 모드로 진행될지 체크하는 트리거
 
+    [Header("텍스트 속도")]
     [SerializeField] private float settedDialogueTextSpeed; //설정에서 변경된 Dialogue텍스트 진행 속도.
-    [SerializeField] private float settedAutoProccessTime; //설정에서 변경된 자동 대화 진행 속도.
 
     [Header("DialogueCharacters")] //대화에 등장하는 캐릭터 관련 요소들.
     [SerializeField] private GameObject CharacterPrefab; //캐릭터 베이스 프리팹
@@ -48,17 +48,8 @@ public class DialogueRunner : MonoBehaviour, IDataInitializeable
     [SerializeField] private List<GameObject> leftChars = new List<GameObject>();
     [SerializeField] private List<GameObject> rightChars = new List<GameObject>();
 
-    private const float DIALOGUE_TEXT_SPEED_SKIP = .01f; //텍스트 진행 속도 (스킵 모드)
-    private const float DIALOGUE_TEXT_AUTOPROCCESS_SKIP = .01f; //자동 텍스트 넘김 지연 시간. (빠른 모드)
 
     private WaitForSeconds currentWaitDialogueProccessSpeed; //현재 Dialogue 진행 속도에 쓰는 WaitForSeconds
-    private WaitForSeconds currentWaitDialogueAutoProccess; //현재 Dialogue 자동 진행에 쓰는 WaitForSeconds
-
-    private WaitForSeconds skipedWaitDialogueProccessSpeed; //스킵 모드일 때, Dialogue 텍스트 진행 속도에 쓰는 WaitForSeconds
-    private WaitForSeconds skipedWaitDialogueAutoProccess; //스킵 모드일 떄, Dialogue 자동 진행에 쓰는 WaitForSeconds
-
-    private WaitForSeconds settedWaitDialogueAutoProccess; //스킵 모드가 아닐 때, Dialogue 자동 진행에 쓰는 WaitForSeconds (설정된 텍스트 속도로 지정함.)
-    private WaitForSeconds settedWaitDialogueProccessSpeed; //스킵 모드가 아닐 때, Dialogue 텍스트 진행에 쓰는 WaitForSeconds (설정된 텍스트 속도로 지정.)
 
     private List<DialogueParser.ParsedLine> scriptLine;
     private int currentLineNum = 0;
@@ -73,24 +64,17 @@ public class DialogueRunner : MonoBehaviour, IDataInitializeable
         //임시
         //CharacterInit(3);
         //RunDialogue();
+        DataInitialize();
     }
 
     public void DataInitialize()
     {
+        Debug.Log("초기화됨");
         isWaiting = false;
         isRunning = false;
 
-        settedDialogueTextSpeed = .065f;
-        settedAutoProccessTime = .6f;
         currentLineNum = 0;
-        // currentWaitDialogueProccessSpeed = new WaitForSeconds(settedDialogueTextSpeed);
-        // currentWaitDialogueAutoProccess = new WaitForSeconds(settedAutoProccessTime);
-
-        // skipedWaitDialogueAutoProccess = new WaitForSeconds(DIALOGUE_TEXT_AUTOPROCCESS_SKIP);
-        // skipedWaitDialogueProccessSpeed = new WaitForSeconds(DIALOGUE_TEXT_SPEED_SKIP);
-
-        // settedWaitDialogueAutoProccess = new WaitForSeconds(settedAutoProccessTime);
-        // settedWaitDialogueProccessSpeed = new WaitForSeconds(settedDialogueTextSpeed);
+        currentWaitDialogueProccessSpeed = new WaitForSeconds(settedDialogueTextSpeed);
     }
 
     void Update()
@@ -124,42 +108,15 @@ public class DialogueRunner : MonoBehaviour, IDataInitializeable
                     ProccessNextLine();
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                foreach (var id in characters.Keys)
+                {
+                    Debug.Log(id);
+                }
+            }
         }
-    }
-
-    //출력 모드에 따른 텍스트 속도 변경.
-    // private void DialogueStateAction()
-    // {
-    //     switch (currentState)
-    //     {
-    //         case RunnerState.Normal:
-    //             currentWaitDialogueProccessSpeed = settedWaitDialogueProccessSpeed;
-    //             break;
-
-    //         case RunnerState.Auto:
-    //             currentWaitDialogueProccessSpeed = settedWaitDialogueProccessSpeed;
-    //             currentWaitDialogueAutoProccess = settedWaitDialogueAutoProccess;
-    //             break;
-
-    //         case RunnerState.Skip:
-    //             currentWaitDialogueProccessSpeed = skipedWaitDialogueProccessSpeed;
-    //             currentWaitDialogueAutoProccess = skipedWaitDialogueAutoProccess;
-    //             break;
-    //     }
-    // }
-
-    //설정 메뉴에서 변경된 텍스트 속도에 따른 변수 변경.
-    public void SettingChangeTextSpeed(float value)
-    {
-        settedDialogueTextSpeed = value;
-        settedWaitDialogueProccessSpeed = new WaitForSeconds(settedDialogueTextSpeed);
-    }
-
-    //설정 메뉴에서 변경된 자동 대화 진행 속도에 따른 변수 변경.
-    public void SettingAutoNextLineSpeed(float value)
-    {
-        settedAutoProccessTime = value;
-        settedWaitDialogueAutoProccess = new WaitForSeconds(settedAutoProccessTime);
     }
 
     public void CharacterInit(int index, string[] positions) //대화에 등장하는 모든 캐릭터 오브젝트 초기화.
@@ -185,10 +142,10 @@ public class DialogueRunner : MonoBehaviour, IDataInitializeable
                 if (num < positions.Length)
                 {
                     //위치 초기화.
-                    Debug.Log($"할렐루야 위치 : {LocalGameManager.instance.dialogueManager.dialogueFuncManager.CalculatePos(positions[num].Trim())}");
+                    //Debug.Log($"할렐루야 위치 : {LocalGameManager.instance.dialogueManager.dialogueFuncManager.CalculatePos(positions[num].Trim())}");
                     RectTransform rectTransform = character.GetComponent<RectTransform>();
-                    Debug.Log(positions[num]);
-                    rectTransform.anchoredPosition = new Vector2(LocalGameManager.instance.dialogueManager.dialogueFuncManager.CalculatePos(positions[num].Trim()), -300);
+                    //Debug.Log(positions[num]);
+                    rectTransform.anchoredPosition = new Vector2(LocalGameManager.instance.dialogueManager.dialogueFuncManager.CalculatePos(positions[num].Trim()), -400);
 
                     if (rectTransform.anchoredPosition.x > 0) rightChars.Add(character);
                     else leftChars.Add(character);
@@ -262,7 +219,7 @@ public class DialogueRunner : MonoBehaviour, IDataInitializeable
 
     public void ProccessNextLine()
     {
-        Debug.Log(currentLineNum);
+        //Debug.Log(currentLineNum);
         if (currentLineNum >= scriptLine.Count) //현재 라인 넘버가 실행중인 대화 스크립트의 총 줄 개수보다 많거나 같으면.
         {
             EndDialogue(); //대화 종료.
@@ -479,9 +436,12 @@ public class DialogueRunner : MonoBehaviour, IDataInitializeable
         if (id == -1 || emotion == "") return;
         foreach (Transform character in characterParent)
         {
-            character.GetComponent<Image>().color = new Color32(140, 140, 140, 255);
-            //Debug.Log($"이동해야할 부분 : {LocalGameManager.instance.dialogueManager.dialogueFuncManager.Relocation(character.GetComponent<RectTransform>().anchoredPosition.x)},캐릭터 이름 : {character.gameObject.name}");
-            //character.GetComponent<RectTransform>().DOAnchorPosX(LocalGameManager.instance.dialogueManager.dialogueFuncManager.Relocation(character.GetComponent<RectTransform>().anchoredPosition.x), .1f);
+            Image charImg = character.GetComponent<Image>();
+            RectTransform charTransform = character.GetComponent<RectTransform>();
+
+            //Debug.Log("까매짐");
+            charImg.color = new Color32(140, 140, 140, 255);
+            charTransform.DOAnchorPosY(-350, .5f);
         }
 
         var emphasisChar = characters[id];
@@ -511,8 +471,11 @@ public class DialogueRunner : MonoBehaviour, IDataInitializeable
             {
                 // i=0 -> num=-1, i=1 -> num=0, i=2 -> num=1
                 int relocationNum = i - 1; //-1, 0, 1순서로
+                RectTransform rectTransform = leftChars[i].GetComponent<RectTransform>();
+
                 //if (!leftChars[i].activeSelf) continue;
-                leftChars[leftChars.Count - i - 1].GetComponent<RectTransform>().DOAnchorPosX(funcManager.Relocation(relocationNum), .5f);
+                if (leftChars[i] == emphasisChar) rectTransform.DOAnchorPos(new Vector2(funcManager.Relocation(relocationNum), -300), .5f);
+                else rectTransform.DOAnchorPos(new Vector2(funcManager.Relocation(relocationNum), -350), .5f);
             }
         }
         else if (emphasisCharRectTransform.anchoredPosition.x > 0)//강조할 캐릭터가 오른쪽에 위치할 때.
@@ -523,7 +486,10 @@ public class DialogueRunner : MonoBehaviour, IDataInitializeable
             for (int i = 0; i < rightChars.Count; i++)
             {
                 int relocationNum = i + (5 - (rightChars.Count - 1));
-                rightChars[i].GetComponent<RectTransform>().DOAnchorPosX(funcManager.Relocation(relocationNum), .5f);
+                RectTransform rectTransform = rightChars[i].GetComponent<RectTransform>();
+
+                if (rightChars[i] == emphasisChar) rectTransform.DOAnchorPos(new Vector2(funcManager.Relocation(relocationNum), -300), .5f);
+                else rectTransform.DOAnchorPos(new Vector2(funcManager.Relocation(relocationNum), -350), .5f);
             }
         }
 

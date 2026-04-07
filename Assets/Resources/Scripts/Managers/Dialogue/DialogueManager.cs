@@ -10,6 +10,9 @@ public class DialogueManager : MonoBehaviour, IDataInitializeable
     public GameObject dialogueCanvas;
     public void DataInitialize()
     {
-
+        // foreach (var data in GetComponentsInChildren<IDataInitializeable>())
+        // {
+        //     data.DataInitialize();
+        // }
     }
 }

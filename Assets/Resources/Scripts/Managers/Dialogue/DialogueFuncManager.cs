@@ -227,7 +227,7 @@ public class DialogueFuncManager : MonoBehaviour, IDataInitializeable
         // 화면의 절반 너비를 기준으로 끝지점을 계산 (보통 UI 중앙이 0)
         // 1920 해상도 기준으로 약 850 정도가 끝자락이라고 가정할 때의 비율 적용
         float screenRatio = Screen.width / 1920f;
-        int baseOffset = (int)(850 * screenRatio);
+        int baseOffset = (int)(750 * screenRatio);
         int spacing = (int)(200 * screenRatio);
 
         return positionCode switch
@@ -245,8 +245,8 @@ public class DialogueFuncManager : MonoBehaviour, IDataInitializeable
     public int Relocation(int num)
     {
         float screenRatio = Screen.width / 1920f;
-        int baseOffset = (int)(850 * screenRatio);
-        int spacing = (int)(100 * screenRatio);
+        int baseOffset = (int)(750 * screenRatio);
+        int spacing = (int)(200 * screenRatio);
 
         // num이 1, 0, -1 순으로 들어오면 (왼쪽 그룹 강조 시)
         // -1이 가장 바깥(-baseOffset)에 위치하도록 계산

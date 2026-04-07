@@ -14,11 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters:
   - id: 0
-    characterName: YeonHaRyeon
+    characterName: "\uC5F0\uD558\uB828"
     characterSpriteMap: {fileID: 11400000, guid: 5488201f541b11b45a14eceb252aee6e, type: 2}
   - id: 1
-    characterName: YeonHaRyeong
+    characterName: "\uC5F0\uD558\uB839"
     characterSpriteMap: {fileID: 11400000, guid: d02075c038755d94eb19a321e4bd93ff, type: 2}
   - id: 2
-    characterName: JeonYeoBin
+    characterName: "\uC804\uC5EC\uBE48"
+    characterSpriteMap: {fileID: 11400000, guid: 204fa786a08725e4198e0fa2beaca4bf, type: 2}
+  - id: 5
+    characterName: "\uC7A5\uB85C\uB2E8"
+    characterSpriteMap: {fileID: 11400000, guid: d02075c038755d94eb19a321e4bd93ff, type: 2}
+  - id: 6
+    characterName: "\uC5F0\uAC15\uD718"
+    characterSpriteMap: {fileID: 11400000, guid: 5488201f541b11b45a14eceb252aee6e, type: 2}
+  - id: 8
+    characterName: "EMA \uAC10\uB3C5\uD300\uC7A5"
     characterSpriteMap: {fileID: 11400000, guid: 204fa786a08725e4198e0fa2beaca4bf, type: 2}
