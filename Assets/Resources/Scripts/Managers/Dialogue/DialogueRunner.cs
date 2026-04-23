@@ -69,7 +69,6 @@ public class DialogueRunner : MonoBehaviour, IDataInitializeable
 
     public void DataInitialize()
     {
-        Debug.Log("초기화됨");
         isWaiting = false;
         isRunning = false;
 
@@ -210,7 +209,7 @@ public class DialogueRunner : MonoBehaviour, IDataInitializeable
         //currentLineNum = 0;
         currentCharId = -1;
         DialoguePanel.SetActive(false);
-        LocalGameManager.instance.timeLineManager.TimeLinePlay();
+        //LocalGameManager.instance.timeLineManager.TimeLinePlay();
         //dataManager.dialogueLog.Clear(); //지나간 대화 로그 삭제
 
         //GameManager.instance.uiManager.FadeDailogueEnd(GameManager.instance.uiManager.dialogueUIManager.gameObject); //페이드 인아웃 연출 및 다음 고정 회화 확인.

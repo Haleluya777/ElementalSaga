@@ -57,7 +57,6 @@ public class CrushBlow : SkillBase
 
             hitBoxCom.Initialize(dmgCalculater.Calculate(caster), stunDmg, caster, null, .15f);
 
-            Debug.Log(animName);
             caster.PlayAnimation(animName);
 
             count++;

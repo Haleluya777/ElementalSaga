@@ -1,0 +1,59 @@
+[보스 공격 위험 지대(Danger Area) 셰이더 적용 가이드]
+
+1. 셰이더 정보 (Assets\Resources\Shaders\DangerAreaFill.shadergraph)
+------------------------------------------------------------------
+* 주요 속성 (Property):
+  - _FillAmount (Float): 색상이 차오르는 정도를 결정합니다.
+    * 1.0 : 비어있는 상태 (배경색만 보임)
+    * 0.0 : 가득 찬 상태 (채우기 색상으로 덮임)
+  - _FillColor (Color): 채워질 영역의 색상 (예: 어두운 붉은색)
+  - _EmptyColor (Color): 비어있는 배경 영역의 색상 (예: 밝은 붉은색)
+  - _MainTex (Texture2D): 영역의 전체적인 형태(마스크)를 결정하는 텍스처입니다.
+
+2. C# 제어 스크립트 예시 (DOTween 활용)
+------------------------------------------------------------------
+using UnityEngine;
+using DG.Tweening; // 프로젝트의 DOTween 라이브러리 사용
+
+public class DangerAreaHandler : MonoBehaviour
+{
+    private Material _material;
+    private static readonly int FillAmountId = Shader.PropertyToID("_FillAmount");
+
+    void Awake()
+    {
+        // 머티리얼 인스턴스를 생성하여 개별 오브젝트마다 독립적인 제어가 가능하게 합니다.
+        var renderer = GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            _material = renderer.material;
+        }
+    }
+
+    /// <summary>
+    /// 위험 지대를 활성화하고 지정된 시간 동안 색을 채웁니다.
+    /// </summary>
+    /// <param name="duration">채워지는 시간 (보스의 공격 전 딜레이)</param>
+    public void Activate(float duration)
+    {
+        if (_material == null) return;
+
+        // 1. 초기 상태 설정 (1.0 = 비어있음)
+        _material.SetFloat(FillAmountId, 1f);
+
+        // 2. DOTween을 사용하여 _FillAmount를 0으로 선형적으로 변화시킵니다.
+        _material.DOFloat(0f, FillAmountId, duration)
+            .SetEase(Ease.Linear)
+            .OnComplete(() => {
+                // 채워지기가 완료되었을 때 실행할 로직
+                Debug.Log("공격 범위 충전 완료!");
+            });
+    }
+}
+
+3. 적용 절차
+------------------------------------------------------------------
+1) 머티리얼 생성: 'DangerAreaFill' 셰이더를 우클릭하여 머티리얼을 생성하고 색상을 설정합니다.
+2) 프리팹 설정: 위험 지대로 사용할 Sprite나 Mesh 오브젝트에 위 스크립트를 부착합니다.
+3) 코드 호출: 보스의 공격 로직에서 프리팹을 생성(Instantiate)한 후, 
+   handler.Activate(시간); 을 호출하여 연출을 시작합니다.

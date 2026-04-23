@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4e1dc3f0d42fbc4d86343364a99e547, type: 3}
-  m_Name: Purgatory_Module
+  m_Name: Laijutsu_Module
   m_EditorClassIdentifier: 
   skillName: 
   skillDetail: 
-  coolDown: 3
-  consumption: 1
+  coolDown: 0
+  consumption: 0
   basicAttack: 0
   attackable: 0
   cancleDelay: 0
   havePassive: 0
   canUseAirial: 0
   activeSkills:
-  - {fileID: 11400000, guid: 3736b792252004a4eb72da6a5f311463, type: 2}
+  - {fileID: 11400000, guid: 577f657a047f3a04b8a86bd3c4cd5af3, type: 2}
   passiveSkills: []
-  releaseSkills:
-  - {fileID: 11400000, guid: 9c20cd6fb1f4b6a4c882d8e8bb40e722, type: 2}
-  activeType: 1
+  releaseSkills: []
+  activeType: 0
