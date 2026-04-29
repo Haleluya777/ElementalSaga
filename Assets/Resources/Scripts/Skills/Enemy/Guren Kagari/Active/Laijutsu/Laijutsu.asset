@@ -17,5 +17,7 @@ MonoBehaviour:
   targetObj: {fileID: 0}
   animName: 
   explanation: 
-  delayTime: 1
+  delayTime: 0.75
   actionSkill: {fileID: 11400000, guid: d3afaed28ab051c49baf7a78c658e4f0, type: 2}
+  dangerAreaSize: {x: 6, y: 1}
+  dangerAreaPos: {x: 4, y: 0}

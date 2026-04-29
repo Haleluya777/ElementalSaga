@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 272331c813368f248b918bd83bf63426, type: 3}
-  m_Name: LaijutsuAction
+  m_Script: {fileID: 11500000, guid: a1d94979c95a0cb4294ef164aa3279b6, type: 3}
+  m_Name: FireSlashAction
   m_EditorClassIdentifier: 
-  dmgCalculater: {fileID: 11400000, guid: 3e507d4a52006de4c91caff3f0bf7f58, type: 2}
+  dmgCalculater: {fileID: 11400000, guid: e40906967fe69924ca1581aaaa4982df, type: 2}
   stunDmg: 0
   targetObj: {fileID: 0}
-  animName: 
+  animName: Hammering
   explanation: 
-  hitBoxOffset: {x: 4, y: 0}
-  hitBoxSize: {x: 6, y: 1}
-  hitBoxObj: {fileID: 0}
+  hitBoxOffset: {x: 2, y: 0}
+  hitBoxSize: {x: 1, y: 1}

@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Purgatory_Explosion", menuName = "ScriptableObject/Skills/Active/YeonHaRyeon/Purgatory_Explosion")]
-public class Purgatory_Explosion : SkillBase
+[CreateAssetMenu(fileName = "FireSlashAction", menuName = "ScriptableObject/Skills/Active/Guren_Kagari/FireSlashAction")]
+public class FireSlashAction : SkillBase
 {
-    private IAttackable attack;
-
     [SerializeField] private Vector2 hitBoxOffset;
     [SerializeField] private Vector2 hitBoxSize;
 
     public override bool UseSkill(ISkillCaster caster)
     {
-        if (attack is null) attack = caster.GetCom<IAttackable>();
-
         GameObject hitBox = LocalGameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
         GameObject effect = LocalGameManager.instance.objectPoolManager.poolDic["Effect"].GetGo("Effect");
 
@@ -31,11 +27,20 @@ public class Purgatory_Explosion : SkillBase
         effect.transform.localScale = hitBoxSize;
         effect.transform.localPosition = hitBoxOffset;
 
-        hitBoxCom.Initialize(dmgCalculater.Calculate(caster), stunDmg, caster, null, .2f);
+        hitBoxCom.Initialize(dmgCalculater.Calculate(caster), stunDmg, caster, null, .15f);
         effectCom.Initialize(.2f);
-        //caster.PlayAnimation(animName);
 
-        Debug.Log($"차징 끝! 펀치! 총 데미지 : {dmgCalculater.Calculate(caster)}");
+        caster.PlayAnimation(animName);
+
+        LocalGameManager.instance.coroutineRunner.StartCoroutine(ReturnRigid(caster));
+
         return true;
+    }
+
+    private IEnumerator ReturnRigid(ISkillCaster caster)
+    {
+        float duration = caster.GetCom<Animator>().GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(duration);
+        caster.GetCom<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
     }
 }

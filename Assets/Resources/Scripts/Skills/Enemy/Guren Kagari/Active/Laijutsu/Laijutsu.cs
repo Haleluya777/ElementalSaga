@@ -8,15 +8,17 @@ public class Laijutsu : SkillBase
 {
     [SerializeField] private float delayTime;
     [SerializeField] private SkillBase actionSkill;
+    [SerializeField] private Vector2 dangerAreaSize;
+    [SerializeField] private Vector2 dangerAreaPos;
 
 
     public override bool UseSkill(ISkillCaster caster)
     {
         GameObject dangerArea = LocalGameManager.instance.objectPoolManager.poolDic["DangerArea"].GetGo("DangerAreaX");
 
-        dangerArea.transform.position = caster.GetHitBoxPos().position;
         dangerArea.transform.SetParent(caster.GetGameObject().transform.GetChild(2).transform.GetChild(0));
-        dangerArea.transform.localScale = new Vector2(caster.GetDirection().x * -1, 1);
+        dangerArea.transform.localPosition = dangerAreaPos;
+        dangerArea.transform.localScale = new Vector2(caster.GetDirection().x * -1 * dangerAreaSize.x, dangerAreaSize.y);
 
         var dangerAreaCom = dangerArea.GetComponent<DangerArea>();
 

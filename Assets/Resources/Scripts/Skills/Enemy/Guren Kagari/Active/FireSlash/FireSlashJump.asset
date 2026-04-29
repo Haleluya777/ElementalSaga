@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 272331c813368f248b918bd83bf63426, type: 3}
-  m_Name: LaijutsuAction
+  m_Script: {fileID: 11500000, guid: 63dbe04b36bd2c34d9519d0c73224587, type: 3}
+  m_Name: FireSlashJump
   m_EditorClassIdentifier: 
-  dmgCalculater: {fileID: 11400000, guid: 3e507d4a52006de4c91caff3f0bf7f58, type: 2}
+  dmgCalculater: {fileID: 0}
   stunDmg: 0
   targetObj: {fileID: 0}
-  animName: 
+  animName: Hammering
   explanation: 
-  hitBoxOffset: {x: 4, y: 0}
-  hitBoxSize: {x: 6, y: 1}
-  hitBoxObj: {fileID: 0}
+  delayTime: 1
+  actionSkill: {fileID: 11400000, guid: 6fccc2d37aa27cd47914b9ccf1cf758e, type: 2}
+  dangerAreaPos: {x: 2, y: 0}
+  dangerAreaSize: {x: 1, y: 1}
