@@ -227,11 +227,12 @@ MonoBehaviour:
   m_Name: Condition
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1608, y: -296}
+  position: {x: 1608, y: -328}
   ports:
     keys:
     - parent
     - parent 0
+    - parent 1
     values:
     - _fieldName: parent
       _node: {fileID: -1432276435775923010}
@@ -253,6 +254,15 @@ MonoBehaviour:
       - fieldName: childs 0
         node: {fileID: 6696275309760834901}
         reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: parent 1
+      _node: {fileID: -1432276435775923010}
+      _typeQualifiedName: BTNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0

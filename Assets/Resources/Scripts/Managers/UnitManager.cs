@@ -5,6 +5,7 @@ using UnityEngine;
 public class UnitManager : MonoBehaviour, IDataInitializeable
 {
     public PlayableCharacter PlayerUnit;
+    public GameObject TestTargetUnit;
     private Unit unit;
     private IAttackable unitAttack;
 

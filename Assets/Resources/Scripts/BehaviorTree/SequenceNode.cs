@@ -13,6 +13,7 @@ public class SequenceNode : BTNode
 
     public override NodeState Evaluate(AIController controller)
     {
+        //Debug.Log("호놀룰루");
         // 연속된 프레임 방문이 아니면 인덱스 초기화
         if (Time.frameCount != lastFrameVisited + 1)
         {

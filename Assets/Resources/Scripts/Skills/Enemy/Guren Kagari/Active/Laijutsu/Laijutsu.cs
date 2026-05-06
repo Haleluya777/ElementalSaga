@@ -11,14 +11,14 @@ public class Laijutsu : SkillBase
     [SerializeField] private Vector2 dangerAreaSize;
     [SerializeField] private Vector2 dangerAreaPos;
 
-
     public override bool UseSkill(ISkillCaster caster)
     {
+        Debug.Log("발도 준비");
         GameObject dangerArea = LocalGameManager.instance.objectPoolManager.poolDic["DangerArea"].GetGo("DangerAreaX");
 
         dangerArea.transform.SetParent(caster.GetGameObject().transform.GetChild(2).transform.GetChild(0));
         dangerArea.transform.localPosition = dangerAreaPos;
-        dangerArea.transform.localScale = new Vector2(caster.GetDirection().x * -1 * dangerAreaSize.x, dangerAreaSize.y);
+        dangerArea.transform.localScale = new Vector2(caster.GetDirection().x, dangerAreaSize.y);
 
         var dangerAreaCom = dangerArea.GetComponent<DangerArea>();
 

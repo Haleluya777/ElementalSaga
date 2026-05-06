@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4e1dc3f0d42fbc4d86343364a99e547, type: 3}
-  m_Name: FireSlashJump_Module
+  m_Name: FireSlash_Module
   m_EditorClassIdentifier: 
   skillName: 
   skillDetail: 

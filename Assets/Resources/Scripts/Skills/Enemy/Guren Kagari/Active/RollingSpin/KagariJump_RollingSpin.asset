@@ -9,15 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d06b7f111387445b04bde34307b29a, type: 3}
-  m_Name: Laijutsu
+  m_Script: {fileID: 11500000, guid: 63dbe04b36bd2c34d9519d0c73224587, type: 3}
+  m_Name: KagariJump_RollingSpin
   m_EditorClassIdentifier: 
   dmgCalculater: {fileID: 0}
   stunDmg: 0
   targetObj: {fileID: 0}
   animName: 
   explanation: 
-  delayTime: 0.75
-  actionSkill: {fileID: 11400000, guid: d3afaed28ab051c49baf7a78c658e4f0, type: 2}
-  dangerAreaSize: {x: 6, y: 1}
-  dangerAreaPos: {x: 0.5, y: 0}
+  actionSkill: {fileID: 11400000, guid: 69d062bf59080b54c9f5a0e9a0b9e225, type: 2}

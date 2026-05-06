@@ -14,6 +14,7 @@ public class SettingDistance : BTNode
 
         blackboard.Set<Vector3>("UnitPos", unitPos);
         blackboard.Set<float>("Distance", Mathf.Abs((playerPos.x - unitPos.x)));
+        //Debug.Log(blackboard.Get<float>("Distance"));
         return NodeState.Failure;
     }
 }

@@ -17,5 +17,8 @@ MonoBehaviour:
   targetObj: {fileID: 0}
   animName: Hammering
   explanation: 
-  hitBoxOffset: {x: 2, y: 0}
+  hitBoxOffset: {x: 0.5, y: 0}
   hitBoxSize: {x: 1, y: 1}
+  dangerAreaPos: {x: 0.5, y: 0}
+  dangerAreaSize: {x: 1, y: 1}
+  delayTime: 1

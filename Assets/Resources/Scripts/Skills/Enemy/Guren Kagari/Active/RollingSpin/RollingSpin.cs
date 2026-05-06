@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-[CreateAssetMenu(fileName = "FireSlashAction", menuName = "ScriptableObject/Skills/Active/Guren_Kagari/FireSlashAction")]
-public class FireSlashAction : SkillBase
+[CreateAssetMenu(fileName = "RollingSpin", menuName = "ScriptableObject/Skills/Active/Guren_Kagari/RollingSpin")]
+public class RollingSpin : SkillBase
 {
-    [SerializeField] private Vector2 hitBoxOffset;
-    [SerializeField] private Vector2 hitBoxSize;
+    private GameObject targetUnit; //임시 타겟.
+    private Unit targetPlayer;
 
     [SerializeField] private Vector2 dangerAreaPos;
     [SerializeField] private Vector2 dangerAreaSize;
@@ -15,19 +16,24 @@ public class FireSlashAction : SkillBase
 
     public override bool UseSkill(ISkillCaster caster)
     {
+        if (targetPlayer == null) targetPlayer = LocalGameManager.instance.unitManager.PlayerUnit;
+
         //경고 범위 오브제 생성.
         GameObject dangerArea = LocalGameManager.instance.objectPoolManager.poolDic["DangerArea"].GetGo("DangerAreaX");
 
-        //위치 및 크기 조정.
+        //위치 조정.
         dangerArea.transform.SetParent(caster.GetGameObject().transform.GetChild(2).transform.GetChild(0));
         dangerArea.transform.localPosition = dangerAreaPos;
-        dangerArea.transform.localScale = new Vector2(caster.GetDirection().x, dangerAreaSize.y);
 
-        dangerArea.transform.parent.rotation = Quaternion.Euler(0, 0, 0);
+        //각도 조절.
+        Vector2 dir = targetPlayer.transform.position - caster.GetCom<Transform>().position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        dangerArea.transform.parent.rotation = Quaternion.Euler(0, 0, angle);
+        dangerArea.transform.localScale = new Vector2(dir.magnitude * caster.GetDirection().x, dangerAreaSize.y); //길이 조정.
 
         var dangerAreaCom = dangerArea.GetComponent<DangerArea>();
 
-        // Activate 호출 시 콜백을 인자로 넘겨주어 이벤트 누적 문제를 방지합니다.
         dangerAreaCom.Activate(delayTime, () =>
         {
             GameObject hitBox = LocalGameManager.instance.objectPoolManager.poolDic["HitBox"].GetGo("HitBox");
@@ -41,12 +47,12 @@ public class FireSlashAction : SkillBase
 
             hitBox.tag = caster.GetGameObject().tag;
 
-            hitBox.transform.localScale = hitBoxSize;
-            hitBox.transform.localPosition = hitBoxOffset;
+            hitBox.transform.localScale = dangerArea.transform.localScale;
+            hitBox.transform.localPosition = dangerAreaPos;
             hitBox.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
-            effect.transform.localScale = hitBoxSize;
-            effect.transform.localPosition = hitBoxOffset;
+            effect.transform.localScale = dangerArea.transform.localScale;
+            effect.transform.localPosition = dangerAreaPos;
             effect.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
             hitBoxCom.Initialize(dmgCalculater.Calculate(caster), stunDmg, caster, null, .15f);
@@ -54,16 +60,25 @@ public class FireSlashAction : SkillBase
 
             caster.PlayAnimation(animName);
 
-            LocalGameManager.instance.coroutineRunner.StartCoroutine(ReturnRigid(caster));
+            hitBox.transform.SetParent(null);
+            effect.transform.SetParent(null);
+
+            LocalGameManager.instance.coroutineRunner.StartCoroutine(ReturnRigid(caster, targetPlayer.transform.position));
         });
 
         return true;
     }
 
-    private IEnumerator ReturnRigid(ISkillCaster caster)
+    private IEnumerator ReturnRigid(ISkillCaster caster, Vector2 targetPos)
     {
-        float duration = caster.GetCom<Animator>().GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(duration);
+        //float duration = caster.GetCom<Animator>().GetCurrentAnimatorStateInfo(0).length;
+        //yield return new WaitForSeconds(duration);
+
+        //caster.GetGameObject().transform.DOMove(targetPos, 1f);
+
+        caster.GetCom<Rigidbody2D>().DOMove(targetPos, .1f).Elapsed();
         caster.GetCom<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+
+        yield return null;
     }
 }

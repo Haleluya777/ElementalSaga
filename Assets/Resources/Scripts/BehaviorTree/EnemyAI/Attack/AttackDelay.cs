@@ -28,14 +28,14 @@ public class AttackDelay : BTNode
             }
 
             startTime = Time.time;
-            Debug.Log($"[AttackDelay] 딜레이 시작. Duration: {duration}");
+            //Debug.Log($"[AttackDelay] 딜레이 시작. Duration: {duration}");
         }
         lastFrameVisited = Time.frameCount;
 
         float elapsed = Time.time - startTime;
         if (elapsed >= duration)
         {
-            Debug.Log($"[AttackDelay] 딜레이 완료 (Elapsed: {elapsed}) -> Success");
+            //Debug.Log($"[AttackDelay] 딜레이 완료 (Elapsed: {elapsed}) -> Success");
             return NodeState.Success;
         }
 

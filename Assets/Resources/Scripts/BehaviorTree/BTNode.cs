@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using XNode;
 
-
 //행동트리의 각 노드의 상태.
 public enum NodeState { Running, Success, Failure }
 
